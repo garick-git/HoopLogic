@@ -11,3 +11,6 @@
 
 ### Git Command Workflow
 1. [Git Command Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
+
+### Droplet Startup Information
+1. [Digital Ocean Tutorial w/ Flask](https://www.digitalocean.com/community/tutorials/how-to-make-a-web-application-using-flask-in-python-3)
