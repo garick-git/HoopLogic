@@ -1,18 +1,12 @@
-from flask import Flask, render_template, send_from_directory
-import os
+from flask import Flask, jsonify
+from flask_cors import CORS
 
-app = Flask(__name__, template_folder="react-app/build")
+app = Flask(__name__)
+CORS(app)
 
-# Serve the index.html file
 @app.route('/')
-def index():
-    return render_template('index.html')
-
-# Serve static files from the 'build' directory
-@app.route('/static/<path:path>')
-def serve_static(path):
-    static_folder = os.path.join(os.getcwd(), 'react-app/build/static')
-    return send_from_directory(static_folder, path)
+def hello_world():
+    return jsonify(message="Hello from Flask!")
 
 if __name__ == '__main__':
     app.run(debug=True)
