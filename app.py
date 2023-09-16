@@ -1,13 +1,12 @@
 from flask import Flask, jsonify
-from flask_cors import CORS  # Import CORS from flask-cors
+from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app)
 
-@app.route('/')
-def api():
-    response = {'message': 'Hello, World from Flask API!'}
-    return jsonify(response)
+@app.route('/api/data')
+def get_data():
+    data = {'message': 'Hello from Flask API!'}
+    return jsonify(data)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
