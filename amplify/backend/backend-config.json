@@ -21,5 +21,23 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "parameters": {
+    "AMPLIFY_function_seniorprojectf23636f5e33_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "seniorprojectf23636f5e33"
+        }
+      ]
+    },
+    "AMPLIFY_function_seniorprojectf23636f5e33_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "seniorprojectf23636f5e33"
+        }
+      ]
+    }
   }
 }

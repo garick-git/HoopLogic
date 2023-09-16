@@ -13,7 +13,13 @@
     },
     "categories": {
       "function": {
-        "seniorprojectf23636f5e33": {}
+        "seniorprojectf23636f5e33": {
+          "deploymentBucketName": "amplify-amplifyab8db87a2e9d4-staging-222253-deployment",
+          "s3Key": "amplify-builds/seniorprojectf23636f5e33-72595566784b41437665-build.zip"
+        }
+      },
+      "api": {
+        "api90655c74": {}
       }
     }
   }
