@@ -1,8 +1,7 @@
 {
-  "name": "react-app",
+  "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://main.d1i83p0bdi289k.amplifyapp.com/home",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
