@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: black;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +11,37 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.homePageDiv{
+  background-color: black;
+}
+
+.homePageLogoDiv{
+  display: flex;
+  justify-content: center;
+  height: 170px;
+  margin-top: 10%;
+}
+
+.searchBarDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.searchBar {
+  width: 500px; /* Adjust the width as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Rounded corners */
+  font-size: 16px;
+  outline: none; /* Remove the outline when focused */
+}
+
+/* Style for the input when focused */
+.searchBar:focus {
+  border-color: #007BFF; /* Change the border color when focused */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow when focused */
 }
