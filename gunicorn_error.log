@@ -760,3 +760,23 @@ ModuleNotFoundError: No module named 'wsgi'
 [2023-09-19 19:13:33 +0000] [38847] [INFO] Booting worker with pid: 38847
 [2023-09-19 19:13:33 +0000] [38848] [INFO] Booting worker with pid: 38848
 [2023-09-19 19:13:33 +0000] [38849] [INFO] Booting worker with pid: 38849
+[2023-09-19 19:14:40 +0000] [38906] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 19:14:40 +0000] [38906] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (38906)
+[2023-09-19 19:14:40 +0000] [38906] [INFO] Using worker: sync
+[2023-09-19 19:14:40 +0000] [38907] [INFO] Booting worker with pid: 38907
+[2023-09-19 19:14:40 +0000] [38908] [INFO] Booting worker with pid: 38908
+[2023-09-19 19:14:40 +0000] [38909] [INFO] Booting worker with pid: 38909
+[2023-09-19 19:21:00 +0000] [38906] [INFO] Handling signal: term
+[2023-09-19 19:21:00 +0000] [38907] [INFO] Worker exiting (pid: 38907)
+[2023-09-19 19:21:00 +0000] [38908] [INFO] Worker exiting (pid: 38908)
+[2023-09-19 19:21:00 +0000] [38909] [INFO] Worker exiting (pid: 38909)
+[2023-09-19 19:21:00 +0000] [38906] [ERROR] Worker (pid:38908) was sent SIGTERM!
+[2023-09-19 19:21:00 +0000] [38906] [ERROR] Worker (pid:38909) was sent SIGTERM!
+[2023-09-19 19:21:00 +0000] [38906] [ERROR] Worker (pid:38907) was sent SIGTERM!
+[2023-09-19 19:21:00 +0000] [38906] [INFO] Shutting down: Master
+[2023-09-19 19:21:00 +0000] [39017] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 19:21:00 +0000] [39017] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (39017)
+[2023-09-19 19:21:00 +0000] [39017] [INFO] Using worker: sync
+[2023-09-19 19:21:00 +0000] [39024] [INFO] Booting worker with pid: 39024
+[2023-09-19 19:21:01 +0000] [39041] [INFO] Booting worker with pid: 39041
+[2023-09-19 19:21:01 +0000] [39036] [INFO] Booting worker with pid: 39036
