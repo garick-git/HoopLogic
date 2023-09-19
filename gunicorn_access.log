@@ -84,3 +84,4 @@
  - - [19/Sep/2023:05:11:49 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
  - - [19/Sep/2023:05:12:11 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
  - - [19/Sep/2023:05:12:22 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+ - - [19/Sep/2023:05:22:15 +0000] "GET /api/data HTTP/1.0" 200 36 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
