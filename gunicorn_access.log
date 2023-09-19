@@ -60,3 +60,7 @@
  - - [19/Sep/2023:04:15:53 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
  - - [19/Sep/2023:04:17:47 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
  - - [19/Sep/2023:04:17:49 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+ - - [19/Sep/2023:04:19:04 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+ - - [19/Sep/2023:04:19:12 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+ - - [19/Sep/2023:04:19:14 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+ - - [19/Sep/2023:04:20:36 +0000] "GET /index.html HTTP/1.0" 404 207 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Snapchat/12.51.0.62 (like Safari/8614.1.25.0.30, panda)"
