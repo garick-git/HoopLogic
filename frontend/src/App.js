@@ -9,8 +9,8 @@ function App() {
     <Router>
       <div className='appDiv'>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/delete-me-page" element={<DeleteMe />} />
+          <Route path="/" exact component={Home} />
+          <Route path="/delete-me-page" component={DeleteMe} />
         </Routes>
       </div>
     </Router>
