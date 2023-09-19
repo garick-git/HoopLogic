@@ -820,3 +820,9 @@ ModuleNotFoundError: No module named 'wsgi'
 [2023-09-19 19:44:25 +0000] [39496] [INFO] Booting worker with pid: 39496
 [2023-09-19 19:44:25 +0000] [39497] [INFO] Booting worker with pid: 39497
 [2023-09-19 19:44:25 +0000] [39498] [INFO] Booting worker with pid: 39498
+[2023-09-19 19:46:00 +0000] [39580] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 19:46:00 +0000] [39580] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (39580)
+[2023-09-19 19:46:00 +0000] [39580] [INFO] Using worker: sync
+[2023-09-19 19:46:00 +0000] [39581] [INFO] Booting worker with pid: 39581
+[2023-09-19 19:46:00 +0000] [39582] [INFO] Booting worker with pid: 39582
+[2023-09-19 19:46:00 +0000] [39583] [INFO] Booting worker with pid: 39583
