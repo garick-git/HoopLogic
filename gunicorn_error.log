@@ -734,3 +734,17 @@ ModuleNotFoundError: No module named 'wsgi'
 [2023-09-19 05:22:11 +0000] [28495] [INFO] Booting worker with pid: 28495
 [2023-09-19 05:22:11 +0000] [28496] [INFO] Booting worker with pid: 28496
 [2023-09-19 05:22:11 +0000] [28497] [INFO] Booting worker with pid: 28497
+[2023-09-19 05:31:09 +0000] [28494] [INFO] Handling signal: term
+[2023-09-19 05:31:09 +0000] [28495] [INFO] Worker exiting (pid: 28495)
+[2023-09-19 05:31:09 +0000] [28496] [INFO] Worker exiting (pid: 28496)
+[2023-09-19 05:31:09 +0000] [28497] [INFO] Worker exiting (pid: 28497)
+[2023-09-19 05:31:09 +0000] [28494] [ERROR] Worker (pid:28495) was sent SIGTERM!
+[2023-09-19 05:31:09 +0000] [28494] [ERROR] Worker (pid:28497) was sent SIGTERM!
+[2023-09-19 05:31:09 +0000] [28494] [ERROR] Worker (pid:28496) was sent SIGTERM!
+[2023-09-19 05:31:09 +0000] [28494] [INFO] Shutting down: Master
+[2023-09-19 05:31:09 +0000] [28724] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 05:31:09 +0000] [28724] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (28724)
+[2023-09-19 05:31:09 +0000] [28724] [INFO] Using worker: sync
+[2023-09-19 05:31:09 +0000] [28726] [INFO] Booting worker with pid: 28726
+[2023-09-19 05:31:09 +0000] [28727] [INFO] Booting worker with pid: 28727
+[2023-09-19 05:31:09 +0000] [28728] [INFO] Booting worker with pid: 28728
