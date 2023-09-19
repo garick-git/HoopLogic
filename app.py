@@ -4,8 +4,11 @@ app = Flask(__name__)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
+    print("Request received: /api/data")
     data = {'message': 'Hello from Flask API!'}
-    return jsonify(data)
+    response = jsonify(data)
+    print("Sending response: /api/data")
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)
