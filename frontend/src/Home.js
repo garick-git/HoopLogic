@@ -4,7 +4,7 @@ const Home = () => {
     return (
         <div className="homePageDiv">
             <div className="homePageLogoDiv">
-                <img src='../Public/hoopLogicLogo1.png' alt="Hoop Logic Logo" className="homePageLogo" />
+                <img src='../public/hoopLogicLogo1.png' alt="Hoop Logic Logo" className="homePageLogo" />
             </div>
             <div className="searchBarDiv">
                 <input
