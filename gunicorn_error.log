@@ -379,3 +379,79 @@ ModuleNotFoundError: No module named 'wsgi'
 [2023-09-19 03:47:23 +0000] [26243] [INFO] Booting worker with pid: 26243
 [2023-09-19 03:47:23 +0000] [26244] [INFO] Booting worker with pid: 26244
 [2023-09-19 03:47:23 +0000] [26245] [INFO] Booting worker with pid: 26245
+[2023-09-19 03:56:42 +0000] [26396] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 03:56:42 +0000] [26396] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (26396)
+[2023-09-19 03:56:42 +0000] [26396] [INFO] Using worker: sync
+[2023-09-19 03:56:42 +0000] [26398] [INFO] Booting worker with pid: 26398
+[2023-09-19 03:56:42 +0000] [26399] [INFO] Booting worker with pid: 26399
+[2023-09-19 03:56:42 +0000] [26400] [INFO] Booting worker with pid: 26400
+[2023-09-19 04:00:08 +0000] [26396] [INFO] Handling signal: term
+[2023-09-19 04:00:08 +0000] [26398] [INFO] Worker exiting (pid: 26398)
+[2023-09-19 04:00:08 +0000] [26399] [INFO] Worker exiting (pid: 26399)
+[2023-09-19 04:00:08 +0000] [26400] [INFO] Worker exiting (pid: 26400)
+[2023-09-19 04:00:08 +0000] [26396] [ERROR] Worker (pid:26399) was sent SIGTERM!
+[2023-09-19 04:00:08 +0000] [26396] [ERROR] Worker (pid:26400) was sent SIGTERM!
+[2023-09-19 04:00:08 +0000] [26396] [ERROR] Worker (pid:26398) was sent SIGTERM!
+[2023-09-19 04:00:08 +0000] [26396] [INFO] Shutting down: Master
+[2023-09-19 04:00:09 +0000] [26463] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 04:00:09 +0000] [26463] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (26463)
+[2023-09-19 04:00:09 +0000] [26463] [INFO] Using worker: sync
+[2023-09-19 04:00:09 +0000] [26473] [INFO] Booting worker with pid: 26473
+[2023-09-19 04:00:09 +0000] [26474] [INFO] Booting worker with pid: 26474
+[2023-09-19 04:00:09 +0000] [26475] [INFO] Booting worker with pid: 26475
+[2023-09-19 04:02:29 +0000] [26463] [INFO] Handling signal: term
+[2023-09-19 04:02:29 +0000] [26473] [INFO] Worker exiting (pid: 26473)
+[2023-09-19 04:02:29 +0000] [26474] [INFO] Worker exiting (pid: 26474)
+[2023-09-19 04:02:29 +0000] [26475] [INFO] Worker exiting (pid: 26475)
+[2023-09-19 04:02:29 +0000] [26463] [ERROR] Worker (pid:26474) was sent SIGTERM!
+[2023-09-19 04:02:29 +0000] [26463] [ERROR] Worker (pid:26475) was sent SIGTERM!
+[2023-09-19 04:02:29 +0000] [26463] [ERROR] Worker (pid:26473) was sent SIGTERM!
+[2023-09-19 04:02:29 +0000] [26463] [INFO] Shutting down: Master
+[2023-09-19 04:02:29 +0000] [26502] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 04:02:29 +0000] [26502] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (26502)
+[2023-09-19 04:02:29 +0000] [26502] [INFO] Using worker: sync
+[2023-09-19 04:02:29 +0000] [26513] [INFO] Booting worker with pid: 26513
+[2023-09-19 04:02:29 +0000] [26514] [INFO] Booting worker with pid: 26514
+[2023-09-19 04:02:29 +0000] [26515] [INFO] Booting worker with pid: 26515
+[2023-09-19 04:04:10 +0000] [26502] [INFO] Handling signal: term
+[2023-09-19 04:04:10 +0000] [26513] [INFO] Worker exiting (pid: 26513)
+[2023-09-19 04:04:10 +0000] [26514] [INFO] Worker exiting (pid: 26514)
+[2023-09-19 04:04:10 +0000] [26515] [INFO] Worker exiting (pid: 26515)
+[2023-09-19 04:04:10 +0000] [26502] [ERROR] Worker (pid:26514) was sent SIGTERM!
+[2023-09-19 04:04:10 +0000] [26502] [ERROR] Worker (pid:26515) was sent SIGTERM!
+[2023-09-19 04:04:10 +0000] [26502] [ERROR] Worker (pid:26513) was sent SIGTERM!
+[2023-09-19 04:04:10 +0000] [26502] [INFO] Shutting down: Master
+[2023-09-19 04:04:11 +0000] [26544] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 04:04:11 +0000] [26544] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (26544)
+[2023-09-19 04:04:11 +0000] [26544] [INFO] Using worker: sync
+[2023-09-19 04:04:11 +0000] [26545] [INFO] Booting worker with pid: 26545
+[2023-09-19 04:04:11 +0000] [26546] [INFO] Booting worker with pid: 26546
+[2023-09-19 04:04:11 +0000] [26547] [INFO] Booting worker with pid: 26547
+[2023-09-19 04:05:04 +0000] [26544] [INFO] Handling signal: term
+[2023-09-19 04:05:04 +0000] [26545] [INFO] Worker exiting (pid: 26545)
+[2023-09-19 04:05:04 +0000] [26546] [INFO] Worker exiting (pid: 26546)
+[2023-09-19 04:05:04 +0000] [26547] [INFO] Worker exiting (pid: 26547)
+[2023-09-19 04:05:04 +0000] [26544] [ERROR] Worker (pid:26547) was sent SIGTERM!
+[2023-09-19 04:05:04 +0000] [26544] [ERROR] Worker (pid:26546) was sent SIGTERM!
+[2023-09-19 04:05:04 +0000] [26544] [ERROR] Worker (pid:26545) was sent SIGTERM!
+[2023-09-19 04:05:04 +0000] [26544] [INFO] Shutting down: Master
+[2023-09-19 04:05:04 +0000] [26558] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 04:05:04 +0000] [26558] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (26558)
+[2023-09-19 04:05:04 +0000] [26558] [INFO] Using worker: sync
+[2023-09-19 04:05:04 +0000] [26559] [INFO] Booting worker with pid: 26559
+[2023-09-19 04:05:04 +0000] [26560] [INFO] Booting worker with pid: 26560
+[2023-09-19 04:05:04 +0000] [26561] [INFO] Booting worker with pid: 26561
+[2023-09-19 04:05:05 +0000] [26558] [INFO] Handling signal: term
+[2023-09-19 04:05:05 +0000] [26559] [INFO] Worker exiting (pid: 26559)
+[2023-09-19 04:05:05 +0000] [26560] [INFO] Worker exiting (pid: 26560)
+[2023-09-19 04:05:05 +0000] [26561] [INFO] Worker exiting (pid: 26561)
+[2023-09-19 04:05:05 +0000] [26558] [ERROR] Worker (pid:26559) was sent SIGTERM!
+[2023-09-19 04:05:05 +0000] [26558] [ERROR] Worker (pid:26561) was sent SIGTERM!
+[2023-09-19 04:05:05 +0000] [26558] [ERROR] Worker (pid:26560) was sent SIGTERM!
+[2023-09-19 04:05:05 +0000] [26558] [INFO] Shutting down: Master
+[2023-09-19 04:05:05 +0000] [26567] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 04:05:05 +0000] [26567] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (26567)
+[2023-09-19 04:05:05 +0000] [26567] [INFO] Using worker: sync
+[2023-09-19 04:05:05 +0000] [26568] [INFO] Booting worker with pid: 26568
+[2023-09-19 04:05:05 +0000] [26569] [INFO] Booting worker with pid: 26569
+[2023-09-19 04:05:05 +0000] [26570] [INFO] Booting worker with pid: 26570
