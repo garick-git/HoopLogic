@@ -4,7 +4,6 @@ app = Flask(__name__)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
-    print("Route reached!")
     data = {'message': 'Hello from Flask API!'}
     return jsonify(data)
 
