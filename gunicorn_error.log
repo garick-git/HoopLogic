@@ -1,0 +1,253 @@
+[2023-09-19 02:15:00 +0000] [23484] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:15:00 +0000] [23484] [INFO] Listening at: http://0.0.0.0:8000 (23484)
+[2023-09-19 02:15:00 +0000] [23484] [INFO] Using worker: sync
+[2023-09-19 02:15:00 +0000] [23485] [INFO] Booting worker with pid: 23485
+[2023-09-19 02:15:00 +0000] [23485] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'your_app'
+[2023-09-19 02:15:00 +0000] [23485] [INFO] Worker exiting (pid: 23485)
+[2023-09-19 02:15:00 +0000] [23484] [ERROR] Worker (pid:23485) exited with code 3
+[2023-09-19 02:15:00 +0000] [23484] [ERROR] Shutting down: Master
+[2023-09-19 02:15:00 +0000] [23484] [ERROR] Reason: Worker failed to boot.
+[2023-09-19 02:16:20 +0000] [23501] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:16:20 +0000] [23501] [INFO] Listening at: http://0.0.0.0:8000 (23501)
+[2023-09-19 02:16:20 +0000] [23501] [INFO] Using worker: sync
+[2023-09-19 02:16:20 +0000] [23502] [INFO] Booting worker with pid: 23502
+[2023-09-19 02:16:20 +0000] [23503] [INFO] Booting worker with pid: 23503
+[2023-09-19 02:16:20 +0000] [23504] [INFO] Booting worker with pid: 23504
+[2023-09-19 02:16:40 +0000] [23501] [INFO] Handling signal: int
+[2023-09-19 02:16:40 +0000] [23502] [INFO] Worker exiting (pid: 23502)
+[2023-09-19 02:16:40 +0000] [23503] [INFO] Worker exiting (pid: 23503)
+[2023-09-19 02:16:40 +0000] [23504] [INFO] Worker exiting (pid: 23504)
+[2023-09-19 02:16:40 +0000] [23501] [INFO] Shutting down: Master
+[2023-09-19 02:16:43 +0000] [23505] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:16:43 +0000] [23505] [INFO] Listening at: http://0.0.0.0:8000 (23505)
+[2023-09-19 02:16:43 +0000] [23505] [INFO] Using worker: sync
+[2023-09-19 02:16:43 +0000] [23506] [INFO] Booting worker with pid: 23506
+[2023-09-19 02:16:43 +0000] [23507] [INFO] Booting worker with pid: 23507
+[2023-09-19 02:16:43 +0000] [23508] [INFO] Booting worker with pid: 23508
+[2023-09-19 02:16:53 +0000] [23505] [INFO] Handling signal: int
+[2023-09-19 02:16:53 +0000] [23506] [INFO] Worker exiting (pid: 23506)
+[2023-09-19 02:16:53 +0000] [23507] [INFO] Worker exiting (pid: 23507)
+[2023-09-19 02:16:53 +0000] [23505] [INFO] Shutting down: Master
+[2023-09-19 02:17:04 +0000] [23531] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:17:04 +0000] [23531] [INFO] Listening at: http://0.0.0.0:8000 (23531)
+[2023-09-19 02:17:04 +0000] [23531] [INFO] Using worker: sync
+[2023-09-19 02:17:04 +0000] [23532] [INFO] Booting worker with pid: 23532
+[2023-09-19 02:17:04 +0000] [23533] [INFO] Booting worker with pid: 23533
+[2023-09-19 02:17:04 +0000] [23534] [INFO] Booting worker with pid: 23534
+[2023-09-19 02:17:14 +0000] [23531] [INFO] Handling signal: int
+[2023-09-19 02:17:14 +0000] [23532] [INFO] Worker exiting (pid: 23532)
+[2023-09-19 02:17:14 +0000] [23533] [INFO] Worker exiting (pid: 23533)
+[2023-09-19 02:17:14 +0000] [23531] [INFO] Shutting down: Master
+[2023-09-19 02:18:26 +0000] [23544] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:18:26 +0000] [23544] [INFO] Listening at: http://0.0.0.0:8000 (23544)
+[2023-09-19 02:18:26 +0000] [23544] [INFO] Using worker: sync
+[2023-09-19 02:18:26 +0000] [23545] [INFO] Booting worker with pid: 23545
+[2023-09-19 02:18:26 +0000] [23546] [INFO] Booting worker with pid: 23546
+[2023-09-19 02:18:26 +0000] [23547] [INFO] Booting worker with pid: 23547
+[2023-09-19 02:19:22 +0000] [23544] [INFO] Handling signal: int
+[2023-09-19 02:19:22 +0000] [23546] [INFO] Worker exiting (pid: 23546)
+[2023-09-19 02:19:22 +0000] [23545] [INFO] Worker exiting (pid: 23545)
+[2023-09-19 02:19:22 +0000] [23547] [INFO] Worker exiting (pid: 23547)
+[2023-09-19 02:19:22 +0000] [23544] [INFO] Shutting down: Master
+[2023-09-19 02:20:30 +0000] [23567] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:20:30 +0000] [23567] [INFO] Listening at: http://0.0.0.0:8000 (23567)
+[2023-09-19 02:20:30 +0000] [23567] [INFO] Using worker: sync
+[2023-09-19 02:20:30 +0000] [23568] [INFO] Booting worker with pid: 23568
+[2023-09-19 02:20:30 +0000] [23569] [INFO] Booting worker with pid: 23569
+[2023-09-19 02:20:30 +0000] [23570] [INFO] Booting worker with pid: 23570
+[2023-09-19 02:24:21 +0000] [23697] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:24:21 +0000] [23697] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (23697)
+[2023-09-19 02:24:21 +0000] [23697] [INFO] Using worker: sync
+[2023-09-19 02:24:21 +0000] [23698] [INFO] Booting worker with pid: 23698
+[2023-09-19 02:24:21 +0000] [23698] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'wsgi'
+[2023-09-19 02:24:21 +0000] [23698] [INFO] Worker exiting (pid: 23698)
+[2023-09-19 02:24:21 +0000] [23697] [ERROR] Worker (pid:23698) exited with code 3
+[2023-09-19 02:24:21 +0000] [23697] [ERROR] Shutting down: Master
+[2023-09-19 02:24:21 +0000] [23697] [ERROR] Reason: Worker failed to boot.
+[2023-09-19 02:24:43 +0000] [23717] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:24:43 +0000] [23717] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (23717)
+[2023-09-19 02:24:43 +0000] [23717] [INFO] Using worker: sync
+[2023-09-19 02:24:43 +0000] [23718] [INFO] Booting worker with pid: 23718
+[2023-09-19 02:24:43 +0000] [23718] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'wsgi'
+[2023-09-19 02:24:43 +0000] [23718] [INFO] Worker exiting (pid: 23718)
+[2023-09-19 02:24:43 +0000] [23717] [ERROR] Worker (pid:23718) exited with code 3
+[2023-09-19 02:24:43 +0000] [23717] [ERROR] Shutting down: Master
+[2023-09-19 02:24:43 +0000] [23717] [ERROR] Reason: Worker failed to boot.
+[2023-09-19 02:27:59 +0000] [23777] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:27:59 +0000] [23777] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (23777)
+[2023-09-19 02:27:59 +0000] [23777] [INFO] Using worker: sync
+[2023-09-19 02:27:59 +0000] [23778] [INFO] Booting worker with pid: 23778
+[2023-09-19 02:27:59 +0000] [23778] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'wsgi'
+[2023-09-19 02:27:59 +0000] [23778] [INFO] Worker exiting (pid: 23778)
+[2023-09-19 02:27:59 +0000] [23777] [ERROR] Worker (pid:23778) exited with code 3
+[2023-09-19 02:27:59 +0000] [23777] [ERROR] Shutting down: Master
+[2023-09-19 02:27:59 +0000] [23777] [ERROR] Reason: Worker failed to boot.
+[2023-09-19 02:28:58 +0000] [23567] [CRITICAL] WORKER TIMEOUT (pid:23568)
+[2023-09-19 02:28:58 +0000] [23568] [INFO] Worker exiting (pid: 23568)
+[2023-09-19 02:28:58 +0000] [23567] [ERROR] Worker (pid:23568) exited with code 1
+[2023-09-19 02:28:58 +0000] [23567] [ERROR] Worker (pid:23568) exited with code 1.
+[2023-09-19 02:28:58 +0000] [23790] [INFO] Booting worker with pid: 23790
+[2023-09-19 02:29:48 +0000] [23803] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 02:29:48 +0000] [23803] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (23803)
+[2023-09-19 02:29:48 +0000] [23803] [INFO] Using worker: sync
+[2023-09-19 02:29:48 +0000] [23804] [INFO] Booting worker with pid: 23804
+[2023-09-19 02:29:48 +0000] [23804] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'wsgi'
+[2023-09-19 02:29:48 +0000] [23804] [INFO] Worker exiting (pid: 23804)
+[2023-09-19 02:29:48 +0000] [23805] [INFO] Booting worker with pid: 23805
+[2023-09-19 02:29:48 +0000] [23806] [INFO] Booting worker with pid: 23806
+[2023-09-19 02:29:48 +0000] [23805] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'wsgi'
+[2023-09-19 02:29:48 +0000] [23805] [INFO] Worker exiting (pid: 23805)
+[2023-09-19 02:29:48 +0000] [23806] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/root/SeniorProjectF23/venv/lib/python3.10/site-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'wsgi'
+[2023-09-19 02:29:48 +0000] [23806] [INFO] Worker exiting (pid: 23806)
+[2023-09-19 02:29:48 +0000] [23803] [ERROR] Worker (pid:23804) exited with code 3
+[2023-09-19 02:29:48 +0000] [23803] [ERROR] Worker (pid:23805) was sent SIGTERM!
+[2023-09-19 02:29:48 +0000] [23803] [ERROR] Worker (pid:23806) was sent SIGTERM!
+[2023-09-19 02:29:48 +0000] [23803] [ERROR] Shutting down: Master
+[2023-09-19 02:29:48 +0000] [23803] [ERROR] Reason: Worker failed to boot.
