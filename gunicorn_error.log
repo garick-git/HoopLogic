@@ -636,3 +636,27 @@ ModuleNotFoundError: No module named 'wsgi'
 [2023-09-19 04:50:50 +0000] [27540] [INFO] Worker exiting (pid: 27540)
 [2023-09-19 04:50:50 +0000] [27541] [INFO] Worker exiting (pid: 27541)
 [2023-09-19 04:50:51 +0000] [27539] [INFO] Shutting down: Master
+[2023-09-19 05:01:18 +0000] [27471] [INFO] Handling signal: term
+[2023-09-19 05:01:18 +0000] [27472] [INFO] Worker exiting (pid: 27472)
+[2023-09-19 05:01:18 +0000] [27473] [INFO] Worker exiting (pid: 27473)
+[2023-09-19 05:01:18 +0000] [27474] [INFO] Worker exiting (pid: 27474)
+[2023-09-19 05:01:18 +0000] [27471] [ERROR] Worker (pid:27474) was sent SIGTERM!
+[2023-09-19 05:01:18 +0000] [27471] [ERROR] Worker (pid:27472) was sent SIGTERM!
+[2023-09-19 05:01:18 +0000] [27471] [ERROR] Worker (pid:27473) was sent SIGTERM!
+[2023-09-19 05:01:18 +0000] [27471] [INFO] Shutting down: Master
+[2023-09-19 05:01:18 +0000] [27861] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 05:01:18 +0000] [27861] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (27861)
+[2023-09-19 05:01:18 +0000] [27861] [INFO] Using worker: sync
+[2023-09-19 05:01:18 +0000] [27863] [INFO] Booting worker with pid: 27863
+[2023-09-19 05:01:18 +0000] [27864] [INFO] Booting worker with pid: 27864
+[2023-09-19 05:01:18 +0000] [27865] [INFO] Booting worker with pid: 27865
+[2023-09-19 05:03:34 +0000] [27925] [INFO] Starting gunicorn 21.2.0
+[2023-09-19 05:03:34 +0000] [27925] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (27925)
+[2023-09-19 05:03:34 +0000] [27925] [INFO] Using worker: sync
+[2023-09-19 05:03:34 +0000] [27926] [INFO] Booting worker with pid: 27926
+[2023-09-19 05:03:34 +0000] [27927] [INFO] Booting worker with pid: 27927
+[2023-09-19 05:03:34 +0000] [27928] [INFO] Booting worker with pid: 27928
+[2023-09-19 05:03:46 +0000] [27925] [INFO] Handling signal: int
+[2023-09-19 05:03:46 +0000] [27926] [INFO] Worker exiting (pid: 27926)
+[2023-09-19 05:03:46 +0000] [27927] [INFO] Worker exiting (pid: 27927)
+[2023-09-19 05:03:47 +0000] [27925] [INFO] Shutting down: Master
