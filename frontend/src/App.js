@@ -5,9 +5,13 @@ import Home from './Home';
 
 function App() {
   return (
+    <Router>
       <div className='appDiv'>
-          <Home />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
       </div>
+    </Router>
   );
 }
 
