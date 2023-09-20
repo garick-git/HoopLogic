@@ -3,7 +3,6 @@ import React from 'react';
 const DeleteMe = () => {
   return (
     <div className="deleteMeContainer">
-      <h2>Delete Me Daddy!</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel
         velit non felis dapibus pulvinar. Integer ut diam nec sapien feugiat
@@ -20,7 +19,7 @@ const DeleteMe = () => {
         Phasellus volutpat, nunc eget congue eleifend, est turpis eleifend
         tortor.
       </p>
-      <button className="deleteButton">Delete</button>
+      <button className="deleteButton">Delete Page!</button>
     </div>
   );
 };
