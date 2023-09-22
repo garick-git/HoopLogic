@@ -1,29 +1,3 @@
-import React, { Component } from 'react';
-
-class PlayerSearch extends Component {
-  constructor() {
-    super();
-    this.state = {
-      searchInput: '',
-      players: [],
-    };
-  }
-
-  handleInputChange = (e) => {
-    this.setState({ searchInput: e.target.value });
-  }
-
-  searchPlayers = () => {
-    fetch(`/api/player/search/${this.state.searchInput}`)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ players: data });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-  }
-
   // render() {
   //   return (
   //     <div>
@@ -43,27 +17,52 @@ class PlayerSearch extends Component {
   //     </div>
   //   );
   // }
-}
 
 
-const PlayerSearch = () => {
-  return(
-    <div>
+
+  import React, { useState, useEffect } from 'react';
+
+  const PlayerSearch = () => {
+    const [searchInput, setSearchInput] = useState('');
+    const [players, setPlayers] = useState([]);
+  
+    const handleInputChange = (e) => {
+      setSearchInput(e.target.value);
+    };
+  
+    useEffect(() => {
+      if (searchInput.trim() === '') {
+        setPlayers([]); // Clear the players list when the input is empty.
+        return;
+      }
+  
+      fetch(`/api/player/search/${searchInput}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setPlayers(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }, [searchInput]); // This effect should run whenever searchInput changes.
+  
+    return (
+      <div>
         <h1>NBA Player Search</h1>
         <input
           type="text"
           placeholder="Search for players by name"
-          value={this.state.searchInput}
-          onChange={this.handleInputChange}
+          value={searchInput}
+          onChange={handleInputChange}
         />
-        <button onClick={this.searchPlayers}>Search</button>
+        <button onClick={() => {}}>Search</button>
         <ul>
-          {this.state.players.map((player, index) => (
+          {players.map((player, index) => (
             <li key={index}>{player.full_name}</li>
           ))}
         </ul>
       </div>
-  );
-}
-
-export default PlayerSearch;
+    );
+  };
+  
+  export default PlayerSearch;
