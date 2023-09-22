@@ -30,7 +30,7 @@ const PlayerSearch = () => {
   }, []); // An empty dependency array means this effect runs once after the initial render.
 
   return (
-    <div>
+    <div className='PlayerSearch'>
       <h1>NBA Player Search</h1>
       <input
         type="text"
