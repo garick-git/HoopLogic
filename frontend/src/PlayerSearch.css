@@ -7,14 +7,15 @@
     max-width: 400px;
   }
   
-  /* Style the title */
-  .PlayerSearch h1 {
+/* Style the title */
+.PlayerSearch h1 {
     font-size: 24px;
     margin-bottom: 10px;
+    color: white; /* Add this line to set font color to white */
   }
   
-  /* Style the input field */
-  .PlayerSearch input[type="text"] {
+/* Style the input field */
+.PlayerSearch input[type="text"] {
     width: 100%;
     padding: 8px;
     font-size: 16px;
@@ -23,10 +24,10 @@
     margin-bottom: 10px;
   }
   
-  /* Style the search button */
-  .PlayerSearch button {
+/* Style the search button */
+.PlayerSearch button {
     background-color: #007bff;
-    color: #fff;
+    color: white; /* Add this line to set font color to white */
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
@@ -34,15 +35,15 @@
     font-size: 16px;
   }
   
-  /* Style the player list */
-  .PlayerSearch ul {
+/* Style the player list */
+.PlayerSearch ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .PlayerSearch ul li {
+.PlayerSearch ul li {
     font-size: 18px;
     margin: 5px 0;
+    color: white; /* Add this line to set font color to white */
   }
-  
