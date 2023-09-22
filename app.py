@@ -6,7 +6,7 @@ from backend.playerSearching import playerNameSearch, playerIDFromName
 app = Flask(__name__)
 
 # Configure the logging format and level
-logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', level=logging.DEBUG)
+log = logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', level=logging.DEBUG)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
@@ -29,3 +29,4 @@ def get_player_id(player_name):
 
 if __name__ == '__main__':
     app.run(debug=True)
+    print(log)
