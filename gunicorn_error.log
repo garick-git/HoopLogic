@@ -877,3 +877,83 @@ ModuleNotFoundError: No module named 'wsgi'
 [2023-09-19 20:13:54 +0000] [40660] [INFO] Booting worker with pid: 40660
 [2023-09-19 20:13:54 +0000] [40661] [INFO] Booting worker with pid: 40661
 [2023-09-19 20:13:54 +0000] [40662] [INFO] Booting worker with pid: 40662
+[2023-09-22 17:08:27 +0000] [99455] [INFO] Starting gunicorn 21.2.0
+[2023-09-22 17:08:27 +0000] [99455] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (99455)
+[2023-09-22 17:08:27 +0000] [99455] [INFO] Using worker: sync
+[2023-09-22 17:08:27 +0000] [99456] [INFO] Booting worker with pid: 99456
+[2023-09-22 17:08:28 +0000] [99458] [INFO] Booting worker with pid: 99458
+[2023-09-22 17:08:28 +0000] [99457] [INFO] Booting worker with pid: 99457
+[2023-09-22 17:11:29 +0000] [99455] [INFO] Handling signal: term
+[2023-09-22 17:11:29 +0000] [99456] [INFO] Worker exiting (pid: 99456)
+[2023-09-22 17:11:29 +0000] [99457] [INFO] Worker exiting (pid: 99457)
+[2023-09-22 17:11:29 +0000] [99458] [INFO] Worker exiting (pid: 99458)
+[2023-09-22 17:11:29 +0000] [99455] [ERROR] Worker (pid:99458) was sent SIGTERM!
+[2023-09-22 17:11:29 +0000] [99455] [ERROR] Worker (pid:99457) was sent SIGTERM!
+[2023-09-22 17:11:29 +0000] [99455] [ERROR] Worker (pid:99456) was sent SIGTERM!
+[2023-09-22 17:11:29 +0000] [99455] [INFO] Shutting down: Master
+[2023-09-22 17:11:29 +0000] [99576] [INFO] Starting gunicorn 21.2.0
+[2023-09-22 17:11:29 +0000] [99576] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (99576)
+[2023-09-22 17:11:29 +0000] [99576] [INFO] Using worker: sync
+[2023-09-22 17:11:29 +0000] [99577] [INFO] Booting worker with pid: 99577
+[2023-09-22 17:11:29 +0000] [99578] [INFO] Booting worker with pid: 99578
+[2023-09-22 17:11:29 +0000] [99579] [INFO] Booting worker with pid: 99579
+[2023-09-22 17:36:26 +0000] [100480] [INFO] Starting gunicorn 21.2.0
+[2023-09-22 17:36:26 +0000] [100480] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (100480)
+[2023-09-22 17:36:26 +0000] [100480] [INFO] Using worker: sync
+[2023-09-22 17:36:26 +0000] [100481] [INFO] Booting worker with pid: 100481
+[2023-09-22 17:36:26 +0000] [100481] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'stop'
+[2023-09-22 17:36:26 +0000] [100481] [INFO] Worker exiting (pid: 100481)
+[2023-09-22 17:36:27 +0000] [100480] [ERROR] Worker (pid:100481) exited with code 3
+[2023-09-22 17:36:27 +0000] [100480] [ERROR] Shutting down: Master
+[2023-09-22 17:36:27 +0000] [100480] [ERROR] Reason: Worker failed to boot.
+[2023-09-22 17:36:31 +0000] [100482] [INFO] Starting gunicorn 21.2.0
+[2023-09-22 17:36:31 +0000] [100482] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (100482)
+[2023-09-22 17:36:31 +0000] [100482] [INFO] Using worker: sync
+[2023-09-22 17:36:31 +0000] [100483] [INFO] Booting worker with pid: 100483
+[2023-09-22 17:36:31 +0000] [100483] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+    worker.init_process()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/workers/base.py", line 134, in init_process
+    self.load_wsgi()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/wsgiapp.py", line 58, in load
+    return self.load_wsgiapp()
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/usr/local/lib/python3.10/dist-packages/gunicorn/util.py", line 371, in import_app
+    mod = importlib.import_module(module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1004, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'start'
+[2023-09-22 17:36:31 +0000] [100483] [INFO] Worker exiting (pid: 100483)
+[2023-09-22 17:36:31 +0000] [100482] [ERROR] Worker (pid:100483) exited with code 3
+[2023-09-22 17:36:31 +0000] [100482] [ERROR] Shutting down: Master
+[2023-09-22 17:36:31 +0000] [100482] [ERROR] Reason: Worker failed to boot.
