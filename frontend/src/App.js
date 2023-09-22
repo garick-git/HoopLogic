@@ -10,9 +10,9 @@ function App() {
     <Router>
       <div className='appDiv'>
         <Routes>
+          <Route path="/playersearch" element={<PlayerSearch />} />
           <Route path="/" element={<Home />} />
           <Route path="/delete-me-page" element={<DeleteMe />} />
-          <Route path="/playersearch" element={<PlayerSearch />} />
         </Routes>
       </div>
     </Router>
