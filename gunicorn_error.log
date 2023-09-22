@@ -957,3 +957,37 @@ ModuleNotFoundError: No module named 'start'
 [2023-09-22 17:36:31 +0000] [100482] [ERROR] Worker (pid:100483) exited with code 3
 [2023-09-22 17:36:31 +0000] [100482] [ERROR] Shutting down: Master
 [2023-09-22 17:36:31 +0000] [100482] [ERROR] Reason: Worker failed to boot.
+[2023-09-22 17:39:58 +0000] [100717] [INFO] Starting gunicorn 21.2.0
+[2023-09-22 17:39:58 +0000] [100717] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (100717)
+[2023-09-22 17:39:58 +0000] [100717] [INFO] Using worker: sync
+[2023-09-22 17:39:58 +0000] [100719] [INFO] Booting worker with pid: 100719
+[2023-09-22 17:39:58 +0000] [100720] [INFO] Booting worker with pid: 100720
+[2023-09-22 17:39:58 +0000] [100721] [INFO] Booting worker with pid: 100721
+[2023-09-22 18:14:34 +0000] [100717] [INFO] Handling signal: term
+[2023-09-22 18:14:34 +0000] [100719] [INFO] Worker exiting (pid: 100719)
+[2023-09-22 18:14:34 +0000] [100720] [INFO] Worker exiting (pid: 100720)
+[2023-09-22 18:14:34 +0000] [100721] [INFO] Worker exiting (pid: 100721)
+[2023-09-22 18:14:34 +0000] [100717] [ERROR] Worker (pid:100721) was sent SIGTERM!
+[2023-09-22 18:14:34 +0000] [100717] [ERROR] Worker (pid:100719) was sent SIGTERM!
+[2023-09-22 18:14:34 +0000] [100717] [ERROR] Worker (pid:100720) was sent SIGTERM!
+[2023-09-22 18:14:34 +0000] [100717] [INFO] Shutting down: Master
+[2023-09-22 18:14:34 +0000] [101598] [INFO] Starting gunicorn 21.2.0
+[2023-09-22 18:14:34 +0000] [101598] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (101598)
+[2023-09-22 18:14:34 +0000] [101598] [INFO] Using worker: sync
+[2023-09-22 18:14:34 +0000] [101599] [INFO] Booting worker with pid: 101599
+[2023-09-22 18:14:34 +0000] [101600] [INFO] Booting worker with pid: 101600
+[2023-09-22 18:14:34 +0000] [101601] [INFO] Booting worker with pid: 101601
+[2023-09-22 18:20:59 +0000] [101598] [INFO] Handling signal: term
+[2023-09-22 18:20:59 +0000] [101599] [INFO] Worker exiting (pid: 101599)
+[2023-09-22 18:20:59 +0000] [101600] [INFO] Worker exiting (pid: 101600)
+[2023-09-22 18:20:59 +0000] [101601] [INFO] Worker exiting (pid: 101601)
+[2023-09-22 18:20:59 +0000] [101598] [ERROR] Worker (pid:101601) was sent SIGTERM!
+[2023-09-22 18:20:59 +0000] [101598] [ERROR] Worker (pid:101600) was sent SIGTERM!
+[2023-09-22 18:20:59 +0000] [101598] [ERROR] Worker (pid:101599) was sent SIGTERM!
+[2023-09-22 18:20:59 +0000] [101598] [INFO] Shutting down: Master
+[2023-09-22 18:20:59 +0000] [101709] [INFO] Starting gunicorn 21.2.0
+[2023-09-22 18:20:59 +0000] [101709] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (101709)
+[2023-09-22 18:20:59 +0000] [101709] [INFO] Using worker: sync
+[2023-09-22 18:20:59 +0000] [101711] [INFO] Booting worker with pid: 101711
+[2023-09-22 18:20:59 +0000] [101712] [INFO] Booting worker with pid: 101712
+[2023-09-22 18:20:59 +0000] [101713] [INFO] Booting worker with pid: 101713
