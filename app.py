@@ -16,15 +16,15 @@ def get_data():
     logging.info("Sending response: /api/data")
     return response
 
-@app.route('/api/player/search/<input_text>', methods=['GET'])
-def search_players(input_text):
-    matching_players = playerNameSearch(input_text)
-    return jsonify(matching_players)
+# @app.route('/api/player/search/<input_text>', methods=['GET'])
+# def search_players(input_text):
+#     matching_players = playerNameSearch(input_text)
+#     return jsonify(matching_players)
 
-@app.route('/api/player/id/<player_name>', methods=['GET'])
-def get_player_id(player_name):
-    player_id = playerIDFromName(player_name)
-    return jsonify(player_id)
+# @app.route('/api/player/id/<player_name>', methods=['GET'])
+# def get_player_id(player_name):
+#     player_id = playerIDFromName(player_name)
+#     return jsonify(player_id)
 
 
 if __name__ == '__main__':
