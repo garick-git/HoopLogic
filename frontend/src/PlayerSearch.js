@@ -24,9 +24,31 @@ class PlayerSearch extends Component {
       });
   }
 
-  render() {
-    return (
-      <div>
+  // render() {
+  //   return (
+  //     <div>
+  //       <h1>NBA Player Search</h1>
+  //       <input
+  //         type="text"
+  //         placeholder="Search for players by name"
+  //         value={this.state.searchInput}
+  //         onChange={this.handleInputChange}
+  //       />
+  //       <button onClick={this.searchPlayers}>Search</button>
+  //       <ul>
+  //         {this.state.players.map((player, index) => (
+  //           <li key={index}>{player.full_name}</li>
+  //         ))}
+  //       </ul>
+  //     </div>
+  //   );
+  // }
+}
+
+
+const PlayerSearch = () => {
+  return(
+    <div>
         <h1>NBA Player Search</h1>
         <input
           type="text"
@@ -41,8 +63,7 @@ class PlayerSearch extends Component {
           ))}
         </ul>
       </div>
-    );
-  }
+  );
 }
 
 export default PlayerSearch;
