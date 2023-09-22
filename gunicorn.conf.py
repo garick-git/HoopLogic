@@ -6,8 +6,11 @@ workers = 3  # Number of Gunicorn worker processes
 errorlog = os.path.join(os.getcwd(), 'gunicorn_error.log')
 accesslog = os.path.join(os.getcwd(), 'gunicorn_access.log')
 
-# # gunicorn.conf.py
-# pythonpath = '/root/SeniorProjectF23/venv/bin/python'
+sys.path.append('/root/seniorProjectF23')  # Ensure the correct path to your application
 
-sys.path.append('/root/seniorProjectF23')
-app = "app:app"
+# Specify the module and the callable (Flask app instance)
+module = "app"
+callable = "app"
+
+# Combine them as "module:callable" for Gunicorn
+app = f"{module}:{callable}"
