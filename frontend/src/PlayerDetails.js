@@ -1,14 +1,14 @@
+// PlayerDetails.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './PlayerDetails.css'; 
 
 const PlayerDetails = () => {
   const { playerId } = useParams();
   const [playerInfo, setPlayerInfo] = useState(null);
 
   useEffect(() => {
-    // Fetch player info by playerId
-    fetch(`/api/player/info/${playerId}`)
+    // Make an API request to get player details using playerId
+    fetch(`/api/player/${playerId}`)
       .then((response) => response.json())
       .then((data) => {
         setPlayerInfo(data);
@@ -22,7 +22,6 @@ const PlayerDetails = () => {
     return <div>Loading...</div>;
   }
 
-  // Extract player information from playerInfo JSON
   const {
     FIRST_NAME,
     LAST_NAME,
@@ -47,16 +46,10 @@ const PlayerDetails = () => {
       <p>Birthday: {BIRTHDATE}</p>
       <p>School: {SCHOOL}</p>
       <p>Country: {COUNTRY}</p>
-      <p>Height: {HEIGHT} inches</p>
-      <p>Weight: {WEIGHT} lbs</p>
-      <p>Seasons of Experience: {SEASON_EXP}</p>
-      <p>Jersey Number: {JERSEY}</p>
+      <p>Height: {HEIGHT} Weight: {WEIGHT}</p>
       <p>Position: {POSITION}</p>
       <p>Team: {TEAM_NAME} ({TEAM_ABBREVIATION})</p>
-      <p>Team City: {TEAM_CITY}</p>
-      <p>From Year: {FROM_YEAR}</p>
-      <p>To Year: {TO_YEAR}</p>
-      {/* Add more player information as needed */}
+      {/* Add more player information */}
     </div>
   );
 };

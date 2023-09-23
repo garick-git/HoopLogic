@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/playersearch" element={<PlayerSearch />} />
           <Route path="/" element={<Home />} />
-          <Route path="/delete-me-page" element={<DeleteMe />} />
+          <Route path="/player/:playerId" component={PlayerDetails} />
         </Routes>
       </div>
     </Router>
