@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Home from './Home';
-import DeleteMe from './PlayerDetails';
+import PlayerDetails from './PlayerDetails';
 import PlayerSearch from './PlayerSearch';
 
 function App() {
