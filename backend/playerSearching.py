@@ -35,7 +35,7 @@ def getCommonPlayerInfoByID(id):
     player_info = retDict['CommonPlayerInfo'][0]
     player_id = player_info['PERSON_ID']
     first_name = player_info['FIRST_NAME']
-    last_name = player/info['LAST_NAME']
+    last_name = player_info['LAST_NAME']
     birthdate = player_info['BIRTHDATE']
     school = player_info['SCHOOL']
     country = player_info['COUNTRY']
