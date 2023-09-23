@@ -5,6 +5,8 @@ import './PlayerSearch.css';
 const PlayerSearch = () => {
   const [searchInput, setSearchInput] = useState('');
   const [players, setPlayers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -17,13 +19,20 @@ const PlayerSearch = () => {
       return;
     }
 
+    setLoading(true);
+    setError(null);
+
     fetch(`/api/player/search/${searchInput}`)
       .then((response) => response.json())
       .then((data) => {
         setPlayers(data);
       })
       .catch((error) => {
+        setError('An error occurred while fetching data.');
         console.error('Error:', error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -45,6 +54,8 @@ const PlayerSearch = () => {
         onChange={handleInputChange}
       />
       <button onClick={searchPlayers}>Search</button>
+      {loading && <p>Loading...</p>}
+      {error && <p className="error">{error}</p>}
       <ul>
         {players.map((player) => (
           <li
