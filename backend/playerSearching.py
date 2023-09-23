@@ -22,33 +22,9 @@ def playerIDFromName(playerName):
     print(playerID[0]['id'])
 
 def getCommonPlayerInfoByID(id):
-    # Nikola Jokić
     career = commonplayerinfo.CommonPlayerInfo(id) 
-
-    # json
     career.get_json()
-
-    # dictionary
-    retDict = career.get_normalized_dict()
-    
-    # Extract specific information from the retDict
-    player_info = retDict['CommonPlayerInfo'][0]
-    player_id = player_info['PERSON_ID']
-    first_name = player_info['FIRST_NAME']
-    last_name = player_info['LAST_NAME']
-    birthdate = player_info['BIRTHDATE']
-    school = player_info['SCHOOL']
-    country = player_info['COUNTRY']
-    height = player_info['HEIGHT']
-    weight = player_info['WEIGHT']
-    season_exp = player_info['SEASON_EXP']
-    jersey = player_info['JERSEY']
-    position = player_info['POSITION']
-    team_name = player_info['TEAM_NAME']
-    team_abbreviation = player_info['TEAM_ABBREVIATION']
-    team_city = player_info['TEAM_CITY']
-    from_year = player_info['FROM_YEAR']
-    to_year = player_info['TO_YEAR']
+    return career
 
 if __name__ == "__main__":
     # Input text to search for
