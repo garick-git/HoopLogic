@@ -1,47 +1,60 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const PlayerDetails = ({ playerName }) => {
-  const [playerInfo, setPlayerInfo] = useState(null);
+const PlayerSearch = () => {
+  const [searchInput, setSearchInput] = useState('');
+  const [players, setPlayers] = useState([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (playerName) {
-      // Fetch the player ID by name
-      fetch(`/api/player/id/${playerName}`)
-        .then((response) => response.json())
-        .then((data) => {
-          // Assuming the API returns the player ID
-          const playerId = data.id;
+  const handleInputChange = (e) => {
+    setSearchInput(e.target.value);
+  };
 
-          // Fetch player details by ID
-          fetch(`/api/playerinfo/id/${playerId}`)
-            .then((response) => response.json())
-            .then((info) => {
-              setPlayerInfo(info);
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-            });
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+  const searchPlayers = () => {
+    if (searchInput.trim() === '') {
+      setPlayers([]);
+      return;
     }
-  }, [playerName]);
 
-  if (!playerInfo) {
-    return <div>Loading...</div>;
-  }
+    // Fetch players matching the search input
+    fetch(`/api/player/search/${searchInput}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPlayers(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
+  const handlePlayerClick = (playerName) => {
+    // Navigate to player details page with the selected player's name
+    navigate(`/playerdetails/${playerName}`);
+  };
 
   return (
-    <div>
-      <h2>Player Details</h2>
-      <p>Name: {playerInfo.FIRST_NAME} {playerInfo.LAST_NAME}</p>
-      <p>Birthday: {playerInfo.BIRTHDATE}</p>
-      <p>School: {playerInfo.SCHOOL}</p>
-      <p>Country: {playerInfo.COUNTRY}</p>
-      {/* Add more player information fields here */}
+    <div className="PlayerSearch">
+      <h1>NBA Player Search</h1>
+      <input
+        type="text"
+        placeholder="Search for players by name"
+        value={searchInput}
+        onChange={handleInputChange}
+      />
+      <button onClick={searchPlayers}>Search</button>
+      <ul>
+        {players.map((player) => (
+          <li
+            key={player.full_name}
+            onClick={() => handlePlayerClick(player.full_name)}
+            className="player-name"
+          >
+            {player.full_name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default PlayerDetails;
+export default PlayerSearch;
