@@ -991,3 +991,9 @@ ModuleNotFoundError: No module named 'start'
 [2023-09-22 18:20:59 +0000] [101711] [INFO] Booting worker with pid: 101711
 [2023-09-22 18:20:59 +0000] [101712] [INFO] Booting worker with pid: 101712
 [2023-09-22 18:20:59 +0000] [101713] [INFO] Booting worker with pid: 101713
+[2023-09-23 16:36:53 +0000] [124480] [INFO] Starting gunicorn 21.2.0
+[2023-09-23 16:36:53 +0000] [124480] [INFO] Listening at: unix:/root/SeniorProjectF23/app.sock (124480)
+[2023-09-23 16:36:53 +0000] [124480] [INFO] Using worker: sync
+[2023-09-23 16:36:53 +0000] [124482] [INFO] Booting worker with pid: 124482
+[2023-09-23 16:36:53 +0000] [124483] [INFO] Booting worker with pid: 124483
+[2023-09-23 16:36:53 +0000] [124484] [INFO] Booting worker with pid: 124484
