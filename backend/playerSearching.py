@@ -22,9 +22,8 @@ def playerIDFromName(playerName):
     return (playerID[0]['id'])
 
 def getCommonPlayerInfoByID(id):
-    career = commonplayerinfo.CommonPlayerInfo(id) 
-    career.get_json()
-    return career[0]
+    career = commonplayerinfo.CommonPlayerInfo(player_id=id)
+    return career.common_player_info.get_json()
 
 if __name__ == "__main__":
     # Input text to search for
