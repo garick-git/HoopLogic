@@ -8,7 +8,7 @@ const PlayerDetails = () => {
 
   useEffect(() => {
     // Make an API request to get player details using playerId
-    fetch(`/api/player/${playerId}`)
+    fetch(`/api/playerinfo/id/${playerId}`)
       .then((response) => response.json())
       .then((data) => {
         setPlayerInfo(data);

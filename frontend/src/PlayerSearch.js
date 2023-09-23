@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './PlayerSearch.css'; 
+import { useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
+import './PlayerSearch.css';
 
 const PlayerSearch = () => {
   const [searchInput, setSearchInput] = useState('');
   const [players, setPlayers] = useState([]);
+  const history = useHistory(); // Create a history object
 
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
@@ -26,11 +28,17 @@ const PlayerSearch = () => {
   };
 
   useEffect(() => {
-    searchPlayers(); // Initially fetch data when the component mounts.
-  }, []); // An empty dependency array means this effect runs once after the initial render.
+    searchPlayers();
+  }, [searchInput]);
+
+  // Function to navigate to player details page when a player is clicked
+  const handlePlayerClick = (playerId) => {
+    // Redirect to the player details page using player ID
+    history.push(`/player/${playerId}`);
+  };
 
   return (
-    <div className='PlayerSearch'>
+    <div className="PlayerSearch">
       <h1>NBA Player Search</h1>
       <input
         type="text"
@@ -40,8 +48,14 @@ const PlayerSearch = () => {
       />
       <button onClick={searchPlayers}>Search</button>
       <ul>
-        {players.map((player, index) => (
-          <li key={index}>{player.full_name}</li>
+        {players.map((player) => (
+          <li
+            key={player.id}
+            onClick={() => handlePlayerClick(player.id)} // Call handlePlayerClick when clicked
+            className="player-name" // Add a CSS class for styling
+          >
+            {player.full_name}
+          </li>
         ))}
       </ul>
     </div>
