@@ -23,5 +23,5 @@ def playerIDFromName(playerName):
 
 def getCommonPlayerInfoByID(id):
     career = commonplayerinfo.CommonPlayerInfo(player_id=id)
-    return career.common_player_info.get_dict()
+    return career.common_player_info.get_json()
 

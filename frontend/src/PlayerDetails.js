@@ -6,7 +6,7 @@ const PlayerDetails = ({ playerId }) => {
   useEffect(() => {
     // Fetch player details based on playerId
     if (playerId) {
-      fetch(`/api/playerinfo/id/${playerId}`)
+      fetch(`/api/player/info/id/${playerId}`)
         .then((response) => response.json())
         .then((data) => {
           setPlayerDetails(data); // Set player details data
@@ -29,7 +29,7 @@ const PlayerDetails = ({ playerId }) => {
       <div>
         <h2>{playerDetails.full_name}</h2>
         <p>Birthdate: {playerDetails.birthdate}</p>
-        {/* Add more player details here */}
+=        {/* Add more player details here */}
       </div>
     </div>
   );
