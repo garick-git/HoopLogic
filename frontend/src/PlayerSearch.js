@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PlayerSearch.css';
 
-
 const PlayerSearch = () => {
   const [searchInput, setSearchInput] = useState('');
   const [players, setPlayers] = useState([]);
@@ -29,9 +28,9 @@ const PlayerSearch = () => {
       });
   };
 
-  const handlePlayerClick = (playerName) => {
-    // Navigate to player details page with the selected player's name
-    navigate(`/playerdetails/${playerName}`);
+  const handlePlayerClick = (playerId) => {
+    // Navigate to player details page with the selected player's ID
+    navigate(`/playerdetails/${playerId}`);
   };
 
   return (
@@ -47,8 +46,8 @@ const PlayerSearch = () => {
       <ul>
         {players.map((player) => (
           <li
-            key={player.full_name}
-            onClick={() => handlePlayerClick(player.full_name)}
+            key={player.id}
+            onClick={() => handlePlayerClick(player.id)} // Pass player ID
             className="player-name"
           >
             {player.full_name}
