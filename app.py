@@ -24,7 +24,7 @@ def search_players(input_text):
 def get_player_id(player_name):
     return jsonify(playerIDFromName(player_name))
 
-@app.route('/api/playerinfo/id/<int:player_id>')
+@app.route('/api/playerinfo/id/<player_id>')
 def player_details(player_id):
     return getCommonPlayerInfoByID(player_id)
     
