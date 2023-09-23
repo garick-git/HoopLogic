@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import './PlayerSearch.css';
 
-const PlayerSearch = () => {
+const PlayerSearch = ({ onPlayerSelect }) => {
   const [searchInput, setSearchInput] = useState('');
   const [players, setPlayers] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const history = useHistory();
 
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
@@ -19,30 +15,20 @@ const PlayerSearch = () => {
       return;
     }
 
-    setLoading(true);
-    setError(null);
-
+    // Make an API request to fetch matching players
     fetch(`/api/player/search/${searchInput}`)
       .then((response) => response.json())
       .then((data) => {
         setPlayers(data);
       })
       .catch((error) => {
-        setError('An error occurred while fetching data.');
         console.error('Error:', error);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
   useEffect(() => {
     searchPlayers();
   }, [searchInput]);
-
-  const handlePlayerClick = (playerId) => {
-    history.push(`/playerinfo/${playerId}`);
-  };
 
   return (
     <div className="PlayerSearch">
@@ -53,14 +39,11 @@ const PlayerSearch = () => {
         value={searchInput}
         onChange={handleInputChange}
       />
-      <button onClick={searchPlayers}>Search</button>
-      {loading && <p>Loading...</p>}
-      {error && <p className="error">{error}</p>}
       <ul>
-        {players.map((player) => (
+        {players.map((player, index) => (
           <li
-            key={player.id}
-            onClick={() => handlePlayerClick(player.id)}
+            key={index}
+            onClick={() => onPlayerSelect(player.full_name)}
             className="player-name"
           >
             {player.full_name}

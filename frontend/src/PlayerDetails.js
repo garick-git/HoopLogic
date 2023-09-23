@@ -1,55 +1,46 @@
-// PlayerDetails.js
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import './PlayerDetails.css';
 
-const PlayerDetails = () => {
-  const { playerId } = useParams();
+const PlayerDetails = ({ playerName }) => {
   const [playerInfo, setPlayerInfo] = useState(null);
 
   useEffect(() => {
-    // Make an API request to get player details using playerId
-    fetch(`/api/playerinfo/id/${playerId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPlayerInfo(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }, [playerId]);
+    if (playerName) {
+      // Make an API request to fetch player info by name
+      fetch(`/api/player/id/${playerName}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // Assuming the API returns the player ID
+          const playerId = data.id;
+
+          // Make another API request to fetch player details by ID
+          fetch(`/api/playerinfo/id/${playerId}`)
+            .then((response) => response.json())
+            .then((info) => {
+              setPlayerInfo(info);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  }, [playerName]);
 
   if (!playerInfo) {
     return <div>Loading...</div>;
   }
 
-  const {
-    FIRST_NAME,
-    LAST_NAME,
-    BIRTHDATE,
-    SCHOOL,
-    COUNTRY,
-    HEIGHT,
-    WEIGHT,
-    SEASON_EXP,
-    JERSEY,
-    POSITION,
-    TEAM_NAME,
-    TEAM_ABBREVIATION,
-    TEAM_CITY,
-    FROM_YEAR,
-    TO_YEAR,
-  } = playerInfo;
-
   return (
-    <div>
-      <h1>{`${FIRST_NAME} ${LAST_NAME}`}</h1>
-      <p>Birthday: {BIRTHDATE}</p>
-      <p>School: {SCHOOL}</p>
-      <p>Country: {COUNTRY}</p>
-      <p>Height: {HEIGHT} Weight: {WEIGHT}</p>
-      <p>Position: {POSITION}</p>
-      <p>Team: {TEAM_NAME} ({TEAM_ABBREVIATION})</p>
-      {/* Add more player information */}
+    <div className="PlayerDetails">
+      <h1>Player Details</h1>
+      <h2>{playerInfo.FIRST_NAME} {playerInfo.LAST_NAME}</h2>
+      <p>Birthday: {playerInfo.BIRTHDATE}</p>
+      <p>School: {playerInfo.SCHOOL}</p>
+      <p>Country: {playerInfo.COUNTRY}</p>
+      {/* Add more player information fields */}
     </div>
   );
 };
