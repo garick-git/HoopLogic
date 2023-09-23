@@ -1,0 +1,40 @@
+/* PlayerDetails.css */
+
+/* Style the container */
+.PlayerDetails {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 400px;
+  }
+  
+  /* Style the player name */
+  .PlayerDetails h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the player information */
+  .PlayerDetails p {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  /* Style loading indicator */
+  .PlayerDetails .loading {
+    font-size: 18px;
+    color: #007bff; /* Change the color to your preference */
+  }
+  
+  /* Add more styles as needed */
+  
+  /* Example: Style links */
+  .PlayerDetails a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .PlayerDetails a:hover {
+    text-decoration: underline;
+  }
+  
