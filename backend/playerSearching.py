@@ -1,4 +1,6 @@
-from nba_api.stats.static import players, commonplayerinfo
+from nba_api.stats.static import players
+from nba_api.stats.endpoints import commonplayerinfo
+
 
 
 def playerNameSearch(input_text):
