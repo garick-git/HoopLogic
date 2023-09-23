@@ -6,24 +6,23 @@ const PlayerDetails = () => {
   const [playerInfo, setPlayerInfo] = useState({});
 
   useEffect(() => {
-    // Fetch player details using playerId and update state
+    // Fetch player details based on the playerId from the route parameter
     fetch(`/api/playerinfo/id/${playerId}`)
       .then((response) => response.json())
       .then((data) => {
-        setPlayerInfo(data); // Update state with player details
+        setPlayerInfo(data);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, [playerId]);
 
-  // Render player details in the JSX
   return (
     <div className="PlayerDetails">
       <h1>Player Details</h1>
       <p>Name: {playerInfo.full_name}</p>
       <p>Team: {playerInfo.team_name}</p>
-      {/* Add more details as needed */}
+      {/* Add more player details as needed */}
     </div>
   );
 };
