@@ -30,7 +30,7 @@ const PlayerSearch = () => {
 
   const handlePlayerClick = (playerId) => {
     // Navigate to player details page with the selected player's ID
-    navigate(`/playerdetails/${playerId}`);
+    navigate(`/player/${playerId}`);
   };
 
   return (
