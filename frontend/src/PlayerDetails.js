@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const PlayerSearch = () => {
   const [searchInput, setSearchInput] = useState('');
   const [players, setPlayers] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
@@ -33,7 +33,7 @@ const PlayerSearch = () => {
 
   const handlePlayerClick = (playerName) => {
     // Redirect to PlayerDetails with the selected player name
-    history.push(`/playerinfo/${playerName}`);
+    navigate.push(`/playerinfo/${playerName}`);
   };
 
   return (
