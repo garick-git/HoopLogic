@@ -22,6 +22,9 @@ def playerIDFromName(playerName):
     return (playerID[0]['id'])
 
 def getCommonPlayerInfoByID(id):
-    career = commonplayerinfo.CommonPlayerInfo(player_id=id)
+    career = commonplayerinfo.CommonPlayerInfo(id)
     return career.common_player_info.get_json()
 
+if __name__ == "__main__":
+    print(getCommonPlayerInfoByID(209))
+    # playerIDFromName("LeBron James")
