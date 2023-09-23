@@ -19,7 +19,7 @@ def isActive(player):
 #Takes a player FULL name and returns their associated ID in the API
 def playerIDFromName(playerName):
     playerID = players.find_players_by_full_name(playerName)
-    print(playerID[0]['id'])
+    return (playerID[0]['id'])
 
 def getCommonPlayerInfoByID(id):
     career = commonplayerinfo.CommonPlayerInfo(id) 
