@@ -25,18 +25,3 @@ def getCommonPlayerInfoByID(id):
     career = commonplayerinfo.CommonPlayerInfo(player_id=id)
     return career.common_player_info.get_dict()
 
-if __name__ == "__main__":
-    # Input text to search for
-    search_text = input("Enter a search term for player names (Enter 'exit' to quit): ")
-
-    # Call the function to search for players
-    matching_players = playerNameSearch(search_text)
-
-    # Print the matching players
-    if matching_players:
-        print(f"Players matching '{search_text}':")
-        for player in matching_players:
-            print(f"{player['first_name']} {player['last_name']}")
-    else:
-        print(f"No players found matching '{search_text}'.")
-    # playerIDFromName("LeBron James")
