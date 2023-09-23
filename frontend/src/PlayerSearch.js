@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'; // Import useHistory from react-router-dom
+import { useHistory } from 'react-router-dom';
 import './PlayerSearch.css';
 
 const PlayerSearch = () => {
   const [searchInput, setSearchInput] = useState('');
   const [players, setPlayers] = useState([]);
-  const history = useHistory(); // Create a history object
+  const history = useHistory();
 
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
@@ -31,10 +31,8 @@ const PlayerSearch = () => {
     searchPlayers();
   }, [searchInput]);
 
-  // Function to navigate to player details page when a player is clicked
   const handlePlayerClick = (playerId) => {
-    // Redirect to the player details page using player ID
-    history.push(`/player/${playerId}`);
+    history.push(`/playerinfo/${playerId}`);
   };
 
   return (
@@ -51,8 +49,8 @@ const PlayerSearch = () => {
         {players.map((player) => (
           <li
             key={player.id}
-            onClick={() => handlePlayerClick(player.id)} // Call handlePlayerClick when clicked
-            className="player-name" // Add a CSS class for styling
+            onClick={() => handlePlayerClick(player.id)}
+            className="player-name"
           >
             {player.full_name}
           </li>
