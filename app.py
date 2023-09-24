@@ -26,7 +26,7 @@ def get_player_id(player_name):
 
 @app.route('/api/player/info/<player_id>', methods=['GET'])
 def player_details(player_id):
-   return jsonify(getCommonPlayerInfoByID(player_id))
+   return jsonify(getCommonPlayerInfoByID(player_id=player_id, proxy="hooplogic.online"))
 
 
 
