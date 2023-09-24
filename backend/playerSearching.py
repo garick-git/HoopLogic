@@ -22,7 +22,7 @@ def playerIDFromName(playerName):
     return (playerID[0]['id'])
 
 def getCommonPlayerInfoByID(id):
-    player_info = commonplayerinfo.CommonPlayerInfo(player_id=id, proxy="127.0.0.1:5000")
+    player_info = commonplayerinfo.CommonPlayerInfo(player_id=id, proxy="http://127.0.0.1:5000")
     playerJson = player_info.common_player_info.get_dict()
     return playerJson
 
