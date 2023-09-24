@@ -22,7 +22,7 @@ def playerIDFromName(playerName):
     return (playerID[0]['id'])
 
 def getCommonPlayerInfoByID(id):
-    player_info = commonplayerinfo.CommonPlayerInfo(id)
+    player_info = commonplayerinfo.CommonPlayerInfo(player_id=id, proxy="hooplogic.online")
     playerJson = player_info.common_player_info.get_dict()
     return playerJson
 
