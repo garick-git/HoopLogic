@@ -33,7 +33,7 @@ def getCommonPlayerInfoByID(id):
         'Accept-Language' : 'en-US,en;q=0.8,af;q=0.6',
     }
     
-    player_info = commonplayerinfo.CommonPlayerInfo(player_id=id, proxy="127.0.0.1:5000",headers=custom_headers)
+    player_info = commonplayerinfo.CommonPlayerInfo(player_id=id, headers=custom_headers)
     playerJson = player_info.common_player_info.get_dict()
     return playerJson
 
