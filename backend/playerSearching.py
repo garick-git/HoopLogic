@@ -25,6 +25,3 @@ def getCommonPlayerInfoByID(id):
     career = commonplayerinfo.CommonPlayerInfo(id)
     return career.common_player_info.get_dict()
 
-if __name__ == "__main__":
-    print(getCommonPlayerInfoByID(209))
-    # playerIDFromName("LeBron James")
