@@ -1,3 +1,4 @@
+import time
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import commonplayerinfo
 
@@ -22,6 +23,7 @@ def playerIDFromName(playerName):
     return (playerID[0]['id'])
 
 def getCommonPlayerInfoByID(id):
+    time.sleep(.6)
     custom_headers = {
         'Host': 'stats.nba.com',
         'Connection': 'keep-alive',
