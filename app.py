@@ -1,4 +1,5 @@
 import logging
+import requests
 from flask import Flask, jsonify
 from backend.playerSearching import playerNameSearch, playerIDFromName, getCommonPlayerInfoByID
 
@@ -26,8 +27,30 @@ def get_player_id(player_name):
 
 @app.route('/api/player/info/<int:player_id>', methods=['GET'])
 def player_details(player_id):
-    return jsonify(getCommonPlayerInfoByID(player_id))
-    
+    try:
+        # Specify the base URL, parameters, headers, and proxies
+        base_url = 'https://stats.nba.com/api/v1/commonplayerinfo'
+        parameters = {'PlayerID': player_id}
+        request_headers = {'User-Agent': 'YourUserAgentHere'}
+        proxies = {
+            'http': 'http://your_proxy_server',
+            'https': 'https://your_proxy_server',
+        }
+
+        # Make the request with an increased timeout of 60 seconds
+        response = requests.get(url=base_url, params=parameters, headers=request_headers, proxies=proxies, timeout=60)
+
+        # Check if the response was successful and handle it accordingly
+        if response.status_code == 200:
+            data = response.json()
+            return jsonify(data)
+        else:
+            # Handle other response codes or errors here
+            return jsonify({'error': 'Request to external service failed'})
+
+    except requests.exceptions.RequestException as e:
+        # Handle request exceptions (e.g., timeouts) here
+        return jsonify({'error': f'Request to external service failed: {str(e)}'})
 
 
 
