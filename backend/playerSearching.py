@@ -35,7 +35,7 @@ def getCommonPlayerInfoByID(id):
 
     # Only available after v1.1.0
     # Proxy Support, Custom Headers Support, Timeout Support (in seconds)
-    player_info = commonplayerinfo.CommonPlayerInfo(player_id=id, proxy='127.0.0.1:80', headers=custom_headers, timeout=100)
+    player_info = commonplayerinfo.CommonPlayerInfo(player_id=id, headers=custom_headers, timeout=100)
     playerJson = player_info.common_player_info.get_json()
     return playerJson
 
