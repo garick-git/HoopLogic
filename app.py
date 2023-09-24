@@ -26,8 +26,8 @@ def get_player_id(player_name):
     return jsonify(playerIDFromName(player_name))
 
 @app.route('/api/player/info/<int:player_id>', methods=['GET'])
-def player_details(id):
-   return jsonify(getCommonPlayerInfoByID(id))
+def player_details(player_id):
+   return jsonify(getCommonPlayerInfoByID(player_id))
 
 
 
