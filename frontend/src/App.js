@@ -4,7 +4,7 @@ import './App.css';
 import Home from './Home';
 import PlayerDetails from './PlayerDetails';
 import PlayerSearch from './PlayerSearch';
-import NBAPlayerInfoPage from './NBAPlayerInfoPage'; // Replace with the actual path to your component
+import NBAPlayerInfoPage from './RequestTest'; // Replace with the actual path to your component
 
 
 function App() {
