@@ -4,6 +4,8 @@ import './App.css';
 import Home from './Home';
 import PlayerDetails from './PlayerDetails';
 import PlayerSearch from './PlayerSearch';
+import InfoPage from './InfoPage';
+
 
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
           <Route path="/playersearch" element={<PlayerSearch />} />
           <Route path="/" element={<Home />} />
           <Route path="/player/:playerId" element={<PlayerDetails/>} />
+          <Route path="/info" element={<InfoPage/>} />
         </Routes>
       </div>
     </Router>
