@@ -26,40 +26,60 @@ const Home = () => {
         {"first_name":"Carey","full_name":"Carey Scurry","id":78102,"is_active":false,"last_name":"Scurry"}
       ];      
 
-    const searchPlayers = async () => {
-        if (searchInput.trim() === '') {
-        setPlayers([]);
-        return;
-        }
+    // const searchPlayers = async () => {
+    //     if (searchInput.trim() === '') {
+    //     setPlayers([]);
+    //     return;
+    //     }
 
-        // Fetch players matching the search input
-        fetch(`/api/player/search/${searchInput}`)
-        .then((response) => response.json())
-        .then((data) => {
-            setPlayers(data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    };
+    //     // Fetch players matching the search input
+    //     fetch(`/api/player/search/${searchInput}`)
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         setPlayers(data);
+    //     })
+    //     .catch((error) => {
+    //         console.error('Error:', error);
+    //     });
+    // };
 
-    const handlePlayerClick = (playerId) => {
-        // Navigate to player details page with the selected player's ID
-        navigate(`/playerdetails/${playerId}`);
-    };
+        const handleInputChange = (e) => {
+          const input = e.target.value;
+          setSearchInput(input);
+        
+          // Filter players based on last name starting with the input
+          const filteredPlayers = playersStatic.filter((player) => {
+            const lastName = player.last_name.toLowerCase();
+            return lastName.startsWith(input.toLowerCase());
+          });
+        
+          setPlayers(filteredPlayers);
+        };
 
-    const handleInputChange = (e) => {
-        const input = e.target.value;
-        setSearchInput(input);
+        const triggerTimer = () => {
+          clearTimeout(timerId);
       
-        // Filter players based on last name starting with the input
-        const filteredPlayers = playersStatic.filter((player) => {
-          const lastName = player.last_name.toLowerCase();
-          return lastName.startsWith(input.toLowerCase());
-        });
-      
-        setPlayers(filteredPlayers);
-      };
+          timerId = setTimeout(() => {
+            fetchPlayers(searchInput);
+          }, 200);
+        };
+
+        const fetchPlayers = () => {
+          // Grab the current value of the input
+
+          // WORK IN PROGRESS!!!
+          // const searchInput = document.querySelector('.searchBar').value;
+        
+          // // Perform the API request based on the search input
+          // fetch(`/api/player/search/${searchInput}`)
+          //   .then((response) => response.json())
+          //   .then((data) => {
+          //     setPlayers(data);
+          //   })
+          //   .catch((error) => {
+          //     console.error('Error:', error);
+          //   });
+        };
       
       return (
         <div className="homePageDiv">
@@ -75,7 +95,7 @@ const Home = () => {
               type="text"
               placeholder="Search for players by name"
               value={searchInput}
-              onChange={handleInputChange}
+              onChange={triggerTimer}
               className="searchBar"
             />
             <div className="suggestedPlayersDiv">
