@@ -17,7 +17,7 @@ const PlayerSearch = () => {
       return;
     }
 
-    // Fetch players matching the search input
+
     fetch(`/api/player/search/${searchInput}`)
       .then((response) => response.json())
       .then((data) => {
@@ -30,7 +30,7 @@ const PlayerSearch = () => {
 
   const handlePlayerClick = (playerId) => {
     // Navigate to player details page with the selected player's ID
-    navigate(`/player/${playerId}`);
+    navigate(`/playerdetails/${playerId}`);
   };
 
   return (

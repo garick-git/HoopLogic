@@ -45,3 +45,7 @@ code {
   border-color: #007BFF; /* Change the border color when focused */
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow when focused */
 }
+
+.suggestedPlayersDiv{
+  background-color: white;
+}
