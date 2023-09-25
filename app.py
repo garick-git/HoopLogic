@@ -1,6 +1,6 @@
 import logging
 from flask import Flask, jsonify
-from backend.playerSearching import playerNameSearch, playerIDFromName, getCommonPlayerInfoByID
+from backend.playerSearching import getAllPlayers
 
 
 app = Flask(__name__)
@@ -16,18 +16,21 @@ def get_data():
     logging.info("Sending response: /api/data")
     return response
 
-@app.route('/api/player/search/<input_text>', methods=['GET'])
-def search_players(input_text):
-    return jsonify(playerNameSearch(input_text))
+# @app.route('/api/player/search/<input_text>', methods=['GET'])
+# def search_players(input_text):
+#     return jsonify(playerNameSearch(input_text))
 
-@app.route('/api/player/id/<player_name>', methods=['GET'])
-def get_player_id(player_name):
-    return jsonify(playerIDFromName(player_name))
+# @app.route('/api/player/id/<player_name>', methods=['GET'])
+# def get_player_id(player_name):
+#     return jsonify(playerIDFromName(player_name))
 
-@app.route('/api/player/info/<player_id>', methods=['GET'])
-def player_details(player_id):
-   return jsonify(getCommonPlayerInfoByID(player_id))
+# @app.route('/api/player/info/<player_id>', methods=['GET'])
+# def player_details(player_id):
+#    return jsonify(getCommonPlayerInfoByID(player_id))
 
+@app.route('/api/player/allplayers', methods=['GET'])
+def getPlayers():
+    return jsonify(getAllPlayers())
 
 
 
