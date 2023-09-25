@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import './App.css';
 import Home from './Home';
 import PlayerSearch from './PlayerSearch';
-import InfoPage from './InfoPage';
 
 
 
@@ -14,7 +13,6 @@ function App() {
         <Routes>
           <Route path="/playersearch" element={<PlayerSearch />} />
           <Route path="/" element={<Home />} />
-          <Route path="/info" element={<InfoPage/>} />
         </Routes>
       </div>
     </Router>
