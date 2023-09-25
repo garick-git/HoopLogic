@@ -1,0 +1,36 @@
+/* NBAPlayerList.css */
+
+.player-list-container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .list-heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .player-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .player-item {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
+    transition: background-color 0.3s ease;
+  }
+  
+  .player-item:hover {
+    background-color: #f0f0f0;
+  }
+  
