@@ -27,8 +27,7 @@ function NBAPlayerInfoPage() {
 
       {playerInfo && (
         <div>
-          <h2>Player Name: {playerInfo.PlayerName}</h2>
-          <p>Team: {playerInfo.TeamName}</p>
+          <p>Team: {playerInfo}</p>
           {/* Display other player information here */}
         </div>
       )}
