@@ -46,7 +46,7 @@ function PlayerSearch() {
       <ul className="player-list">
         {players.map((player) => (
           <li key={player.id} className="player-item">
-            {player.first_name} {player.last_name} - {player.team.full_name}
+            {player.first_name} {player.last_name} - {player.team.full_name} {player.id}
           </li>
         ))}
       </ul>
