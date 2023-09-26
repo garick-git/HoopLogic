@@ -6,16 +6,15 @@ function NBAPlayerList() {
   const [players, setPlayers] = useState([]);
   const [searchText, setSearchText] = useState(''); // State for input text
 
-  const apiUrl = '/api/player/allplayers';
+  // Update the URL to include the searchText as a parameter
+  const apiUrl = `/api/player/search/${searchText}`;
 
   const fetchPlayers = async () => {
     try {
-      const response = await axios.get(apiUrl, {
-        params: { search: searchText } // Pass search text as a query parameter
-      });
+      const response = await axios.get(apiUrl);
 
       // Set the player data in the state
-      setPlayers(response.data.data);
+      setPlayers(response.data);
     } catch (error) {
       console.error('Error fetching NBA players:', error);
     }
