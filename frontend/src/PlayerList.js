@@ -37,13 +37,26 @@ function NBAPlayerList() {
         />
         <button onClick={handleSearch}>Search</button>
       </div>
-      <ul>
-        {players.map((player) => (
-          <li key={player.id}>
-            {player.first_name} {player.last_name} - {player.team.full_name}
-          </li>
-        ))}
-      </ul>
+      {players.length > 0 && (
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Team</th>
+              <th>Position</th>
+            </tr>
+          </thead>
+          <tbody>
+            {players.map((player) => (
+              <tr key={player.id}>
+                <td>{player.first_name} {player.last_name}</td>
+                <td>{player.team.full_name}</td>
+                <td>{player.position}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
