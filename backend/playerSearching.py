@@ -10,8 +10,8 @@ import requests
 
 #     return matching_players
 
-def getAllPlayers():
-    url = "https://www.balldontlie.io/api/v1/players"
+def getAllPlayers(input_text):
+    url = f"https://www.balldontlie.io/api/v1/players?search={input_text}"
 
     try:
         response = requests.get(url)
