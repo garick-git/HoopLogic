@@ -37,6 +37,10 @@
     background-color: #0056b3;
   }
   
+  .error-message {
+    color: red;
+  }
+  
   .player-list {
     list-style: none;
     padding: 0;

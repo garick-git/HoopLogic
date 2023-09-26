@@ -1,6 +1,7 @@
+// PlayerSearch.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import './PlayerList.css';
+import './PlayerList.css'; // Import the CSS file
 
 function PlayerSearch() {
   const [searchInput, setSearchInput] = useState('');
@@ -27,21 +28,24 @@ function PlayerSearch() {
   };
 
   return (
-    <div>
-      <h1>NBA Player Search</h1>
+    <div className="player-search-container">
+      <h1 className="search-heading">NBA Player Search</h1>
       <div>
         <input
+          className="search-input"
           type="text"
           placeholder="Enter a player name..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className="search-button" onClick={handleSearch}>
+          Search
+        </button>
       </div>
-      {error && <p>{error}</p>}
-      <ul>
+      {error && <p className="error-message">{error}</p>}
+      <ul className="player-list">
         {players.map((player) => (
-          <li key={player.id}>
+          <li key={player.id} className="player-item">
             {player.first_name} {player.last_name} - {player.team.full_name}
           </li>
         ))}
