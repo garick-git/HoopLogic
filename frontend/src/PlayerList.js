@@ -6,7 +6,7 @@ function NBAPlayerList() {
   const [players, setPlayers] = useState([]);
   const [searchText, setSearchText] = useState(''); // State for input text
 
-  const apiUrl = '/api/player/search';
+  const apiUrl = '/api/player/allplayers';
 
   const fetchPlayers = async () => {
     try {
