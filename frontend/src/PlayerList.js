@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './PlayerList.css';
 
@@ -8,24 +8,18 @@ function NBAPlayerList() {
 
   const apiUrl = '/api/player/allplayers';
 
-  useEffect(() => {
-    // Function to fetch players based on search text
-    const fetchPlayers = async () => {
-      try {
-        const response = await axios.get(apiUrl, {
-          params: { search: searchText } // Pass search text as a query parameter
-        });
+  const fetchPlayers = async () => {
+    try {
+      const response = await axios.get(apiUrl, {
+        params: { search: searchText } // Pass search text as a query parameter
+      });
 
-        // Set the player data in the state
-        setPlayers(response.data.data);
-      } catch (error) {
-        console.error('Error fetching NBA players:', error);
-      }
-    };
-
-    // Fetch players when the component mounts or when searchText changes
-    fetchPlayers();
-  }, [searchText]);
+      // Set the player data in the state
+      setPlayers(response.data.data);
+    } catch (error) {
+      console.error('Error fetching NBA players:', error);
+    }
+  };
 
   const handleSearch = () => {
     // Trigger a new search when the button is clicked
