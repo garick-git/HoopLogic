@@ -28,9 +28,9 @@ def get_data():
 # def player_details(player_id):
 #    return jsonify(getCommonPlayerInfoByID(player_id))
 
-@app.route('/api/player/allplayers', methods=['GET'])
-def getPlayers():
-    return jsonify(getAllPlayers())
+@app.route('/api/player/search/<search_input>', methods=['GET'])
+def getPlayers(search_input):
+    return jsonify(getAllPlayers(search_input))
 
 
 
