@@ -1,5 +1,6 @@
 import logging
 from flask import Flask, jsonify
+from flask_sqlalchemy import SQLAlchemy
 from backend.playerSearching import getAllPlayers
 
 
@@ -7,6 +8,10 @@ app = Flask(__name__)
 
 # Configure the logging format and level
 log = logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', level=logging.DEBUG)
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@DB_HOST/hooplogic'
+db = SQLAlchemy(app)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
