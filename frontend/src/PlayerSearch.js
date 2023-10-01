@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './PlayerSearch.css';
+import './index.css';
 
 const PlayerSearch = () => {
   const [searchInput, setSearchInput] = useState('');
