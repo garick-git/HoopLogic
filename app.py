@@ -1,10 +1,10 @@
 import logging
 from flask import Flask, jsonify
-from models.team import Team
-from models.player import Player
-from models.game import Game
-from models.playerStats import PlayerStats
-from models.seasonAverages import SeasonAverages
+from .models.team import Team
+from .models.player import Player
+from .models.game import Game
+from .models.playerStats import PlayerStats
+from .models.seasonAverages import SeasonAverages
 from flask_sqlalchemy import SQLAlchemy
 from backend.playerSearching import getAllPlayers
 
