@@ -41,7 +41,7 @@ const PlayerSearch = () => {
           value={searchInput}
           onChange={handleInputChange}
         />
-        <button onClick={searchPlayers} disabled={loading}>
+        <button type="button" onClick={searchPlayers} disabled={loading}>
           {loading ? 'Searching...' : 'Search'}
         </button>
       </div>
