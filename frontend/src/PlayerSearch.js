@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './PlayerSearch.css';
 
 const PlayerSearch = () => {
   const [searchInput, setSearchInput] = useState('');
   const [players, setPlayers] = useState([]);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     setSearchInput(e.target.value);
@@ -13,43 +12,42 @@ const PlayerSearch = () => {
 
   const searchPlayers = () => {
     if (searchInput.trim() === '') {
-      setPlayers([]);
+      alert('Please enter a player name.');
       return;
     }
 
+    setLoading(true);
 
+    // Replace this URL with your API endpoint
     fetch(`/api/player/search/${searchInput}`)
       .then((response) => response.json())
       .then((data) => {
         setPlayers(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error:', error);
+        setLoading(false);
       });
-  };
-
-  const handlePlayerClick = (playerId) => {
-    // Navigate to player details page with the selected player's ID
-    navigate(`/playerdetails/${playerId}`);
   };
 
   return (
     <div className="PlayerSearch">
       <h1>NBA Player Search</h1>
-      <input
-        type="text"
-        placeholder="Search for players by name"
-        value={searchInput}
-        onChange={handleInputChange}
-      />
-      <button onClick={searchPlayers}>Search</button>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search for players by name"
+          value={searchInput}
+          onChange={handleInputChange}
+        />
+        <button onClick={searchPlayers} disabled={loading}>
+          {loading ? 'Searching...' : 'Search'}
+        </button>
+      </div>
       <ul>
         {players.map((player) => (
-          <li
-            key={player.id}
-            onClick={() => handlePlayerClick(player.id)} // Pass player ID
-            className="player-name"
-          >
+          <li key={player.id} className="player-item">
             {player.full_name}
           </li>
         ))}

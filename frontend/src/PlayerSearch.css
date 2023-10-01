@@ -1,57 +1,63 @@
 /* PlayerSearch.css */
 
 .PlayerSearch {
-    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   }
   
   h1 {
     font-size: 24px;
-    color: #333;
+    text-align: center;
     margin-bottom: 20px;
   }
   
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
   input[type="text"] {
-    width: 80%;
+    flex: 1;
     padding: 10px;
-    font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
   }
   
   button {
     padding: 10px 20px;
-    font-size: 16px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
   }
   
-  button:hover {
-    background-color: #0056b3;
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
   
   ul {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
   }
   
-  li.player-name {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  .player-item {
+    padding: 10px 0;
+    font-size: 18px;
+    border-bottom: 1px solid #ddd;
   }
   
-  li.player-name:hover {
-    background-color: #e6e6e6;
+  .player-item:last-child {
+    border-bottom: none;
   }
-  
   
