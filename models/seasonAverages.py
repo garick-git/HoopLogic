@@ -23,7 +23,7 @@ class SeasonAverages(db.Model):
     ast = db.Column(db.Float)
     stl = db.Column(db.Float)
     blk = db.Column(db.Float)
-    turnover = db.Column(db.Float)u
+    turnover = db.Column(db.Float)
     pf = db.Column(db.Float)
     pts = db.Column(db.Float)
     fg_pct = db.Column(db.Float)
