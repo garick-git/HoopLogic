@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './PlayerSearch.css';
 
 const PlayerSearch = () => {
@@ -22,7 +22,7 @@ const PlayerSearch = () => {
     fetch(`/api/player/search/${searchInput}`)
       .then((response) => response.json())
       .then((data) => {
-        setPlayers(data);
+        setPlayers(data.data); // Assuming the players data is in the "data" field
         setLoading(false);
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ const PlayerSearch = () => {
       <ul>
         {players.map((player) => (
           <li key={player.id} className="player-item">
-            <strong>Name:</strong> {player.full_name} | <strong>Height:</strong> {player.height_feet ? `${player.height_feet}'${player.height_inches}"` : 'N/A'} | <strong>Team:</strong> {player.team.full_name}
+            {player.first_name} {player.last_name}
           </li>
         ))}
       </ul>
