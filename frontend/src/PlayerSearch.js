@@ -48,7 +48,9 @@ const PlayerSearch = () => {
       <ul>
         {players.map((player) => (
           <li key={player.id} className="player-item">
-            {player.first_name} {player.last_name}
+            <strong>Name:</strong> {player.first_name} {player.last_name} | 
+            <strong> Team:</strong> {player.team.full_name} | 
+            <strong> Height:</strong> {player.height_feet ? `${player.height_feet}'${player.height_inches}"` : 'N/A'}
           </li>
         ))}
       </ul>
