@@ -1,6 +1,9 @@
 import requests
 import time
 from flask_sqlalchemy import SQLAlchemy
+from .player import Player
+from .team import Team
+from .game import Game
 
 db = SQLAlchemy()
 
