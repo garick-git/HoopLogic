@@ -1,6 +1,5 @@
 import logging
 from flask import Flask, jsonify
-from flask_sqlalchemy import SQLAlchemy
 from backend.playerSearching import getAllPlayers
 from models.team import Team
 from models.player import Player
@@ -13,10 +12,6 @@ app = Flask(__name__)
 
 # Configure logging
 logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', level=logging.DEBUG)
-
-# Configure the SQLAlchemy database connection
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@DB_HOST/hooplogic'
-db = SQLAlchemy(app)
 
 # Define your routes and view functions
 

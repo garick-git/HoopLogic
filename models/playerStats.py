@@ -1,6 +1,6 @@
 import requests
 import time
-from app import db
+from database import db
 from .player import Player
 from .team import Team
 from .game import Game
