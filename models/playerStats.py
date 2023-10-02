@@ -8,7 +8,35 @@ from .game import Game
 
 class PlayerStats(db.Model):
     __tablename__ = 'playerStats'
-    
+
+    id = db.Column(db.Integer, primary_key=True)
+    ast = db.Column(db.Integer)
+    blk = db.Column(db.Integer)
+    dreb = db.Column(db.Integer)
+    fg3_pct = db.Column(db.Float)
+    fg3a = db.Column(db.Integer)
+    fg3m = db.Column(db.Integer)
+    fg_pct = db.Column(db.Float)
+    fga = db.Column(db.Integer)
+    fgm = db.Column(db.Integer)
+    ft_pct = db.Column(db.Float)
+    fta = db.Column(db.Integer)
+    ftm = db.Column(db.Integer)
+    min = db.Column(db.String(10))
+    oreb = db.Column(db.Integer)
+    pf = db.Column(db.Integer)
+    pts = db.Column(db.Integer)
+    reb = db.Column(db.Integer)
+    stl = db.Column(db.Integer)
+    turnover = db.Column(db.Integer)
+    player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    player = db.relationship('Player', backref='playerStats')
+    game = db.relationship('Game', backref='playerStats')
+    team = db.relationship('Team', backref='playerStats')
+
+
     @staticmethod
     def fetch_and_insert_stats():
         base_url = "https://www.balldontlie.io/api/v1/stats"
@@ -70,29 +98,3 @@ class PlayerStats(db.Model):
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
                 break
-    id = db.Column(db.Integer, primary_key=True)
-    ast = db.Column(db.Integer)
-    blk = db.Column(db.Integer)
-    dreb = db.Column(db.Integer)
-    fg3_pct = db.Column(db.Float)
-    fg3a = db.Column(db.Integer)
-    fg3m = db.Column(db.Integer)
-    fg_pct = db.Column(db.Float)
-    fga = db.Column(db.Integer)
-    fgm = db.Column(db.Integer)
-    ft_pct = db.Column(db.Float)
-    fta = db.Column(db.Integer)
-    ftm = db.Column(db.Integer)
-    min = db.Column(db.String(10))
-    oreb = db.Column(db.Integer)
-    pf = db.Column(db.Integer)
-    pts = db.Column(db.Integer)
-    reb = db.Column(db.Integer)
-    stl = db.Column(db.Integer)
-    turnover = db.Column(db.Integer)
-    player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
-    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
-    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
-    player = db.relationship('Player', backref='playerStats')
-    game = db.relationship('Game', backref='playerStats')
-    team = db.relationship('Team', backref='playerStats')
