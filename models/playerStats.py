@@ -1,11 +1,10 @@
 import requests
 import time
-from flask_sqlalchemy import SQLAlchemy
+from app import db
 from .player import Player
 from .team import Team
 from .game import Game
 
-db = SQLAlchemy()
 
 class PlayerStats(db.Model):
     __tablename__ = 'player_stats'

@@ -1,7 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
 from .team import Team
+from app import db
 
-db = SQLAlchemy()
 
 class Game(db.Model):
     __tablename__ = 'games'

@@ -1,7 +1,5 @@
-from flask_sqlalchemy import SQLAlchemy
 from .player import Player
-
-db = SQLAlchemy()
+from app import db
 
 class SeasonAverages(db.Model):
     __tablename__ = 'season_averages'
