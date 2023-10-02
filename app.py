@@ -1,10 +1,10 @@
 import logging
 from flask import Flask, jsonify
-# from models.team import Team
-# from models.player import Player
-# from models.game import Game
-# from models.playerStats import PlayerStats
-# from models.seasonAverages import SeasonAverages
+from models.team import Team
+from models.player import Player
+from models.game import Game
+from models.playerStats import PlayerStats
+from models.seasonAverages import SeasonAverages
 from flask_sqlalchemy import SQLAlchemy
 from backend.playerSearching import getAllPlayers
 
@@ -17,6 +17,11 @@ log = logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', leve
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@DB_HOST/hooplogic'
 db = SQLAlchemy(app)
+
+@app.route('/api/populate_data', methods=['GET'])
+def populate_data():
+    PlayerStats.fetch_and_insert_stats()
+    return "Data population process initiated."
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
