@@ -6,7 +6,7 @@ class SeasonAverages(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     games_played = db.Column(db.Integer)
-    player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
+    player_id = db.Column(db.Integer, db.ForeignKey('player.id'))
     season = db.Column(db.Integer)
     min = db.Column(db.String(10))
     fgm = db.Column(db.Float)
