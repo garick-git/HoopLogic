@@ -7,7 +7,7 @@ from .game import Game
 
 
 class PlayerStats(db.Model):
-    __tablename__ = 'player_stats'
+    __tablename__ = 'playerStats'
     
     @staticmethod
     def fetch_and_insert_stats():
@@ -93,6 +93,6 @@ class PlayerStats(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
     team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
-    player = db.relationship('Player', backref='player_stats')
-    game = db.relationship('Game', backref='player_stats')
-    team = db.relationship('Team', backref='player_stats')
+    player = db.relationship('Player', backref='playerStats')
+    game = db.relationship('Game', backref='playerStats')
+    team = db.relationship('Team', backref='playerStats')
