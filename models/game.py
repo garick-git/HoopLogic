@@ -1,5 +1,4 @@
 from .team import Team
-from app import db
 
 
 class Game(db.Model):

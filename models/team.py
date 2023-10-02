@@ -1,6 +1,3 @@
-from app import db
-
-
 class Team(db.Model):
     __tablename__ = 'teams'
 

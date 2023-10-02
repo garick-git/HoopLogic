@@ -1,5 +1,4 @@
 from .player import Player
-from app import db
 
 class SeasonAverages(db.Model):
     __tablename__ = 'season_averages'

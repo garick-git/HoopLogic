@@ -1,4 +1,3 @@
-from app import db
 from .team import Team
 
 
