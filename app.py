@@ -16,7 +16,7 @@ logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', level=logg
 
 # Configure the SQLAlchemy database connection
 app.config['SECRET_KEY'] = 'SuperSecretKey'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@DB_HOST/hooplogic'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root@DB_HOST:3306/hooplogic'
 db.init_app(app)
 
 # Define your routes and view functions
