@@ -19,6 +19,10 @@ app.config['SECRET_KEY'] = 'SuperSecretKey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:REMOVED@DB_HOST:3306/hooplogic'
 db.init_app(app)
 
+# Create all tables before running the Flask app
+with app.app_context():
+    db.create_all()
+
 # Define your routes and view functions
 
 @app.route('/api/populate_data', methods=['GET'])
@@ -43,6 +47,3 @@ def getPlayers(search_input):
 if __name__ == '__main__':
     # Start the Flask application
     app.run(host='0.0.0.0', port=5000)
-    with app.app_context():
-        db.create_all()
-
