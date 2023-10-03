@@ -30,6 +30,11 @@ def populate_data():
     PlayerStats.fetch_and_insert_stats()
     return "Data population process initiated."
 
+@app.route('/api/populate_teams', methods=['GET'])
+def populate_teams():
+    Team.fetch_and_insert_teams()
+    return "Team population process initiated."
+
 @app.route('/api/data', methods=['GET'])
 def get_data():
     logging.info("Request received: /api/data")

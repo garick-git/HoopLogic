@@ -66,41 +66,43 @@ class PlayerStats(db.Model):
 
                     # Insert data into the player_stats table
                     for stat in stats_data:
-                        player_id = stat['player']['id']
-                        game_id = stat['game']['id']
-                        team_id = stat['team']['id']
+                        player_info = stat.get('player')
+                        if player_info is not None:
+                            player_id = player_info['id']
+                            game_id = stat['game']['id']
+                            team_id = stat['team']['id']
 
-                        # Ensure that the referenced records exist in the database
-                        player = Player.query.get(player_id)
-                        game = Game.query.get(game_id)
-                        team = Team.query.get(team_id)
+                            # Ensure that the referenced records exist in the database
+                            player = Player.query.get(player_id)
+                            game = Game.query.get(game_id)
+                            team = Team.query.get(team_id)
 
-                        if player is not None and game is not None and team is not None:
-                            player_stat = PlayerStats(
-                                ast=stat.get('ast', 0),
-                                blk=stat.get('blk', 0),
-                                dreb=stat.get('dreb', 0),
-                                fg3_pct=stat.get('fg3_pct', 0.0),
-                                fg3a=stat.get('fg3a', 0),
-                                fg3m=stat.get('fg3m', 0),
-                                fg_pct=stat.get('fg_pct', 0.0),
-                                fga=stat.get('fga', 0),
-                                fgm=stat.get('fgm', 0),
-                                ft_pct=stat.get('ft_pct', 0.0),
-                                fta=stat.get('fta', 0),
-                                ftm=stat.get('ftm', 0),
-                                min=stat.get('min', '0'),
-                                oreb=stat.get('oreb', 0),
-                                pf=stat.get('pf', 0),
-                                pts=stat.get('pts', 0),
-                                reb=stat.get('reb', 0),
-                                stl=stat.get('stl', 0),
-                                turnover=stat.get('turnover', 0),
-                                player_id=player_id,
-                                game_id=game_id,
-                                team_id=team_id
-                            )
-                            db.session.add(player_stat)
+                            if player is not None and game is not None and team is not None:
+                                player_stat = PlayerStats(
+                                    ast=stat.get('ast', 0),
+                                    blk=stat.get('blk', 0),
+                                    dreb=stat.get('dreb', 0),
+                                    fg3_pct=stat.get('fg3_pct', 0.0),
+                                    fg3a=stat.get('fg3a', 0),
+                                    fg3m=stat.get('fg3m', 0),
+                                    fg_pct=stat.get('fg_pct', 0.0),
+                                    fga=stat.get('fga', 0),
+                                    fgm=stat.get('fgm', 0),
+                                    ft_pct=stat.get('ft_pct', 0.0),
+                                    fta=stat.get('fta', 0),
+                                    ftm=stat.get('ftm', 0),
+                                    min=stat.get('min', '0'),
+                                    oreb=stat.get('oreb', 0),
+                                    pf=stat.get('pf', 0),
+                                    pts=stat.get('pts', 0),
+                                    reb=stat.get('reb', 0),
+                                    stl=stat.get('stl', 0),
+                                    turnover=stat.get('turnover', 0),
+                                    player_id=player_id,
+                                    game_id=game_id,
+                                    team_id=team_id
+                                )
+                                db.session.add(player_stat)
 
                     db.session.commit()
 
