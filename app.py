@@ -6,7 +6,6 @@ from models.team import Team
 from models.player import Player
 from models.game import Game
 from models.playerStats import PlayerStats
-from models.seasonAverages import SeasonAverages
 
 # Create the Flask app
 app = Flask(__name__)
