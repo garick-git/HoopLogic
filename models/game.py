@@ -1,3 +1,5 @@
+import requests
+import time
 from .team import Team
 from database import db
 
@@ -18,3 +20,61 @@ class Game(db.Model):
     visitor_team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
     home_team = db.relationship('Team', foreign_keys=[home_team_id])
     visitor_team = db.relationship('Team', foreign_keys=[visitor_team_id])
+
+    @staticmethod
+    def fetch_and_insert_games():
+        BASE_URL = "https://www.balldontlie.io/api/v1/games"
+        PER_PAGE = 30  # Adjust this as needed
+
+        page = 1
+        total_pages = None
+
+        while True:
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
+
+            try:
+                response = requests.get(url)
+
+                if response.status_code == 200:
+                    data = response.json()
+                    total_pages = data['meta']['total_pages']
+                    games_data = data['data']
+
+                    # Insert data into the games table
+                    for game_data in games_data:
+                        home_team_data = game_data.get('home_team', {})
+                        visitor_team_data = game_data.get('visitor_team', {})
+
+                        home_team = Team.query.filter_by(id=home_team_data.get('id')).first()
+                        visitor_team = Team.query.filter_by(id=visitor_team_data.get('id')).first()
+
+                        game = Game(
+                            id=game_data['id'],
+                            date=game_data['date'],
+                            home_team_score=game_data['home_team_score'],
+                            visitor_team_score=game_data['visitor_team_score'],
+                            season=game_data['season'],
+                            period=game_data['period'],
+                            status=game_data['status'],
+                            time=game_data['time'],
+                            postseason=game_data['postseason'],
+                            home_team=home_team,
+                            visitor_team=visitor_team
+                        )
+                        db.session.add(game)
+
+                    db.session.commit()
+
+                    print(f"Inserted data from page {page}/{total_pages}")
+
+                    if page < total_pages:
+                        page += 1
+                        time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
+                    else:
+                        break
+                else:
+                    print(f"Request failed with status code {response.status_code}")
+                    break
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
+                break
