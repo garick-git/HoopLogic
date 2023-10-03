@@ -29,13 +29,6 @@ class PlayerStats(db.Model):
     stl = db.Column(db.Integer)
     turnover = db.Column(db.Integer)
 
-    # Add more columns for additional statistics
-    # Example:
-    # three_pointers_made = db.Column(db.Integer)
-    # three_pointers_attempted = db.Column(db.Integer)
-
-    # ... (other columns)
-
     # Use ForeignKey references to establish relationships
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
@@ -48,13 +41,14 @@ class PlayerStats(db.Model):
 
     @staticmethod
     def fetch_and_insert_stats():
-        base_url = "https://www.balldontlie.io/api/v1/stats"
-        per_page = 100
-        total_pages = None
+        BASE_URL = "https://www.balldontlie.io/api/v1/stats"
+        PER_PAGE = 100
+
         page = 1
+        total_pages = None
 
         while True:
-            url = f"{base_url}?per_page={per_page}&page={page}"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
 
             try:
                 response = requests.get(url)
@@ -62,55 +56,73 @@ class PlayerStats(db.Model):
                 if response.status_code == 200:
                     data = response.json()
                     total_pages = data['meta']['total_pages']
-                    stats_data = data['data']
+                    player_stats_data = data['data']
 
-                    # Insert data into the player_stats table
-                    for stat in stats_data:
-                        player_info = stat.get('player')
-                        if player_info is not None:
-                            player_id = player_info['id']
-                            game_id = stat['game']['id']
-                            team_id = stat['team']['id']
+                    for player_stat_data in player_stats_data:
+                        # Check if the 'player' key is present and not None
+                        if 'player' in player_stat_data and player_stat_data['player'] is not None:
+                            player_id = player_stat_data['player']['id']
+                        else:
+                            player_id = None
 
-                            # Ensure that the referenced records exist in the database
-                            player = Player.query.get(player_id)
-                            game = Game.query.get(game_id)
-                            team = Team.query.get(team_id)
+                        # Extract data from the player_stat_data dictionary
+                        ast = player_stat_data['ast']
+                        blk = player_stat_data['blk']
+                        dreb = player_stat_data['dreb']
+                        fg3_pct = player_stat_data['fg3_pct']
+                        fg3a = player_stat_data['fg3a']
+                        fg3m = player_stat_data['fg3m']
+                        fg_pct = player_stat_data['fg_pct']
+                        fga = player_stat_data['fga']
+                        fgm = player_stat_data['fgm']
+                        ft_pct = player_stat_data['ft_pct']
+                        fta = player_stat_data['fta']
+                        ftm = player_stat_data['ftm']
+                        min = player_stat_data['min']
+                        oreb = player_stat_data['oreb']
+                        pf = player_stat_data['pf']
+                        pts = player_stat_data['pts']
+                        reb = player_stat_data['reb']
+                        stl = player_stat_data['stl']
+                        turnover = player_stat_data['turnover']
 
-                            if player is not None and game is not None and team is not None:
-                                player_stat = PlayerStats(
-                                    ast=stat.get('ast', 0),
-                                    blk=stat.get('blk', 0),
-                                    dreb=stat.get('dreb', 0),
-                                    fg3_pct=stat.get('fg3_pct', 0.0),
-                                    fg3a=stat.get('fg3a', 0),
-                                    fg3m=stat.get('fg3m', 0),
-                                    fg_pct=stat.get('fg_pct', 0.0),
-                                    fga=stat.get('fga', 0),
-                                    fgm=stat.get('fgm', 0),
-                                    ft_pct=stat.get('ft_pct', 0.0),
-                                    fta=stat.get('fta', 0),
-                                    ftm=stat.get('ftm', 0),
-                                    min=stat.get('min', '0'),
-                                    oreb=stat.get('oreb', 0),
-                                    pf=stat.get('pf', 0),
-                                    pts=stat.get('pts', 0),
-                                    reb=stat.get('reb', 0),
-                                    stl=stat.get('stl', 0),
-                                    turnover=stat.get('turnover', 0),
-                                    player_id=player_id,
-                                    game_id=game_id,
-                                    team_id=team_id
-                                )
-                                db.session.add(player_stat)
+                        # Create a new PlayerStats object
+                        player_stat = PlayerStats(
+                            id=player_stat_data['id'],
+                            ast=ast,
+                            blk=blk,
+                            dreb=dreb,
+                            fg3_pct=fg3_pct,
+                            fg3a=fg3a,
+                            fg3m=fg3m,
+                            fg_pct=fg_pct,
+                            fga=fga,
+                            fgm=fgm,
+                            ft_pct=ft_pct,
+                            fta=fta,
+                            ftm=ftm,
+                            min=min,
+                            oreb=oreb,
+                            pf=pf,
+                            pts=pts,
+                            reb=reb,
+                            stl=stl,
+                            turnover=turnover,
+                            player_id=player_id,
+                            # Add other columns and relationships here
+                        )
 
+                        # Add the player_stat object to the session
+                        db.session.add(player_stat)
+
+                    # Commit the changes to the database
                     db.session.commit()
 
                     print(f"Inserted data from page {page}/{total_pages}")
 
                     if page < total_pages:
                         page += 1
-                        time.sleep(1)
+                        time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
                     else:
                         break
                 else:
