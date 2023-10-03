@@ -1,6 +1,6 @@
 import requests
 import time
-import datetime
+from datetime import datetime
 from .team import Team
 from database import db
 
