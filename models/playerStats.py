@@ -45,7 +45,7 @@ class PlayerStats(db.Model):
         BASE_URL = "https://www.balldontlie.io/api/v1/stats"
         PER_PAGE = 100
 
-        page = 1
+        page = 5990
         total_pages = None
 
         while True:
@@ -62,46 +62,39 @@ class PlayerStats(db.Model):
                     for player_stat_data in player_stats_data:
                         player_stat_id = player_stat_data['id']
 
-                        existing_player_stat = PlayerStats.query.filter_by(id=player_stat_id).first()
-
-                        if existing_player_stat is None:
-                            try:
-                                player_stat = PlayerStats(
-                                    id=player_stat_id,
-                                    ast=player_stat_data.get('ast', 0),
-                                    blk=player_stat_data.get('blk', 0),
-                                    dreb=player_stat_data.get('dreb', 0),
-                                    fg3_pct=player_stat_data.get('fg3_pct', 0.0),
-                                    fg3a=player_stat_data.get('fg3a', 0),
-                                    fg3m=player_stat_data.get('fg3m', 0),
-                                    fg_pct=player_stat_data.get('fg_pct', 0.0),
-                                    fga=player_stat_data.get('fga', 0),
-                                    fgm=player_stat_data.get('fgm', 0),
-                                    ft_pct=player_stat_data.get('ft_pct', 0.0),
-                                    fta=player_stat_data.get('fta', 0),
-                                    ftm=player_stat_data.get('ftm', 0),
-                                    min=player_stat_data.get('min', '0'),
-                                    oreb=player_stat_data.get('oreb', 0),
-                                    pf=player_stat_data.get('pf', 0),
-                                    pts=player_stat_data.get('pts', 0),
-                                    reb=player_stat_data.get('reb', 0),
-                                    stl=player_stat_data.get('stl', 0),
-                                    turnover=player_stat_data.get('turnover', 0),
-                                    player_id=player_stat_data['player']['id'],
-                                    game_id=player_stat_data['game']['id'],
-                                    team_id=player_stat_data['team']['id']
-                                )
-                                db.session.add(player_stat)
-                                db.session.commit()
-                            except IntegrityError as e:
-                                db.session.rollback()
-                                print(f"IntegrityError: {e}. Skipping duplicate entry.")
-                        else:
-                            # Update existing_player_stat with the new data
-                            existing_player_stat.ast = player_stat_data.get('ast', 0)
-                            existing_player_stat.blk = player_stat_data.get('blk', 0)
-                            existing_player_stat.dreb = player_stat_data.get('dreb', 0)
-                            # ... (update other fields)
+                        try:
+                            player_stat = PlayerStats(
+                                id=player_stat_id,
+                                ast=player_stat_data.get('ast', 0),
+                                blk=player_stat_data.get('blk', 0),
+                                dreb=player_stat_data.get('dreb', 0),
+                                fg3_pct=player_stat_data.get('fg3_pct', 0.0),
+                                fg3a=player_stat_data.get('fg3a', 0),
+                                fg3m=player_stat_data.get('fg3m', 0),
+                                fg_pct=player_stat_data.get('fg_pct', 0.0),
+                                fga=player_stat_data.get('fga', 0),
+                                fgm=player_stat_data.get('fgm', 0),
+                                ft_pct=player_stat_data.get('ft_pct', 0.0),
+                                fta=player_stat_data.get('fta', 0),
+                                ftm=player_stat_data.get('ftm', 0),
+                                min=player_stat_data.get('min', '0'),
+                                oreb=player_stat_data.get('oreb', 0),
+                                pf=player_stat_data.get('pf', 0),
+                                pts=player_stat_data.get('pts', 0),
+                                reb=player_stat_data.get('reb', 0),
+                                stl=player_stat_data.get('stl', 0),
+                                turnover=player_stat_data.get('turnover', 0),
+                                player_id=player_stat_data['player']['id'],
+                                game_id=player_stat_data['game']['id'],
+                                team_id=player_stat_data['team']['id']
+                            )
+                            db.session.add(player_stat)
+                            db.session.commit()
+                        except IntegrityError as e:
+                            db.session.rollback()
+                            print(f"IntegrityError: {e}. Skipping duplicate entry.")
+                        except Exception as e:
+                            print(f"An error occurred while processing data: {e}")
 
                     if page < total_pages:
                         page += 1
