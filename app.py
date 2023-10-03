@@ -37,7 +37,7 @@ def populate_teams():
 
 
 @app.route('/api/populate_players', methods=['GET'])
-def populate_teams():
+def populate_players():
     Player.fetch_and_insert_players()
     return "Player population process initiated."
 
