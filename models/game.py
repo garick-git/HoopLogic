@@ -1,5 +1,6 @@
 import requests
 import time
+import datetime
 from .team import Team
 from database import db
 
@@ -24,7 +25,7 @@ class Game(db.Model):
     @staticmethod
     def fetch_and_insert_games():
         BASE_URL = "https://www.balldontlie.io/api/v1/games"
-        PER_PAGE = 30  # Adjust this as needed
+        PER_PAGE = 100
 
         page = 1
         total_pages = None
@@ -42,15 +43,13 @@ class Game(db.Model):
 
                     # Insert data into the games table
                     for game_data in games_data:
-                        home_team_data = game_data.get('home_team', {})
-                        visitor_team_data = game_data.get('visitor_team', {})
-
-                        home_team = Team.query.filter_by(id=home_team_data.get('id')).first()
-                        visitor_team = Team.query.filter_by(id=visitor_team_data.get('id')).first()
+                        # Convert ISO 8601 formatted date to datetime object
+                        date_str = game_data['date']
+                        date = datetime.fromisoformat(date_str)
 
                         game = Game(
                             id=game_data['id'],
-                            date=game_data['date'],
+                            date=date,  # Use the converted datetime object
                             home_team_score=game_data['home_team_score'],
                             visitor_team_score=game_data['visitor_team_score'],
                             season=game_data['season'],
@@ -58,8 +57,8 @@ class Game(db.Model):
                             status=game_data['status'],
                             time=game_data['time'],
                             postseason=game_data['postseason'],
-                            home_team=home_team,
-                            visitor_team=visitor_team
+                            home_team_id=game_data['home_team']['id'],
+                            visitor_team_id=game_data['visitor_team']['id']
                         )
                         db.session.add(game)
 
