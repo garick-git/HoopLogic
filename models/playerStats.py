@@ -4,6 +4,7 @@ from database import db
 from .player import Player
 from .team import Team
 from .game import Game
+from sqlalchemy.exc import IntegrityError 
 
 class PlayerStats(db.Model):
     __tablename__ = 'playerStats'
@@ -59,66 +60,48 @@ class PlayerStats(db.Model):
                     player_stats_data = data['data']
 
                     for player_stat_data in player_stats_data:
-                        # Check if the 'player' key is present and not None
-                        if 'player' in player_stat_data and player_stat_data['player'] is not None:
-                            player_id = player_stat_data['player']['id']
+                        player_stat_id = player_stat_data['id']
+
+                        existing_player_stat = PlayerStats.query.filter_by(id=player_stat_id).first()
+
+                        if existing_player_stat is None:
+                            try:
+                                player_stat = PlayerStats(
+                                    id=player_stat_id,
+                                    ast=player_stat_data.get('ast', 0),
+                                    blk=player_stat_data.get('blk', 0),
+                                    dreb=player_stat_data.get('dreb', 0),
+                                    fg3_pct=player_stat_data.get('fg3_pct', 0.0),
+                                    fg3a=player_stat_data.get('fg3a', 0),
+                                    fg3m=player_stat_data.get('fg3m', 0),
+                                    fg_pct=player_stat_data.get('fg_pct', 0.0),
+                                    fga=player_stat_data.get('fga', 0),
+                                    fgm=player_stat_data.get('fgm', 0),
+                                    ft_pct=player_stat_data.get('ft_pct', 0.0),
+                                    fta=player_stat_data.get('fta', 0),
+                                    ftm=player_stat_data.get('ftm', 0),
+                                    min=player_stat_data.get('min', '0'),
+                                    oreb=player_stat_data.get('oreb', 0),
+                                    pf=player_stat_data.get('pf', 0),
+                                    pts=player_stat_data.get('pts', 0),
+                                    reb=player_stat_data.get('reb', 0),
+                                    stl=player_stat_data.get('stl', 0),
+                                    turnover=player_stat_data.get('turnover', 0),
+                                    player_id=player_stat_data['player']['id'],
+                                    game_id=player_stat_data['game']['id'],
+                                    team_id=player_stat_data['team']['id']
+                                )
+                                db.session.add(player_stat)
+                                db.session.commit()
+                            except IntegrityError as e:
+                                db.session.rollback()
+                                print(f"IntegrityError: {e}. Skipping duplicate entry.")
                         else:
-                            player_id = None
-
-                        # Extract data from the player_stat_data dictionary
-                        ast = player_stat_data['ast']
-                        blk = player_stat_data['blk']
-                        dreb = player_stat_data['dreb']
-                        fg3_pct = player_stat_data['fg3_pct']
-                        fg3a = player_stat_data['fg3a']
-                        fg3m = player_stat_data['fg3m']
-                        fg_pct = player_stat_data['fg_pct']
-                        fga = player_stat_data['fga']
-                        fgm = player_stat_data['fgm']
-                        ft_pct = player_stat_data['ft_pct']
-                        fta = player_stat_data['fta']
-                        ftm = player_stat_data['ftm']
-                        min = player_stat_data['min']
-                        oreb = player_stat_data['oreb']
-                        pf = player_stat_data['pf']
-                        pts = player_stat_data['pts']
-                        reb = player_stat_data['reb']
-                        stl = player_stat_data['stl']
-                        turnover = player_stat_data['turnover']
-
-                        # Create a new PlayerStats object
-                        player_stat = PlayerStats(
-                            id=player_stat_data['id'],
-                            ast=ast,
-                            blk=blk,
-                            dreb=dreb,
-                            fg3_pct=fg3_pct,
-                            fg3a=fg3a,
-                            fg3m=fg3m,
-                            fg_pct=fg_pct,
-                            fga=fga,
-                            fgm=fgm,
-                            ft_pct=ft_pct,
-                            fta=fta,
-                            ftm=ftm,
-                            min=min,
-                            oreb=oreb,
-                            pf=pf,
-                            pts=pts,
-                            reb=reb,
-                            stl=stl,
-                            turnover=turnover,
-                            player_id=player_id,
-                            # Add other columns and relationships here
-                        )
-
-                        # Add the player_stat object to the session
-                        db.session.add(player_stat)
-
-                    # Commit the changes to the database
-                    db.session.commit()
-
-                    print(f"Inserted data from page {page}/{total_pages}")
+                            # Update existing_player_stat with the new data
+                            existing_player_stat.ast = player_stat_data.get('ast', 0)
+                            existing_player_stat.blk = player_stat_data.get('blk', 0)
+                            existing_player_stat.dreb = player_stat_data.get('dreb', 0)
+                            # ... (update other fields)
 
                     if page < total_pages:
                         page += 1
