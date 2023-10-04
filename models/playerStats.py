@@ -92,7 +92,7 @@ class PlayerStats(db.Model):
                             db.session.commit()
                         except IntegrityError as e:
                             db.session.rollback()
-                            print(f"IntegrityError: {e}. Skipping duplicate entry.")
+                            print(f"IntegrityError: Skipping duplicate entry.")
                         except Exception as e:
                             print(f"An error occurred while processing data: {e}")
 
