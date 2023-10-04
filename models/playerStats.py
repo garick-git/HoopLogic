@@ -45,7 +45,7 @@ class PlayerStats(db.Model):
         BASE_URL = "https://www.balldontlie.io/api/v1/stats"
         PER_PAGE = 100
 
-        page = 7990
+        page = 1
         total_pages = None
 
         while True:
