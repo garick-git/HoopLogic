@@ -1,11 +1,11 @@
 import logging
 from flask import Flask, jsonify
 from database import db
-from backend.playerSearching import getAllPlayers
-from models.team import Team
-from models.player import Player
-from models.game import Game
-from models.playerStats import PlayerStats
+from backend.src.playerSearching import getAllPlayers
+from backend.src.models.team import Team
+from backend.src.models.player import Player
+from backend.src.models.game import Game
+from backend.src.models.playerStats import PlayerStats
 
 # Create the Flask app
 app = Flask(__name__)
