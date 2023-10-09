@@ -1,7 +1,7 @@
 import logging
 from flask import Flask, jsonify
 from database import db
-from backend.src.playerSearching import getAllPlayers
+from backend.src.playerDBRetrieval import searchPlayerByString
 from backend.src.models.team import Team
 from backend.src.models.player import Player
 from backend.src.models.game import Game
@@ -56,7 +56,7 @@ def get_data():
 
 @app.route('/api/player/search/<search_input>', methods=['GET'])
 def getPlayers(search_input):
-    return jsonify(getAllPlayers(search_input))
+    return jsonify(searchPlayerByString(search_input))
 
 # Add more routes as needed
 
