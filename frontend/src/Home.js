@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const [searchInput, setSearchInput] = useState('');
     const [players, setPlayers] = useState([]);
+    const [timeoutFlag, setTimeoutFlag] = useState(null);
+    const [inputValue, setInputValue] = useState('');
+    let timerId; // Store the timer ID
     const navigate = useNavigate();
     const playersStatic = [
         {"first_name":"Curtis","full_name":"Curtis Borchardt","id":2414,"is_active":false,"last_name":"Borchardt"},
@@ -25,46 +28,14 @@ const Home = () => {
         {"first_name":"J.P.","full_name":"J.P. Macura","id":1629122,"is_active":false,"last_name":"Macura"},
         {"first_name":"Carey","full_name":"Carey Scurry","id":78102,"is_active":false,"last_name":"Scurry"}
       ];      
+    // if (searchInput.trim() === '') {
+    //   //     setPlayers([]);
+    //   //     return;
+    //   //     }
 
-    // const searchPlayers = async () => {
-    //     if (searchInput.trim() === '') {
-    //     setPlayers([]);
-    //     return;
-    //     }
-
-    //     // Fetch players matching the search input
-    //     fetch(`/api/player/search/${searchInput}`)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         setPlayers(data);
-    //     })
-    //     .catch((error) => {
-    //         console.error('Error:', error);
-    //     });
-    // };
-
-        const handleInputChange = (e) => {
-          const input = e.target.value;
-          setSearchInput(input);
         
-          // Filter players based on last name starting with the input
-          const filteredPlayers = playersStatic.filter((player) => {
-            const lastName = player.last_name.toLowerCase();
-            return lastName.startsWith(input.toLowerCase());
-          });
-        
-          setPlayers(filteredPlayers);
-        };
-
-        const triggerTimer = () => {
-          clearTimeout(timerId);
-      
-          timerId = setTimeout(() => {
-            fetchPlayers(searchInput);
-          }, 200);
-        };
-
-        const fetchPlayers = () => {
+        const fetchPlayers = (inputValue) => {
+          console.log('fetching data for: ', inputValue)
           // Grab the current value of the input
 
           // WORK IN PROGRESS!!!
@@ -80,32 +51,65 @@ const Home = () => {
           //     console.error('Error:', error);
           //   });
         };
+
+        const checkForTwoChars = (inputValue) => {
+          if (inputValue.length >= 2) {
+            console.log(`Search for players with at least 2 characters: ${inputValue}`);
+            // Clear any previous timers to prevent multiple updates
+            clearTimeout(timerId);
+            timerId = setTimeout(() => {
+              setSearchInput(inputValue);
+              if(timeoutFlag == false){
+                setTimeoutFlag(true);
+              }
+              else if(timeoutFlag == true){
+                setTimeoutFlag(false);
+              }
+              else if(timeoutFlag == null){
+                setTimeoutFlag(true);
+              }
+            }, 1000);
+          }
+        };
       
-      return (
-        <div className="homePageDiv">
-          <div className="homePageLogoDiv">
-            <img
-              src={process.env.PUBLIC_URL + '/hoopLogicLogo1.png'}
-              alt="Hoop Logic Logo"
-              className="homePageLogo"
-            />
-          </div>
-          <div className="searchBarDiv">
+        const handleInputChange = (event) => {
+          setInputValue(event.target.value);
+          setSearchInput(inputValue);
+          checkForTwoChars(inputValue);
+        };
+
+        useEffect(() => {
+          console.log('timer just ended! The input was:', inputValue);
+          if(timeoutFlag != null){
+            fetchPlayers(inputValue);
+          }
+        }, [timeoutFlag])
+      
+        return (
+          <div className="homePageDiv">
+            <div className="homePageLogoDiv">
+              <img
+                src={process.env.PUBLIC_URL + '/hoopLogicLogo1.png'}
+                alt="Hoop Logic Logo"
+                className="homePageLogo"
+              />
+            </div>
+            <div className="searchBarDiv">
             <input
               type="text"
               placeholder="Search for players by name"
-              value={searchInput}
-              onChange={triggerTimer}
               className="searchBar"
+              style={{ fontFamily: 'Norwester' }}
+              onChange={handleInputChange}
             />
-            <div className="suggestedPlayersDiv">
-              {players.map((player) => (
-                <div key={player.id}>{player.full_name}</div>
-              ))}
+              <div className="suggestedPlayersDiv">
+                {players.map((player) => (
+                  <div key={player.id}>{player.full_name}</div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
 };
 
 export default Home;
