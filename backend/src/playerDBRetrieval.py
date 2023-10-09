@@ -14,7 +14,7 @@ player_points = (
     .all()
 )
 
-players_dict_sorted = [{'id': player.id, 'first_name': player.first_name, 'last_name': player.last_name, 'total_points': player.total_points} for player in player_points]
+players_dict_sorted = [{'id': player.id, 'first_name': player.first_name, 'last_name': player.last_name, 'position': player.position, 'team': player.team_id, 'total_points': player.total_points} for player in player_points]
 
 session.close()
 
