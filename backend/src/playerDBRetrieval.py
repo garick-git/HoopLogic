@@ -16,6 +16,8 @@ player_points = (
 
 players_dict_sorted = [{'id': player.id, 'first_name': player.first_name, 'last_name': player.last_name, 'total_points': player.total_points} for player in player_points]
 
+session.close()
+
 def searchPlayerByString(search_string):
     found_players = []
     
