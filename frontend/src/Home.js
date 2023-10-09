@@ -1,55 +1,255 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-    const [searchInput, setSearchInput] = useState('');
     const [players, setPlayers] = useState([]);
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [inputValue, setInputValue] = useState('');
-    let timerId; // Store the timer ID
-    const navigate = useNavigate();
-    const playersStatic = [
-        {"first_name":"Curtis","full_name":"Curtis Borchardt","id":2414,"is_active":false,"last_name":"Borchardt"},
-        {"first_name":"Curtis","full_name":"Curtis Jerrells","id":201998,"is_active":false,"last_name":"Jerrells"},
-        {"first_name":"Curtis","full_name":"Curtis Kitchen","id":77280,"is_active":false,"last_name":"Kitchen"},
-        {"first_name":"Curtis","full_name":"Curtis Perry","id":77835,"is_active":false,"last_name":"Perry"},
-        {"first_name":"Curtis","full_name":"Curtis Rowe","id":78028,"is_active":false,"last_name":"Rowe"},
-        {"first_name":"Radisav","full_name":"Radisav Curcic","id":76488,"is_active":false,"last_name":"Curcic"},
-        {"first_name":"Armand","full_name":"Armand Cure","id":76489,"is_active":false,"last_name":"Cure"},
-        {"first_name":"Earl","full_name":"Earl Cureton","id":940,"is_active":false,"last_name":"Cureton"},
-        {"first_name":"Bill","full_name":"Bill Curley","id":223,"is_active":false,"last_name":"Curley"},
-        {"first_name":"Fran","full_name":"Fran Curran","id":76492,"is_active":false,"last_name":"Curran"},
-        {"first_name":"Dell","full_name":"Dell Curry","id":209,"is_active":false,"last_name":"Curry"},
-        {"first_name":"Eddy","full_name":"Eddy Curry","id":2201,"is_active":false,"last_name":"Curry"},
-        {"first_name":"JamesOn","full_name":"JamesOn Curry","id":201191,"is_active":false,"last_name":"Curry"},
-        {"first_name":"Michael","full_name":"Michael Curry","id":688,"is_active":false,"last_name":"Curry"},
-        {"first_name":"Seth","full_name":"Seth Curry","id":203552,"is_active":true,"last_name":"Curry"},
-        {"first_name":"Stephen","full_name":"Stephen Curry","id":201939,"is_active":true,"last_name":"Curry"},
-        {"first_name":"J.P.","full_name":"J.P. Macura","id":1629122,"is_active":false,"last_name":"Macura"},
-        {"first_name":"Carey","full_name":"Carey Scurry","id":78102,"is_active":false,"last_name":"Scurry"}
-      ];      
-    // if (searchInput.trim() === '') {
-    //   //     setPlayers([]);
-    //   //     return;
-    //   //     }
-
-        
+    let timerId; // Store the timer ID   
+    const staticPlayerData = [
+      {
+        id: 1,
+        first_name: "John",
+        last_name: "Smith",
+        position: "Guard",
+        team_id: 22,
+      },
+      {
+        id: 2,
+        first_name: "Jane",
+        last_name: "Johnson",
+        position: "Forward",
+        team_id: 40,
+      },
+      {
+        id: 3,
+        first_name: "Michael",
+        last_name: "Brown",
+        position: "Center",
+        team_id: 32,
+      },
+      {
+        id: 4,
+        first_name: "Emma",
+        last_name: "Davis",
+        position: "Guard",
+        team_id: 51,
+      },
+      {
+        id: 5,
+        first_name: "Daniel",
+        last_name: "Jones",
+        position: "Forward",
+        team_id: 12,
+      },
+      {
+        id: 6,
+        first_name: "Olivia",
+        last_name: "Miller",
+        position: "Center",
+        team_id: 35,
+      },
+      {
+        id: 7,
+        first_name: "William",
+        last_name: "Wilson",
+        position: "Guard",
+        team_id: 22,
+      },
+      {
+        id: 8,
+        first_name: "Sophia",
+        last_name: "Moore",
+        position: "Forward",
+        team_id: 50,
+      },
+      {
+        id: 9,
+        first_name: "Ethan",
+        last_name: "Taylor",
+        position: "Center",
+        team_id: 16,
+      },
+      {
+        id: 10,
+        first_name: "Ava",
+        last_name: "Anderson",
+        position: "Guard",
+        team_id: 2,
+      },
+      {
+        id: 11,
+        first_name: "Noah",
+        last_name: "Harris",
+        position: "Forward",
+        team_id: 44,
+      },
+      {
+        id: 12,
+        first_name: "Mia",
+        last_name: "Martin",
+        position: "Center",
+        team_id: 37,
+      },
+      {
+        id: 13,
+        first_name: "Liam",
+        last_name: "Clark",
+        position: "Guard",
+        team_id: 36,
+      },
+      {
+        id: 14,
+        first_name: "Oliver",
+        last_name: "Lewis",
+        position: "Forward",
+        team_id: 49,
+      },
+      {
+        id: 15,
+        first_name: "Emma",
+        last_name: "Walker",
+        position: "Center",
+        team_id: 41,
+      },
+      {
+        id: 16,
+        first_name: "Isabella",
+        last_name: "Young",
+        position: "Guard",
+        team_id: 28,
+      },
+      {
+        id: 17,
+        first_name: "James",
+        last_name: "White",
+        position: "Forward",
+        team_id: 13,
+      },
+      {
+        id: 18,
+        first_name: "Benjamin",
+        last_name: "King",
+        position: "Center",
+        team_id: 33,
+      },
+      {
+        id: 19,
+        first_name: "Lucas",
+        last_name: "Hill",
+        position: "Guard",
+        team_id: 47,
+      },
+      {
+        id: 20,
+        first_name: "Abigail",
+        last_name: "Carter",
+        position: "Forward",
+        team_id: 48,
+      },
+      {
+        id: 21,
+        first_name: "Alexander",
+        last_name: "Scott",
+        position: "Center",
+        team_id: 22,
+      },
+      {
+        id: 22,
+        first_name: "Avery",
+        last_name: "Morris",
+        position: "Guard",
+        team_id: 17,
+      },
+      {
+        id: 23,
+        first_name: "Charlotte",
+        last_name: "Turner",
+        position: "Forward",
+        team_id: 10,
+      },
+      {
+        id: 24,
+        first_name: "Jackson",
+        last_name: "Adams",
+        position: "Center",
+        team_id: 11,
+      },
+      {
+        id: 25,
+        first_name: "Liam",
+        last_name: "Wright",
+        position: "Guard",
+        team_id: 7,
+      },
+      {
+        id: 26,
+        first_name: "Olivia",
+        last_name: "Parker",
+        position: "Forward",
+        team_id: 9,
+      },
+      {
+        id: 27,
+        first_name: "Lucas",
+        last_name: "Hall",
+        position: "Center",
+        team_id: 38,
+      },
+      {
+        id: 28,
+        first_name: "Sophia",
+        last_name: "Mitchell",
+        position: "Guard",
+        team_id: 1,
+      },
+      {
+        id: 28,
+        first_name: "Sophia",
+        last_name: "Mitchell",
+        position: "Guard",
+        team_id: 35,
+      },
+      {
+        id: 29,
+        first_name: "Liam",
+        last_name: "Baker",
+        position: "Forward",
+        team_id: 41,
+      },
+      {
+        id: 30,
+        first_name: "Ella",
+        last_name: "Garcia",
+        position: "Center",
+        team_id: 20,
+      }
+    ]    
         const fetchPlayers = (inputValue) => {
-          console.log('fetching data for: ', inputValue)
-          // Grab the current value of the input
+          console.log('fetching data for: ', inputValue);
 
-          // WORK IN PROGRESS!!!
-          // const searchInput = document.querySelector('.searchBar').value;
-        
-          // // Perform the API request based on the search input
-          // fetch(`/api/player/search/${searchInput}`)
-          //   .then((response) => response.json())
-          //   .then((data) => {
-          //     setPlayers(data);
-          //   })
-          //   .catch((error) => {
-          //     console.error('Error:', error);
-          //   });
+          // Encode the input value to handle special characters
+          const encodedInputValue = encodeURIComponent(inputValue);
+
+          // Make the GET request to the backend API
+          fetch(`/api/player/search/${encodedInputValue}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              // Handle the data received from the backend (data may contain player information)
+              setPlayers(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
         };
 
         const checkForTwoChars = (inputValue) => {
@@ -58,7 +258,6 @@ const Home = () => {
             // Clear any previous timers to prevent multiple updates
             clearTimeout(timerId);
             timerId = setTimeout(() => {
-              setSearchInput(inputValue);
               if(timeoutFlag == false){
                 setTimeoutFlag(true);
               }
@@ -74,7 +273,6 @@ const Home = () => {
       
         const handleInputChange = (event) => {
           setInputValue(event.target.value);
-          setSearchInput(inputValue);
           checkForTwoChars(inputValue);
         };
 
@@ -84,7 +282,7 @@ const Home = () => {
             fetchPlayers(inputValue);
           }
         }, [timeoutFlag])
-      
+
         return (
           <div className="homePageDiv">
             <div className="homePageLogoDiv">
@@ -102,12 +300,14 @@ const Home = () => {
               style={{ fontFamily: 'Norwester' }}
               onChange={handleInputChange}
             />
-              <div className="suggestedPlayersDiv">
-                {players.map((player) => (
-                  <div key={player.id}>{player.full_name}</div>
-                ))}
-              </div>
             </div>
+            <div className='suggestedPlayersBigDiv'>
+              <div className="suggestedPlayersDiv">
+                  {staticPlayerData.map((player) => (
+                    <div key={player.id}>{player.first_name} {player.last_name}</div>
+                  ))}
+                </div>
+                </div>
           </div>
         );
 };
