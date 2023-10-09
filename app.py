@@ -29,30 +29,16 @@ def populate_data():
     PlayerStats.fetch_and_insert_stats()
     return "Data population process initiated."
 
-@app.route('/api/populate_teams', methods=['GET'])
-def populate_teams():
-    Team.fetch_and_insert_teams()
-    return "Team population process initiated."
-
-
 @app.route('/api/populate_players', methods=['GET'])
 def populate_players():
     Player.fetch_and_insert_players()
     return "Player population process initiated."
-
 
 @app.route('/api/populate_games', methods=['GET'])
 def populate_games():
     Game.fetch_and_insert_games()
     return "Game population process initiated."
 
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    logging.info("Request received: /api/data")
-    data = {'message': 'Hello from Flask API!'}
-    response = jsonify(data)
-    logging.info("Sending response: /api/data")
-    return response
 
 @app.route('/api/player/search/<search_input>', methods=['GET'])
 def getPlayers(search_input):
