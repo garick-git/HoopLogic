@@ -8,5 +8,5 @@ def getGames(player_id, games_count):
     return jsonify(getRecentGames(player_id, games_count))
 
 @statRetrieval_BP.route('/api/games/search/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
-def getGames(player_id, opponent_id, games_count):
+def getGamesVsOpponent(player_id, opponent_id, games_count):
     return jsonify(getRecentGamesByOpponent(player_id, opponent_id, games_count))
