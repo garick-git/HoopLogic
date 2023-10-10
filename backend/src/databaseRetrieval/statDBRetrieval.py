@@ -69,7 +69,7 @@ def getRecentGamesByOpponent(player_id, team_id, num_games):
         .join(Player)
         .filter(Player.id == player_id)
         .filter(PlayerStats.game_id == Game.id)
-        .filter(PlayerStats.min != '00:00')  # Filter out records with 00:00 minutes played
+        .filter(PlayerStats.min != '00:00') 
         .filter(
             or_(Game.home_team_id == team_id, Game.visitor_team_id == team_id)
         )
