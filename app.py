@@ -49,6 +49,10 @@ def getPlayers(search_input):
 def getGames(player_id, games_count):
     return jsonify(getRecentGames(player_id, games_count))
 
+@app.route('/api/games/search/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
+def getGames(player_id, opponent_id, games_count):
+    return jsonify(getRecentGames(player_id, opponent_id, games_count))
+
 # Add more routes as needed
 
 if __name__ == '__main__':
