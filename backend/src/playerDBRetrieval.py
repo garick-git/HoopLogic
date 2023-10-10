@@ -12,7 +12,8 @@ player_points = (
         Player.id,
         Player.first_name,
         Player.last_name,
-        Player.position, 
+        Player.position,
+        Player.team_id, 
         func.sum(PlayerStats.pts).label('total_points')
     )
     .join(PlayerStats)
