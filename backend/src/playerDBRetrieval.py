@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
-from .models import Player, PlayerStats
+from .models.player import Player
+from .models.playerStats import PlayerStats
 
 engine = create_engine('mysql+mysqlconnector://root:REMOVED@DB_HOST:3306/hooplogic')
 Session = sessionmaker(bind=engine)
