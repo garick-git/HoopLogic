@@ -1,7 +1,8 @@
 import logging
 from flask import Flask, jsonify
 from database import db
-from backend.src.playerDBRetrieval import searchPlayerByString
+from backend.src.databaseRetrieval.playerDBRetrieval import searchPlayerByString
+from backend.src.databaseRetrieval.statDBRetrieval import getRecentGames
 from backend.src.models.team import Team
 from backend.src.models.player import Player
 from backend.src.models.game import Game
@@ -43,6 +44,10 @@ def populate_games():
 @app.route('/api/player/search/<search_input>', methods=['GET'])
 def getPlayers(search_input):
     return jsonify(searchPlayerByString(search_input))
+
+@app.route('/api/games/search/<player_id>/<games_count>', methods=['GET'])
+def getGames(player_id, games_count):
+    return jsonify(getRecentGames(player_id, games_count))
 
 # Add more routes as needed
 
