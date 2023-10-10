@@ -6,7 +6,7 @@ from ..models.game import Game
 from ..models.playerStats import PlayerStats
 from database import db
 
-def get_most_recent_games(player_id, num_games):
+def getRecentGames(player_id, num_games):
     games = (
         db.session.query(
             Game,
