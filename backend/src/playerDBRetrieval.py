@@ -8,9 +8,15 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 player_points = (
-    session.query(Player.id, Player.first_name, Player.last_name, func.sum(PlayerStats.pts).label('total_points'))
+    session.query(
+        Player.id,
+        Player.first_name,
+        Player.last_name,
+        Player.position, 
+        func.sum(PlayerStats.pts).label('total_points')
+    )
     .join(PlayerStats)
-    .group_by(Player.id, Player.first_name, Player.last_name)
+    .group_by(Player.id, Player.first_name, Player.last_name, Player.position) 
     .order_by(func.sum(PlayerStats.pts).desc())
     .all()
 )
