@@ -17,7 +17,7 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-app.register_blueprint(databasePopulate_BP)
+app.register_blueprint(databasePopulate_BP, url_prefix='/api')
 app.register_blueprint(databaseRetrieval_BP)
 app.register_blueprint(statRetrieval_BP)
 
