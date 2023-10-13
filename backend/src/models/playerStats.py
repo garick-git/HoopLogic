@@ -47,6 +47,8 @@ class PlayerStats(db.Model):
 
         page = 1
         total_pages = None
+        new_records = 0
+        duplicate_records = 0
 
         while True:
             url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
@@ -90,15 +92,16 @@ class PlayerStats(db.Model):
                             )
                             db.session.add(player_stat)
                             db.session.commit()
+                            new_records += 1
                         except IntegrityError as e:
                             db.session.rollback()
-                            print(f"IntegrityError: Skipping duplicate entry.")
+                            duplicate_records += 1
                         except Exception as e:
                             print(f"An error occurred while processing data: {e}")
 
                     if page < total_pages:
                         page += 1
-                        time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
+                        time.sleep(1)
                     else:
                         break
                 else:
@@ -107,3 +110,6 @@ class PlayerStats(db.Model):
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
                 break
+
+        print(f"New records inserted: {new_records}")
+        print(f"Duplicate records skipped: {duplicate_records}")
