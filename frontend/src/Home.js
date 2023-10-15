@@ -341,7 +341,7 @@ const Home = () => {
             <div className="suggestedPlayersDiv">
               <table className='playersTable'>
                 <tbody>
-                  {staticPlayerData.map((player) => (
+                  {players.map((player) => (
                     <tr className='playersRow'key={player.id}>
                       <td className="teamLogoCell">
                         <img
