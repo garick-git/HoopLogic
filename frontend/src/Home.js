@@ -258,29 +258,32 @@ const Home = () => {
     //     team_id: 20,
     //   }
     // ]    
-        const fetchPlayers = (inputValue) => {
-          console.log('fetching data for: ', inputValue);
-          // Make the GET request to the backend API
-          fetch(`/api/player/search/${inputValue}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+      const fetchPlayers = (inputValue) => {
+        const encodedInputValue = encodeURIComponent(inputValue); // Encode the input value
+      
+        console.log('fetching data for: ', inputValue);
+      
+        // Make the GET request to the backend API
+        fetch(`/api/player/search/${encodedInputValue}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
           })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then((data) => {
-              // Handle the data received from the backend (data may contain player information)
-              setPlayers(data);
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-            });
-        };
+          .then((data) => {
+            // Handle the data received from the backend (data may contain player information)
+            setPlayers(data);
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      };
       
         const handleInputChange = (event) => {
           setInputValue(event.target.value);
