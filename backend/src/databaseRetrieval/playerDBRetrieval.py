@@ -13,7 +13,10 @@ player_points = (
         Player.first_name,
         Player.last_name,
         Player.position,
-        Player.team_id, 
+        Player.team_id,
+        Player.height_feet,
+        Player.height_inches,
+        Player.height_feet, 
         func.sum(PlayerStats.pts).label('total_points')
     )
     .join(PlayerStats)
@@ -39,8 +42,6 @@ def searchPlayerByString(search_string):
         found_players_sorted = []
 
     return found_players_sorted
-
-
 
 
 def get_player_by_id(player_id):
