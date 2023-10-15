@@ -358,7 +358,7 @@ const Home = () => {
                       </td>
                       <td className="playerNameCell">{player.first_name} {player.last_name}</td>
                       <td className="playerPositionCell">
-                        {player.position === 'G' ? 'Guard' : player.position === 'F' ? 'Forward' : player.position === 'C' ? 'Center' : ''}
+                        {player.position === '' ? 'N/A' : player.position === 'G' ? 'Guard' : player.position === 'F' ? 'Forward' : player.position === 'C' ? 'Center' : ''}
                       </td>
                     </tr>
                   ))}
