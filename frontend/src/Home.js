@@ -5,6 +5,7 @@ const Home = () => {
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [inputValue, setInputValue] = useState('');
     const [emptySearchBar, setEmptySearchBar] = useState(true);
+    const [selectedPlayer, setSelectedPlayer] = useState(null);
     let timerId; // Store the timer ID 
     const teamLogos = {
       1: 'ATL_Hawks.png',
@@ -38,225 +39,225 @@ const Home = () => {
       29: 'UTA_Jazz.png',
       30: 'WAS_Wizards.png',
     };      
-    const staticPlayerData = [
-      {
-        id: 1,
-        first_name: "John",
-        last_name: "Smith",
-        position: "Guard",
-        team_id: 22,
-      },
-      {
-        id: 2,
-        first_name: "Jane",
-        last_name: "Johnson",
-        position: "Forward",
-        team_id: 30,
-      },
-      {
-        id: 3,
-        first_name: "Michael",
-        last_name: "Brown",
-        position: "Center",
-        team_id: 12,
-      },
-      {
-        id: 4,
-        first_name: "Emma",
-        last_name: "Davis",
-        position: "Guard",
-        team_id: 15,
-      },
-      {
-        id: 5,
-        first_name: "Daniel",
-        last_name: "Jones",
-        position: "Forward",
-        team_id: 12,
-      },
-      {
-        id: 6,
-        first_name: "Olivia",
-        last_name: "Miller",
-        position: "Center",
-        team_id: 25,
-      },
-      {
-        id: 7,
-        first_name: "William",
-        last_name: "Wilson",
-        position: "Guard",
-        team_id: 22,
-      },
-      {
-        id: 8,
-        first_name: "Sophia",
-        last_name: "Moore",
-        position: "Forward",
-        team_id: 10,
-      },
-      {
-        id: 9,
-        first_name: "Ethan",
-        last_name: "Taylor",
-        position: "Center",
-        team_id: 16,
-      },
-      {
-        id: 10,
-        first_name: "Ava",
-        last_name: "Anderson",
-        position: "Guard",
-        team_id: 2,
-      },
-      {
-        id: 11,
-        first_name: "Noah",
-        last_name: "Harris",
-        position: "Forward",
-        team_id: 4,
-      },
-      {
-        id: 12,
-        first_name: "Mia",
-        last_name: "Martin",
-        position: "Center",
-        team_id: 7,
-      },
-      {
-        id: 13,
-        first_name: "Liam",
-        last_name: "Clark",
-        position: "Guard",
-        team_id: 6,
-      },
-      {
-        id: 14,
-        first_name: "Oliver",
-        last_name: "Lewis",
-        position: "Forward",
-        team_id: 29,
-      },
-      {
-        id: 15,
-        first_name: "Emma",
-        last_name: "Walker",
-        position: "Center",
-        team_id: 21,
-      },
-      {
-        id: 16,
-        first_name: "Isabella",
-        last_name: "Young",
-        position: "Guard",
-        team_id: 28,
-      },
-      {
-        id: 17,
-        first_name: "James",
-        last_name: "White",
-        position: "Forward",
-        team_id: 13,
-      },
-      {
-        id: 18,
-        first_name: "Benjamin",
-        last_name: "King",
-        position: "Center",
-        team_id: 23,
-      },
-      {
-        id: 19,
-        first_name: "Lucas",
-        last_name: "Hill",
-        position: "Guard",
-        team_id: 27,
-      },
-      {
-        id: 20,
-        first_name: "Abigail",
-        last_name: "Carter",
-        position: "Forward",
-        team_id: 18,
-      },
-      {
-        id: 21,
-        first_name: "Alexander",
-        last_name: "Scott",
-        position: "Center",
-        team_id: 22,
-      },
-      {
-        id: 22,
-        first_name: "Avery",
-        last_name: "Morris",
-        position: "Guard",
-        team_id: 17,
-      },
-      {
-        id: 23,
-        first_name: "Charlotte",
-        last_name: "Turner",
-        position: "Forward",
-        team_id: 10,
-      },
-      {
-        id: 24,
-        first_name: "Jackson",
-        last_name: "Adams",
-        position: "Center",
-        team_id: 11,
-      },
-      {
-        id: 25,
-        first_name: "Liam",
-        last_name: "Wright",
-        position: "Guard",
-        team_id: 7,
-      },
-      {
-        id: 26,
-        first_name: "Olivia",
-        last_name: "Parker",
-        position: "Forward",
-        team_id: 9,
-      },
-      {
-        id: 27,
-        first_name: "Lucas",
-        last_name: "Hall",
-        position: "Center",
-        team_id: 8,
-      },
-      {
-        id: 28,
-        first_name: "Sophia",
-        last_name: "Mitchell",
-        position: "Guard",
-        team_id: 1,
-      },
-      {
-        id: 28,
-        first_name: "Sophia",
-        last_name: "Mitchell",
-        position: "Guard",
-        team_id: 5,
-      },
-      {
-        id: 29,
-        first_name: "Liam",
-        last_name: "Baker",
-        position: "Forward",
-        team_id: 11,
-      },
-      {
-        id: 30,
-        first_name: "Ella",
-        last_name: "Garcia",
-        position: "Center",
-        team_id: 20,
-      }
-    ]    
+    // const staticPlayerData = [
+    //   {
+    //     id: 1,
+    //     first_name: "John",
+    //     last_name: "Smith",
+    //     position: "Guard",
+    //     team_id: 22,
+    //   },
+    //   {
+    //     id: 2,
+    //     first_name: "Jane",
+    //     last_name: "Johnson",
+    //     position: "Forward",
+    //     team_id: 30,
+    //   },
+    //   {
+    //     id: 3,
+    //     first_name: "Michael",
+    //     last_name: "Brown",
+    //     position: "Center",
+    //     team_id: 12,
+    //   },
+    //   {
+    //     id: 4,
+    //     first_name: "Emma",
+    //     last_name: "Davis",
+    //     position: "Guard",
+    //     team_id: 15,
+    //   },
+    //   {
+    //     id: 5,
+    //     first_name: "Daniel",
+    //     last_name: "Jones",
+    //     position: "Forward",
+    //     team_id: 12,
+    //   },
+    //   {
+    //     id: 6,
+    //     first_name: "Olivia",
+    //     last_name: "Miller",
+    //     position: "Center",
+    //     team_id: 25,
+    //   },
+    //   {
+    //     id: 7,
+    //     first_name: "William",
+    //     last_name: "Wilson",
+    //     position: "Guard",
+    //     team_id: 22,
+    //   },
+    //   {
+    //     id: 8,
+    //     first_name: "Sophia",
+    //     last_name: "Moore",
+    //     position: "Forward",
+    //     team_id: 10,
+    //   },
+    //   {
+    //     id: 9,
+    //     first_name: "Ethan",
+    //     last_name: "Taylor",
+    //     position: "Center",
+    //     team_id: 16,
+    //   },
+    //   {
+    //     id: 10,
+    //     first_name: "Ava",
+    //     last_name: "Anderson",
+    //     position: "Guard",
+    //     team_id: 2,
+    //   },
+    //   {
+    //     id: 11,
+    //     first_name: "Noah",
+    //     last_name: "Harris",
+    //     position: "Forward",
+    //     team_id: 4,
+    //   },
+    //   {
+    //     id: 12,
+    //     first_name: "Mia",
+    //     last_name: "Martin",
+    //     position: "Center",
+    //     team_id: 7,
+    //   },
+    //   {
+    //     id: 13,
+    //     first_name: "Liam",
+    //     last_name: "Clark",
+    //     position: "Guard",
+    //     team_id: 6,
+    //   },
+    //   {
+    //     id: 14,
+    //     first_name: "Oliver",
+    //     last_name: "Lewis",
+    //     position: "Forward",
+    //     team_id: 29,
+    //   },
+    //   {
+    //     id: 15,
+    //     first_name: "Emma",
+    //     last_name: "Walker",
+    //     position: "Center",
+    //     team_id: 21,
+    //   },
+    //   {
+    //     id: 16,
+    //     first_name: "Isabella",
+    //     last_name: "Young",
+    //     position: "Guard",
+    //     team_id: 28,
+    //   },
+    //   {
+    //     id: 17,
+    //     first_name: "James",
+    //     last_name: "White",
+    //     position: "Forward",
+    //     team_id: 13,
+    //   },
+    //   {
+    //     id: 18,
+    //     first_name: "Benjamin",
+    //     last_name: "King",
+    //     position: "Center",
+    //     team_id: 23,
+    //   },
+    //   {
+    //     id: 19,
+    //     first_name: "Lucas",
+    //     last_name: "Hill",
+    //     position: "Guard",
+    //     team_id: 27,
+    //   },
+    //   {
+    //     id: 20,
+    //     first_name: "Abigail",
+    //     last_name: "Carter",
+    //     position: "Forward",
+    //     team_id: 18,
+    //   },
+    //   {
+    //     id: 21,
+    //     first_name: "Alexander",
+    //     last_name: "Scott",
+    //     position: "Center",
+    //     team_id: 22,
+    //   },
+    //   {
+    //     id: 22,
+    //     first_name: "Avery",
+    //     last_name: "Morris",
+    //     position: "Guard",
+    //     team_id: 17,
+    //   },
+    //   {
+    //     id: 23,
+    //     first_name: "Charlotte",
+    //     last_name: "Turner",
+    //     position: "Forward",
+    //     team_id: 10,
+    //   },
+    //   {
+    //     id: 24,
+    //     first_name: "Jackson",
+    //     last_name: "Adams",
+    //     position: "Center",
+    //     team_id: 11,
+    //   },
+    //   {
+    //     id: 25,
+    //     first_name: "Liam",
+    //     last_name: "Wright",
+    //     position: "Guard",
+    //     team_id: 7,
+    //   },
+    //   {
+    //     id: 26,
+    //     first_name: "Olivia",
+    //     last_name: "Parker",
+    //     position: "Forward",
+    //     team_id: 9,
+    //   },
+    //   {
+    //     id: 27,
+    //     first_name: "Lucas",
+    //     last_name: "Hall",
+    //     position: "Center",
+    //     team_id: 8,
+    //   },
+    //   {
+    //     id: 28,
+    //     first_name: "Sophia",
+    //     last_name: "Mitchell",
+    //     position: "Guard",
+    //     team_id: 1,
+    //   },
+    //   {
+    //     id: 28,
+    //     first_name: "Sophia",
+    //     last_name: "Mitchell",
+    //     position: "Guard",
+    //     team_id: 5,
+    //   },
+    //   {
+    //     id: 29,
+    //     first_name: "Liam",
+    //     last_name: "Baker",
+    //     position: "Forward",
+    //     team_id: 11,
+    //   },
+    //   {
+    //     id: 30,
+    //     first_name: "Ella",
+    //     last_name: "Garcia",
+    //     position: "Center",
+    //     team_id: 20,
+    //   }
+    // ]    
         const fetchPlayers = (inputValue) => {
           console.log('fetching data for: ', inputValue);
           // Make the GET request to the backend API
@@ -319,6 +320,11 @@ const Home = () => {
           }
         }, [timeoutFlag])
 
+        const handleRowClick = (player) => {
+          setSelectedPlayer(player); // Set the selected player when a row is clicked
+          console.log('Selected Player:', player);
+        };
+
         return (
           <div className="homePageDiv">
             <div className="homePageLogoDiv">
@@ -342,7 +348,7 @@ const Home = () => {
               <table className='playersTable'>
                 <tbody>
                   {players.map((player) => (
-                    <tr className='playersRow'key={player.id}>
+                    <tr className='playersRow'key={player.id} onClick={() => handleRowClick(player)}>
                       <td className="teamLogoCell">
                         <img
                           src={`/teamLogos/${teamLogos[player.team_id]}`}
