@@ -46,18 +46,56 @@ code {
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow when focused */
 }
 
-.suggestedPlayersDiv{
-  background-color: white;
-}
-
-.suggestedPlayersDiv{
-  background-color: white;
-  height: 200px;
-  width: 150px;
+.suggestedPlayersDiv {
+  font-family: 'Norwester';
   display: flex;
   justify-content: center;
+  flex-direction: row;
+  max-height: 300px;
+  overflow: scroll;
 }
 
-.suggestedPlayersBigDiv{
-  
+.playersTable {
+  max-width: 28%;
+}
+
+.playersRow {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  border: solid black 2px;
+  border-radius: 7%;
+  background-color: white;
+  max-height: 90px;
+}
+
+.playersRow:hover{
+  background-color: #d9d9d9;
+  cursor: pointer;
+}
+
+.teamLogoCell {
+  text-align: center;
+  width: 20%;
+  margin-left: -15%; /* Reduce the margin to align the logo */
+  margin-top: 2%;
+}
+
+.teamLogo {
+  max-width: 75%;
+}
+
+.playerNameCell {
+  font-size: 140%;
+  margin-top: 4%;
+  width: 40%;
+  margin-right: 2%; /* Reduce the margin to align the name */
+}
+
+.playerPositionCell {
+  font-size: 120%;
+  margin-top: 5%;
+  margin-left: -2%;
+  margin-right: -14%;
+  color: #6f6e6e;
 }

@@ -4,7 +4,40 @@ const Home = () => {
     const [players, setPlayers] = useState([]);
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [inputValue, setInputValue] = useState('');
-    let timerId; // Store the timer ID   
+    const [emptySearchBar, setEmptySearchBar] = useState(true);
+    let timerId; // Store the timer ID 
+    const teamLogos = {
+      1: 'ATL_Hawks.png',
+      2: 'BKN_Nets.png',
+      3: 'BOS_Celtics.png',
+      4: 'CHA_Hornet.png',
+      5: 'CHI_Bulls.png',
+      6: 'CLE_Cavaliers.png',
+      7: 'DAL_Mavericks.png',
+      8: 'DEN_Nuggets.png',
+      9: 'DET_Pistons.png',
+      10: 'GSW_Warriors.png',
+      11: 'HOU_Rockets.png',
+      12: 'IND_Pacers.png',
+      13: 'LAC_Clippers.png',
+      14: 'LAL_Lakers.png',
+      15: 'MEM_Grizzlies.png',
+      16: 'MIA_Heat.png',
+      17: 'MIL_Bucks.png',
+      18: 'MIN_Timberwolves.png',
+      19: 'NOP_Pelicans.png',
+      20: 'NYK_Knicks.png',
+      21: 'OKC_Thunder.png',
+      22: 'ORL_Magic.png',
+      23: 'PHI_76ers.png',
+      24: 'PHX_Suns.png',
+      25: 'POR_Trailblazers.png',
+      26: 'SAC_Kings.png',
+      27: 'SAS_Spurs.png',
+      28: 'TOR_Raptors.png',
+      29: 'UTA_Jazz.png',
+      30: 'WAS_Wizards.png',
+    };      
     const staticPlayerData = [
       {
         id: 1,
@@ -18,21 +51,21 @@ const Home = () => {
         first_name: "Jane",
         last_name: "Johnson",
         position: "Forward",
-        team_id: 40,
+        team_id: 30,
       },
       {
         id: 3,
         first_name: "Michael",
         last_name: "Brown",
         position: "Center",
-        team_id: 32,
+        team_id: 12,
       },
       {
         id: 4,
         first_name: "Emma",
         last_name: "Davis",
         position: "Guard",
-        team_id: 51,
+        team_id: 15,
       },
       {
         id: 5,
@@ -46,7 +79,7 @@ const Home = () => {
         first_name: "Olivia",
         last_name: "Miller",
         position: "Center",
-        team_id: 35,
+        team_id: 25,
       },
       {
         id: 7,
@@ -60,7 +93,7 @@ const Home = () => {
         first_name: "Sophia",
         last_name: "Moore",
         position: "Forward",
-        team_id: 50,
+        team_id: 10,
       },
       {
         id: 9,
@@ -81,35 +114,35 @@ const Home = () => {
         first_name: "Noah",
         last_name: "Harris",
         position: "Forward",
-        team_id: 44,
+        team_id: 4,
       },
       {
         id: 12,
         first_name: "Mia",
         last_name: "Martin",
         position: "Center",
-        team_id: 37,
+        team_id: 7,
       },
       {
         id: 13,
         first_name: "Liam",
         last_name: "Clark",
         position: "Guard",
-        team_id: 36,
+        team_id: 6,
       },
       {
         id: 14,
         first_name: "Oliver",
         last_name: "Lewis",
         position: "Forward",
-        team_id: 49,
+        team_id: 29,
       },
       {
         id: 15,
         first_name: "Emma",
         last_name: "Walker",
         position: "Center",
-        team_id: 41,
+        team_id: 21,
       },
       {
         id: 16,
@@ -130,21 +163,21 @@ const Home = () => {
         first_name: "Benjamin",
         last_name: "King",
         position: "Center",
-        team_id: 33,
+        team_id: 23,
       },
       {
         id: 19,
         first_name: "Lucas",
         last_name: "Hill",
         position: "Guard",
-        team_id: 47,
+        team_id: 27,
       },
       {
         id: 20,
         first_name: "Abigail",
         last_name: "Carter",
         position: "Forward",
-        team_id: 48,
+        team_id: 18,
       },
       {
         id: 21,
@@ -193,7 +226,7 @@ const Home = () => {
         first_name: "Lucas",
         last_name: "Hall",
         position: "Center",
-        team_id: 38,
+        team_id: 8,
       },
       {
         id: 28,
@@ -207,14 +240,14 @@ const Home = () => {
         first_name: "Sophia",
         last_name: "Mitchell",
         position: "Guard",
-        team_id: 35,
+        team_id: 5,
       },
       {
         id: 29,
         first_name: "Liam",
         last_name: "Baker",
         position: "Forward",
-        team_id: 41,
+        team_id: 11,
       },
       {
         id: 30,
@@ -226,12 +259,8 @@ const Home = () => {
     ]    
         const fetchPlayers = (inputValue) => {
           console.log('fetching data for: ', inputValue);
-
-          // Encode the input value to handle special characters
-          const encodedInputValue = encodeURIComponent(inputValue);
-
           // Make the GET request to the backend API
-          fetch(`/api/player/search/${encodedInputValue}`, {
+          fetch(`/api/player/search/${inputValue}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -251,30 +280,37 @@ const Home = () => {
               console.error('Error:', error);
             });
         };
-
-        const checkForTwoChars = (inputValue) => {
-          if (inputValue.length >= 2) {
+      
+        const handleInputChange = (event) => {
+          setInputValue(event.target.value);
+        };
+        
+        useEffect(() => {
+          console.log('inputValue is: ', inputValue);
+          if(inputValue.length > 1){
             console.log(`Search for players with at least 2 characters: ${inputValue}`);
             // Clear any previous timers to prevent multiple updates
             clearTimeout(timerId);
             timerId = setTimeout(() => {
               if(timeoutFlag == false){
+                setEmptySearchBar(false)
                 setTimeoutFlag(true);
               }
               else if(timeoutFlag == true){
+                setEmptySearchBar(false)
                 setTimeoutFlag(false);
               }
               else if(timeoutFlag == null){
+                setEmptySearchBar(false)
                 setTimeoutFlag(true);
               }
             }, 1000);
           }
-        };
-      
-        const handleInputChange = (event) => {
-          setInputValue(event.target.value);
-          checkForTwoChars(inputValue);
-        };
+
+          else{
+            setEmptySearchBar(true);
+          }
+        }, [inputValue])
 
         useEffect(() => {
           console.log('timer just ended! The input was:', inputValue);
@@ -301,13 +337,29 @@ const Home = () => {
               onChange={handleInputChange}
             />
             </div>
-            <div className='suggestedPlayersBigDiv'>
-              <div className="suggestedPlayersDiv">
+            {!emptySearchBar && (
+            <div className="suggestedPlayersDiv">
+              <table className='playersTable'>
+                <tbody>
                   {staticPlayerData.map((player) => (
-                    <div key={player.id}>{player.first_name} {player.last_name}</div>
+                    <tr className='playersRow'key={player.id}>
+                      <td className="teamLogoCell">
+                        <img
+                          src={`/teamLogos/${teamLogos[player.team_id]}`}
+                          alt={`Team Logo for Team ${player.team_id}`}
+                          className="teamLogo"
+                        />
+                      </td>
+                      <td className="playerNameCell">{player.first_name} {player.last_name}</td>
+                      <td className="playerPositionCell">
+                        {player.position === 'Guard' ? 'Guard' : player.position === 'Forward' ? 'Forward' : player.position === 'Center' ? 'Center' : ''}
+                      </td>
+                    </tr>
                   ))}
-                </div>
-                </div>
+                </tbody>
+              </table>
+            </div>
+            )}
           </div>
         );
 };
