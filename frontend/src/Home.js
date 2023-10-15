@@ -351,14 +351,14 @@ const Home = () => {
                     <tr className='playersRow'key={player.id} onClick={() => handleRowClick(player)}>
                       <td className="teamLogoCell">
                         <img
-                          src={`/teamLogos/${teamLogos[player.team_id]}`}
-                          alt={`Team Logo for Team ${player.team_id}`}
+                          src={`/teamLogos/${teamLogos[player.team]}`}
+                          alt={`Team Logo for Team ${player.team}`}
                           className="teamLogo"
                         />
                       </td>
                       <td className="playerNameCell">{player.first_name} {player.last_name}</td>
                       <td className="playerPositionCell">
-                        {player.position === 'Guard' ? 'Guard' : player.position === 'Forward' ? 'Forward' : player.position === 'Center' ? 'Center' : ''}
+                        {player.position === 'G' ? 'Guard' : player.position === 'F' ? 'Forward' : player.position === 'C' ? 'Center' : ''}
                       </td>
                     </tr>
                   ))}
