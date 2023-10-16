@@ -7,6 +7,6 @@ databaseRetrieval_BP = Blueprint("db_retrieval", __name__)
 def getPlayers(search_input):
     return jsonify(searchPlayerByString(search_input))
 
-@databaseRetrieval_BP.route('/api/player/search/<player_id>', methods=['GET'])
+@databaseRetrieval_BP.route('/api/player/search/id/<player_id>', methods=['GET'])
 def getPlayersByID(player_id):
     return jsonify(get_player_by_id(player_id))
