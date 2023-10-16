@@ -45,7 +45,19 @@ def searchPlayerByString(search_string):
 
 
 def get_player_by_id(player_id):
-        player = Player.query.filter_by(id=player_id).first()
-        return player
+    player = Player.query.filter_by(id=player_id).first()
+
+    if player:
+        player_info = {
+            "first_name": player.first_name,
+            "last_name": player.last_name,
+            "position": player.position,
+            "height": player.height,
+            "weight": player.weight,
+            "team_id": player.team_id  
+        }
+        return player_info
+    else:
+        return None
 
 
