@@ -1,16 +1,22 @@
-// route to call on load: /api/games/search/<player_id>/<games_count>
+// routes to call on load: 
+// /api/games/search/<player_id>/<games_count
+// 
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const PlayerStats = () => {
     const { playerId } = useParams();
     const [gameCount, setGameCount] = useState(5);
-    const [player, setPlayer] = useState(null);
+    const [lastXGames, setLastXGames] = useState(null);
+    const [playerData, setPlayerData] = useState(null);
 
     useEffect(() => {
-        console.log('the received player id is: ', playerId);
         fetchPlayer(playerId, gameCount);
-    },[])
+    }, [])
+    
+    useEffect(() => {
+        console.log('Last ', gameCount, ' games: ', lastXGames)
+    }, [lastXGames])
 
     useEffect(() => {
         console.log('Player object fetched: ', player)
@@ -31,11 +37,30 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              setPlayer(data);
+                setLastXGames(data);
             })
             .catch((error) => {
               console.error('Error:', error);
-            });
+        });
+
+        fetch(`/api/player/search/${playerId}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+                setPlayerData(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+        });
     };
     return(
         <div className='playerStatsPage'>
