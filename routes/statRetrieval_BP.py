@@ -3,8 +3,7 @@ from backend.src.databaseRetrieval.statDBRetrieval import getRecentGames, getRec
 from backend.src.databaseRetrieval.astRebStatGetters import assistsByNumGames, assistsByNumGames_teams, reboundsByNumGames, reboundsByNumGames_team
 from backend.src.databaseRetrieval.ft3PMStatGetters import threesByNumGames, threesByNumGames_team, FTMByNumGames, FTMByNumGames_team
 from backend.src.databaseRetrieval.pointStatGetters import pointsByNumGames_teams, getPointsByNumGames
-from backend.src.databaseRetrieval.comboStatGetters import getAverageAndRecentPA, getAverageAndRecentPAWithTeam, getAverageAndRecentPRA,\
-      getAverageAndRecentPRAWithTeam, getAverageAndRecentPR, getAverageAndRecentPRWithTeam, getAverageAndRecentRA, getAverageAndRecentRAWithTeam
+from backend.src.databaseRetrieval.comboStatGetters import getAverageAndRecentPRA, getAverageAndRecentPRAWithTeam
 
 statRetrieval_BP = Blueprint("stat_retrieval", __name__)
 
