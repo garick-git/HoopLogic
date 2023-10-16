@@ -26,7 +26,6 @@ def assistsByNumGames(player_id, num_games):
 
     return [average_assists, [assist[0] for assist in recent_assists]]
 
-
 def assistsByNumGames_teams(player_id, team_id, num_games):
     recent_assists = (
         db.session.query(PlayerStats.ast)
@@ -50,8 +49,6 @@ def assistsByNumGames_teams(player_id, team_id, num_games):
 
     return [average_assists, [assist[0] for assist in recent_assists]]
 
-
-
 def reboundsByNumGames(player_id, num_games):
     recent_rebounds = (
         db.session.query(PlayerStats.reb)
@@ -70,8 +67,6 @@ def reboundsByNumGames(player_id, num_games):
     average_rebounds = round(total_rebounds / num_games, 2)
 
     return [average_rebounds, [rebound[0] for rebound in recent_rebounds]]
-
-
 
 def reboundsByNumGames_team(player_id, team_id, num_games):
     recent_rebounds = (
