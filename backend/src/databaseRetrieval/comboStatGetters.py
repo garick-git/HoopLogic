@@ -5,8 +5,8 @@ from sqlalchemy import or_
 from ..models.player import Player
 from ..models.game import Game
 from ..models.playerStats import PlayerStats
-from astRebStatGetters import assistsByNumGames, assistsByNumGames_teams, reboundsByNumGames, reboundsByNumGames_team
-from pointStatGetters import getPointsByNumGames, pointsByNumGames_teams
+from .astRebStatGetters import assistsByNumGames, assistsByNumGames_teams, reboundsByNumGames, reboundsByNumGames_team
+from .pointStatGetters import getPointsByNumGames, pointsByNumGames_teams
 from database import db
 
 #Points, Rebounds, Assists
