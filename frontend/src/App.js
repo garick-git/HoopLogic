@@ -4,7 +4,7 @@ import './App.css';
 import Home from './Home';
 import PlayerSearch from './PlayerSearch';
 import PlayerList from './PlayerList';
-
+import PlayerStats from './PlayerStats';
 
 
 function App() {
@@ -12,9 +12,10 @@ function App() {
     <Router>
       <div className='appDiv'>
         <Routes>
-          <Route path="/playersearch" element={<PlayerSearch />} />
-          <Route path="/allplayers" element={<PlayerList />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/playersearch" element={<PlayerSearch/>} />
+          <Route path="/allplayers" element={<PlayerList/>} />
+          <Route path="/" element={<Home/>} />
+          <Route path="playerStats/:playerId" element={<PlayerStats/>} />
         </Routes>
       </div>
     </Router>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [players, setPlayers] = useState([]);
@@ -6,6 +7,7 @@ const Home = () => {
     const [inputValue, setInputValue] = useState('');
     const [emptySearchBar, setEmptySearchBar] = useState(true);
     const [selectedPlayer, setSelectedPlayer] = useState(null);
+    const navigate = useNavigate();
     let timerId; // Store the timer ID 
     const teamLogos = {
       1: 'ATL_Hawks.png',
@@ -325,7 +327,8 @@ const Home = () => {
 
         const handleRowClick = (player) => {
           setSelectedPlayer(player); // Set the selected player when a row is clicked
-          console.log('Selected Player:', player);
+          console.log('Selected Player:', player, 'with ID: ', player.id);
+          navigate(`/playerStats/${player.id}`);
         };
 
         return (
