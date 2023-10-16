@@ -4,13 +4,17 @@ import { useParams } from 'react-router-dom';
 
 const PlayerStats = () => {
     const { playerId } = useParams();
-    const { gameCount } = useState(5);
+    const [gameCount, setGameCount] = useState(5);
     const [player, setPlayer] = useState(null);
 
     useEffect(() => {
         console.log('the received player id is: ', playerId);
         fetchPlayer(playerId, gameCount);
     },[])
+
+    useEffect(() => {
+        console.log('Player object fetched: ', player)
+    }, [player])
 
     const fetchPlayer = (playerId, gameCount) => {
         console.log('Fetching player with ID: ', playerId, ' for ', gameCount, ' games.');
@@ -39,7 +43,7 @@ const PlayerStats = () => {
             {player ? (
                 <div>
                     <p>Player ID: {player.id}</p>
-                    <p>Player Name: {player.name}</p>
+                    <p>Player Name: {player.first_name} {player.last_name}</p>
                 </div>
             ) : (
                 <p>Loading player data...</p>
