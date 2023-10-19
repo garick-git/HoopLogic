@@ -10,7 +10,7 @@ from .pointStatGetters import getPointsByNumGames, pointsByNumGames_teams
 from database import db
 
 #Points, Rebounds, Assists
-def getPRAComboForNumGames(player_id, num_games):
+def getAverageAndRecentPRA(player_id, num_games):
     pra_combo = (
         db.session.query(
             func.sum(PlayerStats.pts).label('total_points'),
