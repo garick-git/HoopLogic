@@ -4,21 +4,19 @@ from ..models.playerStats import PlayerStats
 from ..models.game import Game
 from database import db
 
-def average_and_recent_points(player_id, num_games, team_id=None):
+def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
 
-    query = db.session.query(PlayerStats.pts)
+    query = db.session.query(stat_column)
     
     if team_id:
-        query = query.join(Game).filter(
-            or_(
-                Game.home_team_id == team_id,
-                Game.visitor_team_id == team_id
-            )
+        query = query.filter(
+            (PlayerStats.game.home_team_id == team_id) | (PlayerStats.game.visitor_team_id == team_id)
         )
-
-    recent_points = (
+    
+    recent_stats = (
         query
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
@@ -27,16 +25,17 @@ def average_and_recent_points(player_id, num_games, team_id=None):
         .all()
     )
 
-    if not recent_points:
+    if not recent_stats:
         return [0.0, []]
 
-    total_points = sum(point[0] for point in recent_points)
-    average_points = round(total_points / num_games, 2)
+    total_stat = sum(stat[0] for stat in recent_stats)
+    average_stat = round(total_stat / num_games, 2)
 
-    return [average_points, [point[0] for point in recent_points]]
-
-def pointsByNumGames_teams(player_id, team_id, num_games):
-    return average_and_recent_points(player_id, num_games, team_id)
+    return [average_stat, [stat[0] for stat in recent_stats]]
 
 def pointsByNumGames(player_id, num_games):
-    return average_and_recent_points(player_id, num_games)
+    return average_and_recent_stat(player_id, num_games, PlayerStats.pts)
+
+def pointsByNumGames_teams(player_id, team_id, num_games):
+    return average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)
+
