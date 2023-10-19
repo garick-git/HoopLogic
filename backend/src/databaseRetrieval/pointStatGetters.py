@@ -1,25 +1,24 @@
 from datetime import datetime
-from sqlalchemy import func
-from sqlalchemy.orm import joinedload
 from sqlalchemy import or_
-from ..models.player import Player
-from ..models.game import Game
 from ..models.playerStats import PlayerStats
+from ..models.game import Game
 from database import db
 
 def average_and_recent_points(player_id, num_games, team_id=None):
     num_games = int(num_games)
 
     query = db.session.query(PlayerStats.pts)
-
-    if team_id:
-        query = query.filter(
-            or_(PlayerStats.game.home_team_id == team_id, PlayerStats.game.visitor_team_id == team_id)
-        )
     
+    if team_id:
+        query = query.join(Game).filter(
+            or_(
+                Game.home_team_id == team_id,
+                Game.visitor_team_id == team_id
+            )
+        )
+
     recent_points = (
         query
-        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
