@@ -17,7 +17,7 @@ def getPRAComboForNumGames(player_id, num_games):
 
     pra_combo = []
     for i in range(num_games):
-        pra_game = pointsArr[i] + reboundsArr[i] + assistsArr[i]
+        pra_game = pointsArr[1][i] + reboundsArr[1][i] + assistsArr[1][i]
         pra_combo.append(pra_game)
     
     average_PRA = round(sum(pra_combo) / num_games, 2)
@@ -33,7 +33,7 @@ def getPRAComboForNumGamesWithTeam(player_id, team_id, num_games):
 
     pra_combo = []
     for i in range(num_games):
-        pra_game = pointsArr[i] + reboundsArr[i] + assistsArr[i]
+        pra_game = pointsArr[1][i] + reboundsArr[1][i] + assistsArr[1][i]
         pra_combo.append(pra_game)
     
     average_PRA = round(sum(pra_combo) / num_games, 2)
