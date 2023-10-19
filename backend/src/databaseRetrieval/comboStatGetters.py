@@ -10,24 +10,31 @@ from .pointStatGetters import getPointsByNumGames, pointsByNumGames_teams
 from database import db
 
 #Points, Rebounds, Assists
-def getAverageAndRecentPRA(player_id, num_games):
-    average_points, recent_points = getPointsByNumGames(player_id, num_games)
-    average_assists, recent_assists = assistsByNumGames(player_id, num_games)
-    average_rebounds, recent_rebounds = reboundsByNumGames(player_id, num_games)
-
-    average_PRA = round(
-        (average_points + average_assists + average_rebounds) / 3, 2
+def getPRAComboForNumGames(player_id, num_games):
+    pra_combo = (
+        db.session.query(
+            func.sum(PlayerStats.pts).label('total_points'),
+            func.sum(PlayerStats.reb).label('total_rebounds'),
+            func.sum(PlayerStats.ast).label('total_assists'),
+        )
+        .join(PlayerStats.game)
+        .filter(PlayerStats.player_id == player_id)
+        .filter(PlayerStats.min != '00:00')
+        .filter(PlayerStats.min != '00')
+        .order_by(Game.date.desc())
+        .limit(num_games)
+        .all()
     )
 
-    if not recent_points or not recent_assists or not recent_rebounds:
-        return [average_PRA, []]
+    if not pra_combo:
+        return [0.0, []]
 
-    recent_PRA = [
-        round((p + a + r) / 3, 2)
-        for p, a, r in zip(recent_points, recent_assists, recent_rebounds)
-    ]
+    total_points, total_rebounds, total_assists = pra_combo[0]
+    average_pra = round(
+        (total_points + total_rebounds + total_assists) / len(pra_combo), 2
+    )
 
-    return [average_PRA, recent_PRA]
+    return [average_pra, pra_combo]
 
 #Points, Rebounds, Assists
 #WITH TEAM
