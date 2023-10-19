@@ -4,6 +4,7 @@ from backend.src.databaseRetrieval.astRebStatGetters import assistsByNumGames, a
 from backend.src.databaseRetrieval.ft3PMStatGetters import threesByNumGames, threesByNumGames_team, FTMByNumGames, FTMByNumGames_team
 from backend.src.databaseRetrieval.pointStatGetters import pointsByNumGames_teams, pointsByNumGames
 from backend.src.databaseRetrieval.comboStatGetters import getPRAComboForNumGames, getPRAComboForNumGamesWithTeam
+from backend.src.databaseRetrieval.stlBlkStatGetters import stealsByNumGames, stealsByNumGames_teams, blocksByNumGames, blocksByNumGames_team
 
 statRetrieval_BP = Blueprint("stat_retrieval", __name__)
 
@@ -82,3 +83,25 @@ def getPRAByNumGames(player_id, games_count):
 @statRetrieval_BP.route('/api/games/search/PRA/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
 def getPRAByNumGames_Teams(player_id, games_count, opponent_id):
     return jsonify(getPRAComboForNumGamesWithTeam(player_id, games_count, opponent_id))
+
+#Points for a player_id for games_count amount of games
+@statRetrieval_BP.route('/api/games/search/steals/<player_id>/<games_count>', methods=['GET'])
+def getStealsByNumGames(player_id, games_count):
+    return jsonify(stealsByNumGames(player_id, games_count))
+
+#Points for a player_id for games_count amount of games
+#Uses opponent ID to bring up ^ vs. a specfic team
+@statRetrieval_BP.route('/api/games/search/steals/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
+def getStealsByNumGames_Teams(player_id, games_count, opponent_id):
+    return jsonify(stealsByNumGames_teams(player_id, games_count, opponent_id))
+
+#Points for a player_id for games_count amount of games
+@statRetrieval_BP.route('/api/games/search/blocks/<player_id>/<games_count>', methods=['GET'])
+def getBlocksByNumGames(player_id, games_count):
+    return jsonify(blocksByNumGames(player_id, games_count))
+
+#Points for a player_id for games_count amount of games
+#Uses opponent ID to bring up ^ vs. a specfic team
+@statRetrieval_BP.route('/api/games/search/blocks/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
+def getBlocksByNumGames_Teams(player_id, games_count, opponent_id):
+    return jsonify(blocksByNumGames_team(player_id, games_count, opponent_id))
