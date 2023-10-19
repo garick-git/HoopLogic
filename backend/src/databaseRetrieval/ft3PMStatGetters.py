@@ -10,11 +10,11 @@ from database import db
 def FTMByNumGames(player_id, num_games):
     recent_ftm = (
         db.session.query(PlayerStats.ftm)
-        .join(PlayerStats.game)
+        .join(PlayerStats.game) 
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
-        .order_by(PlayerStats.game.date.desc())
+        .order_by(Game.date.desc())
         .limit(num_games)
         .all()
     )
@@ -38,7 +38,7 @@ def FTMByNumGames_team(player_id, team_id, num_games):
         .filter(
             (PlayerStats.game.home_team_id == team_id) | (PlayerStats.game.visitor_team_id == team_id)
         )
-        .order_by(PlayerStats.game.date.desc())
+        .order_by(Game.date.desc())
         .limit(num_games)
         .all()
     )
@@ -58,7 +58,7 @@ def threesByNumGames(player_id, num_games):
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
-        .order_by(PlayerStats.game.date.desc())
+        .order_by(Game.date.desc())
         .limit(num_games)
         .all()
     )
@@ -81,7 +81,7 @@ def threesByNumGames_team(player_id, team_id, num_games):
         .filter(
             (PlayerStats.game.home_team_id == team_id) | (PlayerStats.game.visitor_team_id == team_id)
         )
-        .order_by(PlayerStats.game.date.desc())
+        .order_by(Game.date.desc())
         .limit(num_games)
         .all()
     )
