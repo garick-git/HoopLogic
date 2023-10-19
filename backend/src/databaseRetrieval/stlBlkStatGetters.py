@@ -39,11 +39,11 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 def stealsByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.stl)
 
-def stealsByNumGames_teams(player_id, team_id, num_games):
+def stealsByNumGames_teams(player_id, num_games, team_id):
     return average_and_recent_stat(player_id, num_games, PlayerStats.stl, team_id)
 
 def blocksByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.blk)
 
-def blocksByNumGames_team(player_id, team_id, num_games):
+def blocksByNumGames_team(player_id, num_games, team_id):
     return average_and_recent_stat(player_id, num_games, PlayerStats.blk, team_id)

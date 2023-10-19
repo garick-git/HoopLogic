@@ -38,5 +38,5 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 def pointsByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.pts)
 
-def pointsByNumGames_teams(player_id, team_id, num_games):
+def pointsByNumGames_teams(player_id, num_games, team_id):
     return average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)

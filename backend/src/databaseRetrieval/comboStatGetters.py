@@ -27,9 +27,9 @@ def getPRAComboForNumGames(player_id, num_games):
 def getPRAComboForNumGamesWithTeam(player_id, team_id, num_games):
     num_games = int(num_games)
 
-    pointsArr = pointsByNumGames_teams(player_id, team_id, num_games)
-    reboundsArr = reboundsByNumGames_team(player_id, team_id, num_games)
-    assistsArr = assistsByNumGames_teams(player_id, team_id, num_games)
+    pointsArr = pointsByNumGames_teams(player_id, num_games, team_id)
+    reboundsArr = reboundsByNumGames_team(player_id, num_games, team_id)
+    assistsArr = assistsByNumGames_teams(player_id, num_games, team_id)
 
     pra_combo = []
     for i in range(num_games):

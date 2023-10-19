@@ -30,11 +30,11 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 def FTMByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.ftm)
 
-def FTMByNumGames_team(player_id, team_id, num_games):
+def FTMByNumGames_team(player_id, num_games, team_id):
     return average_and_recent_stat(player_id, num_games, PlayerStats.ftm, team_id)
 
 def threesByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.fg3m)
 
-def threesByNumGames_team(player_id, team_id, num_games):
+def threesByNumGames_team(player_id, num_games, team_id):
     return average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id)
