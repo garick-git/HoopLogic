@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify
 from backend.src.databaseRetrieval.statDBRetrieval import getRecentGames, getRecentGamesByOpponent
 from backend.src.databaseRetrieval.astRebStatGetters import assistsByNumGames, assistsByNumGames_teams, reboundsByNumGames, reboundsByNumGames_team
 from backend.src.databaseRetrieval.ft3PMStatGetters import threesByNumGames, threesByNumGames_team, FTMByNumGames, FTMByNumGames_team
-from backend.src.databaseRetrieval.pointStatGetters import pointsByNumGames_teams, getPointsByNumGames
+from backend.src.databaseRetrieval.pointStatGetters import pointsByNumGames_teams, pointsByNumGames
 from backend.src.databaseRetrieval.comboStatGetters import getPRAComboForNumGames, getPRAComboForNumGamesWithTeam
 
 statRetrieval_BP = Blueprint("stat_retrieval", __name__)
@@ -64,7 +64,7 @@ def getFTMByNumGames_Teams(player_id, games_count, opponent_id):
 #Points for a player_id for games_count amount of games
 @statRetrieval_BP.route('/api/games/search/points/<player_id>/<games_count>', methods=['GET'])
 def getPointsByNumGames(player_id, games_count):
-    return jsonify(getPointsByNumGames(player_id, games_count))
+    return jsonify(pointsByNumGames(player_id, games_count))
 
 #Points for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
