@@ -24,7 +24,7 @@ def getPRAComboForNumGames(player_id, num_games):
     
     return [average_PRA, pra_combo]
 
-def getPRAComboForNumGamesWithTeam(player_id, team_id, num_games):
+def getPRAComboForNumGamesWithTeam(player_id, num_games, team_id):
     num_games = int(num_games)
 
     pointsArr = pointsByNumGames_teams(player_id, num_games, team_id)
