@@ -13,13 +13,15 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     query = db.session.query(stat_column)
     
     if team_id:
-        query = query.filter(
-            (PlayerStats.game.home_team_id == team_id) | (PlayerStats.game.visitor_team_id == team_id)
+        query = query.join(Game).filter(
+            or_(
+                Game.home_team_id == team_id,
+                Game.visitor_team_id == team_id
+            )
         )
     
     recent_stats = (
         query
-        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')

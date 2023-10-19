@@ -8,16 +8,26 @@ from database import db
 
 def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
-    query = db.session.query(stat_column)
 
-    query = query.filter(PlayerStats.player_id == player_id)
-    if team_id is not None:
-        query = query.join(PlayerStats.game).filter(
-            or_(PlayerStats.game.home_team_id == team_id, PlayerStats.game.visitor_team_id == team_id)
+    query = db.session.query(stat_column)
+    
+    if team_id:
+        query = query.join(Game).filter(
+            or_(
+                Game.home_team_id == team_id,
+                Game.visitor_team_id == team_id
+            )
         )
-    query = query.filter(PlayerStats.min != '00:00', PlayerStats.min != '00')
-    query = query.join(PlayerStats.game).order_by(Game.date.desc()).limit(num_games)
-    recent_stats = query.all()
+    
+    recent_stats = (
+        query
+        .filter(PlayerStats.player_id == player_id)
+        .filter(PlayerStats.min != '00:00')
+        .filter(PlayerStats.min != '00')
+        .order_by(Game.date.desc())
+        .limit(num_games)
+        .all()
+    )
 
     if not recent_stats:
         return [0.0, []]
