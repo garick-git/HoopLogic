@@ -64,8 +64,7 @@ def getFTMByNumGames_Teams(player_id, games_count, opponent_id):
 #Points for a player_id for games_count amount of games
 @statRetrieval_BP.route('/api/games/search/points/<player_id>/<games_count>', methods=['GET'])
 def getPointsByNumGames(player_id, games_count):
-    points_data = getPointsByNumGames(player_id, games_count)
-    return jsonify(points_data) 
+    return jsonify(getPointsByNumGames(player_id, games_count))
 
 #Points for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
