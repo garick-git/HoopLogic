@@ -7,15 +7,14 @@ from ..models.game import Game
 from ..models.playerStats import PlayerStats
 from database import db
 
+def calculate_PRA(game):
+    return game.PlayerStats.pts + game.PlayerStats.reb + game.PlayerStats.ast
+
 def average_and_recent_PRA(player_id, num_games, team_id=None):
     num_games = int(num_games)
 
-    query = db.session.query(
-        func.sum(PlayerStats.pts).label('total_points'),
-        func.sum(PlayerStats.reb).label('total_rebounds'),
-        func.sum(PlayerStats.ast).label('total_assists')
-    )
-
+    query = db.session.query(PlayerStats, Game)
+    
     if team_id:
         query = query.filter(
             or_(PlayerStats.game.home_team_id == team_id, PlayerStats.game.visitor_team_id == team_id)
@@ -35,14 +34,10 @@ def average_and_recent_PRA(player_id, num_games, team_id=None):
     if not pra_combo:
         return [0.0, []]
 
-    total_points, total_rebounds, total_assists = pra_combo[0]
-    average_PRA = round((total_points + total_rebounds + total_assists) / num_games, 2)
+    total_PRA = sum(calculate_PRA(game) for player_stats, game in pra_combo)
+    average_PRA = round(total_PRA / num_games, 2)
 
-    pra_combo_list = [{
-        'total_points': total_points,
-        'total_rebounds': total_rebounds,
-        'total_assists': total_assists,
-    }]
+    pra_combo_list = [calculate_PRA(game) for player_stats, game in pra_combo]
 
     return [average_PRA, pra_combo_list]
 
