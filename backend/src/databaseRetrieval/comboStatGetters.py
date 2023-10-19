@@ -5,13 +5,13 @@ from ..models.player import Player
 from ..models.game import Game
 from ..models.playerStats import PlayerStats
 from ..databaseRetrieval.astRebStatGetters import assistsByNumGames, assistsByNumGames_teams, reboundsByNumGames, reboundsByNumGames_team
-from ..databaseRetrieval.pointStatGetters import pointsByNumGames_teams, getPointsByNumGames
+from ..databaseRetrieval.pointStatGetters import pointsByNumGames_teams, pointsByNumGames
 from database import db
 
 def getPRAComboForNumGames(player_id, num_games):
     num_games = int(num_games)
 
-    pointsArr = getPointsByNumGames(player_id, num_games)
+    pointsArr = pointsByNumGames(player_id, num_games)
     reboundsArr = reboundsByNumGames(player_id, num_games)
     assistsArr = assistsByNumGames(player_id, num_games)
 
