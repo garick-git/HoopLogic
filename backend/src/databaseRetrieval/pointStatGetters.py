@@ -11,6 +11,7 @@ from database import db
 def pointsByNumGames_teams(player_id, team_id, num_games):
     recent_points = (
         db.session.query(PlayerStats.pts)
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(or_(
             PlayerStats.game.home_team_id == team_id,
@@ -36,6 +37,7 @@ def pointsByNumGames_teams(player_id, team_id, num_games):
 def getPointsByNumGames(player_id, num_games):
     recent_points = (
         db.session.query(PlayerStats.pts)
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')

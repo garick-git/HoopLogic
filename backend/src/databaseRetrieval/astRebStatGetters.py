@@ -10,6 +10,7 @@ from database import db
 def assistsByNumGames(player_id, num_games):
     recent_assists = (
         db.session.query(PlayerStats.ast)
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
@@ -52,6 +53,7 @@ def assistsByNumGames_teams(player_id, team_id, num_games):
 def reboundsByNumGames(player_id, num_games):
     recent_rebounds = (
         db.session.query(PlayerStats.reb)
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
@@ -71,7 +73,7 @@ def reboundsByNumGames(player_id, num_games):
 def reboundsByNumGames_team(player_id, team_id, num_games):
     recent_rebounds = (
         db.session.query(PlayerStats.reb)
-        .join(PlayerStats.game)  # Join the Game to filter by team_id
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')

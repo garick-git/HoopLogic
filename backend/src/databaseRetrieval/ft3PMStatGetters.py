@@ -10,6 +10,7 @@ from database import db
 def FTMByNumGames(player_id, num_games):
     recent_ftm = (
         db.session.query(PlayerStats.ftm)
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
@@ -30,7 +31,7 @@ def FTMByNumGames(player_id, num_games):
 def FTMByNumGames_team(player_id, team_id, num_games):
     recent_ftm = (
         db.session.query(PlayerStats.ftm)
-        .join(PlayerStats.game)  # Join the Game to filter by team_id
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
@@ -53,6 +54,7 @@ def FTMByNumGames_team(player_id, team_id, num_games):
 def threesByNumGames(player_id, num_games):
     recent_3pm = (
         db.session.query(PlayerStats.fg3m)
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
@@ -72,7 +74,7 @@ def threesByNumGames(player_id, num_games):
 def threesByNumGames_team(player_id, team_id, num_games):
     recent_3pm = (
         db.session.query(PlayerStats.fg3m)
-        .join(PlayerStats.game)  # Join the Game to filter by team_id
+        .join(PlayerStats.game)
         .filter(PlayerStats.player_id == player_id)
         .filter(PlayerStats.min != '00:00')
         .filter(PlayerStats.min != '00')
