@@ -1,14 +1,10 @@
 from datetime import datetime
-from sqlalchemy import func
 from sqlalchemy.orm import joinedload
 from sqlalchemy import or_
 from ..models.player import Player
 from ..models.game import Game
 from ..models.playerStats import PlayerStats
 from database import db
-
-def calculate_PRA(game):
-    return game.PlayerStats.pts + game.PlayerStats.reb + game.PlayerStats.ast
 
 def average_and_recent_PRA(player_id, num_games, team_id=None):
     num_games = int(num_games)
@@ -34,10 +30,10 @@ def average_and_recent_PRA(player_id, num_games, team_id=None):
     if not pra_combo:
         return [0.0, []]
 
-    total_PRA = sum(calculate_PRA(game) for player_stats, game in pra_combo)
+    total_PRA = sum(game.PlayerStats.pts + game.PlayerStats.reb + game.PlayerStats.ast for player_stats, game in pra_combo)
     average_PRA = round(total_PRA / num_games, 2)
 
-    pra_combo_list = [calculate_PRA(game) for player_stats, game in pra_combo]
+    pra_combo_list = [game.PlayerStats.pts + game.PlayerStats.reb + game.PlayerStats.ast for player_stats, game in pra_combo]
 
     return [average_PRA, pra_combo_list]
 
