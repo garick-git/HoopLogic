@@ -42,10 +42,10 @@ def assistsByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.ast)
 
 def assistsByNumGames_teams(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.ast, team_id)
+    return average_and_recent_stat(player_id, num_games, team_id, PlayerStats.ast)
 
 def reboundsByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.reb)
 
 def reboundsByNumGames_team(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.reb, team_id)
+    return average_and_recent_stat(player_id, num_games, team_id, PlayerStats.reb)
