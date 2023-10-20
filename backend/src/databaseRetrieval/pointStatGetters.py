@@ -40,4 +40,4 @@ def pointsByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.pts)
 
 def pointsByNumGames_teams(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)
+    return average_and_recent_stat(player_id, num_games, team_id, PlayerStats.pts)
