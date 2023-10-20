@@ -55,7 +55,7 @@ def get_player_by_id(player_id):
             "position": player.position,
             "height_in": player.height_inches,
             "height_feet": player.height_feet,
-            "weight": player.weight,
+            "weight": player.weight_pounds,
             "team_id": player.team_id  
         }
         return player_info
