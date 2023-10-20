@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy import func, or_
 from sqlalchemy.orm import joinedload
-from sqlalcehmy import desc
+from sqlalchemy import desc
 from ..models.player import Player
 from ..models.game import Game
 from ..models.playerStats import PlayerStats

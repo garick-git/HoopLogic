@@ -1,6 +1,6 @@
 from datetime import datetime
 from sqlalchemy import or_
-from sqlalcehmy import desc
+from sqlalchemy import desc
 from ..models.playerStats import PlayerStats
 from ..models.game import Game
 from database import db
