@@ -11,10 +11,10 @@ from database import db
 def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
 
-    query = db.session.query(stat_column)
+    query = db.session.query(stat_column).join(Game)
     
     if team_id:
-        query = query.join(Game).filter(
+        query = query.filter(
             or_(
                 Game.home_team_id == team_id,
                 Game.visitor_team_id == team_id
@@ -38,6 +38,7 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     average_stat = round(total_stat / num_games, 2)
 
     return [average_stat, [stat[0] for stat in recent_stats]]
+
 
 def stealsByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.stl)
