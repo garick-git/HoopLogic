@@ -19,8 +19,8 @@ const PlayerStats = () => {
     }, [lastXGames])
 
     useEffect(() => {
-        console.log('Player object fetched: ', player)
-    }, [player])
+        console.log('Player object fetched: ', playerData)
+    }, [playerData])
 
     const fetchPlayer = (playerId, gameCount) => {
         console.log('Fetching player with ID: ', playerId, ' for ', gameCount, ' games.');
@@ -65,10 +65,10 @@ const PlayerStats = () => {
     return(
         <div className='playerStatsPage'>
             <p>Hello, world! The player you just selected:</p>
-            {player ? (
+            {playerData ? (
                 <div>
-                    <p>Player ID: {player.id}</p>
-                    <p>Player Name: {player.first_name} {player.last_name}</p>
+                    <p>Player ID: {playerData.id}</p>
+                    <p>Player Name: {playerData.first_name} {playerData.last_name}</p>
                 </div>
             ) : (
                 <p>Loading player data...</p>
