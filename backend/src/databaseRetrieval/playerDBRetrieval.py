@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import desc
 from ..models.player import Player
 from ..models.playerStats import PlayerStats
 
@@ -52,7 +53,8 @@ def get_player_by_id(player_id):
             "first_name": player.first_name,
             "last_name": player.last_name,
             "position": player.position,
-            "height": player.height,
+            "height_in": player.height_inches,
+            "height_feet": player.height_feet,
             "weight": player.weight,
             "team_id": player.team_id  
         }
