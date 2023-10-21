@@ -43,7 +43,7 @@ const PlayerStats = () => {
               console.error('Error:', error);
         });
 
-        fetch(`/api/player/search/${playerId}`, {
+        fetch(`/api/player/search/id/${playerId}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
