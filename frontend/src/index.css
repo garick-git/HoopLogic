@@ -101,5 +101,43 @@ code {
 }
 
 .playerStatsPage{
-  background-color: white;
+  background-color: black;
+}
+
+#secondaryLogo{
+  width: 10%;
+  top: 5%;
+}
+
+.searchBarBigDiv{
+  position: absolute;
+  top: 6%;
+  right: 5%;
+}
+
+.searchBar2 {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.pageHeader{
+  margin-top: -3%;
+}
+
+.headerLogo{
+  max-width: 10%;
+  margin-top: -3%;
+  margin-left: 22%;
+  position: absolute;
+}
+
+.playerName{
+  color: white;
+  font-family: 'Norwester';
+  font-size: 420%;
+  font-weight: 1;
+  display: flex;
+  justify-content: center;
 }

@@ -1,26 +1,67 @@
 // routes to call on load: 
 // /api/games/search/<player_id>/<games_count
-// 
+// for local purposes, Stephen Curry will be the object being worked on.
+
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const PlayerStats = () => {
     const { playerId } = useParams();
     const [gameCount, setGameCount] = useState(5);
     const [lastXGames, setLastXGames] = useState(null);
     const [playerData, setPlayerData] = useState(null);
+    const [emptySearchBar, setEmptySearchBar] = useState(true);
+    const [inputValue, setInputValue] = useState('');
+    const [timeoutFlag, setTimeoutFlag] = useState(null);
+    const [players, setPlayers] = useState([]);
+    const navigate = useNavigate();
+    let timerId; // Store the timer ID 
+    const teamLogos = {
+      1: 'ATL_Hawks.png',
+      2: 'BKN_Nets.png',
+      3: 'BOS_Celtics.png',
+      4: 'CHA_Hornet.png',
+      5: 'CHI_Bulls.png',
+      6: 'CLE_Cavaliers.png',
+      7: 'DAL_Mavericks.png',
+      8: 'DEN_Nuggets.png',
+      9: 'DET_Pistons.png',
+      10: 'GSW_Warriors.png',
+      11: 'HOU_Rockets.png',
+      12: 'IND_Pacers.png',
+      13: 'LAC_Clippers.png',
+      14: 'LAL_Lakers.png',
+      15: 'MEM_Grizzlies.png',
+      16: 'MIA_Heat.png',
+      17: 'MIL_Bucks.png',
+      18: 'MIN_Timberwolves.png',
+      19: 'NOP_Pelicans.png',
+      20: 'NYK_Knicks.png',
+      21: 'OKC_Thunder.png',
+      22: 'ORL_Magic.png',
+      23: 'PHI_76ers.png',
+      24: 'PHX_Suns.png',
+      25: 'POR_Trailblazers.png',
+      26: 'SAC_Kings.png',
+      27: 'SAS_Spurs.png',
+      28: 'TOR_Raptors.png',
+      29: 'UTA_Jazz.png',
+      30: 'WAS_Wizards.png',
+    };
+
+    const localPlayerData = {
+      first_name: "Stephen",
+      height_feet: 6,
+      height_in: 3,
+      last_name: "Curry",
+      position: "G",
+      team_id: 10,
+      weight: 190
+    };    
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
     }, [])
-    
-    useEffect(() => {
-        console.log('Last ', gameCount, ' games: ', lastXGames)
-    }, [lastXGames])
-
-    useEffect(() => {
-        console.log('Player object fetched: ', playerData)
-    }, [playerData])
 
     const fetchPlayer = (playerId, gameCount) => {
         console.log('Fetching player with ID: ', playerId, ' for ', gameCount, ' games.');
@@ -56,25 +97,151 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-                setPlayerData(data);
+              setPlayerData(data);
             })
             .catch((error) => {
               console.error('Error:', error);
+              console.error('Player could not be fetched! Switching to local playerData...')
+              setPlayerData(localPlayerData);
         });
     };
-    return(
-        <div className='playerStatsPage'>
-            <p>Hello, world! The player you just selected:</p>
-            {playerData ? (
-                <div>
-                    <p>Player ID: {playerData.id}</p>
-                    <p>Player Name: {playerData.first_name} {playerData.last_name}</p>
+
+    const fetchPlayers = (inputValue) => {
+      const encodedInputValue = encodeURIComponent(inputValue); // Encode the input value
+    
+      console.log('fetching data for: ', inputValue);
+    
+      // Make the GET request to the backend API
+      fetch(`/api/player/search/${encodedInputValue}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Handle the data received from the backend (data may contain player information)
+          setPlayers(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
+    
+      const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+      };
+      
+      useEffect(() => {
+        console.log('inputValue is: ', inputValue);
+        if(inputValue.length > 1){
+          console.log(`Search for players with at least 2 characters: ${inputValue}`);
+          // Clear any previous timers to prevent multiple updates
+          clearTimeout(timerId);
+          timerId = setTimeout(() => {
+            if(timeoutFlag == false){
+              setEmptySearchBar(false)
+              setTimeoutFlag(true);
+            }
+            else if(timeoutFlag == true){
+              setEmptySearchBar(false)
+              setTimeoutFlag(false);
+            }
+            else if(timeoutFlag == null){
+              setEmptySearchBar(false)
+              setTimeoutFlag(true);
+            }
+          }, 1000);
+        }
+
+        else{
+          setEmptySearchBar(true);
+        }
+      }, [inputValue])
+
+      useEffect(() => {
+        console.log('timer just ended! The input was:', inputValue);
+        if(timeoutFlag != null){
+          fetchPlayers(inputValue);
+        }
+      }, [timeoutFlag])
+
+      const handleRowClick = (player) => {
+        console.log('Selected Player:', player, 'with ID: ', player.id);
+        navigate(`/playerStats/${player.id}`);
+      };
+
+      return (
+        playerData ? (
+          <div className='playerStatsPage'>
+            <img
+              src={process.env.PUBLIC_URL + '/hoopLogicLogo2.png'}
+              alt="Hoop Logic Logo"
+              id="secondaryLogo"
+            />
+            <div className='searchBarBigDiv'>
+              <div className="searchBarDiv">
+                <input
+                  type="text"
+                  placeholder="Search Again"
+                  className="searchBar2"
+                  style={{ fontFamily: 'Norwester' }}
+                  onChange={handleInputChange}
+                />
+              </div>
+              {emptySearchBar ? null : (
+                <div className="suggestedPlayersDiv">
+                  <table className='playersTable'>
+                    <tbody>
+                      {players.map((player) => (
+                        <tr className='playersRow' key={player.id} onClick={() => handleRowClick(player)}>
+                          <td className="teamLogoCell">
+                            <img
+                              src={`/teamLogos/${teamLogos[player.team]}`}
+                              alt={`Team Logo for Team ${player.team}`}
+                              className="teamLogo"
+                            />
+                          </td>
+                          <td className="playerNameCell">{player.first_name} {player.last_name}</td>
+                          <td className="playerPositionCell">
+                            {player.position === '' ? 'N/A' : player.position === 'G' ? 'Guard' : player.position === 'F' ? 'Forward' : player.position === 'C' ? 'Center' : ''}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-            ) : (
-                <p>Loading player data...</p>
-            )}
-        </div>
-    );
+              )}
+            </div>
+            <div className="pageHeader">
+              <img
+                src={`/teamLogos/${teamLogos[playerData.team_id]}`}
+                alt={`Team Logo for Team ${playerData.team_id}`}
+                className="headerLogo"
+              />
+              <h1 className="playerName">{playerData.first_name} {playerData.last_name}</h1>
+            </div>
+            <div className="pageContent">
+              <div className="biographyDiv">
+        
+              </div>
+              <div className="statsDiv">
+        
+              </div>
+              <div className="graphDiv">
+        
+              </div>
+            </div>
+          </div>
+        ) : (
+          <p>Loading player data...</p>
+        )
+      );            
 }
 
 export default PlayerStats;
