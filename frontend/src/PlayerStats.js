@@ -94,6 +94,7 @@ const PlayerStats = () => {
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
+        console.log('last 5 games of the player: ', lastXGames)
     }, [])
 
     const fetchPlayer = (playerId, gameCount) => {
