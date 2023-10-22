@@ -122,22 +122,79 @@ code {
   text-align: center;
 }
 
-.pageHeader{
-  margin-top: -3%;
+.pageHeader {
+  display: flex; /* Use flexbox to align items horizontally */
+  justify-content: center;
+  margin-right: 9%;
+  align-items: center; /* Vertically center items */
 }
 
-.headerLogo{
+.headerLogo {
   max-width: 10%;
-  margin-top: -3%;
-  margin-left: 22%;
-  position: absolute;
+  margin-right: 35px; /* Add a margin to separate the image from text */
 }
 
-.playerName{
+.playerName {
   color: white;
   font-family: 'Norwester';
   font-size: 420%;
   font-weight: 1;
+}
+
+.biographyDiv{
+  color: white;
+  font-family: 'Norwester';
+  font-size: larger;
+  margin-left: 7%;
+}
+
+.biographyTitle{
+  margin-bottom: 0.4%;
+  font-weight: 1;
+}
+
+.biographyTable{
+  border: solid #00BF63 2px;
+}
+
+.playerTeam{
   display: flex;
+  margin-left: 10%;
   justify-content: center;
+  border-bottom: solid #00BF63 1px;
+  margin-right: 10%;
+}
+
+.playerTeamlbl{
+  margin-left: 3%;
+}
+
+.playerTeamName{
+  text-align: center;
+  margin-right: -25%;
+}
+
+.playerPosition{
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: center;
+  border-bottom: solid #00BF63 1px;
+}
+
+.playerPositionlbl{
+  margin-left: -10%;
+  margin-right: 21%;
+}
+
+.playerHeight{
+  display: flex;
+  margin-left: 10%;
+  margin-right: 10%;
+  justify-content: center;
+}
+
+.playerHeightlbl{
+  margin-left: -10%;
+  margin-right: 21%;
 }

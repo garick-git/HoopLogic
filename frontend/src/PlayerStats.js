@@ -49,6 +49,39 @@ const PlayerStats = () => {
       30: 'WAS_Wizards.png',
     };
 
+    const teamNames = {
+      1: 'Atlanta Hawks',
+      2: 'Brooklyn Nets',
+      3: 'Boston Celtics',
+      4: 'Charlotte Hornets',
+      5: 'Chicago Bulls',
+      6: 'Cleveland Cavaliers',
+      7: 'Dallas Mavericks',
+      8: 'Denver Nuggets',
+      9: 'Detroit Pistons',
+      10: 'Golden State Warriors',
+      11: 'Houston Rockets',
+      12: 'Indiana Pacers',
+      13: 'LA Clippers',
+      14: 'Los Angeles Lakers',
+      15: 'Memphis Grizzlies',
+      16: 'Miami Heat',
+      17: 'Milwaukee Bucks',
+      18: 'Minnesota Timberwolves',
+      19: 'New Orleans Pelicans',
+      20: 'New York Knicks',
+      21: 'Oklahoma City Thunder',
+      22: 'Orlando Magic',
+      23: 'Philadelphia 76ers',
+      24: 'Phoenix Suns',
+      25: 'Portland Trail Blazers',
+      26: 'Sacramento Kings',
+      27: 'San Antonio Spurs',
+      28: 'Toronto Raptors',
+      29: 'Utah Jazz',
+      30: 'Washington Wizards',
+    };
+    
     const localPlayerData = {
       first_name: "Stephen",
       height_feet: 6,
@@ -228,10 +261,50 @@ const PlayerStats = () => {
             </div>
             <div className="pageContent">
               <div className="biographyDiv">
-        
+                <h3 className='biographyTitle'>Bio</h3>
+                <table className='biographyTable'>
+                  <tbody>
+                  <tr className="playerTeam">
+                    <p className='playerTeamlbl'>Team: </p>
+                    <p className='playerTeamName'>{teamNames[playerData.team_id]}</p>
+                  </tr>
+                  <tr className="playerPosition">
+                      <p className='playerPositionlbl'>Position: </p>
+                      <p className="playerPositionName">{playerData ? (
+                          playerData.position === 'F'
+                            ? 'Forward'
+                            : playerData.position === 'C'
+                            ? 'Center'
+                            : playerData.position === 'G'
+                            ? 'Guard'
+                            : ''
+                        ) : ''}
+                      </p>
+                  </tr>
+                  <tr className="playerHeight">
+                      <p className="playerHeightlbl">Height: </p>
+                      <p className="playerHeightName">{playerData.height_feet}'{playerData.height_in}"</p>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
               <div className="statsDiv">
-        
+                <table className="statsTable">
+                  <tbody>
+                    <tr>
+                      <p>Average Points</p>
+                      {/* <p>{lastXGames.}</p> */}
+                    </tr>
+                    <tr>
+                      <td>Row 2, Cell 1</td>
+                      <td>Row 2, Cell 2</td>
+                    </tr>
+                    <tr>
+                      <td>Row 3, Cell 1</td>
+                      <td>Row 3, Cell 2</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <div className="graphDiv">
         
