@@ -94,7 +94,6 @@ const PlayerStats = () => {
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
-        console.log('last 5 games of the player: ', lastXGames)
     }, [])
 
     const fetchPlayer = (playerId, gameCount) => {
@@ -113,6 +112,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
                 setLastXGames(data);
+                console.log("stats for player's last 5 games: ", data);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -142,8 +142,6 @@ const PlayerStats = () => {
 
     const fetchPlayers = (inputValue) => {
       const encodedInputValue = encodeURIComponent(inputValue); // Encode the input value
-    
-      console.log('fetching data for: ', inputValue);
     
       // Make the GET request to the backend API
       fetch(`/api/player/search/${encodedInputValue}`, {
