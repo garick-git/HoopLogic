@@ -43,3 +43,31 @@ def pointsByNumGames(player_id, num_games):
 
 def pointsByNumGames_teams(player_id, num_games, team_id):
     return average_and_recent_stat(player_id, num_games, team_id, PlayerStats.pts)
+
+
+def allByNumGames(player_id, num_games):
+    result = {
+        'average_points': average_and_recent_stat(player_id, num_games, PlayerStats.pts)[0],
+        'assists': average_and_recent_stat(player_id, num_games, PlayerStats.ast)[0],
+        'rebounds': average_and_recent_stat(player_id, num_games, PlayerStats.reb)[0],
+        'free_throws': average_and_recent_stat(player_id, num_games, PlayerStats.ftm)[0],
+        'three_pointers': average_and_recent_stat(player_id, num_games, PlayerStats.fg3m)[0],
+    }
+
+    result['PRA'] = result['average_points'] + result['rebounds'] + result['assists']
+
+    return result
+
+def allByNumGamesByTeam(player_id, num_games, team_id):
+    result = {
+        'average_points': average_and_recent_stat(player_id, num_games, team_id, PlayerStats.pts)[0],
+        'assists': average_and_recent_stat(player_id, num_games, team_id, PlayerStats.ast)[0],
+        'rebounds': average_and_recent_stat(player_id, num_games, team_id, PlayerStats.reb)[0],
+        'free_throws': average_and_recent_stat(player_id, num_games, team_id, PlayerStats.ftm)[0],
+        'three_pointers': average_and_recent_stat(player_id, num_games, team_id, PlayerStats.fg3m)[0],
+    }
+
+    result['PRA'] = result['average_points'] + result['rebounds'] + result['assists']
+
+    return result
+
