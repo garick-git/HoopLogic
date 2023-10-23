@@ -92,12 +92,154 @@ const PlayerStats = () => {
       weight: 190
     };    
 
+    const localLastXGames = [
+      {
+        date: "Fri, 12 May 2023 00:00:00 GMT",
+        home_team: "Los Angeles Lakers",
+        home_team_score: 122,
+        player_stats: {
+          ast: 5,
+          blk: 1,
+          dreb: 5,
+          fg3_pct: 0.285714,
+          fg3a: 14,
+          fg3m: 4,
+          fg_pct: 0.392857,
+          fga: 28,
+          fgm: 11,
+          ft_pct: 1,
+          fta: 6,
+          ftm: 6,
+          min: "39",
+          oreb: 1,
+          pf: 3,
+          pts: 32,
+          reb: 6,
+          stl: 1,
+          turnover: 4
+        },
+        visitor_team: "Golden State Warriors",
+        visitor_team_score: 101
+      },
+      {
+        date: "Wed, 10 May 2023 00:00:00 GMT",
+        home_team: "Golden State Warriors",
+        home_team_score: 121,
+        player_stats: {
+          ast: 8,
+          blk: 1,
+          dreb: 3,
+          fg3_pct: 0.272727,
+          fg3a: 11,
+          fg3m: 3,
+          fg_pct: 0.5,
+          fga: 24,
+          fgm: 12,
+          ft_pct: 0,
+          fta: 0,
+          ftm: 0,
+          min: "39",
+          oreb: 0,
+          pf: 0,
+          pts: 27,
+          reb: 3,
+          stl: 0,
+          turnover: 2
+        },
+        visitor_team: "Los Angeles Lakers",
+        visitor_team_score: 106
+      },
+      {
+        date: "Mon, 08 May 2023 00:00:00 GMT",
+        home_team: "Los Angeles Lakers",
+        home_team_score: 104,
+        player_stats: {
+          ast: 14,
+          blk: 0,
+          dreb: 7,
+          fg3_pct: 0.214,
+          fg3a: 14,
+          fg3m: 3,
+          fg_pct: 0.4,
+          fga: 30,
+          fgm: 12,
+          ft_pct: 1,
+          fta: 4,
+          ftm: 4,
+          min: "42",
+          oreb: 3,
+          pf: 5,
+          pts: 31,
+          reb: 10,
+          stl: 3,
+          turnover: 2
+        },
+        visitor_team: "Golden State Warriors",
+        visitor_team_score: 121
+      },
+      {
+        date: "Sat, 06 May 2023 00:00:00 GMT",
+        home_team: "Los Angeles Lakers",
+        home_team_score: 127,
+        player_stats: {
+          ast: 3,
+          blk: 1,
+          dreb: 2,
+          fg3_pct: 0.4,
+          fg3a: 10,
+          fg3m: 4,
+          fg_pct: 0.428571,
+          fga: 21,
+          fgm: 9,
+          ft_pct: 0.333333,
+          fta: 3,
+          ftm: 1,
+          min: "32",
+          oreb: 2,
+          pf: 2,
+          pts: 23,
+          reb: 4,
+          stl: 1,
+          turnover: 3
+        },
+        visitor_team: "Golden State Warriors",
+        visitor_team_score: 97
+      },
+      {
+        date: "Thu, 04 May 2023 00:00:00 GMT",
+        home_team: "Golden State Warriors",
+        home_team_score: 127,
+        player_stats: {
+          ast: 12,
+          blk: 0,
+          dreb: 4,
+          fg3_pct: 0.6,
+          fg3a: 5,
+          fg3m: 3,
+          fg_pct: 0.583333,
+          fga: 12,
+          fgm: 7,
+          ft_pct: 1,
+          fta: 3,
+          ftm: 3,
+          min: "29",
+          oreb: 0,
+          pf: 3,
+          pts: 20,
+          reb: 4,
+          stl: 1,
+          turnover: 3
+        },
+        visitor_team: "Los Angeles Lakers",
+        visitor_team_score: 100
+      }
+    ];    
+
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
     }, [])
 
     const fetchPlayer = (playerId, gameCount) => {
-        console.log('Fetching player with ID: ', playerId, ' for ', gameCount, ' games.');
         fetch(`/api/games/search/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
@@ -112,10 +254,11 @@ const PlayerStats = () => {
             })
             .then((data) => {
                 setLastXGames(data);
-                console.log("stats for player's last 5 games: ", data);
             })
             .catch((error) => {
               console.error('Error:', error);
+              console.error('Stats could not be fetched! Switching to local gamesData...')
+              setLastXGames(localLastXGames);
         });
 
         fetch(`/api/player/search/id/${playerId}`, {
@@ -170,9 +313,7 @@ const PlayerStats = () => {
       };
       
       useEffect(() => {
-        console.log('inputValue is: ', inputValue);
         if(inputValue.length > 1){
-          console.log(`Search for players with at least 2 characters: ${inputValue}`);
           // Clear any previous timers to prevent multiple updates
           clearTimeout(timerId);
           timerId = setTimeout(() => {
@@ -197,15 +338,18 @@ const PlayerStats = () => {
       }, [inputValue])
 
       useEffect(() => {
-        console.log('timer just ended! The input was:', inputValue);
         if(timeoutFlag != null){
           fetchPlayers(inputValue);
         }
       }, [timeoutFlag])
 
+      useEffect(() => {
+        console.log('lastXGames: ', lastXGames)
+      }, [lastXGames])
+
       const handleRowClick = (player) => {
-        console.log('Selected Player:', player, 'with ID: ', player.id);
         navigate(`/playerStats/${player.id}`);
+        window.location.reload();
       };
 
       return (
