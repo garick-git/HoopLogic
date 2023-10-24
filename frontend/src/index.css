@@ -1,9 +1,7 @@
 body {
   margin: 0;
   background-color: black;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Norwester';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -47,7 +45,6 @@ code {
 }
 
 .suggestedPlayersDiv {
-  font-family: 'Norwester';
   display: flex;
   justify-content: center;
   flex-direction: row;
@@ -136,16 +133,20 @@ code {
 
 .playerName {
   color: white;
-  font-family: 'Norwester';
   font-size: 420%;
   font-weight: 1;
 }
 
+.pageContent{
+  display: flex;
+  justify-content: center;
+}
+
 .biographyDiv{
   color: white;
-  font-family: 'Norwester';
   font-size: larger;
-  margin-left: 7%;
+  margin-left: -70%;
+  position: fixed;
 }
 
 .biographyTitle{
@@ -155,6 +156,7 @@ code {
 
 .biographyTable{
   border: solid #00BF63 2px;
+  padding: 1%;
 }
 
 .playerTeam{
@@ -197,4 +199,19 @@ code {
 .playerHeightlbl{
   margin-left: -10%;
   margin-right: 21%;
+}
+
+.statsDiv{
+  margin-left: -20%;
+}
+
+.statsTitle{
+  color: white;
+  margin-bottom: 0.4%;
+  font-weight: 1;
+}
+
+.statsTable{
+  border: solid #00BF63 2px;
+  color: white;
 }
