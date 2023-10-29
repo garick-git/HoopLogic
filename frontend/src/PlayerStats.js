@@ -135,6 +135,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPlayerData(data);
+              console.log('data is: ', data)
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -293,19 +294,18 @@ const PlayerStats = () => {
               </div>
               <div className="statsDiv">
                 <h3 className='statsTitle'>Stats</h3>
-                <table className="statsTable">
-                <table>
+                {/* <table className="statsTable">
                   <tbody>
                   <div className="topStatsRow">
                     <div className="pointsCell">
                       <p className="pointsLabel">Points</p>
                       <p className="pointsNumber">{lastXGames.average_points}</p>
                     </div>
-                    <div className="spacerCell"></div> {/* Empty cell to create space */}
+                    <div className="spacerCell"></div>
                     <div className="freeThrowsCell">
                       <p>Free Throws</p>
                       <p>{lastXGames.free_throws}</p>
-                    </div>
+                  </div>
                   </div>
                     <tr>
                       <td>
@@ -328,9 +328,7 @@ const PlayerStats = () => {
                       </td>
                     </tr>
                   </tbody>
-                </table>
-
-                </table>
+                </table> */}
               </div>
               <div className="graphDiv">
         
