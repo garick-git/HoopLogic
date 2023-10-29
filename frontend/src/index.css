@@ -197,9 +197,10 @@ code {
 }
 
 .playerHeightlbl{
-  margin-left: -10%;
-  margin-right: 21%;
+  margin-left: -14%;
+  margin-right: 36%;
 }
+
 
 .statsDiv{
   margin-left: -20%;
@@ -213,5 +214,36 @@ code {
 
 .statsTable{
   border: solid #00BF63 2px;
-  color: white;
+  color: white; 
+}
+
+.topStatsRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pointsCell {
+  display: inline-flex;
+  border-bottom: solid #00BF63 1px;
+  margin-left: 5%;
+}
+
+.pointsLabel {
+  font-size: 150%;
+}
+
+.pointsNumber {
+  color: #00BF63;
+  font-size: 300%;
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-bottom: -40%;
+}
+
+.spacerCell {
+  width: 100px; /* Adjust the width as needed to create space */
+}
+
+.freeThrowsCell {
+  /* Styling for the Free Throws cell */
 }
