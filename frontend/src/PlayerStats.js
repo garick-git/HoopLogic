@@ -92,9 +92,8 @@ const PlayerStats = () => {
       weight: 190
     };    
 
-    const localLastXGames = [
-      {"PRA":40.4,"assists":8.4,"average_points":26.6,"free_throws":2.8,"rebounds":5.4,"three_pointers":3.4}
-    ];    
+    const localLastXGames =
+      {PRA:40.4,assists:8.4,average_points:26.6,free_throws:2.8,rebounds:5.4,three_pointers:3.4};    
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
@@ -206,7 +205,6 @@ const PlayerStats = () => {
 
       useEffect(() => {
         console.log('lastXGames: ', lastXGames)
-        console.log('average points: ', lastXGames[0].average_points)
       }, [lastXGames])
 
       const handleRowClick = (player) => {
@@ -296,20 +294,42 @@ const PlayerStats = () => {
               <div className="statsDiv">
                 <h3 className='statsTitle'>Stats</h3>
                 <table className="statsTable">
+                <table>
                   <tbody>
-                    <tr className='averagePoints'>
-                      <p>Average Points: {lastXGames.average_points}</p>
-                      <p></p>
+                  <div className="topStatsRow">
+                    <div className="pointsCell">
+                      <p className="pointsLabel">Points</p>
+                      <p className="pointsNumber">{lastXGames.average_points}</p>
+                    </div>
+                    <div className="spacerCell"></div> {/* Empty cell to create space */}
+                    <div className="freeThrowsCell">
+                      <p>Free Throws</p>
+                      <p>{lastXGames.free_throws}</p>
+                    </div>
+                  </div>
+                    <tr>
+                      <td>
+                        <p>Rebounds</p>
+                        <p>{lastXGames.rebounds}</p>
+                      </td>
+                      <td>
+                        <p>Three Pointers</p>
+                        <p>{lastXGames.three_pointers}</p>
+                      </td>
                     </tr>
                     <tr>
-                      <td>Row 2, Cell 1</td>
-                      <td>Row 2, Cell 2</td>
-                    </tr>
-                    <tr>
-                      <td>Row 3, Cell 1</td>
-                      <td>Row 3, Cell 2</td>
+                      <td>
+                        <p>Assists</p>
+                        <p>{lastXGames.assists}</p>
+                      </td>
+                      <td>
+                        <p>P+R+A</p>
+                        <p>{lastXGames.PRA}</p>
+                      </td>
                     </tr>
                   </tbody>
+                </table>
+
                 </table>
               </div>
               <div className="graphDiv">
