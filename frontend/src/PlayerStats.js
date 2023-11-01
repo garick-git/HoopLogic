@@ -15,6 +15,7 @@ const PlayerStats = () => {
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [players, setPlayers] = useState([]);
     const navigate = useNavigate();
+    const [renderData, setRenderData] = useState(null);
     let timerId; // Store the timer ID 
     const teamLogos = {
       1: 'ATL_Hawks.png',
@@ -136,6 +137,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPlayerData(data);
+              setRenderData(true);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -204,11 +206,11 @@ const PlayerStats = () => {
         }
       }, [timeoutFlag])
 
-      useEffect(() => {
-        console.log('lastXGames: ', lastXGames)
-        console.log('PRA: ', lastXGames[0])
-        // console.log('localLastXGames.PRA: ', localLastXGames.PRA)
-      }, [lastXGames])
+      // useEffect(() => {
+      //   console.log('lastXGames: ', lastXGames)
+      //   console.log('PRA: ', lastXGames[0])
+      //   // console.log('localLastXGames.PRA: ', localLastXGames.PRA)
+      // }, [renderData])
 
       const handleRowClick = (player) => {
         navigate(`/playerStats/${player.id}`);
