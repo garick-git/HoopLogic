@@ -219,7 +219,7 @@ const PlayerStats = () => {
         navigate(`/`);
       };
       return (
-        playerData ? (
+        playerData && lastXGames ? (
           <div className='playerStatsPage'>
             <img
               src={process.env.PUBLIC_URL + '/hoopLogicLogo2.png'}
