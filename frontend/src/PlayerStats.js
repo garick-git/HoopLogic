@@ -15,7 +15,6 @@ const PlayerStats = () => {
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [players, setPlayers] = useState([]);
     const navigate = useNavigate();
-    const [renderData, setRenderData] = useState(null);
     let timerId; // Store the timer ID 
     const teamLogos = {
       1: 'ATL_Hawks.png',
@@ -115,7 +114,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
                 setLastXGames(data);
-                console.log('Data fetched! LastXGames set.');
+                console.log('Data fetched! LastXGames set to: ', data);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -137,7 +136,6 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPlayerData(data);
-              setRenderData(true);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -312,27 +310,27 @@ const PlayerStats = () => {
                     <div className="spacerCell"></div>
                     <div className="freeThrowsCell">
                       <p>Free Throws</p>
-                      <p>{lastXGames.free_throws}</p>
+                      {/* <p>{lastXGames.free_throws}</p> */}
                   </div>
                   </div>
                     <tr>
                       <td>
                         <p>Rebounds</p>
-                        <p>{lastXGames.rebounds}</p>
+                        {/* <p>{lastXGames.rebounds}</p> */}
                       </td>
                       <td>
                         <p>Three Pointers</p>
-                        <p>{lastXGames.three_pointers}</p>
+                        {/* <p>{lastXGames.three_pointers}</p> */}
                       </td>
                     </tr>
                     <tr>
                       <td>
                         <p>Assists</p>
-                        <p>{lastXGames.assists}</p>
+                        {/* <p>{lastXGames.assists}</p> */}
                       </td>
                       <td>
                         <p>P+R+A</p>
-                        <p>{lastXGames.PRA}</p>
+                        <p>{lastXGames[0]}</p>
                       </td>
                     </tr>
                   </tbody>
