@@ -310,27 +310,27 @@ const PlayerStats = () => {
                     <div className="spacerCell"></div>
                     <div className="freeThrowsCell">
                       <p>Free Throws</p>
-                      {/* <p>{lastXGames.free_throws}</p> */}
+                      <p>{lastXGames.free_throws}</p>
                   </div>
                   </div>
                     <tr>
                       <td>
                         <p>Rebounds</p>
-                        {/* <p>{lastXGames.rebounds}</p> */}
+                        <p>{lastXGames.rebounds}</p>
                       </td>
                       <td>
                         <p>Three Pointers</p>
-                        {/* <p>{lastXGames.three_pointers}</p> */}
+                        <p>{lastXGames.three_pointers}</p>
                       </td>
                     </tr>
                     <tr>
                       <td>
                         <p>Assists</p>
-                        {/* <p>{lastXGames.assists}</p> */}
+                        <p>{lastXGames.assists}</p>
                       </td>
                       <td>
                         <p>P+R+A</p>
-                        <p>{lastXGames[0]}</p>
+                        <p>{lastXGames.PRA}</p>
                       </td>
                     </tr>
                   </tbody>
