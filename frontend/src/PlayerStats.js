@@ -114,6 +114,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
                 setLastXGames(data);
+                console.log('Data fetched! LastXGames set.');
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -135,7 +136,6 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPlayerData(data);
-              console.log('data is: ', data)
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -206,6 +206,8 @@ const PlayerStats = () => {
 
       useEffect(() => {
         console.log('lastXGames: ', lastXGames)
+        console.log('PRA: ', lastXGames[0])
+        // console.log('localLastXGames.PRA: ', localLastXGames.PRA)
       }, [lastXGames])
 
       const handleRowClick = (player) => {
@@ -213,6 +215,9 @@ const PlayerStats = () => {
         window.location.reload();
       };
 
+      const handleGoBack = () => {
+        navigate(`/`);
+      };
       return (
         playerData ? (
           <div className='playerStatsPage'>
@@ -220,6 +225,7 @@ const PlayerStats = () => {
               src={process.env.PUBLIC_URL + '/hoopLogicLogo2.png'}
               alt="Hoop Logic Logo"
               id="secondaryLogo"
+              onClick={handleGoBack}
             />
             <div className='searchBarBigDiv'>
               <div className="searchBarDiv">
@@ -294,7 +300,7 @@ const PlayerStats = () => {
               </div>
               <div className="statsDiv">
                 <h3 className='statsTitle'>Stats</h3>
-                {/* <table className="statsTable">
+                <table className="statsTable">
                   <tbody>
                   <div className="topStatsRow">
                     <div className="pointsCell">
@@ -328,7 +334,7 @@ const PlayerStats = () => {
                       </td>
                     </tr>
                   </tbody>
-                </table> */}
+                </table>
               </div>
               <div className="graphDiv">
         

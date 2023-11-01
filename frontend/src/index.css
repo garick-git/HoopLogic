@@ -104,6 +104,7 @@ code {
 #secondaryLogo{
   width: 10%;
   top: 5%;
+  cursor: pointer;
 }
 
 .searchBarBigDiv{
@@ -244,6 +245,3 @@ code {
   width: 100px; /* Adjust the width as needed to create space */
 }
 
-.freeThrowsCell {
-  /* Styling for the Free Throws cell */
-}
