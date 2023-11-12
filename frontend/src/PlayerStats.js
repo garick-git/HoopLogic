@@ -99,6 +99,18 @@ const PlayerStats = () => {
         fetchPlayer(playerId, gameCount);
     }, [])
 
+    const roundAttributesToDecimal = (object) => {
+      const roundedObject = {};
+      for (const key in object) {
+        if (typeof object[key] === 'number') {
+          roundedObject[key] = Math.round(object[key] * 10) / 10; // Round to 1 decimal point
+        } else {
+          roundedObject[key] = object[key];
+        }
+      }
+      return roundedObject;
+    };
+
     const fetchPlayer = (playerId, gameCount) => {
         fetch(`/api/games/search/${playerId}/${gameCount}`, {
             method: 'GET',
@@ -113,8 +125,8 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-                setLastXGames(data);
-                console.log('Data fetched! LastXGames set to: ', data);
+              const roundedData = roundAttributesToDecimal(data);
+              setLastXGames(roundedData);
             })
             .catch((error) => {
               console.error('Error:', error);
