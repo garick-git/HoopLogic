@@ -305,34 +305,36 @@ const PlayerStats = () => {
                   <div className="topStatsRow">
                     <div className="pointsCell">
                       <p className="pointsLabel">Points</p>
-                      <p className="pointsNumber">{lastXGames.average_points}</p>
+                      <p className="cellNumber" id='pointsNumber'>{lastXGames.average_points}</p>
                     </div>
                     <div className="spacerCell"></div>
                     <div className="freeThrowsCell">
-                      <p>Free Throws</p>
-                      <p>{lastXGames.free_throws}</p>
+                      <p className='freeThrowsLabel'>Free Throws</p>
+                      <p className='cellNumber'>{lastXGames.free_throws}</p>
+                    </div>
                   </div>
+                  <div className="topStatsRow">
+                    <div className="pointsCell">
+                        <p className="pointsLabel">Rebounds</p>
+                        <p className="cellNumber" id='pointsNumber'>{lastXGames.rebounds}</p>
+                      </div>
+                      <div className="spacerCell"></div>
+                      <div className="freeThrowsCell">
+                        <p className='freeThrowsLabel'>Three Pointers</p>
+                        <p className='cellNumber'>{lastXGames.three_pointers}</p>
+                      </div>
                   </div>
-                    <tr>
-                      <td>
-                        <p>Rebounds</p>
-                        <p>{lastXGames.rebounds}</p>
-                      </td>
-                      <td>
-                        <p>Three Pointers</p>
-                        <p>{lastXGames.three_pointers}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <p>Assists</p>
-                        <p>{lastXGames.assists}</p>
-                      </td>
-                      <td>
-                        <p>P+R+A</p>
-                        <p>{lastXGames.PRA}</p>
-                      </td>
-                    </tr>
+                  <div className="topStatsRow">
+                      <div className="alternateCell1">
+                        <p className="pointsLabel">Assists</p>
+                        <p className="cellNumber" id='pointsNumber'>{lastXGames.assists}</p>
+                      </div>
+                      <div className="spacerCell"></div>
+                      <div className="alternateCell2">
+                        <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
+                        <p className='cellNumber'>{lastXGames.PRA}</p>
+                      </div>
+                  </div>
                   </tbody>
                 </table>
               </div>

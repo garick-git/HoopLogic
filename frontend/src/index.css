@@ -1,3 +1,5 @@
+@import './fonts/fonts.css';
+
 body {
   margin: 0;
   background-color: black;
@@ -146,7 +148,7 @@ code {
 .biographyDiv{
   color: white;
   font-size: larger;
-  margin-left: -70%;
+  margin-left: -60%;
   position: fixed;
 }
 
@@ -204,7 +206,7 @@ code {
 
 
 .statsDiv{
-  margin-left: -20%;
+  margin-left: 0%;
 }
 
 .statsTitle{
@@ -221,27 +223,86 @@ code {
 .topStatsRow {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-right: 5%;
 }
 
 .pointsCell {
-  display: inline-flex;
   border-bottom: solid #00BF63 1px;
-  margin-left: 5%;
+  margin-left: 7%;
+  display: flex;
+  justify-content: center;
+  width: 130%;
+}
+
+.alternateCell1 {
+  margin-left: 7%;
+  display: flex;
+  justify-content: center;
+  width: 130%;
+}
+
+.alternateCell1:hover{
+  background-color: #1d1d1d;
+  cursor: pointer;
+}
+
+.pointsCell:hover{
+  background-color: #1d1d1d;
+  cursor: pointer;
+}
+
+.freeThrowsLabel {
+  font-size: 150%;
+  display: flex;
+  justify-content: center;
 }
 
 .pointsLabel {
   font-size: 150%;
+  display: flex;
+  justify-content: center;
+  margin-top: 27%;
 }
 
-.pointsNumber {
+.cellNumber{
   color: #00BF63;
   font-size: 300%;
-  margin-top: 5%;
-  margin-left: 10%;
-  margin-bottom: -40%;
+  margin-top: 15%;
+  margin-left: 15%;
+  margin-bottom: 10%;
 }
 
 .spacerCell {
-  width: 100px; /* Adjust the width as needed to create space */
+  width: 100px;
 }
 
+.freeThrowsCell{
+  display: flex;
+  justify-content: center;
+  border-bottom: solid #00BF63 1px;
+  margin-right: 5%;
+  width: 120%;
+}
+
+.alternateCell2{
+  display: flex;
+  justify-content: center;
+  margin-right: 5%;
+  width: 120%;
+}
+
+.alternateCell2:hover{
+  background-color: #1d1d1d;
+  cursor: pointer;
+}
+
+.freeThrowsCell:hover{
+  background-color: #1d1d1d;
+  cursor: pointer;
+}
+
+#PRALabel{
+  margin-left: 10%;
+  margin-top: 26%;
+}
