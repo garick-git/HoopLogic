@@ -1,9 +1,9 @@
-@import './fonts/fonts.css';
+@import 'fonts/fonts.css';
 
 body {
   margin: 0;
   background-color: black;
-  font-family: 'Norwester';
+  font-family: 'Norwester-Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
