@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Norwester';
-  src: local('Norwester'), local('norwester'), url('./norwester.otf') format('otf');
+  src: local('Norwester'), local('norwester'), url('norwester.otf') format('otf');
   font-weight: normal;
   font-style: normal;
 }
