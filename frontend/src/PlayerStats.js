@@ -4,6 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Graph from './Graph.js';
 
 const PlayerStats = () => {
     const { playerId } = useParams();
@@ -48,6 +49,40 @@ const PlayerStats = () => {
       29: 'UTA_Jazz.png',
       30: 'WAS_Wizards.png',
     };
+
+    const NBA_TEAMS = [
+      'All',
+      'Atlanta Hawks',
+      'Boston Celtics',
+      'Brooklyn Nets',
+      'Charlotte Hornets',
+      'Chicago Bulls',
+      'Cleveland Cavaliers',
+      'Dallas Mavericks',
+      'Denver Nuggets',
+      'Detroit Pistons',
+      'Golden State Warriors',
+      'Houston Rockets',
+      'Indiana Pacers',
+      'LA Clippers',
+      'Los Angeles Lakers',
+      'Memphis Grizzlies',
+      'Miami Heat',
+      'Milwaukee Bucks',
+      'Minnesota Timberwolves',
+      'New Orleans Pelicans',
+      'New York Knicks',
+      'Oklahoma City Thunder',
+      'Orlando Magic',
+      'Philadelphia 76ers',
+      'Phoenix Suns',
+      'Portland Trail Blazers',
+      'Sacramento Kings',
+      'San Antonio Spurs',
+      'Toronto Raptors',
+      'Utah Jazz',
+      'Washington Wizards',
+    ];    
 
     const teamNames = {
       1: 'Atlanta Hawks',
@@ -224,6 +259,11 @@ const PlayerStats = () => {
       const handleGoBack = () => {
         navigate(`/`);
       };
+
+      const handleTeamChange = (selectedTeamIndex) => {
+        console.log('you selected option #', selectedTeamIndex, ' which maps to: ', NBA_TEAMS[selectedTeamIndex - 1]);
+      };
+
       return (
         playerData && lastXGames ? (
           <div className='playerStatsPage'>
@@ -239,7 +279,6 @@ const PlayerStats = () => {
                   type="text"
                   placeholder="Search Again"
                   className="searchBar2"
-                  style={{ fontFamily: 'Norwester' }}
                   onChange={handleInputChange}
                 />
               </div>
@@ -313,7 +352,13 @@ const PlayerStats = () => {
                   <h3 className='statsTitle'>Stats</h3>
                   <p className="lastGamesLabel">Last Games: </p>
                   <input type="number" min="1" max= "50" className="lastGamesInput" />
-                  <select name="" id="" className="rivalSelection"></select>
+                  <p className="vsLabel">VS. </p>
+                  <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
+                    {NBA_TEAMS.map((team, index) => (
+                      <option key={index} value={index + 1}>{team}</option>
+                    ))}
+                  </select>
+                  {/* <button className="refreshButton">Refresh Table</button> */}
                 </div>
                 <table className="statsTable">
                   <tbody>
@@ -353,9 +398,7 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="graphDiv">
-        
-              </div>
+              <Graph/>
             </div>
           </div>
         ) : (

@@ -8,8 +8,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+code, pre {
+  font-family: 'Norwester-Regular', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -28,22 +28,22 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px; /* Adjust the margin as needed */
+  margin-top: 20px;
 }
 
 .searchBar {
-  width: 500px; /* Adjust the width as needed */
+  width: 500px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 20px; /* Rounded corners */
+  border-radius: 20px;
   font-size: 16px;
-  outline: none; /* Remove the outline when focused */
+  outline: none;  
+  font-family: 'Norwester-Regular';
 }
 
-/* Style for the input when focused */
 .searchBar:focus {
-  border-color: #007BFF; /* Change the border color when focused */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow when focused */
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .suggestedPlayersDiv {
@@ -120,6 +120,7 @@ code {
   border-radius: 20px;
   font-size: 16px;
   text-align: center;
+  font-family: 'Norwester-Regular';
 }
 
 .pageHeader {
@@ -127,6 +128,7 @@ code {
   justify-content: center;
   margin-right: 9%;
   align-items: center; /* Vertically center items */
+  margin-top: -5%;
 }
 
 .headerLogo {
@@ -207,13 +209,15 @@ code {
 
 
 .statsDiv{
-  margin-left: 0%;
-  margin-top: -0.5%;
+  margin-left: 6%;
+  margin-top: 0.5%;
 }
 
 .statsTitle {
-  margin-right: 10px; /* Adjust the margin as needed */
+  margin-right: 34%; 
   color: white;
+  font-weight: 1;
+  font-size: larger;
 }
 
 .statsTableHeader{
@@ -223,16 +227,37 @@ code {
 }
 
 .lastGamesLabel {
-  margin-right: 5px; /* Adjust the margin as needed */
   color: white;
+  margin-left: -15%;
+  margin-right: -1%;
+  width: 19%
 }
 
 .lastGamesInput {
   width: 6.5%;
   font-size: large;
   height: 4%;
-  margin-right: 10%;
+  margin-right: 6%;
+  margin-top: 2%;
   font-family: 'Norwester';
+}
+
+.vsLabel{
+  color: white;
+  margin-left: -5%;
+  margin-right: 1%;
+}
+
+.rivalSelection{
+  height: 30px;
+  width: 100px;
+  margin-top: 1.5%;
+  font-family: 'Norwester-Regular';
+}
+
+.refreshButton{
+  height: 2%;
+  width: 1%;
 }
 
 .statsTable{

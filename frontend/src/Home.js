@@ -108,7 +108,6 @@ const Home = () => {
 
         const handleRowClick = (player) => {
           setSelectedPlayer(player); // Set the selected player when a row is clicked
-          console.log('Selected Player:', player, 'with ID: ', player.id);
           navigate(`/playerStats/${player.id}`);
         };
 
@@ -126,7 +125,6 @@ const Home = () => {
                 type="text"
                 placeholder="Search for players by name"
                 className="searchBar"
-                style={{ fontFamily: 'Norwester' }}
                 onChange={handleInputChange}
               />
               </div>
