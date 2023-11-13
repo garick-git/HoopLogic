@@ -216,12 +216,6 @@ const PlayerStats = () => {
         }
       }, [timeoutFlag])
 
-      // useEffect(() => {
-      //   console.log('lastXGames: ', lastXGames)
-      //   console.log('PRA: ', lastXGames[0])
-      //   // console.log('localLastXGames.PRA: ', localLastXGames.PRA)
-      // }, [renderData])
-
       const handleRowClick = (player) => {
         navigate(`/playerStats/${player.id}`);
         window.location.reload();
@@ -264,7 +258,7 @@ const PlayerStats = () => {
                           </td>
                           <td className="playerNameCell">{player.first_name} {player.last_name}</td>
                           <td className="playerPositionCell">
-                            {player.position === '' ? 'N/A' : player.position === 'G' ? 'Guard' : player.position === 'F' ? 'Forward' : player.position === 'C' ? 'Center' : ''}
+                            {player.position === null ? 'N/A' : player.position === '' ? 'N/A' : player.position === 'G' ? 'Guard' : player.position === 'F' ? 'Forward' : player.position === 'C' ? 'Center' : ''}
                           </td>
                         </tr>
                       ))}
@@ -300,18 +294,27 @@ const PlayerStats = () => {
                             : playerData.position === 'G'
                             ? 'Guard'
                             : ''
-                        ) : ''}
+                        ) : 'N/A'}
                       </p>
                   </tr>
                   <tr className="playerHeight">
                       <p className="playerHeightlbl">Height: </p>
-                      <p className="playerHeightName">{playerData.height_feet}'{playerData.height_in}"</p>
+                      <p className="playerHeightName">
+                        {playerData.height_feet && playerData.height_in
+                          ? `${playerData.height_feet}'${playerData.height_in}"`
+                          : 'N/A'}
+                      </p>
                   </tr>
                   </tbody>
                 </table>
               </div>
               <div className="statsDiv">
-                <h3 className='statsTitle'>Stats</h3>
+                <div className="statsTableHeader">
+                  <h3 className='statsTitle'>Stats</h3>
+                  <p className="lastGamesLabel">Last Games: </p>
+                  <input type="number" min="1" max= "50" className="lastGamesInput" />
+                  <select name="" id="" className="rivalSelection"></select>
+                </div>
                 <table className="statsTable">
                   <tbody>
                   <div className="topStatsRow">
