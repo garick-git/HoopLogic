@@ -260,6 +260,10 @@ const PlayerStats = () => {
         navigate(`/`);
       };
 
+      const handleTeamChange = (selection) => {
+        console.log('your selection: ', selection)
+      }
+
       const refreshStats = () => {
         console.log('Last games: ');
         console.log('Team selected: ');
