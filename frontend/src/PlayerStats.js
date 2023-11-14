@@ -260,9 +260,10 @@ const PlayerStats = () => {
         navigate(`/`);
       };
 
-      const handleTeamChange = (selectedTeamIndex) => {
-        console.log('you selected option #', selectedTeamIndex, ' which maps to: ', NBA_TEAMS[selectedTeamIndex - 1]);
-      };
+      const refreshStats = () => {
+        console.log('Last games: ');
+        console.log('Team selected: ');
+      }
 
       return (
         playerData && lastXGames ? (
@@ -358,7 +359,12 @@ const PlayerStats = () => {
                       <option key={index} value={index + 1}>{team}</option>
                     ))}
                   </select>
-                  {/* <button className="refreshButton">Refresh Table</button> */}
+                  <img
+                    src={process.env.PUBLIC_URL + '/arrowIcon.png'}
+                    alt="Refresh Button"
+                    className="refreshButton"
+                    onClick={refreshStats}
+                  />
                 </div>
                 <table className="statsTable">
                   <tbody>

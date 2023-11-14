@@ -256,8 +256,14 @@ code, pre {
 }
 
 .refreshButton{
-  height: 2%;
-  width: 1%;
+  height: 18%;
+  width: 8%;
+  margin-right: -10%;
+  margin-left: 3%;
+}
+
+.refreshButton:hover{
+  cursor: pointer;
 }
 
 .statsTable{
