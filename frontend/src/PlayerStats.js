@@ -275,7 +275,7 @@ const PlayerStats = () => {
         console.log('Last games: ', gameCount);
         console.log('Team selected: ', selectedTeam);
         if(selectedTeam != 1){
-          fetch(`/api/games/search/<${playerId}/${gameCount}/${selectedTeam - 1}`, {
+          fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -298,7 +298,7 @@ const PlayerStats = () => {
         }
 
         else{
-          fetch(`/api/games/search/${playerId}/${gameCount}`, {
+          fetch(`/api/games/search/${playerId}/1/${selectedTeam - 1}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -325,7 +325,7 @@ const PlayerStats = () => {
 
       useEffect(() => {
         console.log('lastXGames has changed! New array: ', lastXGames)
-      },[lastXGames, refreshStats])
+      },[lastXGames])
 
       return (
         playerData && lastXGames ? (
