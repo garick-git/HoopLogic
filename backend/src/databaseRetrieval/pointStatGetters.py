@@ -59,18 +59,12 @@ def allByNumGames(player_id, num_games):
     return result
 
 def allByNumGamesByTeam(player_id, num_games, team_id):
-    average_points = average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)
-    assists = average_and_recent_stat(player_id, num_games, PlayerStats.ast, team_id)
-    rebounds = average_and_recent_stat(player_id, num_games, PlayerStats.reb, team_id)
-    free_throws = average_and_recent_stat(player_id, num_games, PlayerStats.ftm, team_id)
-    three_pointers = average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id)
-
     result = {
-        'average_points': average_points[0],
-        'assists': assists[0],
-        'rebounds': rebounds[0],
-        'free_throws': free_throws[0],
-        'three_pointers': three_pointers[0],
+        'average_points': average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)[0],
+        'assists': average_and_recent_stat(player_id, num_games, PlayerStats.ast, team_id)[0],
+        'rebounds': average_and_recent_stat(player_id, num_games, PlayerStats.reb, team_id)[0],
+        'free_throws': average_and_recent_stat(player_id, num_games, PlayerStats.ftm, team_id)[0],
+        'three_pointers': average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id)[0],
     }
 
     result['PRA'] = result['average_points'] + result['rebounds'] + result['assists']
