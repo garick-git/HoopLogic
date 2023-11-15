@@ -288,6 +288,7 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
+              console.log('selected team was NOT 1. Fetched data: ', data)
               const roundedData = roundAttributesToDecimal(data);
               setLastXGames(roundedData);
             })
@@ -310,6 +311,7 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
+              console.log('selected team was 1. Fetched data: ', data)
               const roundedData = roundAttributesToDecimal(data);
               setLastXGames(roundedData);
             })
@@ -323,7 +325,7 @@ const PlayerStats = () => {
 
       useEffect(() => {
         console.log('lastXGames has changed! New array: ', lastXGames)
-      },[lastXGames])
+      },[lastXGames, refreshStats])
 
       return (
         playerData && lastXGames ? (
