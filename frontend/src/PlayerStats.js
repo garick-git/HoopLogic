@@ -317,8 +317,6 @@ const PlayerStats = () => {
             })
             .catch((error) => {
               console.error('Error:', error);
-              console.error('Stats could not be fetched! Switching to local gamesData...')
-              setLastXGames(localLastXGames);
         });
         }
       }
