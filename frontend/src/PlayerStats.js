@@ -298,7 +298,7 @@ const PlayerStats = () => {
         }
 
         else{
-          fetch(`/api/games/search/${playerId}/1/${selectedTeam - 1}`, {
+          fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
