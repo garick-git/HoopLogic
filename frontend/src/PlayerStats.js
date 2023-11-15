@@ -9,6 +9,7 @@ import Graph from './Graph.js';
 const PlayerStats = () => {
     const { playerId } = useParams();
     const [gameCount, setGameCount] = useState(5);
+    const [selectedTeam, setSelectedTeam] = useState(1);
     const [lastXGames, setLastXGames] = useState(null);
     const [playerData, setPlayerData] = useState(null);
     const [emptySearchBar, setEmptySearchBar] = useState(true);
@@ -82,7 +83,7 @@ const PlayerStats = () => {
       'Toronto Raptors',
       'Utah Jazz',
       'Washington Wizards',
-    ];    
+    ];
 
     const teamNames = {
       1: 'Atlanta Hawks',
@@ -261,12 +262,63 @@ const PlayerStats = () => {
       };
 
       const handleTeamChange = (selection) => {
-        console.log('your selection: ', selection)
+        console.log('your team selection: ', selection)
+        setSelectedTeam(selection);
+      }
+
+      const handleGameCountChange = (selection) => {
+        console.log('your game count selected: ', selection);
+        setGameCount(selection);
       }
 
       const refreshStats = () => {
-        console.log('Last games: ');
-        console.log('Team selected: ');
+        console.log('Last games: ', gameCount);
+        console.log('Team selected: ', selectedTeam);
+        if(selectedTeam != 1){
+          fetch(`/api/games/search/<${playerId}/${gameCount}/${selectedTeam - 1}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              const roundedData = roundAttributesToDecimal(data);
+              setLastXGames(roundedData);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        }
+
+        else{
+          fetch(`/api/games/search/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              const roundedData = roundAttributesToDecimal(data);
+              setLastXGames(roundedData);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Stats could not be fetched! Switching to local gamesData...')
+              setLastXGames(localLastXGames);
+        });
+        }
       }
 
       return (
@@ -356,7 +408,7 @@ const PlayerStats = () => {
                 <div className="statsTableHeader">
                   <h3 className='statsTitle'>Stats</h3>
                   <p className="lastGamesLabel">Last Games: </p>
-                  <input type="number" min="1" max= "50" className="lastGamesInput" />
+                  <input type="number" min="1" max= "50" className="lastGamesInput"  onChange={(e) => handleGameCountChange(e.target.value)}/>
                   <p className="vsLabel">VS. </p>
                   <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
                     {NBA_TEAMS.map((team, index) => (
