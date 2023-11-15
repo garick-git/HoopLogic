@@ -412,7 +412,7 @@ const PlayerStats = () => {
                 <div className="statsTableHeader">
                   <h3 className='statsTitle'>Stats</h3>
                   <p className="lastGamesLabel">Last Games: </p>
-                  <input type="number" min="1" max= "50" className="lastGamesInput"  onChange={(e) => handleGameCountChange(e.target.value)}/>
+                  <input placeholder='1' type="number" min="1" max= "50" className="lastGamesInput"  onChange={(e) => handleGameCountChange(e.target.value)}/>
                   <p className="vsLabel">VS. </p>
                   <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
                     {NBA_TEAMS.map((team, index) => (
