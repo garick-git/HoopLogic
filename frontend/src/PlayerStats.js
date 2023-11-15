@@ -8,7 +8,7 @@ import Graph from './Graph.js';
 
 const PlayerStats = () => {
     const { playerId } = useParams();
-    const [gameCount, setGameCount] = useState(5);
+    const [gameCount, setGameCount] = useState(1);
     const [selectedTeam, setSelectedTeam] = useState(1);
     const [lastXGames, setLastXGames] = useState(null);
     const [playerData, setPlayerData] = useState(null);
