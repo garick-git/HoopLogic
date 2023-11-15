@@ -321,6 +321,10 @@ const PlayerStats = () => {
         }
       }
 
+      useEffect(() => {
+        console.log('lastXGames has changed! New array: ', lastXGames)
+      },[lastXGames])
+
       return (
         playerData && lastXGames ? (
           <div className='playerStatsPage'>
