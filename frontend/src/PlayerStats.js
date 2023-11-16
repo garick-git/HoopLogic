@@ -275,7 +275,7 @@ const PlayerStats = () => {
         console.log('Last games: ', gameCount);
         console.log('Team selected: ', selectedTeam);
         if(selectedTeam != 1){
-          fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
+          fetch(`/api/games/search/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
