@@ -17,7 +17,7 @@ const PlayerStats = () => {
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [players, setPlayers] = useState([]);
     const navigate = useNavigate();
-    let timerId; // Store the timer ID 
+    let timerId;
     const localDataForPlayers = [{"first_name":"Stephen","id":115,"last_name":"Curry","position":"G","team":10,"total_points":"24477"},
       {"first_name":"Stephen","id":1280,"last_name":"Jackson","position":"F","team":3,"total_points":"12887"},
       {"first_name":"Lance","id":431,"last_name":"Stephenson","position":"G","team":12,"total_points":"5014"},
