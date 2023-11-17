@@ -335,7 +335,7 @@ const PlayerStats = () => {
               onClick={handleGoBack}
             />
             <div className='searchBarBigDiv'>
-              <div className="searchBarDiv">
+              <div className="searchBarDiv2">
                 <input
                   type="text"
                   placeholder="Search Again"
