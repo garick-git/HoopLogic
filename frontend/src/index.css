@@ -33,6 +33,7 @@ code, pre {
 
 .searchBarDiv2 {
   display: flex;
+  justify-content: right;
   margin-top: 20px;
 }
 
@@ -56,6 +57,15 @@ code, pre {
   justify-content: center;
   flex-direction: row;
   max-height: 300px;
+  overflow: scroll;
+}
+
+.suggestedPlayersDiv2 {
+  display: flex;
+  justify-content: right;
+  flex-direction: row;
+  max-height: 400px;
+  margin-left: 15%;
   overflow: scroll;
 }
 

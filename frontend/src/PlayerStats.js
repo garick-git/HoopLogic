@@ -18,6 +18,20 @@ const PlayerStats = () => {
     const [players, setPlayers] = useState([]);
     const navigate = useNavigate();
     let timerId; // Store the timer ID 
+    const localDataForPlayers = [{"first_name":"Stephen","id":115,"last_name":"Curry","position":"G","team":10,"total_points":"24477"},
+      {"first_name":"Stephen","id":1280,"last_name":"Jackson","position":"F","team":3,"total_points":"12887"},
+      {"first_name":"Lance","id":431,"last_name":"Stephenson","position":"G","team":12,"total_points":"5014"},
+      {"first_name":"Stephen","id":1655,"last_name":"Graham","position":"","team":11,"total_points":"895"},
+      {"first_name":"Jack","id":46395582,"last_name":"Stephens","position":"","team":1,"total_points":"730"},
+      {"first_name":"Stephen","id":747,"last_name":"Howard","position":"","team":29,"total_points":"334"},
+      {"first_name":"Stephen","id":721,"last_name":"Bardo","position":"","team":27,"total_points":"73"},
+      {"first_name":"Everette","id":3079,"last_name":"Stephens","position":"","team":17,"total_points":"65"},
+      {"first_name":"Joe","id":1078,"last_name":"Stephens","position":"","team":11,"total_points":"51"},
+      {"first_name":"Stephen","id":711,"last_name":"Thompson","position":"","team":22,"total_points":"29"},
+      {"first_name":"Stephen","id":2173,"last_name":"Zimmerman","position":"","team":22,"total_points":"19"},
+      {"first_name":"DJ","id":430,"last_name":"Stephens","position":"G-F","team":15,"total_points":"9"},
+      {"first_name":"Stephen","id":17895907,"last_name":"Domingo","position":"G","team":27,"total_points":"9"}
+    ]
     const teamLogos = {
       1: 'ATL_Hawks.png',
       2: 'BKN_Nets.png',
@@ -214,6 +228,7 @@ const PlayerStats = () => {
         })
         .catch((error) => {
           console.error('Error:', error);
+          setPlayers(localDataForPlayers)
         });
     };
     
@@ -343,8 +358,8 @@ const PlayerStats = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              {emptySearchBar ? null : (
-                <div className="suggestedPlayersDiv">
+              {emptySearchBar ? true : (
+                <div className="suggestedPlayersDiv2">
                   <table className='playersTable'>
                     <tbody>
                       {players.map((player) => (
