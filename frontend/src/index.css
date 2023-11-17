@@ -165,8 +165,7 @@ code, pre {
 .biographyDiv{
   color: white;
   font-size: larger;
-  margin-left: -60%;
-  position: fixed;
+  margin-left: -18%;
 }
 
 .biographyTitle{
@@ -225,7 +224,6 @@ code, pre {
 
 .statsDiv{
   margin-left: 6%;
-  margin-top: 0.5%;
 }
 
 .statsTitle {
@@ -292,6 +290,7 @@ code, pre {
   justify-content: space-between;
   align-items: center;
   margin-right: 5%;
+  margin-bottom: -1%;
 }
 
 .pointsCell {
