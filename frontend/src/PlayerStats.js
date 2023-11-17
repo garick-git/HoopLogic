@@ -358,7 +358,7 @@ const PlayerStats = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              {emptySearchBar ? true : (
+              {emptySearchBar ? null : (
                 <div className="suggestedPlayersDiv2">
                   <table className='playersTable'>
                     <tbody>
