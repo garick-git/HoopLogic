@@ -63,7 +63,7 @@ class Game(db.Model):
                         date_str = game_data['date']
                         date = Game.parse_iso8601_date(date_str)
 
-                        if date:
+                        if date and date.year >= 2001:
                             game = Game(
                                 id=game_data['id'],
                                 date=date,
