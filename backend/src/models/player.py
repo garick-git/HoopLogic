@@ -56,8 +56,9 @@ class Player(db.Model):
                             team=team  # Assign the Team object
                         )
                         db.session.add(player)
+                        db.session.commit()  # Commit after each player to reflect in the database
 
-                    db.session.commit()
+                        print(f"Added player: {player.first_name} {player.last_name}, Position: {player.position}")
 
                     print(f"Inserted data from page {page}/{total_pages}")
 
