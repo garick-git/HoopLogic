@@ -41,14 +41,13 @@ class PlayerStats(db.Model):
     team = db.relationship('Team', backref='player_stats')
 
     @staticmethod
-    def fetch_and_insert_stats():
-        BASE_URL = "https://www.balldontlie.io/api/v1/stats"
-        PER_PAGE = 100
+    def fetch_and_insert_players():
+        BASE_URL = "https://www.balldontlie.io/api/v1/players"
+        PER_PAGE = 100  
 
         page = 1
         total_pages = None
-        new_records = 0
-        duplicate_records = 0
+        players_added = 0  # Counter for tracking the number of players added
 
         while True:
             url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
@@ -59,49 +58,37 @@ class PlayerStats(db.Model):
                 if response.status_code == 200:
                     data = response.json()
                     total_pages = data['meta']['total_pages']
-                    player_stats_data = data['data']
+                    players_data = data['data']
 
-                    for player_stat_data in player_stats_data:
-                        player_stat_id = player_stat_data['id']
+                    # Insert data into the players table
+                    for player_data in players_data:
+                        if 'position' not in player_data:
+                            continue  # Skip players without a position
 
-                        try:
-                            player_stat = PlayerStats(
-                                id=player_stat_id,
-                                ast=player_stat_data.get('ast', 0),
-                                blk=player_stat_data.get('blk', 0),
-                                dreb=player_stat_data.get('dreb', 0),
-                                fg3_pct=player_stat_data.get('fg3_pct', 0.0),
-                                fg3a=player_stat_data.get('fg3a', 0),
-                                fg3m=player_stat_data.get('fg3m', 0),
-                                fg_pct=player_stat_data.get('fg_pct', 0.0),
-                                fga=player_stat_data.get('fga', 0),
-                                fgm=player_stat_data.get('fgm', 0),
-                                ft_pct=player_stat_data.get('ft_pct', 0.0),
-                                fta=player_stat_data.get('fta', 0),
-                                ftm=player_stat_data.get('ftm', 0),
-                                min=player_stat_data.get('min', '0'),
-                                oreb=player_stat_data.get('oreb', 0),
-                                pf=player_stat_data.get('pf', 0),
-                                pts=player_stat_data.get('pts', 0),
-                                reb=player_stat_data.get('reb', 0),
-                                stl=player_stat_data.get('stl', 0),
-                                turnover=player_stat_data.get('turnover', 0),
-                                player_id=player_stat_data['player']['id'],
-                                game_id=player_stat_data['game']['id'],
-                                team_id=player_stat_data['team']['id']
-                            )
-                            db.session.add(player_stat)
-                            db.session.commit()
-                            new_records += 1
-                        except IntegrityError as e:
-                            db.session.rollback()
-                            duplicate_records += 1
-                        except Exception as e:
-                            print(f"An error occurred while processing data: {e}")
+                        # Extract team data (if available)
+                        team_data = player_data.get('team', {})
+                        team = Team.query.filter_by(id=team_data.get('id')).first()
+
+                        player = Player(
+                            id=player_data['id'],
+                            first_name=player_data['first_name'],
+                            last_name=player_data['last_name'],
+                            position=player_data['position'],
+                            height_feet=player_data.get('height_feet'),  # Handle nullable value
+                            height_inches=player_data.get('height_inches'),  # Handle nullable value
+                            weight_pounds=player_data.get('weight_pounds'),  # Handle nullable value
+                            team=team  # Assign the Team object
+                        )
+                        db.session.add(player)
+                        players_added += 1  # Increment the counter
+
+                    db.session.commit()
+
+                    print(f"Inserted data from page {page}/{total_pages}. Players added: {players_added}")
 
                     if page < total_pages:
                         page += 1
-                        time.sleep(1)
+                        time.sleep(1)  
                     else:
                         break
                 else:

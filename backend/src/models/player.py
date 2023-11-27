@@ -38,6 +38,9 @@ class Player(db.Model):
 
                     # Insert data into the players table
                     for player_data in players_data:
+                        if 'position' not in player_data:
+                            continue  # Skip players without a position
+
                         # Extract team data (if available)
                         team_data = player_data.get('team', {})
                         team = Team.query.filter_by(id=team_data.get('id')).first()
