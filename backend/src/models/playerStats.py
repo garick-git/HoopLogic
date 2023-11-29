@@ -52,7 +52,7 @@ class PlayerStats(db.Model):
         duplicate_records = 0  # Counter for duplicate records
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
+            url = f"{BASE_URL}&per_page={PER_PAGE}&page={page}"
 
             try:
                 response = requests.get(url)
