@@ -62,7 +62,7 @@ class PlayerStats(db.Model):
                     total_pages = data['meta']['total_pages']
                     players_data = data['data']
 
-                    # Insert data into the players table
+                    # Insert data into the players and playerStats tables
                     for player_data in players_data:
                         if 'position' not in player_data:
                             continue  # Skip players without a position
@@ -91,6 +91,31 @@ class PlayerStats(db.Model):
                         db.session.add(player)
                         players_added += 1  # Increment the counter
                         new_records += 1  # Increment the counter
+
+                        # Insert player stats data
+                        player_stats = PlayerStats(
+                            ast=player_data.get('ast'),
+                            blk=player_data.get('blk'),
+                            dreb=player_data.get('dreb'),
+                            fg3_pct=player_data.get('fg3_pct'),
+                            fg3a=player_data.get('fg3a'),
+                            fg3m=player_data.get('fg3m'),
+                            fg_pct=player_data.get('fg_pct'),
+                            fga=player_data.get('fga'),
+                            fgm=player_data.get('fgm'),
+                            ft_pct=player_data.get('ft_pct'),
+                            fta=player_data.get('fta'),
+                            ftm=player_data.get('ftm'),
+                            min=player_data.get('min'),
+                            oreb=player_data.get('oreb'),
+                            pf=player_data.get('pf'),
+                            pts=player_data.get('pts'),
+                            reb=player_data.get('reb'),
+                            stl=player_data.get('stl'),
+                            turnover=player_data.get('turnover'),
+                            player=player  # Assign the Player object
+                        )
+                        db.session.add(player_stats)
 
                     db.session.commit()
 
