@@ -42,12 +42,16 @@ class PlayerStats(db.Model):
 
     @staticmethod
     def fetch_and_insert_players():
-        BASE_URL = "https://www.balldontlie.io/api/v1/players"
+        BASE_URL = "https://www.balldontlie.io/api/v1/stats?start_date={start}&end_date={end}"
+        start = "2003-10-28"
+        end = "2023-11-27"
         PER_PAGE = 100  
 
         page = 1
         total_pages = None
         players_added = 0  # Counter for tracking the number of players added
+        new_records = 0  # Counter for new records
+        duplicate_records = 0  # Counter for duplicate records
 
         while True:
             url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
@@ -65,6 +69,13 @@ class PlayerStats(db.Model):
                         if 'position' not in player_data:
                             continue  # Skip players without a position
 
+                        # Check if the player with the given ID already exists in the database
+                        existing_player = Player.query.filter_by(id=player_data['id']).first()
+
+                        if existing_player:
+                            duplicate_records += 1
+                            continue  # Skip adding the player if already in the database
+
                         # Extract team data (if available)
                         team_data = player_data.get('team', {})
                         team = Team.query.filter_by(id=team_data.get('id')).first()
@@ -81,6 +92,7 @@ class PlayerStats(db.Model):
                         )
                         db.session.add(player)
                         players_added += 1  # Increment the counter
+                        new_records += 1  # Increment the counter
 
                     db.session.commit()
 
