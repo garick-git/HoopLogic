@@ -63,17 +63,10 @@ class PlayerStats(db.Model):
 
                     # Insert data into the playerStats table
                     for player_data in players_data:
-                        if 'position' not in player_data:
-                            continue  # Skip players without a position
-
                         # Check if the player with the given ID already exists in the database
-                        existing_player = Player.query.filter_by(id=player_data['id']).first()
+                        existing_player = Player.query.filter_by(id=player_data['player']['id']).first()
 
-                        if not existing_player:
-                            duplicate_records += 1
-                            continue  # Skip adding the stats if player not in the database
-
-                        # Insert player stats data
+                        # Insert player stats data regardless of whether there's a position or not
                         player_stats = PlayerStats(
                             ast=player_data.get('ast'),
                             blk=player_data.get('blk'),
@@ -94,7 +87,7 @@ class PlayerStats(db.Model):
                             reb=player_data.get('reb'),
                             stl=player_data.get('stl'),
                             turnover=player_data.get('turnover'),
-                            player=existing_player  # Assign the existing Player object
+                            player=existing_player if existing_player else Player(id=player_data['player']['id'])
                         )
                         db.session.add(player_stats)
                         new_records += 1  # Increment the counter
