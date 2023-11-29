@@ -41,7 +41,7 @@ class PlayerStats(db.Model):
     team = db.relationship('Team', backref='player_stats')
 
     @staticmethod
-    def fetch_and_insert_players():
+    def fetch_and_insert_stats():
         BASE_URL = "https://www.balldontlie.io/api/v1/stats?start_date={start}&end_date={end}"
         start = "2003-10-28"
         end = "2023-11-27"
