@@ -70,7 +70,7 @@ class PlayerStats(db.Model):
                     # Check if the player with the given ID already exists in the database
                     existing_player = Player.query.filter_by(id=player_info['id']).first()
 
-                    if not existing_player:
+                    if existing_player == None | existing_player == "":
                         duplicate_records += 1
                         continue  # Skip adding the stats if player not in the database
 
