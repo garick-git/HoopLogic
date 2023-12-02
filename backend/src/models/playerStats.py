@@ -62,57 +62,70 @@ class PlayerStats(db.Model):
                     players_data = data['data']
 
                     # Insert data into the playerStats table
-                for player_data in players_data:
-                    player_info = player_data.get('player')
+                    for player_data in players_data:
+                        player_info = player_data.get('player')
 
-                # Check if player_info is not None
-                if player_info:
-                    # Check if the player with the given ID already exists in the database
-                    existing_player = Player.query.filter_by(id=player_info['id']).first()
+                        # Check if player_info is not None
+                        if player_info:
+                            # Check if the player with the given ID already exists in the database
+                            existing_player = Player.query.filter_by(id=player_info['id']).first()
 
-                    if existing_player == None or existing_player == "":
-                        duplicate_records += 1
-                        continue  # Skip adding the stats if player not in the database
+                            if existing_player is None:
+                                # Player does not exist, skip adding the stats
+                                duplicate_records += 1
+                                continue
 
-                    # Insert player stats data
-                    player_stats = PlayerStats(
-                        ast=player_data.get('ast'),
-                        blk=player_data.get('blk'),
-                        dreb=player_data.get('dreb'),
-                        fg3_pct=player_data.get('fg3_pct'),
-                        fg3a=player_data.get('fg3a'),
-                        fg3m=player_data.get('fg3m'),
-                        fg_pct=player_data.get('fg_pct'),
-                        fga=player_data.get('fga'),
-                        fgm=player_data.get('fgm'),
-                        ft_pct=player_data.get('ft_pct'),
-                        fta=player_data.get('fta'),
-                        ftm=player_data.get('ftm'),
-                        min=player_data.get('min'),
-                        oreb=player_data.get('oreb'),
-                        pf=player_data.get('pf'),
-                        pts=player_data.get('pts'),
-                        reb=player_data.get('reb'),
-                        stl=player_data.get('stl'),
-                        turnover=player_data.get('turnover'),
-                        player=existing_player  # Assign the existing Player object
-                    )
-                    db.session.add(player_stats)
-                    new_records += 1  # Increment the counter
+                            # Check if the player stats entry already exists for the given game
+                            existing_stats_entry = PlayerStats.query.filter_by(
+                                player_id=existing_player.id,
+                                game_id=player_data.get('game')['id']
+                            ).first()
 
+                            if existing_stats_entry is not None:
+                                # Entry already exists, skip adding the stats
+                                duplicate_records += 1
+                                continue
 
-                    db.session.commit()
+                            # Insert player stats data
+                            player_stats = PlayerStats(
+                                ast=player_data.get('ast'),
+                                blk=player_data.get('blk'),
+                                dreb=player_data.get('dreb'),
+                                fg3_pct=player_data.get('fg3_pct'),
+                                fg3a=player_data.get('fg3a'),
+                                fg3m=player_data.get('fg3m'),
+                                fg_pct=player_data.get('fg_pct'),
+                                fga=player_data.get('fga'),
+                                fgm=player_data.get('fgm'),
+                                ft_pct=player_data.get('ft_pct'),
+                                fta=player_data.get('fta'),
+                                ftm=player_data.get('ftm'),
+                                min=player_data.get('min'),
+                                oreb=player_data.get('oreb'),
+                                pf=player_data.get('pf'),
+                                pts=player_data.get('pts'),
+                                reb=player_data.get('reb'),
+                                stl=player_data.get('stl'),
+                                turnover=player_data.get('turnover'),
+                                player=existing_player,  # Assign the existing Player object
+                                game_id=player_data.get('game')['id']
+                            )
 
-                    print(f"Inserted data from page {page}/{total_pages}. New records added: {new_records}")
+                            db.session.add(player_stats)
+                            new_records += 1  # Increment the counter
 
-                    if page < total_pages:
-                        page += 1
-                        time.sleep(1)  
-                    else:
-                        break
-                else:
-                    print(f"Request failed with status code {response.status_code}")
-                    break
+                            db.session.commit()
+
+                            print(f"Inserted data from page {page}/{total_pages}. New records added: {new_records}")
+
+                            if page < total_pages:
+                                page += 1
+                                time.sleep(1)
+                            else:
+                                break
+                        else:
+                            print(f"Request failed with status code {response.status_code}")
+                            break
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
                 break
