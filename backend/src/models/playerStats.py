@@ -43,12 +43,12 @@ class PlayerStats(db.Model):
     @staticmethod
     def fetch_and_insert_stats():
         BASE_URL = "https://www.balldontlie.io/api/v1/stats?start_date=2003-10-28"
-        PER_PAGE = 100  
+        PER_PAGE = 100
 
         page = 1
         total_pages = None
-        new_records = 0  # Counter for new records
-        duplicate_records = 0  # Counter for duplicate records
+        new_records = 0
+        duplicate_records = 0
 
         while True:
             url = f"{BASE_URL}&per_page={PER_PAGE}&page={page}"
@@ -59,73 +59,63 @@ class PlayerStats(db.Model):
                 if response.status_code == 200:
                     data = response.json()
                     total_pages = data['meta']['total_pages']
-                    players_data = data['data']
+                    player_stats_data = data['data']
 
-                    # Insert data into the playerStats table
-                    for player_data in players_data:
-                        player_info = player_data.get('player')
-
-                        # Check if player_info is not None
-                        if player_info:
-                            # Check if the player with the given ID already exists in the database
-                            existing_player = Player.query.filter_by(id=player_info['id']).first()
+                    for player_stat_data in player_stats_data:
+                        player_stat_id = player_stat_data['id']
+                        try:
+                            # Check if the player already exists
+                            existing_player = Player.query.filter_by(id=player_stat_data['player']['id']).first()
 
                             if existing_player is None:
                                 # Player does not exist, skip adding the stats
-                                duplicate_records += 1
+                                print(f"Player with ID {player_stat_data['player']['id']} does not exist. Skipping.")
                                 continue
 
-                            # Check if the player stats entry already exists for the given game
-                            existing_stats_entry = PlayerStats.query.filter_by(
+                            player_stat = PlayerStats(
+                                id=player_stat_id,
+                                ast=player_stat_data.get('ast', 0),
+                                blk=player_stat_data.get('blk', 0),
+                                dreb=player_stat_data.get('dreb', 0),
+                                fg3_pct=player_stat_data.get('fg3_pct', 0.0),
+                                fg3a=player_stat_data.get('fg3a', 0),
+                                fg3m=player_stat_data.get('fg3m', 0),
+                                fg_pct=player_stat_data.get('fg_pct', 0.0),
+                                fga=player_stat_data.get('fga', 0),
+                                fgm=player_stat_data.get('fgm', 0),
+                                ft_pct=player_stat_data.get('ft_pct', 0.0),
+                                fta=player_stat_data.get('fta', 0),
+                                ftm=player_stat_data.get('ftm', 0),
+                                min=player_stat_data.get('min', '0'),
+                                oreb=player_stat_data.get('oreb', 0),
+                                pf=player_stat_data.get('pf', 0),
+                                pts=player_stat_data.get('pts', 0),
+                                reb=player_stat_data.get('reb', 0),
+                                stl=player_stat_data.get('stl', 0),
+                                turnover=player_stat_data.get('turnover', 0),
                                 player_id=existing_player.id,
-                                game_id=player_data.get('game')['id']
-                            ).first()
-
-                            if existing_stats_entry is not None:
-                                # Entry already exists, skip adding the stats
-                                duplicate_records += 1
-                                continue
-
-                            # Insert player stats data
-                            player_stats = PlayerStats(
-                                ast=player_data.get('ast'),
-                                blk=player_data.get('blk'),
-                                dreb=player_data.get('dreb'),
-                                fg3_pct=player_data.get('fg3_pct'),
-                                fg3a=player_data.get('fg3a'),
-                                fg3m=player_data.get('fg3m'),
-                                fg_pct=player_data.get('fg_pct'),
-                                fga=player_data.get('fga'),
-                                fgm=player_data.get('fgm'),
-                                ft_pct=player_data.get('ft_pct'),
-                                fta=player_data.get('fta'),
-                                ftm=player_data.get('ftm'),
-                                min=player_data.get('min'),
-                                oreb=player_data.get('oreb'),
-                                pf=player_data.get('pf'),
-                                pts=player_data.get('pts'),
-                                reb=player_data.get('reb'),
-                                stl=player_data.get('stl'),
-                                turnover=player_data.get('turnover'),
-                                player=existing_player,  # Assign the existing Player object
-                                game_id=player_data.get('game')['id']
+                                game_id=player_stat_data['game']['id'],
+                                team_id=player_stat_data['team']['id']
                             )
 
-                            db.session.add(player_stats)
-                            new_records += 1  # Increment the counter
-
+                            db.session.add(player_stat)
                             db.session.commit()
+                            new_records += 1
+                        except IntegrityError as e:
+                            db.session.rollback()
+                            print(f"IntegrityError: Skipping duplicate entry.")
+                            duplicate_records += 1
+                        except Exception as e:
+                            print(f"An error occurred while processing data: {e}")
 
-                            print(f"Inserted data from page {page}/{total_pages}. New records added: {new_records}")
-
-                            if page < total_pages:
-                                page += 1
-                                time.sleep(1)
-                            else:
-                                break
-                        else:
-                            print(f"Request failed with status code {response.status_code}")
-                            break
+                    if page < total_pages:
+                        page += 1
+                        time.sleep(1)
+                    else:
+                        break
+                else:
+                    print(f"Request failed with status code {response.status_code}")
+                    break
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
                 break
