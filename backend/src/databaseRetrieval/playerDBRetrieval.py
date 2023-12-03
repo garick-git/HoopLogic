@@ -38,7 +38,7 @@ def searchPlayerByString(search_string):
             found_players.append(player)
 
     if found_players:
-        found_players_sorted = sorted(found_players, key=lambda x: x['total_points'], reverse=True)
+        found_players_sorted = sorted(found_players, key=lambda x: x.get('total_points', 0), reverse=True)
     else:
         found_players_sorted = []
 
