@@ -108,6 +108,8 @@ class PlayerStats(db.Model):
                         except Exception as e:
                             print(f"An error occurred while processing data: {e}")
 
+                    print(f"Inserted data from page {page}/{total_pages}. New records added: {new_records}")
+                    
                     if page < total_pages:
                         page += 1
                         time.sleep(1)
