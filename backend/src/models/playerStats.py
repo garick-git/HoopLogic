@@ -43,7 +43,7 @@ class PlayerStats(db.Model):
     @staticmethod
     def fetch_and_insert_stats():
         BASE_URL = "https://www.balldontlie.io/api/v1/stats?seasons[]=2021"
-        PER_PAGE = 100
+        PER_PAGE = 50
 
         page = 1
         total_pages = None
