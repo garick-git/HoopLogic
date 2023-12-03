@@ -116,7 +116,7 @@ class PlayerStats(db.Model):
 
                     if page < total_pages:
                         page += 1
-                        time.sleep(.25)
+                        # time.sleep(.25)
                     else:
                         break
                 else:
