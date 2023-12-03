@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import desc
 from ..models.player import Player
 from ..models.playerStats import PlayerStats
+from decimal import Decimal
 
 engine = create_engine('mysql+mysqlconnector://root:REMOVED@DB_HOST:3306/hooplogic')
 Session = sessionmaker(bind=engine)
@@ -38,7 +39,8 @@ def searchPlayerByString(search_string):
             found_players.append(player)
 
     if found_players:
-        found_players_sorted = sorted(found_players, key=lambda x: x.get('total_points', 0), reverse=True)
+        # Handle the case where 'total_points' might be None or a Decimal
+        found_players_sorted = sorted(found_players, key=lambda x: x.get('total_points', Decimal(0)) if x.get('total_points') is not None else Decimal(0), reverse=True)
     else:
         found_players_sorted = []
 
