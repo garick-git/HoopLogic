@@ -61,6 +61,9 @@ class PlayerStats(db.Model):
                     total_pages = data['meta']['total_pages']
                     player_stats_data = data['data']
 
+                    new_records_page = 0  # Counter for new records on the current page
+                    duplicate_records_page = 0  # Counter for duplicate records on the current page
+
                     for player_stat_data in player_stats_data:
                         player_stat_id = player_stat_data['id']
                         try:
@@ -101,15 +104,17 @@ class PlayerStats(db.Model):
                             db.session.add(player_stat)
                             db.session.commit()
                             new_records += 1
+                            new_records_page += 1
                         except IntegrityError as e:
                             db.session.rollback()
                             print(f"IntegrityError: Skipping duplicate entry.")
                             duplicate_records += 1
+                            duplicate_records_page += 1
                         except Exception as e:
                             print(f"An error occurred while processing data: {e}")
 
-                    print(f"Inserted data from page {page}/{total_pages}. New records added: {new_records}")
-                    
+                    print(f"Inserted data from page {page}/{total_pages}. New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
+
                     if page < total_pages:
                         page += 1
                         time.sleep(1)
@@ -122,5 +127,4 @@ class PlayerStats(db.Model):
                 print(f"An error occurred: {e}")
                 break
 
-        print(f"New records inserted: {new_records}")
-        print(f"Duplicate records skipped: {duplicate_records}")
+        print(f"Overall: New records inserted: {new_records}, Duplicate records skipped: {duplicate_records}")
