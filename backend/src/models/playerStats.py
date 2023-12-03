@@ -42,7 +42,7 @@ class PlayerStats(db.Model):
 
     @staticmethod
     def fetch_and_insert_stats():
-        BASE_URL = "https://www.balldontlie.io/api/v1/stats?seasons[]=2022"
+        BASE_URL = "https://www.balldontlie.io/api/v1/stats?seasons[]=2021"
         PER_PAGE = 100
 
         page = 1
@@ -116,7 +116,6 @@ class PlayerStats(db.Model):
 
                     if page < total_pages:
                         page += 1
-                        # time.sleep(.25)
                     else:
                         break
                 else:
