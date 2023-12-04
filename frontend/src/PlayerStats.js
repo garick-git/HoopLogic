@@ -479,7 +479,7 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              <Graph/>
+              {/* <Graph/> */}
             </div>
           </div>
         ) : (
