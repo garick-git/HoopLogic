@@ -32,14 +32,16 @@ class Player(db.Model):
 
                 if response.status_code == 200:
                     data = response.json()
-                    total_pages = data['meta']['total_pages']
-                    players_data = data['data']
+                    meta = data.get('meta', {})
+                    total_pages = meta.get('total_pages')
+
+                    players_data = data.get('data', [])
 
                     Player.insert_players(players_data)
 
                     print(f"Inserted data from page {page}/{total_pages}")
 
-                    if page < total_pages:
+                    if total_pages is not None and page < total_pages:
                         page += 1
                         time.sleep(1)  
                     else:
