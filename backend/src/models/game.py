@@ -38,7 +38,6 @@ class Game(db.Model):
         PER_PAGE = 100
 
         page = 1
-        total_pages = None
 
         while True:
             url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&seasons[]=2022"
@@ -48,8 +47,7 @@ class Game(db.Model):
 
                 if response.status_code == 200:
                     data = response.json()
-                    total_pages = data['meta']['total_pages']
-                    games_data = data['data']
+                    games_data = data.get('data', [])
 
                     # Insert data into the games table
                     for game_data in games_data:
@@ -60,30 +58,29 @@ class Game(db.Model):
                         visitor_team = Team.query.filter_by(id=visitor_team_data.get('id')).first()
 
                         # Parse the date using the custom function
-                        date_str = game_data['date']
+                        date_str = game_data.get('date')
                         date = Game.parse_iso8601_date(date_str)
 
-                        if date and date.year >= 2001:
-                            game = Game(
-                                id=game_data['id'],
-                                date=date,
-                                home_team_score=game_data['home_team_score'],
-                                visitor_team_score=game_data['visitor_team_score'],
-                                season=game_data['season'],
-                                period=game_data['period'],
-                                status=game_data['status'],
-                                time=game_data['time'],
-                                postseason=game_data['postseason'],
-                                home_team=home_team,
-                                visitor_team=visitor_team
-                            )
-                            db.session.add(game)
+                        game = Game(
+                            id=game_data.get('id'),
+                            date=date,
+                            home_team_score=game_data.get('home_team_score'),
+                            visitor_team_score=game_data.get('visitor_team_score'),
+                            season=game_data.get('season'),
+                            period=game_data.get('period'),
+                            status=game_data.get('status'),
+                            time=game_data.get('time'),
+                            postseason=game_data.get('postseason'),
+                            home_team=home_team,
+                            visitor_team=visitor_team
+                        )
+                        db.session.add(game)
 
                     db.session.commit()
 
-                    print(f"Inserted data from page {page}/{total_pages}")
+                    print(f"Inserted data from page {page}")
 
-                    if page < total_pages:
+                    if games_data:
                         page += 1
                         time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
                     else:
