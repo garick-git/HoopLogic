@@ -16,7 +16,7 @@ class Player(db.Model):
     team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
     team = db.relationship('Team', backref='players')
 
-   @staticmethod
+    @staticmethod
     def fetch_and_insert_players():
         BASE_URL = "https://www.balldontlie.io/api/v1/players"
         PER_PAGE = 100  
