@@ -38,9 +38,10 @@ class Game(db.Model):
         PER_PAGE = 100
 
         page = 1
+        total_added = 0
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&seasons[]=2022"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
 
             try:
                 response = requests.get(url)
@@ -75,15 +76,17 @@ class Game(db.Model):
                             visitor_team=visitor_team
                         )
                         db.session.add(game)
+                        total_added += 1
 
                     db.session.commit()
 
-                    print(f"Inserted data from page {page}")
+                    print(f"Page {page}: Added {len(games_data)} games. Total added: {total_added}")
 
                     if games_data:
                         page += 1
                         time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
                     else:
+                        print("No more games to fetch.")
                         break
                 else:
                     print(f"Request failed with status code {response.status_code}")
