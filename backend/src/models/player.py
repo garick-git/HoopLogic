@@ -54,34 +54,37 @@ class Player(db.Model):
                 break
 
     @staticmethod
-    def insert_players(players_data):
-        for player_data in players_data:
-            if 'position' not in player_data:
-                continue  # Skip players without a position
+    def fetch_and_insert_players():
+        BASE_URL = "https://www.balldontlie.io/api/v1/players"
+        PER_PAGE = 100  
 
-            # Extract team data (if available)
-            team_data = player_data.get('team', {})
-            team = Team.query.filter_by(id=team_data.get('id')).first()
+        page = 1
 
-            # Check if the player is already in the database
-            existing_player = Player.query.filter_by(id=player_data['id']).first()
+        while True:
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
 
-            if not existing_player:
-                # Insert the player into the database
-                player = Player(
-                    id=player_data['id'],
-                    first_name=player_data['first_name'],
-                    last_name=player_data['last_name'],
-                    position=player_data['position'],
-                    height_feet=player_data.get('height_feet'),  # Handle nullable value
-                    height_inches=player_data.get('height_inches'),  # Handle nullable value
-                    weight_pounds=player_data.get('weight_pounds'),  # Handle nullable value
-                    team=team  # Assign the Team object
-                )
-                db.session.add(player)
-                db.session.commit()  # Commit after each player to reflect in the database
+            try:
+                response = requests.get(url)
 
-                print(f"Added player: {player.first_name} {player.last_name}, Position: {player.position}")
+                if response.status_code == 200:
+                    data = response.json()
+                    players_data = data.get('data', [])
+
+                    if not players_data:
+                        break  # No more players to fetch
+
+                    Player.insert_players(players_data)
+
+                    print(f"Inserted data from page {page}")
+
+                    page += 1
+                    time.sleep(1)  # Add a delay to avoid hitting API rate limits
+                else:
+                    print(f"Request failed with status code {response.status_code}")
+                    break
+            except requests.exceptions.RequestException as e:
+                print(f"An error occurred: {e}")
+                break
 
 if __name__ == "__main__":
     Player.fetch_and_insert_players()
