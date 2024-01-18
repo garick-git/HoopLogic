@@ -46,7 +46,6 @@ class PlayerStats(db.Model):
         PER_PAGE = 100
 
         page = 1
-        total_pages = None
         new_records = 0
         duplicate_records = 0
 
@@ -58,12 +57,15 @@ class PlayerStats(db.Model):
 
                 if response.status_code == 200:
                     data = response.json()
-                    meta_data = data.get('meta', {})
-                    total_pages = meta_data.get('total_pages', 0)
                     player_stats_data = data.get('data', [])
 
                     new_records_page = 0  # Counter for new records on the current page
                     duplicate_records_page = 0  # Counter for duplicate records on the current page
+
+                    if not player_stats_data:
+                        # No more records to fetch
+                        print("No more records to fetch. Exiting.")
+                        break
 
                     for player_stat_data in player_stats_data:
                         player_stat_id = player_stat_data['id']
@@ -114,13 +116,10 @@ class PlayerStats(db.Model):
                         except Exception as e:
                             print(f"An error occurred while processing data: {e}")
 
-                    print(f"Page {page}/{total_pages}: New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
+                    print(f"Page {page}: New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
 
-                    if page < total_pages:
-                        page += 1
-                        time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
-                    else:
-                        break
+                    page += 1
+                    time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
                 else:
                     print(f"Request failed with status code {response.status_code}")
                     break
