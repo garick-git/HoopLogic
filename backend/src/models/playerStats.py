@@ -70,8 +70,8 @@ class PlayerStats(db.Model):
                     for player_stat_data in player_stats_data:
                         player_stat_id = player_stat_data['id']
 
-                        # Check if the player_stat_data has 'player' and 'id' properties
-                        if 'player' not in player_stat_data or 'id' not in player_stat_data['player']:
+                        # Check if 'player' is None or 'id' is not present
+                        if player_stat_data.get('player') is None or 'id' not in player_stat_data.get('player', {}):
                             print("Invalid player data. Skipping.")
                             continue
 
