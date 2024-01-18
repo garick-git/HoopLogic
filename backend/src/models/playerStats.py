@@ -70,6 +70,11 @@ class PlayerStats(db.Model):
                     for player_stat_data in player_stats_data:
                         player_stat_id = player_stat_data['id']
 
+                        # Check if the player_stat_data has 'player' and 'id' properties
+                        if 'player' not in player_stat_data or 'id' not in player_stat_data['player']:
+                            print("Invalid player data. Skipping.")
+                            continue
+
                         # Check if the player already exists
                         existing_player = Player.query.filter_by(id=player_stat_data['player']['id']).first()
 
