@@ -58,8 +58,9 @@ class PlayerStats(db.Model):
 
                 if response.status_code == 200:
                     data = response.json()
-                    total_pages = data['meta']['total_pages']
-                    player_stats_data = data['data']
+                    meta_data = data.get('meta', {})
+                    total_pages = meta_data.get('total_pages', 0)
+                    player_stats_data = data.get('data', [])
 
                     new_records_page = 0  # Counter for new records on the current page
                     duplicate_records_page = 0  # Counter for duplicate records on the current page
