@@ -42,7 +42,7 @@ class PlayerStats(db.Model):
 
     @staticmethod
     def fetch_and_insert_stats():
-        BASE_URL = "https://www.balldontlie.io/api/v1/stats?start_date=2013-10-10"
+        BASE_URL = "https://www.balldontlie.io/api/v1/stats?start_date=2002-7-6"
         PER_PAGE = 100
 
         page = 1
@@ -66,15 +66,16 @@ class PlayerStats(db.Model):
 
                     for player_stat_data in player_stats_data:
                         player_stat_id = player_stat_data['id']
+
+                        # Check if the player already exists
+                        existing_player = Player.query.filter_by(id=player_stat_data['player']['id']).first()
+
+                        if existing_player is None:
+                            # Player does not exist, skip adding the stats
+                            print(f"Player with ID {player_stat_data['player']['id']} does not exist. Skipping.")
+                            continue
+
                         try:
-                            # Check if the player already exists
-                            existing_player = Player.query.filter_by(id=player_stat_data['player']['id']).first()
-
-                            if existing_player is None:
-                                # Player does not exist, skip adding the stats
-                                print(f"Player with ID {player_stat_data['player']['id']} does not exist. Skipping.")
-                                continue
-
                             player_stat = PlayerStats(
                                 id=player_stat_id,
                                 ast=player_stat_data.get('ast', 0),
@@ -105,17 +106,18 @@ class PlayerStats(db.Model):
                             db.session.commit()
                             new_records += 1
                             new_records_page += 1
-                        except IntegrityError as e:
+                        except IntegrityError:
                             db.session.rollback()
                             duplicate_records += 1
                             duplicate_records_page += 1
                         except Exception as e:
                             print(f"An error occurred while processing data: {e}")
 
-                    print(f"Inserted data from page {page}/{total_pages}. New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
+                    print(f"Page {page}/{total_pages}: New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
 
                     if page < total_pages:
                         page += 1
+                        time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
                     else:
                         break
                 else:
