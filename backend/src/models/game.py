@@ -41,7 +41,7 @@ class Game(db.Model):
         total_added = 0
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&seasons[]=2004"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&seasons[]=2003"
 
             try:
                 response = requests.get(url)
