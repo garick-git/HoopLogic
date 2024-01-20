@@ -71,7 +71,7 @@ def getPointsByNumGames(player_id, games_count):
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/points/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
 def getPointsByNumGames_teams(player_id, games_count, opponent_id):
-    return jsonify(pointsByNumGames_teams(player_id, games_count, opponent_id))
+    return jsonify(pointsByNumGames_teams(player_id, games_count, int(opponent_id)))
 
 #PRA for a player_id for games_count amount of games
 @statRetrieval_BP.route('/api/games/search/PRA/<player_id>/<games_count>', methods=['GET'])
