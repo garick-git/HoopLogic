@@ -1,14 +1,13 @@
 from datetime import datetime
 from sqlalchemy import or_
 from sqlalchemy import desc
-from sqlalchemy import func  # Import the func module for coalesce
 from ..models.playerStats import PlayerStats
 from ..models.game import Game
 from database import db
 
 def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
-    query = db.session.query(func.coalesce(stat_column, 0.0)).join(Game)
+    query = db.session.query(stat_column).join(Game)
     
     if team_id:
         query = query.filter(
@@ -28,8 +27,11 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
         .all()
     )
 
+    if not recent_stats:
+        return [0.0, []]
+
     total_stat = sum(stat[0] for stat in recent_stats)
-    average_stat = round(total_stat / num_games, 2) if recent_stats else 0.0
+    average_stat = round(total_stat / num_games, 2)
 
     return [average_stat, [stat[0] for stat in recent_stats]]
 
