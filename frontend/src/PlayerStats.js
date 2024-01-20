@@ -16,6 +16,7 @@ const PlayerStats = () => {
     const [inputValue, setInputValue] = useState('');
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [players, setPlayers] = useState([]);
+    const [pointArray, setPointArray] = useState([]);
     const navigate = useNavigate();
     let timerId;
     const localDataForPlayers = [{"first_name":"Stephen","id":115,"last_name":"Curry","position":"G","team":10,"total_points":"24477"},
@@ -142,8 +143,14 @@ const PlayerStats = () => {
       weight: 190
     };    
 
-    const localLastXGames =
-      {PRA:40.4,assists:8.4,average_points:26.6,free_throws:2.8,rebounds:5.4,three_pointers:3.4};    
+    const localLastXGames = {
+      PRA:40.4,
+      assists:8.4,
+      average_points:26.6,
+      free_throws:2.8,
+      rebounds:5.4,
+      three_pointers:3.4
+    };    
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
@@ -287,8 +294,6 @@ const PlayerStats = () => {
       }
 
       const refreshStats = () => {
-        console.log('Last games: ', gameCount);
-        console.log('Team selected: ', selectedTeam);
         if(selectedTeam != 1){
           fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
             method: 'GET',
@@ -310,6 +315,26 @@ const PlayerStats = () => {
             .catch((error) => {
               console.error('Error:', error);
             });
+
+            fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                return response.json();
+              })
+              .then((data) => {
+                console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
+                setPointArray(data);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+          });
         }
 
         else{
@@ -333,12 +358,28 @@ const PlayerStats = () => {
             .catch((error) => {
               console.error('Error:', error);
         });
+
+          fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log('Points array for last ', gameCount, 'games against ALL opponents: ', data)
+              setPointArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+        });
         }
       }
-
-      useEffect(() => {
-        console.log('lastXGames has changed! New array: ', lastXGames)
-      },[lastXGames])
 
       return (
         playerData && lastXGames ? (
