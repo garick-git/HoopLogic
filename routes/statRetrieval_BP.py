@@ -49,7 +49,7 @@ def getThreesByNumGames(player_id, games_count):
 #3PM for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/3PM/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
-def getThreesByNumGames_Teams(player_id, games_count, opponent_id):
+def getThreesByNumGames_teams(player_id, games_count, opponent_id):
     return jsonify(threesByNumGames_team(player_id, games_count, opponent_id))
 
 @statRetrieval_BP.route('/api/games/search/FTM/<player_id>/<games_count>', methods=['GET'])
@@ -59,7 +59,7 @@ def getFTMByNumGames(player_id, games_count):
 #FTM for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/FTM/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
-def getFTMByNumGames_Teams(player_id, games_count, opponent_id):
+def getFTMByNumGames_teams(player_id, games_count, opponent_id):
     return jsonify(FTMByNumGames_team(player_id, games_count, opponent_id))
 
 #Points for a player_id for games_count amount of games
@@ -70,7 +70,7 @@ def getPointsByNumGames(player_id, games_count):
 #Points for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/points/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
-def getPointsByNumGames_Teams(player_id, games_count, opponent_id):
+def getPointsByNumGames_teams(player_id, games_count, opponent_id):
     return jsonify(pointsByNumGames_teams(player_id, games_count, opponent_id))
 
 #PRA for a player_id for games_count amount of games
@@ -81,7 +81,7 @@ def getPRAByNumGames(player_id, games_count):
 #PRA for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/PRA/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
-def getPRAByNumGames_Teams(player_id, games_count, opponent_id):
+def getPRAByNumGames_teams(player_id, games_count, opponent_id):
     return jsonify(getPRAComboForNumGamesWithTeam(player_id, games_count, opponent_id))
 
 #Points for a player_id for games_count amount of games
@@ -92,7 +92,7 @@ def getStealsByNumGames(player_id, games_count):
 #Points for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/steals/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
-def getStealsByNumGames_Teams(player_id, games_count, opponent_id):
+def getStealsByNumGames_teams(player_id, games_count, opponent_id):
     return jsonify(stealsByNumGames_teams(player_id, games_count, opponent_id))
 
 #Points for a player_id for games_count amount of games
@@ -103,5 +103,5 @@ def getBlocksByNumGames(player_id, games_count):
 #Points for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/blocks/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
-def getBlocksByNumGames_Teams(player_id, games_count, opponent_id):
+def getBlocksByNumGames_teams(player_id, games_count, opponent_id):
     return jsonify(blocksByNumGames_team(player_id, games_count, opponent_id))
