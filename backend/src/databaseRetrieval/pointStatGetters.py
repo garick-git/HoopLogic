@@ -1,15 +1,13 @@
 from datetime import datetime
 from sqlalchemy import or_
 from sqlalchemy import desc
-from sqlalchemy.orm import joinedload
 from ..models.playerStats import PlayerStats
 from ..models.game import Game
 from database import db
 
 def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
-    query = db.session.query(stat_column)
-    query = query.join(Game)
+    query = db.session.query(stat_column).join(Game)
     
     if team_id:
         query = query.filter(
@@ -42,7 +40,7 @@ def pointsByNumGames(player_id, num_games):
     return average_and_recent_stat(player_id, num_games, PlayerStats.pts)
 
 def pointsByNumGames_teams(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, team_id, PlayerStats.pts)
+    return average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)
 
 def allByNumGames(player_id, num_games):
     result = {
@@ -69,4 +67,3 @@ def allByNumGamesByTeam(player_id, num_games, team_id):
     result['PRA'] = round(result['average_points'] + result['rebounds'] + result['assists'], 2)
 
     return result
-
