@@ -154,6 +154,7 @@ const PlayerStats = () => {
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
+        refreshStats();
     }, [])
 
     const roundAttributesToDecimal = (object) => {
@@ -294,6 +295,7 @@ const PlayerStats = () => {
       }
 
       const refreshStats = () => {
+        // If the user specified a team against:
         if(selectedTeam != 1){
           fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
             method: 'GET',
@@ -316,6 +318,7 @@ const PlayerStats = () => {
               console.error('Error:', error);
             });
 
+            // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
               headers: {
@@ -336,7 +339,7 @@ const PlayerStats = () => {
                 console.error('Error:', error);
           });
         }
-
+        // If the user did not specify a team against:
         else{
           fetch(`/api/games/search/${playerId}/${gameCount}`, {
             method: 'GET',
@@ -359,6 +362,7 @@ const PlayerStats = () => {
               console.error('Error:', error);
         });
 
+        // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
@@ -520,7 +524,9 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              {/* <Graph/> */}
+              <div className="graphDiv">
+                <Graph pointArray={pointArray}/>
+              </div>
             </div>
           </div>
         ) : (
