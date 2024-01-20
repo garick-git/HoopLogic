@@ -2,3 +2,5 @@
 __pycache__/
 gunicorn_access.log
 gunicorn_error.log
+node_modules
+node_modules

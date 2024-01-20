@@ -152,6 +152,11 @@ const PlayerStats = () => {
       three_pointers:3.4
     };    
 
+    const localPointArray = {
+      average_points:40.4,
+      points:[30, 40, 45, 50, 37]
+    };
+
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
         refreshStats();
@@ -337,6 +342,8 @@ const PlayerStats = () => {
               })
               .catch((error) => {
                 console.error('Error:', error);
+                console.error('Points array could not be fetched! Switching to localPointArray...')
+                setPointArray(localPointArray);
           });
         }
         // If the user did not specify a team against:
@@ -381,6 +388,8 @@ const PlayerStats = () => {
             })
             .catch((error) => {
               console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localPointArray...')
+              setPointArray(localPointArray);
         });
         }
       }
