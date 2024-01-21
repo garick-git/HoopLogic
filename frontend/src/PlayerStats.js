@@ -153,8 +153,7 @@ const PlayerStats = () => {
     };    
 
     const localPointArray = {
-      average_points:40.4,
-      points:[30, 40, 45, 50, 37]
+      points: [40.4, [30, 40, 45, 50, 37]],
     };
 
     useEffect(() => {

@@ -46,7 +46,7 @@ def pointsByNumGames_teams(player_id, num_games, team_id):
     result = {
         'points': (average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id))
     }
-    return 
+    return result
 
 def allByNumGames(player_id, num_games):
     result = {
