@@ -532,9 +532,9 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="graphDiv">
+              {/* <div className="graphDiv">
                 <Graph pointArray={pointArray}/>
-              </div>
+              </div> */}
             </div>
           </div>
         ) : (
