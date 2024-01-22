@@ -12,7 +12,7 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     if team_id:
         query = query.filter(
             or_(
-                Game.home_team_id == team_id
+                Game.home_team_id == team_id,
                 Game.visitor_team_id == team_id
             )
         )
