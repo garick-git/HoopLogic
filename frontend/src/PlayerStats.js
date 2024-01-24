@@ -153,7 +153,7 @@ const PlayerStats = () => {
     };    
 
     const localPointArray = {
-      points: [40.4, [30, 40, 45, 50, 37]],
+      points: [26.6, [24, 25, 27, 27, 30, 24, 25, 27, 2, 23]]
     };
 
     useEffect(() => {
@@ -480,7 +480,14 @@ const PlayerStats = () => {
                 <div className="statsTableHeader">
                   <h3 className='statsTitle'>Stats</h3>
                   <p className="lastGamesLabel">Last Games: </p>
-                  <input placeholder='1' type="number" min="1" max= "50" className="lastGamesInput"  onChange={(e) => handleGameCountChange(e.target.value)}/>
+                  <input
+                    placeholder='1'
+                    type="number"
+                    min="1"
+                    max="50"
+                    className="lastGamesInput"
+                    onChange={(e) => handleGameCountChange(e.target.value)}
+                  />
                   <p className="vsLabel">VS. </p>
                   <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
                     {NBA_TEAMS.map((team, index) => (
@@ -532,9 +539,9 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              {/* <div className="graphDiv">
+              <div className="graphDiv">
                 <Graph pointArray={pointArray}/>
-              </div> */}
+              </div>
             </div>
           </div>
         ) : (
