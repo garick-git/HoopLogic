@@ -298,7 +298,7 @@ const PlayerStats = () => {
         setGameCount(selection);
       }
 
-      const refreshStats = ({ currentCell }) => {
+      const refreshStats = (currentCell) => {
         console.log('displayed graph should be: ', currentCell);
         // If the user specified a team against:
         if(selectedTeam != 1){
@@ -646,7 +646,7 @@ const PlayerStats = () => {
         }
       }
 
-      const changeDisplayedGraph = ({ currentCell }) => {
+      const changeDisplayedGraph = (currentCell) => {
         // 1 = points, 2 = free throws, 3 = rebounds, 4 = three pointers, 5 = assists, 6 = P+R+A
         console.log('cell clicked was ', currentCell)
         // refreshStats(currentCell);
@@ -763,7 +763,7 @@ const PlayerStats = () => {
                 <table className="statsTable">
                   <tbody>
                   <div className="topStatsRow">
-                    <div className="pointsCell" onClick={() => changeDisplayedGraph(1)}>
+                  <div className="pointsCell" onClick={() => changeDisplayedGraph(1)}>
                       <p className="pointsLabel">Points</p>
                       <p className="cellNumber" id='pointsNumber'>{lastXGames.average_points}</p>
                     </div>
