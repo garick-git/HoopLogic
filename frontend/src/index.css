@@ -39,12 +39,17 @@ code, pre {
 
 .searchBar {
   width: 500px;
-  padding: 10px;
+  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 20px;
   font-size: 16px;
   outline: none;  
   font-family: 'Norwester-Regular';
+  transition: transform 0.2s ease-in-out;
+}
+
+.searchBar:hover{
+  transform: scale(1.1);
 }
 
 .searchBar:focus {
@@ -81,11 +86,13 @@ code, pre {
   border-radius: 7%;
   background-color: white;
   max-height: 90px;
+  transition: transform 0.2s ease-in-out; /* Add transition property for smooth effect */
 }
 
 .playersRow:hover{
   background-color: #d9d9d9;
   cursor: pointer;
+  transform: scale(1.1); /* Increase the size on hover */
 }
 
 .teamLogoCell {
@@ -391,5 +398,6 @@ input::-webkit-inner-spin-button {
   padding-right:1%;
   padding-bottom:3%;
   max-width: 390px;
+  max-height: 270px;
   overflow: scroll;
 }
