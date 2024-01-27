@@ -41,9 +41,9 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 
 def PRAByNumGames(player_id, num_games):
     result = {
-        'average_points': round(average_and_recent_stat(player_id, num_games, PlayerStats.pts)[0], 2),
-        'assists': round(average_and_recent_stat(player_id, num_games, PlayerStats.ast)[0], 2),
-        'rebounds': round(average_and_recent_stat(player_id, num_games, PlayerStats.reb)[0], 2)
+        'average_points': (average_and_recent_stat(player_id, num_games, PlayerStats.pts)),
+        'assists': average_and_recent_stat(player_id, num_games, PlayerStats.ast),
+        'rebounds': average_and_recent_stat(player_id, num_games, PlayerStats.reb)
     }
 
     result['PRA'] = round(result['average_points'] + result['rebounds'] + result['assists'], 2)
@@ -52,9 +52,9 @@ def PRAByNumGames(player_id, num_games):
 
 def PRAByNumGames_team(player_id, num_games, team_id):
     result = {
-        'average_points': round(average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)[0], 2),
-        'assists': round(average_and_recent_stat(player_id, num_games, PlayerStats.ast, team_id)[0], 2),
-        'rebounds': round(average_and_recent_stat(player_id, num_games, PlayerStats.reb, team_id)[0], 2)
+        'average_points': average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id),
+        'assists': average_and_recent_stat(player_id, num_games, PlayerStats.ast, team_id),
+        'rebounds': average_and_recent_stat(player_id, num_games, PlayerStats.reb, team_id)
     }
 
     result['PRA'] = round(result['average_points'] + result['rebounds'] + result['assists'], 2)
