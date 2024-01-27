@@ -299,8 +299,8 @@ const PlayerStats = () => {
         setGameCount(selection);
       }
 
-      const refreshStats = ({ displayedGraph }) => {
-        console.log('displayed graph should be: ', displayedGraph);
+      const refreshStats = ({ currentCell }) => {
+        console.log('displayed graph should be: ', currentCell);
         // If the user specified a team against:
         if(selectedTeam != 1){
           fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
@@ -323,7 +323,7 @@ const PlayerStats = () => {
             .catch((error) => {
               console.error('Error:', error);
             });
-            if(displayedGraph == 1){
+            if(currentCell == 1){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -348,7 +348,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(displayedGraph == 2){
+            if(currentCell == 2){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/FTM/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -373,7 +373,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(displayedGraph == 3){
+            if(currentCell == 3){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/rebounds/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -398,7 +398,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(displayedGraph == 4){
+            if(currentCell == 4){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/3PM/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -423,7 +423,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(displayedGraph == 5){
+            if(currentCell == 5){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/assists/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -448,7 +448,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(displayedGraph == 6){
+            if(currentCell == 6){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/PRA/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -496,7 +496,7 @@ const PlayerStats = () => {
               console.error('Error:', error);
         });
 
-        if(displayedGraph == 1){
+        if(currentCell == 1){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -521,7 +521,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(displayedGraph == 2){
+          if(currentCell == 2){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/FTM/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -546,7 +546,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(displayedGraph == 3){
+          if(currentCell == 3){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/rebounds/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -571,7 +571,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(displayedGraph == 4){
+          if(currentCell == 4){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/3PM/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -596,7 +596,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(displayedGraph == 5){
+          if(currentCell == 5){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/assists/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -621,7 +621,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(displayedGraph == 6){
+          if(currentCell == 6){
             fetch(`/api/games/search/PRA/${playerId}/${gameCount}`, {
               method: 'GET',
               headers: {
@@ -759,7 +759,7 @@ const PlayerStats = () => {
                     src={process.env.PUBLIC_URL + '/arrowIcon.png'}
                     alt="Refresh Button"
                     className="refreshButton"
-                    onClick={refreshStats}
+                    onClick={(refreshStats(displayedGraph))}
                   />
                 </div>
                 <table className="statsTable">
