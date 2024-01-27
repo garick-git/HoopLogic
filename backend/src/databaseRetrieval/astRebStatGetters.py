@@ -58,7 +58,7 @@ def reboundsByNumGames(player_id, num_games):
     }
     return result
 
-def assistsByNumGames_teams(player_id, num_games, team_id):
+def reboundsByNumGames_teams(player_id, num_games, team_id):
     result = {
         'rebounds': (average_and_recent_stat(player_id, num_games, team_id, PlayerStats.reb))
     }
