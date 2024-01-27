@@ -10,9 +10,8 @@ from database import db
 
 def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
-    query = db.session.query(stat_column)
-    query = query.join(Game)
-    
+    query = db.session.query(stat_column).join(Game)
+
     if team_id:
         query = query.filter(
             or_(
@@ -20,7 +19,7 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
                 Game.visitor_team_id == team_id
             )
         )
-        
+
     recent_stats = (
         query
         .filter(PlayerStats.player_id == player_id)
@@ -41,13 +40,26 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 
 
 def assistsByNumGames(player_id, num_games):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.ast)
+    result = {
+        'assists': (average_and_recent_stat(player_id, num_games, PlayerStats.ast))
+    }
+    return result
+    
 
 def assistsByNumGames_teams(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, team_id, PlayerStats.ast)
+    result = {
+        'assists': (average_and_recent_stat(player_id, num_games, team_id, PlayerStats.ast))
+    }
+    return result
 
 def reboundsByNumGames(player_id, num_games):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.reb)
+    result = {
+        'rebounds': (average_and_recent_stat(player_id, num_games, PlayerStats.reb))
+    }
+    return result
 
-def reboundsByNumGames_team(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, team_id, PlayerStats.reb)
+def assistsByNumGames_teams(player_id, num_games, team_id):
+    result = {
+        'rebounds': (average_and_recent_stat(player_id, num_games, team_id, PlayerStats.reb))
+    }
+    return result

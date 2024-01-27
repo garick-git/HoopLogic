@@ -10,9 +10,8 @@ from database import db
 
 def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
-    query = db.session.query(stat_column)
-    query = query.join(Game)
-    
+    query = db.session.query(stat_column).join(Game)
+
     if team_id:
         query = query.filter(
             or_(
@@ -20,7 +19,7 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
                 Game.visitor_team_id == team_id
             )
         )
-        
+
     recent_stats = (
         query
         .filter(PlayerStats.player_id == player_id)
@@ -42,13 +41,25 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 
 
 def stealsByNumGames(player_id, num_games):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.stl)
+    result = {
+        'steals': (average_and_recent_stat(player_id, num_games, PlayerStats.stl))
+    }
+    return result
 
 def stealsByNumGames_teams(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.stl, team_id)
+    result = {
+        'steals': (average_and_recent_stat(player_id, num_games, PlayerStats.stl, team_id))
+    }
+    return result
 
 def blocksByNumGames(player_id, num_games):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.blk)
+    result = {
+        'blocks': (average_and_recent_stat(player_id, num_games, PlayerStats.blk))
+    }
+    return result
 
 def blocksByNumGames_team(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.blk, team_id)
+    result = {
+        'blocks': (average_and_recent_stat(player_id, num_games, PlayerStats.blk, team_id))
+    }
+    return result

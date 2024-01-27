@@ -9,9 +9,8 @@ from database import db
 
 def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
-    query = db.session.query(stat_column)
-    query = query.join(Game)
-    
+    query = db.session.query(stat_column).join(Game)
+
     if team_id:
         query = query.filter(
             or_(
@@ -19,7 +18,7 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
                 Game.visitor_team_id == team_id
             )
         )
-        
+
     recent_stats = (
         query
         .filter(PlayerStats.player_id == player_id)
@@ -40,13 +39,25 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 
 
 def FTMByNumGames(player_id, num_games):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.ftm)
+    result = {
+        'ftm': (average_and_recent_stat(player_id, num_games, PlayerStats.ftm))
+    }
+    return result
 
 def FTMByNumGames_team(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.ftm, team_id)
+    result = {
+        'ftm': (average_and_recent_stat(player_id, num_games, PlayerStats.ftm, team_id))
+    }
+    return result
 
 def threesByNumGames(player_id, num_games):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.fg3m)
+    result = {
+        '3pm': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m))
+    }
+    return result
 
 def threesByNumGames_team(player_id, num_games, team_id):
-    return average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id)
+    result = {
+        '3pm': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id))
+    }
+    return result
