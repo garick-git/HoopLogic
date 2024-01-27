@@ -799,7 +799,7 @@ const PlayerStats = () => {
                 </table>
               </div>
               <div className="graphDiv">
-                <Graph graphArray={graphArray}/>
+                {graphArray && <Graph graphArray={graphArray} />}
               </div>
             </div>
           </div>
