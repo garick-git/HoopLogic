@@ -159,7 +159,6 @@ const PlayerStats = () => {
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
-        refreshStats(displayedGraph);
     }, [])
 
     const roundAttributesToDecimal = (object) => {
@@ -650,8 +649,7 @@ const PlayerStats = () => {
       const changeDisplayedGraph = ({ currentCell }) => {
         // 1 = points, 2 = free throws, 3 = rebounds, 4 = three pointers, 5 = assists, 6 = P+R+A
         console.log('cell clicked was ', currentCell)
-        setDisplayedGraph(currentCell);
-        refreshStats(currentCell);
+        // refreshStats(currentCell);
       }
 
       return (
