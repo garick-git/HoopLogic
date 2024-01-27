@@ -8,35 +8,55 @@ from ..databaseRetrieval.astRebStatGetters import assistsByNumGames, assistsByNu
 from ..databaseRetrieval.pointStatGetters import pointsByNumGames_teams, pointsByNumGames
 from database import db
 
-def getPRAComboForNumGames(player_id, num_games):
+
+def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
+    query = db.session.query(stat_column).join(Game)
 
-    pointsArr = pointsByNumGames(player_id, num_games)
-    reboundsArr = reboundsByNumGames(player_id, num_games)
-    assistsArr = assistsByNumGames(player_id, num_games)
+    if team_id:
+        query = query.filter(
+            or_(
+                Game.home_team_id == team_id,
+                Game.visitor_team_id == team_id
+            )
+        )
 
-    pra_combo = []
-    for i in range(num_games):
-        pra_game = pointsArr[1][i] + reboundsArr[1][i] + assistsArr[1][i]
-        pra_combo.append(pra_game)
-    
-    average_PRA = round(sum(pra_combo) / num_games, 2)
-    
-    return [average_PRA, pra_combo]
+    recent_stats = (
+        query
+        .filter(PlayerStats.player_id == player_id)
+        .filter(PlayerStats.min != '00:00')
+        .filter(PlayerStats.min != '00')
+        .order_by(Game.date.desc())
+        .limit(num_games)
+        .all()
+    )
 
-def getPRAComboForNumGamesWithTeam(player_id, num_games, team_id):
-    num_games = int(num_games)
+    if not recent_stats:
+        return [0.0, []]
 
-    pointsArr = pointsByNumGames_teams(player_id, num_games, team_id)
-    reboundsArr = reboundsByNumGames_team(player_id, num_games, team_id)
-    assistsArr = assistsByNumGames_teams(player_id, num_games, team_id)
+    total_stat = sum(stat[0] for stat in recent_stats)
+    average_stat = round(total_stat / num_games, 2)
 
-    pra_combo = []
-    for i in range(num_games):
-        pra_game = pointsArr[1][i] + reboundsArr[1][i] + assistsArr[1][i]
-        pra_combo.append(pra_game)
-    
-    average_PRA = round(sum(pra_combo) / num_games, 2)
-    
-    return [average_PRA, pra_combo]
-#basketbalzzz
+    return [average_stat, [stat[0] for stat in recent_stats]]
+
+def PRAByNumGames(player_id, num_games):
+    result = {
+        'average_points': round(average_and_recent_stat(player_id, num_games, PlayerStats.pts)[0], 2),
+        'assists': round(average_and_recent_stat(player_id, num_games, PlayerStats.ast)[0], 2),
+        'rebounds': round(average_and_recent_stat(player_id, num_games, PlayerStats.reb)[0], 2)
+    }
+
+    result['PRA'] = round(result['average_points'] + result['rebounds'] + result['assists'], 2)
+
+    return result
+
+def PRAByNumGames_team(player_id, num_games, team_id):
+    result = {
+        'average_points': round(average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)[0], 2),
+        'assists': round(average_and_recent_stat(player_id, num_games, PlayerStats.ast, team_id)[0], 2),
+        'rebounds': round(average_and_recent_stat(player_id, num_games, PlayerStats.reb, team_id)[0], 2)
+    }
+
+    result['PRA'] = round(result['average_points'] + result['rebounds'] + result['assists'], 2)
+
+    return result
