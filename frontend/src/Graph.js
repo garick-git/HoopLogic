@@ -29,14 +29,22 @@ const Graph = ({ graphArray }) => {
     }, [tooltipData]);
 
     useEffect(() => {
-        if (!graphArray || !graphArray.points || graphArray.points.length !== 2) {
+        console.log('We are now in the useEffect() --> ', graphArray);
+        if (!graphArray) {
             return;
         }
-
-        const [averagePoints, specificScores] = graphArray.points;
+    
+        const dataType = Object.keys(graphArray)[0]; // Get the first (and only) key in graphArray
+        const data = graphArray[dataType];
+    
+        if (!data || data.length < 2) {
+            return;
+        }
+    
+        const [averageValue, specificValues] = data;
         const columnWidth = 100;
         const padding = 0.4;
-        const dynamicWidth = specificScores.length * (columnWidth + padding);
+        const dynamicWidth = specificValues.length * (columnWidth + padding);    
 
         const h = 250;
         const svg = d3.select(svgRef.current)
