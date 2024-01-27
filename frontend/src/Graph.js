@@ -56,19 +56,19 @@ const Graph = ({ graphArray }) => {
             .style('overflow', 'visible');
 
         const xScale = d3.scaleBand()
-            .domain(specificScores.map((val, i) => i))
+            .domain(specificValues.map((val, i) => i))
             .range([0, dynamicWidth])
             .padding(padding);
 
         const yScale = d3.scaleLinear()
-            .domain([0, d3.max(specificScores)])
+            .domain([0, d3.max(specificValues)])
             .range([h, 0]);
 
         const xAxis = d3.axisBottom(xScale)
-            .ticks(specificScores.length);
+            .ticks(specificValues.length);
 
         const yAxis = d3.axisLeft(yScale)
-            .ticks(specificScores.length);
+            .ticks(specificValues.length);
 
         svg.selectAll('*').remove();
 
@@ -80,7 +80,7 @@ const Graph = ({ graphArray }) => {
             .call(yAxis);
 
         const bars = svg.selectAll('.bar')
-            .data(specificScores)
+            .data(specificValues)
             .join('g')
             .attr('class', 'bar-group');
 
@@ -92,12 +92,12 @@ const Graph = ({ graphArray }) => {
             .style('transition', 'transform 0.2s ease-in-out')
             .style('cursor', 'pointer')
             .attr('rx', 5)
-            .attr('fill', v => (v < averagePoints) ? 'red' : '#00BF63')
+            .attr('fill', v => (v < averageValue) ? 'red' : '#00BF63')
             .on('mouseover', (event, d, i) => {
                 d3.select(event.target)
                     .style('transform', 'scale(1.01)')
-                const overUnder = (d < averagePoints) ? 'UNDER' : 'OVER';
-                const tooltipText = `${overUnder} ${averagePoints}`;
+                const overUnder = (d < averageValue) ? 'UNDER' : 'OVER';
+                const tooltipText = `${overUnder} ${averageValue}`;
                 setTooltipData({
                     text: tooltipText,
                     x: event.pageX,
