@@ -19,7 +19,6 @@ const PlayerStats = () => {
     const [graphArray, setGraphArray] = useState([]);
     const navigate = useNavigate();
     let timerId;
-    let [displayedGraph, setDisplayedGraph] = useState(1);
     const localDataForPlayers = [{"first_name":"Stephen","id":115,"last_name":"Curry","position":"G","team":10,"total_points":"24477"},
       {"first_name":"Stephen","id":1280,"last_name":"Jackson","position":"F","team":3,"total_points":"12887"},
       {"first_name":"Lance","id":431,"last_name":"Stephenson","position":"G","team":12,"total_points":"5014"},
@@ -159,6 +158,7 @@ const PlayerStats = () => {
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
+        refreshStats(1);
     }, [])
 
     const roundAttributesToDecimal = (object) => {
@@ -742,12 +742,6 @@ const PlayerStats = () => {
                       <option key={index} value={index + 1}>{team}</option>
                     ))}
                   </select>
-                  <img
-                    src={process.env.PUBLIC_URL + '/arrowIcon.png'}
-                    alt="Refresh Button"
-                    className="refreshButton"
-                    onClick={(refreshStats)}
-                  />
                 </div>
                 <table className="statsTable">
                   <tbody>
