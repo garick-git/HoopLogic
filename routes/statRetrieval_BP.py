@@ -3,7 +3,7 @@ from backend.src.databaseRetrieval.statDBRetrieval import getRecentGames, getRec
 from backend.src.databaseRetrieval.astRebStatGetters import assistsByNumGames, assistsByNumGames_teams, reboundsByNumGames, reboundsByNumGames_teams
 from backend.src.databaseRetrieval.ft3PMStatGetters import threesByNumGames, threesByNumGames_team, FTMByNumGames, FTMByNumGames_team
 from backend.src.databaseRetrieval.pointStatGetters import pointsByNumGames_teams, pointsByNumGames, allByNumGames, allByNumGamesByTeam
-from backend.src.databaseRetrieval.comboStatGetters import getPRAComboForNumGames, getPRAComboForNumGamesWithTeam
+from backend.src.databaseRetrieval.comboStatGetters import PRAByNumGames, PRAByNumGames_team
 from backend.src.databaseRetrieval.stlBlkStatGetters import stealsByNumGames, stealsByNumGames_teams, blocksByNumGames, blocksByNumGames_team
 
 statRetrieval_BP = Blueprint("stat_retrieval", __name__)
@@ -39,7 +39,7 @@ def getReboundsByNumGames(player_id, games_count):
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/rebounds/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
 def getReboundsByNumGames_Teams(player_id, games_count, opponent_id):
-    return jsonify(reboundsByNumGames_team(player_id, games_count, opponent_id))
+    return jsonify(reboundsByNumGames_teams(player_id, games_count, opponent_id))
 
 #3PM for a player_id for games_count amount of games
 @statRetrieval_BP.route('/api/games/search/3PM/<player_id>/<games_count>', methods=['GET'])
@@ -76,13 +76,13 @@ def getPointsByNumGames_teams(player_id, games_count, opponent_id):
 #PRA for a player_id for games_count amount of games
 @statRetrieval_BP.route('/api/games/search/PRA/<player_id>/<games_count>', methods=['GET'])
 def getPRAByNumGames(player_id, games_count):
-    return jsonify(getPRAComboForNumGames(player_id, games_count))
+    return jsonify(PRAByNumGames(player_id, games_count))
 
 #PRA for a player_id for games_count amount of games
 #Uses opponent ID to bring up ^ vs. a specfic team
 @statRetrieval_BP.route('/api/games/search/PRA/<player_id>/<games_count>/<opponent_id>', methods=['GET'])
 def getPRAByNumGames_teams(player_id, games_count, opponent_id):
-    return jsonify(getPRAComboForNumGamesWithTeam(player_id, games_count, opponent_id))
+    return jsonify(PRAByNumGames_team(player_id, games_count, opponent_id))
 
 #Points for a player_id for games_count amount of games
 @statRetrieval_BP.route('/api/games/search/steals/<player_id>/<games_count>', methods=['GET'])
