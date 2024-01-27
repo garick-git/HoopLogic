@@ -9,9 +9,9 @@ from ..databaseRetrieval.pointStatGetters import pointsByNumGames_teams, pointsB
 from database import db
 
 
-def average_and_recent_stat(player_id, num_games, stat_column1, stat_column2, stat_column3, team_id=None):
+def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
     num_games = int(num_games)
-    query = db.session.query(stat_column1, stat_column2, stat_column3).join(Game)
+    query = db.session.query(stat_column).join(Game)
 
     if team_id:
         query = query.filter(
@@ -34,22 +34,29 @@ def average_and_recent_stat(player_id, num_games, stat_column1, stat_column2, st
     if not recent_stats:
         return [0.0, []]
 
-    total_stat1 = sum(stat[0] for stat in recent_stats)
-    total_stat2 = sum(stat[1] for stat in recent_stats)
-    total_stat3 = sum(stat[2] for stat in recent_stats)
+    total_stat = sum(stat[0] for stat in recent_stats)
+    average_stat = round(total_stat / num_games, 2)
 
-    average_stat = round((total_stat1 + total_stat2 + total_stat3) / num_games, 2)
-
-    return [average_stat, [(stat[0], stat[1], stat[2]) for stat in recent_stats]]
+    return [average_stat, [stat[0] for stat in recent_stats]]
 
 def PRAByNumGames(player_id, num_games):
     result = {
-        'PRA': (average_and_recent_stat(player_id, num_games, PlayerStats.pts, PlayerStats.reb, PlayerStats.ast))
+        'average_points': round(average_and_recent_stat(player_id, num_games, PlayerStats.pts)[0], 2),
+        'assists': round(average_and_recent_stat(player_id, num_games, PlayerStats.ast)[0], 2),
+        'rebounds': round(average_and_recent_stat(player_id, num_games, PlayerStats.reb)[0], 2)
     }
+
+    result['PRA'] = round(result['average_points'] + result['rebounds'] + result['assists'], 2)
+
     return result
 
-def PRAByNumGames_teams(player_id, num_games, team_id):
+def PRAByNumGames_team(player_id, num_games, team_id):
     result = {
-        'PRA': (average_and_recent_stat(player_id, num_games, PlayerStats.pts, PlayerStats.reb, PlayerStats.ast, team_id))
+        'average_points': round(average_and_recent_stat(player_id, num_games, PlayerStats.pts, team_id)[0], 2),
+        'assists': round(average_and_recent_stat(player_id, num_games, PlayerStats.ast, team_id)[0], 2),
+        'rebounds': round(average_and_recent_stat(player_id, num_games, PlayerStats.reb, team_id)[0], 2)
     }
+
+    result['PRA'] = round(result['average_points'] + result['rebounds'] + result['assists'], 2)
+
     return result
