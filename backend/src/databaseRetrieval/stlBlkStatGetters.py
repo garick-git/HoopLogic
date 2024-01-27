@@ -42,24 +42,24 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 
 def stealsByNumGames(player_id, num_games):
     result = {
-        'steals': (average_and_recent_stat(player_id, num_games, PlayerStats.stl))
+        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.stl))
     }
     return result
 
 def stealsByNumGames_teams(player_id, num_games, team_id):
     result = {
-        'steals': (average_and_recent_stat(player_id, num_games, PlayerStats.stl, team_id))
+        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.stl, team_id))
     }
     return result
 
 def blocksByNumGames(player_id, num_games):
     result = {
-        'blocks': (average_and_recent_stat(player_id, num_games, PlayerStats.blk))
+        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.blk))
     }
     return result
 
 def blocksByNumGames_team(player_id, num_games, team_id):
     result = {
-        'blocks': (average_and_recent_stat(player_id, num_games, PlayerStats.blk, team_id))
+        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.blk, team_id))
     }
     return result
