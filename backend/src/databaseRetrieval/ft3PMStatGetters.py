@@ -40,24 +40,24 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 
 def FTMByNumGames(player_id, num_games):
     result = {
-        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.ftm))
+        'ftm': (average_and_recent_stat(player_id, num_games, PlayerStats.ftm))
     }
     return result
 
 def FTMByNumGames_team(player_id, num_games, team_id):
     result = {
-        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.ftm, team_id))
+        'ftm': (average_and_recent_stat(player_id, num_games, PlayerStats.ftm, team_id))
     }
     return result
 
 def threesByNumGames(player_id, num_games):
     result = {
-        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m))
+        '3pm': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m))
     }
     return result
 
 def threesByNumGames_team(player_id, num_games, team_id):
     result = {
-        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id))
+        '3pm': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id))
     }
     return result

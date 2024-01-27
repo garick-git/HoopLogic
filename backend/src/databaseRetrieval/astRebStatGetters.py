@@ -41,25 +41,25 @@ def average_and_recent_stat(player_id, num_games, stat_column, team_id=None):
 
 def assistsByNumGames(player_id, num_games):
     result = {
-        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.ast))
+        'assists': (average_and_recent_stat(player_id, num_games, PlayerStats.ast))
     }
     return result
     
 
 def assistsByNumGames_teams(player_id, num_games, team_id):
     result = {
-        'points': (average_and_recent_stat(player_id, num_games, team_id, PlayerStats.ast))
+        'assists': (average_and_recent_stat(player_id, num_games, team_id, PlayerStats.ast))
     }
     return result
 
 def reboundsByNumGames(player_id, num_games):
     result = {
-        'points': (average_and_recent_stat(player_id, num_games, PlayerStats.reb))
+        'rebounds': (average_and_recent_stat(player_id, num_games, PlayerStats.reb))
     }
     return result
 
 def assistsByNumGames_teams(player_id, num_games, team_id):
     result = {
-        'points': (average_and_recent_stat(player_id, num_games, team_id, PlayerStats.reb))
+        'rebounds': (average_and_recent_stat(player_id, num_games, team_id, PlayerStats.reb))
     }
     return result
