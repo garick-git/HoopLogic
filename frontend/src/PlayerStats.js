@@ -159,7 +159,7 @@ const PlayerStats = () => {
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
-        refreshStats(displayedGraphç);
+        refreshStats(displayedGraph);
     }, [])
 
     const roundAttributesToDecimal = (object) => {
