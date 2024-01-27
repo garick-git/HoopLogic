@@ -757,7 +757,7 @@ const PlayerStats = () => {
                     src={process.env.PUBLIC_URL + '/arrowIcon.png'}
                     alt="Refresh Button"
                     className="refreshButton"
-                    onClick={(refreshStats(displayedGraph))}
+                    onClick={(refreshStats)}
                   />
                 </div>
                 <table className="statsTable">
