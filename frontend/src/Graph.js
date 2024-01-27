@@ -5,6 +5,7 @@ const Graph = ({ graphArray }) => {
     const svgRef = useRef();
     const tooltipRef = useRef(null);
     const [tooltipData, setTooltipData] = useState(null);
+    console.log('graph is now rendered! The array received was: ', graphArray);
 
     useEffect(() => {
         const handleMouseMove = (event) => {

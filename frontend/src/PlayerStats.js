@@ -300,6 +300,7 @@ const PlayerStats = () => {
       }
 
       const refreshStats = ({ displayedGraph }) => {
+        console.log('displayed graph should be: ', displayedGraph);
         // If the user specified a team against:
         if(selectedTeam != 1){
           fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
@@ -648,12 +649,10 @@ const PlayerStats = () => {
 
       const changeDisplayedGraph = ({ currentCell }) => {
         // 1 = points, 2 = free throws, 3 = rebounds, 4 = three pointers, 5 = assists, 6 = P+R+A
+        console.log('cell clicked was ', currentCell)
         setDisplayedGraph(currentCell);
+        refreshStats(currentCell);
       }
-
-      useEffect(() => {
-        refreshStats(displayedGraph);
-      }, [displayedGraph])
 
       return (
         playerData && lastXGames ? (
