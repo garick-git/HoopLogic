@@ -362,7 +362,6 @@ const PlayerStats = () => {
                   return response.json();
                 })
                 .then((data) => {
-                  console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                   setGraphArray(data);
                 })
                 .catch((error) => {
@@ -387,7 +386,6 @@ const PlayerStats = () => {
                   return response.json();
                 })
                 .then((data) => {
-                  console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                   setGraphArray(data);
                 })
                 .catch((error) => {
@@ -412,7 +410,6 @@ const PlayerStats = () => {
                   return response.json();
                 })
                 .then((data) => {
-                  console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                   setGraphArray(data);
                 })
                 .catch((error) => {
@@ -437,7 +434,6 @@ const PlayerStats = () => {
                   return response.json();
                 })
                 .then((data) => {
-                  console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                   setGraphArray(data);
                 })
                 .catch((error) => {
@@ -462,7 +458,6 @@ const PlayerStats = () => {
                   return response.json();
                 })
                 .then((data) => {
-                  console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                   setGraphArray(data);
                 })
                 .catch((error) => {
@@ -510,7 +505,6 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                console.log('Points array for last ', gameCount, 'games against ALL opponents: ', data)
                 setGraphArray(data);
               })
               .catch((error) => {
@@ -535,7 +529,6 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                console.log('Points array for last ', gameCount, 'games against ALL opponents: ', data)
                 setGraphArray(data);
               })
               .catch((error) => {
@@ -560,7 +553,6 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                console.log('Points array for last ', gameCount, 'games against ALL opponents: ', data)
                 setGraphArray(data);
               })
               .catch((error) => {
@@ -585,7 +577,6 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                console.log('Points array for last ', gameCount, 'games against ALL opponents: ', data)
                 setGraphArray(data);
               })
               .catch((error) => {
@@ -610,7 +601,6 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                console.log('Points array for last ', gameCount, 'games against ALL opponents: ', data)
                 setGraphArray(data);
               })
               .catch((error) => {
@@ -634,7 +624,6 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                console.log('Points array for last ', gameCount, 'games against ALL opponents: ', data)
                 setGraphArray(data);
               })
               .catch((error) => {
