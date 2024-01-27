@@ -641,6 +641,10 @@ const PlayerStats = () => {
         refreshStats(currentCell);
       }
 
+      useEffect(() => {
+        console.log('graphArray has changed to: ', graphArray)
+      }, [graphArray])
+
       return (
         playerData && lastXGames ? (
           <div className='playerStatsPage'>
