@@ -17,10 +17,7 @@ def PRAByNumGames(player_id, num_games):
     recent_PRA = np.add(avgPoints[1] + avgAst[1] + avgReb[1])
     average_PRA = round((avgAst[0]+avgReb[0]+avgPoints[0]),2)
 
-    return {
-        'average_PRA': average_PRA,
-        'recent_PRA': recent_PRA
-    }
+    return [average_PRA,recent_PRA]
 
 def PRAByNumGames_team(player_id, num_games, team_id):
     avgPoints = pointsByNumGames_teams(player_id, num_games, team_id)
@@ -30,7 +27,4 @@ def PRAByNumGames_team(player_id, num_games, team_id):
     recent_PRA = np.add(avgPoints[1] + avgAst[1] + avgReb[1])
     average_PRA = round((avgAst[0]+avgReb[0]+avgPoints[0]),2)
 
-    return {
-        'average_PRA': average_PRA,
-        'recent_PRA': recent_PRA
-    }
+    return [average_PRA,recent_PRA]
