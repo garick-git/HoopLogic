@@ -1,4 +1,5 @@
 from datetime import datetime
+import numpy as np
 from sqlalchemy.orm import joinedload
 from sqlalchemy import or_
 from ..models.player import Player
@@ -8,43 +9,13 @@ from ..databaseRetrieval.astRebStatGetters import assistsByNumGames, assistsByNu
 from ..databaseRetrieval.pointStatGetters import pointsByNumGames_teams, pointsByNumGames
 from database import db
 
-def average_and_recent_PRA(player_id, num_games, team_id=None):
-    num_games = int(num_games)
-
-    query = db.session.query(PlayerStats.pts, PlayerStats.ast, PlayerStats.reb).join(Game)
-
-    if team_id:
-        query = query.filter(
-            or_(
-                Game.home_team_id == team_id,
-                Game.visitor_team_id == team_id
-            )
-        )
-
-    recent_stats = (
-        query
-        .filter(PlayerStats.player_id == player_id)
-        .filter(PlayerStats.min != '00:00')
-        .filter(PlayerStats.min != '00')
-        .order_by(Game.date.desc())
-        .limit(num_games)
-        .all()
-    )
-
-    if not recent_stats:
-        return [0.0, []]
-
-    total_PRA = []
-    for stats in recent_stats:
-        PRA = sum(stats)
-        total_PRA.append(PRA)
-
-    average_PRA = round(sum(total_PRA) / num_games, 2)
-
-    return [average_PRA, total_PRA]
-
 def PRAByNumGames(player_id, num_games):
-    average_PRA, recent_PRA = average_and_recent_PRA(player_id, num_games)
+    avgPoints = pointsByNumGames(player_id, num_games)
+    avgReb = reboundsByNumGames(player_id, num_games)
+    avgAst = assistsByNumGames(player_id, num_games)
+
+    recent_PRA = np.add(avgPoints[1] + avgAst[1] + avgReb[1])
+    average_PRA = round((avgAst[0]+avgReb[0]+avgPoints[0]),2)
 
     return {
         'average_PRA': average_PRA,
@@ -52,7 +23,12 @@ def PRAByNumGames(player_id, num_games):
     }
 
 def PRAByNumGames_team(player_id, num_games, team_id):
-    average_PRA, recent_PRA = average_and_recent_PRA(player_id, num_games, team_id)
+    avgPoints = pointsByNumGames_teams(player_id, num_games, team_id)
+    avgReb = reboundsByNumGames_teams(player_id, num_games, team_id)
+    avgAst = assistsByNumGames_teams(player_id, num_games, team_id)
+
+    recent_PRA = np.add(avgPoints[1] + avgAst[1] + avgReb[1])
+    average_PRA = round((avgAst[0]+avgReb[0]+avgPoints[0]),2)
 
     return {
         'average_PRA': average_PRA,
