@@ -158,9 +158,139 @@ const PlayerStats = () => {
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setPointsArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setPointsArray(localGraphArray);
+          });
+
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/FTM/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setFtArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setFtArray(localGraphArray);
+          });
+
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/rebounds/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setReboundsArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setReboundsArray(localGraphArray);
+          });
+
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/3PM/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setThreePointersArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setThreePointersArray(localGraphArray);
+          });
+
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/assists/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setAssistsArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setAssistsArray(localGraphArray);
+          });
+
+          fetch(`/api/games/search/PRA/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setPraArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setPraArray(localGraphArray);
+          });
     }, [])
 
-    const fetchPlayer = (playerId, gameCount) => {
+    const fetchPlayer = (playerId) => {
         fetch(`/api/player/search/id/${playerId}`, {
             method: 'GET',
             headers: {
@@ -292,11 +422,13 @@ const PlayerStats = () => {
               .then((data) => {
                 console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                 setPointsArray(data);
+                setGraphArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
                 setPointsArray(localGraphArray);
+                setGraphArray(localGraphArray);
             });
           }
 
@@ -316,11 +448,13 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setFtArray(data);
+                setGraphArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
                 setFtArray(localGraphArray);
+                setGraphArray(localGraphArray);
             });
           }
 
@@ -340,11 +474,13 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setReboundsArray(data);
+                setGraphArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
                 setReboundsArray(localGraphArray);
+                setGraphArray(localGraphArray);
             });
           }
 
@@ -364,11 +500,13 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setThreePointersArray(data);
+                setGraphArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
                 setThreePointersArray(localGraphArray);
+                setGraphArray(localGraphArray);
             });
           }
 
@@ -388,11 +526,13 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setAssistsArray(data);
+                setGraphArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
                 setAssistsArray(localGraphArray);
+                setGraphArray(localGraphArray);
             });
           }
 
@@ -412,11 +552,13 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setPraArray(data);
+                setGraphArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
                 setPraArray(localGraphArray);
+                setGraphArray(localGraphArray);
             });
           }
       }
@@ -438,11 +580,13 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPointsArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
               setPointsArray(localGraphArray);
+              setGraphArray(localGraphArray);
           });
         }
 
@@ -462,11 +606,13 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setFtArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
               setFtArray(localGraphArray);
+              setGraphArray(localGraphArray);
           });
         }
 
@@ -486,11 +632,13 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setReboundsArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
               setReboundsArray(localGraphArray);
+              setGraphArray(localGraphArray);
           });
         }
 
@@ -510,11 +658,13 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setThreePointersArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
               setThreePointersArray(localGraphArray);
+              setGraphArray(localGraphArray);
           });
         }
 
@@ -534,11 +684,13 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setAssistsArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
               setAssistsArray(localGraphArray);
+              setGraphArray(localGraphArray);
           });
         }
 
@@ -557,11 +709,13 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPraArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
               setPraArray(localGraphArray);
+              setGraphArray(localGraphArray);
           });
         }
       }
