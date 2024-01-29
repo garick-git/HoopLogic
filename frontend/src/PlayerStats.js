@@ -814,7 +814,7 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              {pointsArray ? null : (
+              {pointsArray && (
                 <div className="statsDiv">
                   <div className="statsTableHeader">
                     <h3 className='statsTitle'>Stats</h3>
