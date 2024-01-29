@@ -173,6 +173,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPointsArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -195,6 +196,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setFtArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -217,6 +219,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setReboundsArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -239,6 +242,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setThreePointersArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -261,6 +265,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setAssistsArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -282,6 +287,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPraArray(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -808,63 +814,65 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="statsDiv">
-                <div className="statsTableHeader">
-                  <h3 className='statsTitle'>Stats</h3>
-                  <p className="lastGamesLabel">Last Games: </p>
-                  <input
-                    placeholder='5'
-                    type="number"
-                    min="1"
-                    max="50"
-                    className="lastGamesInput"
-                    onChange={(e) => handleGameCountChange(e.target.value)}
-                  />
-                  <p className="vsLabel">VS. </p>
-                  <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
-                    {NBA_TEAMS.map((team, index) => (
-                      <option key={index} value={index + 1}>{team}</option>
-                    ))}
-                  </select>
+              {pointsArray ? null : (
+                <div className="statsDiv">
+                  <div className="statsTableHeader">
+                    <h3 className='statsTitle'>Stats</h3>
+                    <p className="lastGamesLabel">Last Games: </p>
+                    <input
+                      placeholder='5'
+                      type="number"
+                      min="1"
+                      max="50"
+                      className="lastGamesInput"
+                      onChange={(e) => handleGameCountChange(e.target.value)}
+                    />
+                    <p className="vsLabel">VS. </p>
+                    <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
+                      {NBA_TEAMS.map((team, index) => (
+                        <option key={index} value={index + 1}>{team}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <table className="statsTable">
+                    <tbody>
+                    <div className="topStatsRow">
+                    <div className="pointsCell" onClick={() => handleCellChange(1)}>
+                        <p className="pointsLabel">Points</p>
+                        <p className="cellNumber" id='pointsNumber'>{pointsArray.points[0]}</p>
+                      </div>
+                      <div className="spacerCell"></div>
+                      <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
+                        <p className='freeThrowsLabel'>Free Throws</p>
+                        <p className='cellNumber'>{ftArray.points[0]}</p>
+                      </div>
+                    </div>
+                    <div className="topStatsRow">
+                      <div className="pointsCell" onClick={() => handleCellChange(3)}>
+                          <p className="pointsLabel">Rebounds</p>
+                          <p className="cellNumber" id='pointsNumber'>{reboundsArray.points[0]}</p>
+                        </div>
+                        <div className="spacerCell"></div>
+                        <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
+                          <p className='freeThrowsLabel'>Three Pointers</p>
+                          <p className='cellNumber'>{threePointersArray.points[0]}</p>
+                        </div>
+                    </div>
+                    <div className="topStatsRow">
+                        <div className="alternateCell1" onClick={() => handleCellChange(5)}>
+                          <p className="pointsLabel">Assists</p>
+                          <p className="cellNumber" id='pointsNumber'>{assistsArray.points[0]}</p>
+                        </div>
+                        <div className="spacerCell"></div>
+                        <div className="alternateCell2" onClick={() => handleCellChange(6)}>
+                          <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
+                          <p className='cellNumber'>{praArray.points[0]}</p>
+                        </div>
+                    </div>
+                    </tbody>
+                  </table>
                 </div>
-                <table className="statsTable">
-                  <tbody>
-                  <div className="topStatsRow">
-                  <div className="pointsCell" onClick={() => handleCellChange(1)}>
-                      <p className="pointsLabel">Points</p>
-                      <p className="cellNumber" id='pointsNumber'>{pointsArray.points[0]}</p>
-                    </div>
-                    <div className="spacerCell"></div>
-                    <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
-                      <p className='freeThrowsLabel'>Free Throws</p>
-                      <p className='cellNumber'>{ftArray.points[0]}</p>
-                    </div>
-                  </div>
-                  <div className="topStatsRow">
-                    <div className="pointsCell" onClick={() => handleCellChange(3)}>
-                        <p className="pointsLabel">Rebounds</p>
-                        <p className="cellNumber" id='pointsNumber'>{reboundsArray.points[0]}</p>
-                      </div>
-                      <div className="spacerCell"></div>
-                      <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
-                        <p className='freeThrowsLabel'>Three Pointers</p>
-                        <p className='cellNumber'>{threePointersArray.points[0]}</p>
-                      </div>
-                  </div>
-                  <div className="topStatsRow">
-                      <div className="alternateCell1" onClick={() => handleCellChange(5)}>
-                        <p className="pointsLabel">Assists</p>
-                        <p className="cellNumber" id='pointsNumber'>{assistsArray.points[0]}</p>
-                      </div>
-                      <div className="spacerCell"></div>
-                      <div className="alternateCell2" onClick={() => handleCellChange(6)}>
-                        <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
-                        <p className='cellNumber'>{praArray.points[0]}</p>
-                      </div>
-                  </div>
-                  </tbody>
-                </table>
-              </div>
+              )}
               <div className="graphDiv">
                 {graphArray && <Graph graphArray={graphArray} />}
               </div>
