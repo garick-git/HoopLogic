@@ -8,9 +8,9 @@ import Graph from './Graph.js';
 
 const PlayerStats = () => {
     const { playerId } = useParams();
+    
     const [gameCount, setGameCount] = useState(5);
     const [selectedTeam, setSelectedTeam] = useState(1);
-    const [lastXGames, setLastXGames] = useState(null);
     const [playerData, setPlayerData] = useState(null);
     const [emptySearchBar, setEmptySearchBar] = useState(true);
     const [inputValue, setInputValue] = useState('');
@@ -144,59 +144,15 @@ const PlayerStats = () => {
       weight: 190
     };    
 
-    const localLastXGames = {
-      PRA:40.4,
-      assists:8.4,
-      average_points:26.6,
-      free_throws:2.8,
-      rebounds:5.4,
-      three_pointers:3.4
-    };    
-
     const localGraphArray = {
       points: [26.6, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]]
     };
 
     useEffect(() => {
         fetchPlayer(playerId, gameCount);
-        refreshStats(1);
     }, [])
 
-    const roundAttributesToDecimal = (object) => {
-      const roundedObject = {};
-      for (const key in object) {
-        if (typeof object[key] === 'number') {
-          roundedObject[key] = Math.round(object[key] * 10) / 10; // Round to 1 decimal point
-        } else {
-          roundedObject[key] = object[key];
-        }
-      }
-      return roundedObject;
-    };
-
     const fetchPlayer = (playerId, gameCount) => {
-        fetch(`/api/games/search/${playerId}/${gameCount}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then((data) => {
-              const roundedData = roundAttributesToDecimal(data);
-              setLastXGames(roundedData);
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-              console.error('Stats could not be fetched! Switching to local gamesData...')
-              setLastXGames(localLastXGames);
-        });
-
         fetch(`/api/player/search/id/${playerId}`, {
             method: 'GET',
             headers: {
@@ -295,205 +251,19 @@ const PlayerStats = () => {
       }
 
       const handleGameCountChange = (selection) => {
-        console.log('your game count selected: ', selection);
         setGameCount(selection);
       }
 
-      const refreshGraph = (selectedCell) => {
-        console.log('displayed graph should be: ', selectedCell);
-        // If the user specified a team against:
+      const handleCellChange = (selection) => {
+        setSelectedCell(selection)
+      }
+
+      useEffect(() => {
+        console.log('selected team: ', selectedTeam, ', selected cell: ', selectedCell, ', # of games: ', gameCount)
         if(selectedTeam != 1){
-          fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then((data) => {
-              console.log('selected team was NOT 1. Fetched data: ', data)
-              const roundedData = roundAttributesToDecimal(data);
-              setLastXGames(roundedData);
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-            });
-            if(selectedCell == 1){
-              // Retrieving array of points against a specific team for the last x games
-              fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
-                  setGraphArray(data);
-                })
-                .catch((error) => {
-                  console.error('Error:', error);
-                  console.error('Points array could not be fetched! Switching to localGraphArray...')
-                  setGraphArray(localGraphArray);
-              });
-            }
-
-            if(selectedCell == 2){
-              // Retrieving array of points against a specific team for the last x games
-              fetch(`/api/games/search/FTM/${playerId}/${gameCount}/${selectedTeam}`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  setGraphArray(data);
-                })
-                .catch((error) => {
-                  console.error('Error:', error);
-                  console.error('Points array could not be fetched! Switching to localGraphArray...')
-                  setGraphArray(localGraphArray);
-              });
-            }
-
-            if(selectedCell == 3){
-              // Retrieving array of points against a specific team for the last x games
-              fetch(`/api/games/search/rebounds/${playerId}/${gameCount}/${selectedTeam}`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  setGraphArray(data);
-                })
-                .catch((error) => {
-                  console.error('Error:', error);
-                  console.error('Points array could not be fetched! Switching to localGraphArray...')
-                  setGraphArray(localGraphArray);
-              });
-            }
-
-            if(selectedCell == 4){
-              // Retrieving array of points against a specific team for the last x games
-              fetch(`/api/games/search/3PM/${playerId}/${gameCount}/${selectedTeam}`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  setGraphArray(data);
-                })
-                .catch((error) => {
-                  console.error('Error:', error);
-                  console.error('Points array could not be fetched! Switching to localGraphArray...')
-                  setGraphArray(localGraphArray);
-              });
-            }
-
-            if(selectedCell == 5){
-              // Retrieving array of points against a specific team for the last x games
-              fetch(`/api/games/search/assists/${playerId}/${gameCount}/${selectedTeam}`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  setGraphArray(data);
-                })
-                .catch((error) => {
-                  console.error('Error:', error);
-                  console.error('Points array could not be fetched! Switching to localGraphArray...')
-                  setGraphArray(localGraphArray);
-              });
-            }
-
-            if(selectedCell == 6){
-              // Retrieving array of points against a specific team for the last x games
-              fetch(`/api/games/search/PRA/${playerId}/${gameCount}/${selectedTeam}`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-              })
-                .then((response) => {
-                  if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-                  return response.json();
-                })
-                .then((data) => {
-                  setGraphArray(data);
-                })
-                .catch((error) => {
-                  console.error('Error:', error);
-                  console.error('Points array could not be fetched! Switching to localGraphArray...')
-                  setGraphArray(localGraphArray);
-              });
-            }
-        }
-        // If the user did not specify a team against:
-        else{
-          fetch(`/api/games/search/${playerId}/${gameCount}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then((data) => {
-              console.log('selected team was 1. Fetched data: ', data)
-              const roundedData = roundAttributesToDecimal(data);
-              setLastXGames(roundedData);
-            })
-            .catch((error) => {
-              console.error('Error:', error);
-        });
-
-        if(selectedCell == 1){
-            // Retrieving array of points against ALL teams for the last x games
-            fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
+          if(selectedCell == 1){
+            // Retrieving array of points against a specific team for the last x games
+            fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -506,6 +276,7 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
+                console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                 setGraphArray(data);
               })
               .catch((error) => {
@@ -516,8 +287,8 @@ const PlayerStats = () => {
           }
 
           if(selectedCell == 2){
-            // Retrieving array of points against ALL teams for the last x games
-            fetch(`/api/games/search/FTM/${playerId}/${gameCount}`, {
+            // Retrieving array of points against a specific team for the last x games
+            fetch(`/api/games/search/FTM/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -540,8 +311,8 @@ const PlayerStats = () => {
           }
 
           if(selectedCell == 3){
-            // Retrieving array of points against ALL teams for the last x games
-            fetch(`/api/games/search/rebounds/${playerId}/${gameCount}`, {
+            // Retrieving array of points against a specific team for the last x games
+            fetch(`/api/games/search/rebounds/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -564,8 +335,8 @@ const PlayerStats = () => {
           }
 
           if(selectedCell == 4){
-            // Retrieving array of points against ALL teams for the last x games
-            fetch(`/api/games/search/3PM/${playerId}/${gameCount}`, {
+            // Retrieving array of points against a specific team for the last x games
+            fetch(`/api/games/search/3PM/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -588,8 +359,8 @@ const PlayerStats = () => {
           }
 
           if(selectedCell == 5){
-            // Retrieving array of points against ALL teams for the last x games
-            fetch(`/api/games/search/assists/${playerId}/${gameCount}`, {
+            // Retrieving array of points against a specific team for the last x games
+            fetch(`/api/games/search/assists/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -612,7 +383,8 @@ const PlayerStats = () => {
           }
 
           if(selectedCell == 6){
-            fetch(`/api/games/search/PRA/${playerId}/${gameCount}`, {
+            // Retrieving array of points against a specific team for the last x games
+            fetch(`/api/games/search/PRA/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -633,23 +405,12 @@ const PlayerStats = () => {
                 setGraphArray(localGraphArray);
             });
           }
-        }
       }
-
-      // instead of refreshGraph, we useEffect when selectedCell changes
-      useEffect(() => {
-        // 1 = points, 2 = free throws, 3 = rebounds, 4 = three pointers, 5 = assists, 6 = P+R+A
-        console.log('cell clicked was ', selectedCell);
-        refreshGraph(selectedCell)
-
-      }, [selectedCell])
-
-      const refreshStats = () => {
-        console.log('Refresh button has been clicked and selectedTeam was: ', selectedTeam)
-
-        // If a team was selected
-        if(selectedTeam != 1){
-          fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
+      // If the user did not specify a team against:
+      else{
+      if(selectedCell == 1){
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -662,17 +423,18 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              console.log('selected specific team. Fetched data: ', data)
-              setLastXGames(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
-            });
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setGraphArray(localGraphArray);
+          });
         }
-        
-        //If team selected was ALL
-        if(selectedTeam == 1){
-          fetch(`/api/games/search/${playerId}/${gameCount}`, {
+
+        if(selectedCell == 2){
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/FTM/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -685,25 +447,118 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              console.log('selected team was ALL. Fetched data: ', data)
-              setLastXGames(data);
+              setGraphArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
-        });
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setGraphArray(localGraphArray);
+          });
+        }
+
+        if(selectedCell == 3){
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/rebounds/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setGraphArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setGraphArray(localGraphArray);
+          });
+        }
+
+        if(selectedCell == 4){
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/3PM/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setGraphArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setGraphArray(localGraphArray);
+          });
+        }
+
+        if(selectedCell == 5){
+          // Retrieving array of points against ALL teams for the last x games
+          fetch(`/api/games/search/assists/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setGraphArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setGraphArray(localGraphArray);
+          });
+        }
+
+        if(selectedCell == 6){
+          fetch(`/api/games/search/PRA/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setGraphArray(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              setGraphArray(localGraphArray);
+          });
         }
       }
-
-      useEffect(() => {
-        console.log('LastXGames has been updated to: ', lastXGames)
-      }, [lastXGames])
+      }, [selectedTeam, gameCount, selectedCell])
 
       useEffect(() => {
         console.log('graphArray has changed to: ', graphArray)
       }, [graphArray])
 
       return (
-        playerData && lastXGames ? (
+        playerData && graphArray ? (
           <div className='playerStatsPage'>
             <img
               src={process.env.PUBLIC_URL + '/hoopLogicLogo2.png'}
@@ -803,41 +658,40 @@ const PlayerStats = () => {
                       <option key={index} value={index + 1}>{team}</option>
                     ))}
                   </select>
-                  <button className="refreshButton" onClick={refreshStats}>Refresh</button>
                 </div>
                 <table className="statsTable">
                   <tbody>
                   <div className="topStatsRow">
-                  <div className="pointsCell" onClick={setSelectedCell(1)}>
+                  <div className="pointsCell" onClick={() => handleCellChange(1)}>
                       <p className="pointsLabel">Points</p>
-                      <p className="cellNumber" id='pointsNumber'>{lastXGames.average_points}</p>
+                      <p className="cellNumber" id='pointsNumber'>{graphArray.points[0]}</p>
                     </div>
                     <div className="spacerCell"></div>
-                    <div className="freeThrowsCell" onClick={setSelectedCell(2)}>
+                    <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
                       <p className='freeThrowsLabel'>Free Throws</p>
-                      <p className='cellNumber'>{lastXGames.free_throws}</p>
+                      <p className='cellNumber'>{graphArray.points[0]}</p>
                     </div>
                   </div>
                   <div className="topStatsRow">
-                    <div className="pointsCell" onClick={setSelectedCell(3)}>
+                    <div className="pointsCell" onClick={() => handleCellChange(3)}>
                         <p className="pointsLabel">Rebounds</p>
-                        <p className="cellNumber" id='pointsNumber'>{lastXGames.rebounds}</p>
+                        <p className="cellNumber" id='pointsNumber'>{graphArray.points[0]}</p>
                       </div>
                       <div className="spacerCell"></div>
-                      <div className="freeThrowsCell" onClick={setSelectedCell(4)}>
+                      <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
                         <p className='freeThrowsLabel'>Three Pointers</p>
-                        <p className='cellNumber'>{lastXGames.three_pointers}</p>
+                        <p className='cellNumber'>{graphArray.points[0]}</p>
                       </div>
                   </div>
                   <div className="topStatsRow">
-                      <div className="alternateCell1" onClick={setSelectedCell(5)}>
+                      <div className="alternateCell1" onClick={() => handleCellChange(5)}>
                         <p className="pointsLabel">Assists</p>
-                        <p className="cellNumber" id='pointsNumber'>{lastXGames.assists}</p>
+                        <p className="cellNumber" id='pointsNumber'>{graphArray.points[0]}</p>
                       </div>
                       <div className="spacerCell"></div>
-                      <div className="alternateCell2" onClick={setSelectedCell(6)}>
+                      <div className="alternateCell2" onClick={() => handleCellChange(6)}>
                         <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
-                        <p className='cellNumber'>{lastXGames.PRA}</p>
+                        <p className='cellNumber'>{graphArray.points[0]}</p>
                       </div>
                   </div>
                   </tbody>
