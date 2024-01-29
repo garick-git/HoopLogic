@@ -800,7 +800,7 @@ const PlayerStats = () => {
                       <option key={index} value={index + 1}>{team}</option>
                     ))}
                   </select>
-                  <button className="refreshButton" onClick={refreshStats()}>Refresh</button>
+                  <button className="refreshButton" onClick={refreshStats}>Refresh</button>
                 </div>
                 <table className="statsTable">
                   <tbody>
