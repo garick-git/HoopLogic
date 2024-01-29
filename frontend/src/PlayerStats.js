@@ -636,12 +636,13 @@ const PlayerStats = () => {
         }
       }
 
-      const changeDisplayedGraph = (cellClicked) => {
+      // instead of refreshGraph, we useEffect when selectedCell changes
+      useEffect(() => {
         // 1 = points, 2 = free throws, 3 = rebounds, 4 = three pointers, 5 = assists, 6 = P+R+A
-        setSelectedCell(cellClicked);
         console.log('cell clicked was ', selectedCell);
-        refreshGraph(selectedCell);
-      }
+        refreshGraph(selectedCell)
+
+      }, [selectedCell])
 
       const refreshStats = () => {
         console.log('Refresh button has been clicked and selectedTeam was: ', selectedTeam)
@@ -807,34 +808,34 @@ const PlayerStats = () => {
                 <table className="statsTable">
                   <tbody>
                   <div className="topStatsRow">
-                  <div className="pointsCell" onClick={() => changeDisplayedGraph(1)}>
+                  <div className="pointsCell" onClick={setSelectedCell(1)}>
                       <p className="pointsLabel">Points</p>
                       <p className="cellNumber" id='pointsNumber'>{lastXGames.average_points}</p>
                     </div>
                     <div className="spacerCell"></div>
-                    <div className="freeThrowsCell" onClick={() => changeDisplayedGraph(2)}>
+                    <div className="freeThrowsCell" onClick={setSelectedCell(2)}>
                       <p className='freeThrowsLabel'>Free Throws</p>
                       <p className='cellNumber'>{lastXGames.free_throws}</p>
                     </div>
                   </div>
                   <div className="topStatsRow">
-                    <div className="pointsCell" onClick={() => changeDisplayedGraph(3)}>
+                    <div className="pointsCell" onClick={setSelectedCell(3)}>
                         <p className="pointsLabel">Rebounds</p>
                         <p className="cellNumber" id='pointsNumber'>{lastXGames.rebounds}</p>
                       </div>
                       <div className="spacerCell"></div>
-                      <div className="freeThrowsCell" onClick={() => changeDisplayedGraph(4)}>
+                      <div className="freeThrowsCell" onClick={setSelectedCell(4)}>
                         <p className='freeThrowsLabel'>Three Pointers</p>
                         <p className='cellNumber'>{lastXGames.three_pointers}</p>
                       </div>
                   </div>
                   <div className="topStatsRow">
-                      <div className="alternateCell1" onClick={() => changeDisplayedGraph(5)}>
+                      <div className="alternateCell1" onClick={setSelectedCell(5)}>
                         <p className="pointsLabel">Assists</p>
                         <p className="cellNumber" id='pointsNumber'>{lastXGames.assists}</p>
                       </div>
                       <div className="spacerCell"></div>
-                      <div className="alternateCell2" onClick={() => changeDisplayedGraph(6)}>
+                      <div className="alternateCell2" onClick={setSelectedCell(6)}>
                         <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
                         <p className='cellNumber'>{lastXGames.PRA}</p>
                       </div>
