@@ -17,6 +17,7 @@ const PlayerStats = () => {
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [players, setPlayers] = useState([]);
     const [graphArray, setGraphArray] = useState([]);
+    const [selectedCell, setSelectedCell] = useState(1);
     const navigate = useNavigate();
     let timerId;
     const localDataForPlayers = [{"first_name":"Stephen","id":115,"last_name":"Curry","position":"G","team":10,"total_points":"24477"},
@@ -298,8 +299,8 @@ const PlayerStats = () => {
         setGameCount(selection);
       }
 
-      const refreshGraph = (currentCell) => {
-        console.log('displayed graph should be: ', currentCell);
+      const refreshGraph = (selectedCell) => {
+        console.log('displayed graph should be: ', selectedCell);
         // If the user specified a team against:
         if(selectedTeam != 1){
           fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
@@ -322,7 +323,7 @@ const PlayerStats = () => {
             .catch((error) => {
               console.error('Error:', error);
             });
-            if(currentCell == 1){
+            if(selectedCell == 1){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -347,7 +348,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(currentCell == 2){
+            if(selectedCell == 2){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/FTM/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -371,7 +372,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(currentCell == 3){
+            if(selectedCell == 3){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/rebounds/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -395,7 +396,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(currentCell == 4){
+            if(selectedCell == 4){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/3PM/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -419,7 +420,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(currentCell == 5){
+            if(selectedCell == 5){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/assists/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -443,7 +444,7 @@ const PlayerStats = () => {
               });
             }
 
-            if(currentCell == 6){
+            if(selectedCell == 6){
               // Retrieving array of points against a specific team for the last x games
               fetch(`/api/games/search/PRA/${playerId}/${gameCount}/${selectedTeam}`, {
                 method: 'GET',
@@ -490,7 +491,7 @@ const PlayerStats = () => {
               console.error('Error:', error);
         });
 
-        if(currentCell == 1){
+        if(selectedCell == 1){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -514,7 +515,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(currentCell == 2){
+          if(selectedCell == 2){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/FTM/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -538,7 +539,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(currentCell == 3){
+          if(selectedCell == 3){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/rebounds/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -562,7 +563,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(currentCell == 4){
+          if(selectedCell == 4){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/3PM/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -586,7 +587,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(currentCell == 5){
+          if(selectedCell == 5){
             // Retrieving array of points against ALL teams for the last x games
             fetch(`/api/games/search/assists/${playerId}/${gameCount}`, {
               method: 'GET',
@@ -610,7 +611,7 @@ const PlayerStats = () => {
             });
           }
 
-          if(currentCell == 6){
+          if(selectedCell == 6){
             fetch(`/api/games/search/PRA/${playerId}/${gameCount}`, {
               method: 'GET',
               headers: {
@@ -635,10 +636,11 @@ const PlayerStats = () => {
         }
       }
 
-      const changeDisplayedGraph = (currentCell) => {
+      const changeDisplayedGraph = (cellClicked) => {
         // 1 = points, 2 = free throws, 3 = rebounds, 4 = three pointers, 5 = assists, 6 = P+R+A
-        console.log('cell clicked was ', currentCell)
-        refreshGraph(currentCell);
+        setSelectedCell(cellClicked);
+        console.log('cell clicked was ', selectedCell);
+        refreshGraph(selectedCell);
       }
 
       const refreshStats = () => {
@@ -787,7 +789,7 @@ const PlayerStats = () => {
                   <h3 className='statsTitle'>Stats</h3>
                   <p className="lastGamesLabel">Last Games: </p>
                   <input
-                    placeholder='1'
+                    placeholder='5'
                     type="number"
                     min="1"
                     max="50"
