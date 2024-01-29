@@ -8,7 +8,7 @@ import Graph from './Graph.js';
 
 const PlayerStats = () => {
     const { playerId } = useParams();
-    const [gameCount, setGameCount] = useState(1);
+    const [gameCount, setGameCount] = useState(5);
     const [selectedTeam, setSelectedTeam] = useState(1);
     const [lastXGames, setLastXGames] = useState(null);
     const [playerData, setPlayerData] = useState(null);
@@ -298,7 +298,7 @@ const PlayerStats = () => {
         setGameCount(selection);
       }
 
-      const refreshStats = (currentCell) => {
+      const refreshGraph = (currentCell) => {
         console.log('displayed graph should be: ', currentCell);
         // If the user specified a team against:
         if(selectedTeam != 1){
@@ -638,8 +638,62 @@ const PlayerStats = () => {
       const changeDisplayedGraph = (currentCell) => {
         // 1 = points, 2 = free throws, 3 = rebounds, 4 = three pointers, 5 = assists, 6 = P+R+A
         console.log('cell clicked was ', currentCell)
-        refreshStats(currentCell);
+        refreshGraph(currentCell);
       }
+
+      const refreshStats = () => {
+        console.log('Refresh button has been clicked and selectedTeam was: ', selectedTeam)
+
+        // If a team was selected
+        if(selectedTeam != 1){
+          fetch(`/api/games/search/${playerId}/${gameCount}/${selectedTeam - 1}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log('selected specific team. Fetched data: ', data)
+              setLastXGames(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+        }
+        
+        //If team selected was ALL
+        if(selectedTeam == 1){
+          fetch(`/api/games/search/${playerId}/${gameCount}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log('selected team was ALL. Fetched data: ', data)
+              setLastXGames(data);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+        });
+        }
+      }
+
+      useEffect(() => {
+        console.log('LastXGames has been updated to: ', lastXGames)
+      }, [lastXGames])
 
       useEffect(() => {
         console.log('graphArray has changed to: ', graphArray)
@@ -746,6 +800,7 @@ const PlayerStats = () => {
                       <option key={index} value={index + 1}>{team}</option>
                     ))}
                   </select>
+                  <button className="refreshButton" onClick={refreshStats()}>Refresh</button>
                 </div>
                 <table className="statsTable">
                   <tbody>
