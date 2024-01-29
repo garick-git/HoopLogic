@@ -17,6 +17,14 @@ const PlayerStats = () => {
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [players, setPlayers] = useState([]);
     const [graphArray, setGraphArray] = useState([]);
+
+    const [pointsArray, setPointsArray] = useState([]);
+    const [ftArray, setFtArray] = useState([]);
+    const [reboundsArray, setReboundsArray] = useState([]);
+    const [threePointersArray, setThreePointersArray] = useState([]);
+    const [assistsArray, setAssistsArray] = useState([]);
+    const [praArray, setPraArray] = useState([]);
+
     const [selectedCell, setSelectedCell] = useState(1);
     const navigate = useNavigate();
     let timerId;
@@ -255,6 +263,12 @@ const PlayerStats = () => {
       }
 
       const handleCellChange = (selection) => {
+        if(selection == 1){ setGraphArray(pointsArray)}
+        if(selection == 2){ setGraphArray(ftArray)}
+        if(selection == 3){ setGraphArray(reboundsArray)}
+        if(selection == 4){ setGraphArray(threePointersArray)}
+        if(selection == 5){ setGraphArray(assistsArray)}
+        if(selection == 6){ setGraphArray(praArray)}
         setSelectedCell(selection)
       }
 
@@ -277,12 +291,12 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
-                setGraphArray(data);
+                setPointsArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
-                setGraphArray(localGraphArray);
+                setPointsArray(localGraphArray);
             });
           }
 
@@ -301,12 +315,12 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                setGraphArray(data);
+                setFtArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
-                setGraphArray(localGraphArray);
+                setFtArray(localGraphArray);
             });
           }
 
@@ -325,12 +339,12 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                setGraphArray(data);
+                setReboundsArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
-                setGraphArray(localGraphArray);
+                setReboundsArray(localGraphArray);
             });
           }
 
@@ -349,12 +363,12 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                setGraphArray(data);
+                setThreePointersArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
-                setGraphArray(localGraphArray);
+                setThreePointersArray(localGraphArray);
             });
           }
 
@@ -373,12 +387,12 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                setGraphArray(data);
+                setAssistsArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
-                setGraphArray(localGraphArray);
+                setAssistsArray(localGraphArray);
             });
           }
 
@@ -397,12 +411,12 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                setGraphArray(data);
+                setPraArray(data);
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
-                setGraphArray(localGraphArray);
+                setPraArray(localGraphArray);
             });
           }
       }
@@ -423,12 +437,12 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              setGraphArray(data);
+              setPointsArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
-              setGraphArray(localGraphArray);
+              setPointsArray(localGraphArray);
           });
         }
 
@@ -447,12 +461,12 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              setGraphArray(data);
+              setFtArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
-              setGraphArray(localGraphArray);
+              setFtArray(localGraphArray);
           });
         }
 
@@ -471,12 +485,12 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              setGraphArray(data);
+              setReboundsArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
-              setGraphArray(localGraphArray);
+              setReboundsArray(localGraphArray);
           });
         }
 
@@ -495,12 +509,12 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              setGraphArray(data);
+              setThreePointersArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
-              setGraphArray(localGraphArray);
+              setThreePointersArray(localGraphArray);
           });
         }
 
@@ -519,12 +533,12 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              setGraphArray(data);
+              setAssistsArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
-              setGraphArray(localGraphArray);
+              setAssistsArray(localGraphArray);
           });
         }
 
@@ -542,12 +556,12 @@ const PlayerStats = () => {
               return response.json();
             })
             .then((data) => {
-              setGraphArray(data);
+              setPraArray(data);
             })
             .catch((error) => {
               console.error('Error:', error);
               console.error('Points array could not be fetched! Switching to localGraphArray...')
-              setGraphArray(localGraphArray);
+              setPraArray(localGraphArray);
           });
         }
       }
@@ -664,34 +678,34 @@ const PlayerStats = () => {
                   <div className="topStatsRow">
                   <div className="pointsCell" onClick={() => handleCellChange(1)}>
                       <p className="pointsLabel">Points</p>
-                      <p className="cellNumber" id='pointsNumber'>{graphArray.points[0]}</p>
+                      <p className="cellNumber" id='pointsNumber'>{pointsArray.points[0]}</p>
                     </div>
                     <div className="spacerCell"></div>
                     <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
                       <p className='freeThrowsLabel'>Free Throws</p>
-                      <p className='cellNumber'>{graphArray.points[0]}</p>
+                      <p className='cellNumber'>{ftArray.points[0]}</p>
                     </div>
                   </div>
                   <div className="topStatsRow">
                     <div className="pointsCell" onClick={() => handleCellChange(3)}>
                         <p className="pointsLabel">Rebounds</p>
-                        <p className="cellNumber" id='pointsNumber'>{graphArray.points[0]}</p>
+                        <p className="cellNumber" id='pointsNumber'>{reboundsArray.points[0]}</p>
                       </div>
                       <div className="spacerCell"></div>
                       <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
                         <p className='freeThrowsLabel'>Three Pointers</p>
-                        <p className='cellNumber'>{graphArray.points[0]}</p>
+                        <p className='cellNumber'>{threePointersArray.points[0]}</p>
                       </div>
                   </div>
                   <div className="topStatsRow">
                       <div className="alternateCell1" onClick={() => handleCellChange(5)}>
                         <p className="pointsLabel">Assists</p>
-                        <p className="cellNumber" id='pointsNumber'>{graphArray.points[0]}</p>
+                        <p className="cellNumber" id='pointsNumber'>{assistsArray.points[0]}</p>
                       </div>
                       <div className="spacerCell"></div>
                       <div className="alternateCell2" onClick={() => handleCellChange(6)}>
                         <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
-                        <p className='cellNumber'>{graphArray.points[0]}</p>
+                        <p className='cellNumber'>{praArray.points[0]}</p>
                       </div>
                   </div>
                   </tbody>
