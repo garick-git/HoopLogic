@@ -52,12 +52,12 @@ def FTMByNumGames_team(player_id, num_games, team_id):
 
 def threesByNumGames(player_id, num_games):
     result = {
-        '3pm': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m))
+        'threepm': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m))
     }
     return result
 
 def threesByNumGames_team(player_id, num_games, team_id):
     result = {
-        '3pm': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id))
+        'threepm': (average_and_recent_stat(player_id, num_games, PlayerStats.fg3m, team_id))
     }
     return result

@@ -2,9 +2,6 @@ from datetime import datetime
 import numpy as np
 from sqlalchemy.orm import joinedload
 from sqlalchemy import or_
-from ..models.player import Player
-from ..models.game import Game
-from ..models.playerStats import PlayerStats
 from ..databaseRetrieval.astRebStatGetters import assistsByNumGames, assistsByNumGames_teams, reboundsByNumGames, reboundsByNumGames_teams
 from ..databaseRetrieval.pointStatGetters import pointsByNumGames_teams, pointsByNumGames
 from database import db
