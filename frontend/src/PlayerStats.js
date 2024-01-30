@@ -826,7 +826,7 @@ const PlayerStats = () => {
                 )}
 
               {console.log("ftArray", ftArray)}
-                {ftArray && ftArray.points && ftArray.points[0] !== undefined && (
+                {ftArray && ftArray.ftm && ftArray.ftm[0] !== undefined && (
                   <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
                     <p className='freeThrowsLabel'>Free Throws</p>
                     <p className='cellNumber'>{ftArray.ftm[0]}</p>
@@ -834,7 +834,7 @@ const PlayerStats = () => {
                 )}
 
                 {console.log("reboundsArray", reboundsArray)}
-                  {reboundsArray && reboundsArray.points && reboundsArray.points[0] !== undefined && (
+                  {reboundsArray && reboundsArray.rebounds && reboundsArray.rebounds[0] !== undefined && (
                     <div className="pointsCell" onClick={() => handleCellChange(3)}>
                       <p className="pointsLabel">Rebounds</p>
                       <p className="cellNumber" id='pointsNumber'>{reboundsArray.rebounds[0]}</p>
@@ -842,7 +842,7 @@ const PlayerStats = () => {
                   )}
 
                 {console.log("threePointersArray", threePointersArray)}
-                  {threePointersArray && threePointersArray.points && threePointersArray.points[0] !== undefined && (
+                  {threePointersArray && threePointersArray.threepm && threePointersArray.threepm[0] !== undefined && (
                     <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
                       <p className='freeThrowsLabel'>Three Pointers</p>
                       <p className='cellNumber'>{threePointersArray.threepm[0]}</p>
@@ -850,7 +850,7 @@ const PlayerStats = () => {
                   )}
 
                 {console.log("assistsArray", assistsArray)}
-                  {assistsArray && assistsArray.points && assistsArray.points[0] !== undefined && (
+                  {assistsArray && assistsArray.assists && assistsArray.assists[0] !== undefined && (
                     <div className="alternateCell1" onClick={() => handleCellChange(5)}>
                       <p className="pointsLabel">Assists</p>
                       <p className="cellNumber" id='pointsNumber'>{assistsArray.assists[0]}</p>
