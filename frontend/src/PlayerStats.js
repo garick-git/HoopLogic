@@ -829,7 +829,7 @@ const PlayerStats = () => {
                 {ftArray && ftArray.points && ftArray.points[0] !== undefined && (
                   <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
                     <p className='freeThrowsLabel'>Free Throws</p>
-                    <p className='cellNumber'>{ftArray.points[0]}</p>
+                    <p className='cellNumber'>{ftArray.ftm[0]}</p>
                   </div>
                 )}
 
@@ -837,7 +837,7 @@ const PlayerStats = () => {
                   {reboundsArray && reboundsArray.points && reboundsArray.points[0] !== undefined && (
                     <div className="pointsCell" onClick={() => handleCellChange(3)}>
                       <p className="pointsLabel">Rebounds</p>
-                      <p className="cellNumber" id='pointsNumber'>{reboundsArray.points[0]}</p>
+                      <p className="cellNumber" id='pointsNumber'>{reboundsArray.rebounds[0]}</p>
                     </div>
                   )}
 
@@ -845,7 +845,7 @@ const PlayerStats = () => {
                   {threePointersArray && threePointersArray.points && threePointersArray.points[0] !== undefined && (
                     <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
                       <p className='freeThrowsLabel'>Three Pointers</p>
-                      <p className='cellNumber'>{threePointersArray.points[0]}</p>
+                      <p className='cellNumber'>{threePointersArray.threepm[0]}</p>
                     </div>
                   )}
 
@@ -853,7 +853,7 @@ const PlayerStats = () => {
                   {assistsArray && assistsArray.points && assistsArray.points[0] !== undefined && (
                     <div className="alternateCell1" onClick={() => handleCellChange(5)}>
                       <p className="pointsLabel">Assists</p>
-                      <p className="cellNumber" id='pointsNumber'>{assistsArray.points[0]}</p>
+                      <p className="cellNumber" id='pointsNumber'>{assistsArray.assists[0]}</p>
                     </div>
                   )}
 
