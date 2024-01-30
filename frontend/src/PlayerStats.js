@@ -815,7 +815,7 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              {praArray && (
+              {pointsArray && (
                 <div className="statsDiv">
                   <div className="statsTableHeader">
                     <h3 className='statsTitle'>Stats</h3>
