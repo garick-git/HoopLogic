@@ -817,6 +817,7 @@ const PlayerStats = () => {
               </div>
               <div className="statsTable">
               <tbody>
+              {console.log("pointsArray", pointsArray)}
                 {pointsArray && pointsArray.points && pointsArray.points[0] !== undefined && (
                   <div className="pointsCell" onClick={() => handleCellChange(1)}>
                     <p className="pointsLabel">Points</p>
@@ -824,6 +825,7 @@ const PlayerStats = () => {
                   </div>
                 )}
 
+              {console.log("ftArray", ftArray)}
                 {ftArray && ftArray.points && ftArray.points[0] !== undefined && (
                   <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
                     <p className='freeThrowsLabel'>Free Throws</p>
@@ -831,33 +833,37 @@ const PlayerStats = () => {
                   </div>
                 )}
 
-                {reboundsArray && reboundsArray.points && reboundsArray.points[0] !== undefined && (
-                  <div className="pointsCell" onClick={() => handleCellChange(3)}>
-                    <p className="pointsLabel">Rebounds</p>
-                    <p className="cellNumber" id='pointsNumber'>{reboundsArray.points[0]}</p>
-                  </div>
-                )}
+                {console.log("reboundsArray", reboundsArray)}
+                  {reboundsArray && reboundsArray.points && reboundsArray.points[0] !== undefined && (
+                    <div className="pointsCell" onClick={() => handleCellChange(3)}>
+                      <p className="pointsLabel">Rebounds</p>
+                      <p className="cellNumber" id='pointsNumber'>{reboundsArray.points[0]}</p>
+                    </div>
+                  )}
 
-                {threePointersArray && threePointersArray.points && threePointersArray.points[0] !== undefined && (
-                  <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
-                    <p className='freeThrowsLabel'>Three Pointers</p>
-                    <p className='cellNumber'>{threePointersArray.points[0]}</p>
-                  </div>
-                )}
+                {console.log("threePointersArray", threePointersArray)}
+                  {threePointersArray && threePointersArray.points && threePointersArray.points[0] !== undefined && (
+                    <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
+                      <p className='freeThrowsLabel'>Three Pointers</p>
+                      <p className='cellNumber'>{threePointersArray.points[0]}</p>
+                    </div>
+                  )}
 
-                {assistsArray && assistsArray.points && assistsArray.points[0] !== undefined && (
-                  <div className="alternateCell1" onClick={() => handleCellChange(5)}>
-                    <p className="pointsLabel">Assists</p>
-                    <p className="cellNumber" id='pointsNumber'>{assistsArray.points[0]}</p>
-                  </div>
-                )}
+                {console.log("assistsArray", assistsArray)}
+                  {assistsArray && assistsArray.points && assistsArray.points[0] !== undefined && (
+                    <div className="alternateCell1" onClick={() => handleCellChange(5)}>
+                      <p className="pointsLabel">Assists</p>
+                      <p className="cellNumber" id='pointsNumber'>{assistsArray.points[0]}</p>
+                    </div>
+                  )}
 
-                {praArray && praArray.points && praArray.points[0] !== undefined && (
-                  <div className="alternateCell2" onClick={() => handleCellChange(6)}>
-                    <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
-                    <p className='cellNumber'>{praArray.points[0]}</p>
-                  </div>
-                )}
+                {console.log("praArray", praArray)}
+                  {praArray && praArray.points && praArray.points[0] !== undefined && (
+                    <div className="alternateCell2" onClick={() => handleCellChange(6)}>
+                      <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
+                      <p className='cellNumber'>{praArray.points[0]}</p>
+                    </div>
+                  )}
               </tbody>
             </div>
 
