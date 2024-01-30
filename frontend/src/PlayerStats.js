@@ -157,7 +157,7 @@ const PlayerStats = () => {
     };
 
     useEffect(() => {
-        fetchPlayer(playerId, gameCount);
+          fetchPlayer(playerId, gameCount);
           // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
             method: 'GET',
@@ -174,6 +174,7 @@ const PlayerStats = () => {
             .then((data) => {
               setPointsArray(data);
               setGraphArray(data);
+              console.log('data for points is: ', data)
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -814,7 +815,7 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              {pointsArray && (
+              {praArray && (
                 <div className="statsDiv">
                   <div className="statsTableHeader">
                     <h3 className='statsTitle'>Stats</h3>
