@@ -412,7 +412,6 @@ const PlayerStats = () => {
       useEffect(() => {
         console.log('selected team: ', selectedTeam, ', selected cell: ', selectedCell, ', # of games: ', gameCount)
         if(selectedTeam != 1){
-          if(selectedCell == 1){
             // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
@@ -429,7 +428,7 @@ const PlayerStats = () => {
               .then((data) => {
                 console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                 setPointsArray(data);
-                setGraphArray(data);
+                if(selectedCell == 1){setGraphArray(data);}
               })
               .catch((error) => {
                 console.error('Error:', error);
@@ -437,9 +436,7 @@ const PlayerStats = () => {
                 setPointsArray(localGraphArray);
                 setGraphArray(localGraphArray);
             });
-          }
 
-          if(selectedCell == 2){
             // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/FTM/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
@@ -455,7 +452,7 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setFtArray(data);
-                setGraphArray(data);
+                if(selectedCell == 2){setGraphArray(data);}
               })
               .catch((error) => {
                 console.error('Error:', error);
@@ -463,9 +460,7 @@ const PlayerStats = () => {
                 setFtArray(localGraphArray);
                 setGraphArray(localGraphArray);
             });
-          }
 
-          if(selectedCell == 3){
             // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/rebounds/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
@@ -481,17 +476,15 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setReboundsArray(data);
-                setGraphArray(data);
+              if(selectedCell == 3){setGraphArray(data);}
               })
               .catch((error) => {
                 console.error('Error:', error);
                 console.error('Points array could not be fetched! Switching to localGraphArray...')
                 setReboundsArray(localGraphArray);
                 setGraphArray(localGraphArray);
-            });
-          }
+          });
 
-          if(selectedCell == 4){
             // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/3PM/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
@@ -507,7 +500,7 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setThreePointersArray(data);
-                setGraphArray(data);
+                if(selectedCell == 4){setGraphArray(data);}
               })
               .catch((error) => {
                 console.error('Error:', error);
@@ -515,9 +508,7 @@ const PlayerStats = () => {
                 setThreePointersArray(localGraphArray);
                 setGraphArray(localGraphArray);
             });
-          }
 
-          if(selectedCell == 5){
             // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/assists/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
@@ -533,7 +524,7 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setAssistsArray(data);
-                setGraphArray(data);
+                if(selectedCell == 5){setGraphArray(data);}
               })
               .catch((error) => {
                 console.error('Error:', error);
@@ -541,9 +532,7 @@ const PlayerStats = () => {
                 setAssistsArray(localGraphArray);
                 setGraphArray(localGraphArray);
             });
-          }
 
-          if(selectedCell == 6){
             // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/PRA/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
@@ -559,7 +548,7 @@ const PlayerStats = () => {
               })
               .then((data) => {
                 setPraArray(data);
-                setGraphArray(data);
+                if(selectedCell == 6){setGraphArray(data);}
               })
               .catch((error) => {
                 console.error('Error:', error);
@@ -567,11 +556,9 @@ const PlayerStats = () => {
                 setPraArray(localGraphArray);
                 setGraphArray(localGraphArray);
             });
-          }
       }
       // If the user did not specify a team against:
       else{
-      if(selectedCell == 1){
           // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
             method: 'GET',
@@ -587,7 +574,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPointsArray(data);
-              setGraphArray(data);
+              if(selectedCell == 1){setGraphArray(data);}
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -595,9 +582,7 @@ const PlayerStats = () => {
               setPointsArray(localGraphArray);
               setGraphArray(localGraphArray);
           });
-        }
 
-        if(selectedCell == 2){
           // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/FTM/${playerId}/${gameCount}`, {
             method: 'GET',
@@ -613,7 +598,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setFtArray(data);
-              setGraphArray(data);
+              if(selectedCell == 2){setGraphArray(data);}
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -621,9 +606,7 @@ const PlayerStats = () => {
               setFtArray(localGraphArray);
               setGraphArray(localGraphArray);
           });
-        }
 
-        if(selectedCell == 3){
           // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/rebounds/${playerId}/${gameCount}`, {
             method: 'GET',
@@ -639,7 +622,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setReboundsArray(data);
-              setGraphArray(data);
+              if(selectedCell == 3){setGraphArray(data);}
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -647,9 +630,7 @@ const PlayerStats = () => {
               setReboundsArray(localGraphArray);
               setGraphArray(localGraphArray);
           });
-        }
 
-        if(selectedCell == 4){
           // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/3PM/${playerId}/${gameCount}`, {
             method: 'GET',
@@ -665,7 +646,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setThreePointersArray(data);
-              setGraphArray(data);
+              if(selectedCell == 4){setGraphArray(data);}
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -673,9 +654,7 @@ const PlayerStats = () => {
               setThreePointersArray(localGraphArray);
               setGraphArray(localGraphArray);
           });
-        }
 
-        if(selectedCell == 5){
           // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/assists/${playerId}/${gameCount}`, {
             method: 'GET',
@@ -691,7 +670,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setAssistsArray(data);
-              setGraphArray(data);
+              if(selectedCell == 5){setGraphArray(data);}
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -699,9 +678,8 @@ const PlayerStats = () => {
               setAssistsArray(localGraphArray);
               setGraphArray(localGraphArray);
           });
-        }
+          }
 
-        if(selectedCell == 6){
           fetch(`/api/games/search/PRA/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
@@ -716,7 +694,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPraArray(data);
-              setGraphArray(data);
+              if(selectedCell == 6){setGraphArray(data);}
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -724,13 +702,7 @@ const PlayerStats = () => {
               setPraArray(localGraphArray);
               setGraphArray(localGraphArray);
           });
-        }
-      }
-      }, [selectedTeam, gameCount, selectedCell])
-
-      useEffect(() => {
-        console.log('graphArray has changed to: ', graphArray)
-      }, [graphArray])
+        }, [selectedTeam, gameCount, selectedCell])
 
       return (
         playerData && graphArray ? (
@@ -834,7 +806,7 @@ const PlayerStats = () => {
                       ))}
                     </select>
                   </div>
-              <table className="statsTable">
+                <table className="statsTable">
                     <tbody>
                     <div className="topStatsRow">
                     {console.log("pointsArray", pointsArray)}
