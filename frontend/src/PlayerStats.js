@@ -815,56 +815,80 @@ const PlayerStats = () => {
                   </tbody>
                 </table>
               </div>
-              <div className="statsTable">
-              <tbody>
-              {console.log("pointsArray", pointsArray)}
-                {pointsArray && pointsArray.points && pointsArray.points[0] !== undefined && (
-                  <div className="pointsCell" onClick={() => handleCellChange(1)}>
-                    <p className="pointsLabel">Points</p>
-                    <p className="cellNumber" id='pointsNumber'>{pointsArray.points[0]}</p>
+              <div className="statsDiv">
+                  <div className="statsTableHeader">
+                    <h3 className='statsTitle'>Stats</h3>
+                    <p className="lastGamesLabel">Last Games: </p>
+                    <input
+                      placeholder='5'
+                      type="number"
+                      min="1"
+                      max="50"
+                      className="lastGamesInput"
+                      onChange={(e) => handleGameCountChange(e.target.value)}
+                    />
+                    <p className="vsLabel">VS. </p>
+                    <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
+                      {NBA_TEAMS.map((team, index) => (
+                        <option key={index} value={index + 1}>{team}</option>
+                      ))}
+                    </select>
                   </div>
-                )}
-
-              {console.log("ftArray", ftArray)}
-                {ftArray && ftArray.ftm && ftArray.ftm[0] !== undefined && (
-                  <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
-                    <p className='freeThrowsLabel'>Free Throws</p>
-                    <p className='cellNumber'>{ftArray.ftm[0]}</p>
-                  </div>
-                )}
-
-                {console.log("reboundsArray", reboundsArray)}
-                  {reboundsArray && reboundsArray.rebounds && reboundsArray.rebounds[0] !== undefined && (
-                    <div className="pointsCell" onClick={() => handleCellChange(3)}>
-                      <p className="pointsLabel">Rebounds</p>
-                      <p className="cellNumber" id='pointsNumber'>{reboundsArray.rebounds[0]}</p>
+              <table className="statsTable">
+                    <tbody>
+                    <div className="topStatsRow">
+                    {console.log("pointsArray", pointsArray)}
+                    {pointsArray && pointsArray.points && pointsArray.points[0] !== undefined && (
+                      <div className="pointsCell" onClick={() => handleCellChange(1)}>
+                        <p className="pointsLabel">Points</p>
+                        <p className="cellNumber" id='pointsNumber'>{pointsArray.points[0]}</p>
+                      </div>
+                    )}
+                      <div className="spacerCell"></div>
+                      {console.log("ftArray", ftArray)}
+                      {ftArray && ftArray.ftm && ftArray.ftm[0] !== undefined && (
+                        <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
+                          <p className='freeThrowsLabel'>Free Throws</p>
+                          <p className='cellNumber'>{ftArray.ftm[0]}</p>
+                        </div>
+                      )}
                     </div>
-                  )}
-
-                {console.log("threePointersArray", threePointersArray)}
-                  {threePointersArray && threePointersArray.threepm && threePointersArray.threepm[0] !== undefined && (
-                    <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
-                      <p className='freeThrowsLabel'>Three Pointers</p>
-                      <p className='cellNumber'>{threePointersArray.threepm[0]}</p>
+                    <div className="topStatsRow">
+                      {console.log("reboundsArray", reboundsArray)}
+                      {reboundsArray && reboundsArray.rebounds && reboundsArray.rebounds[0] !== undefined && (
+                        <div className="pointsCell" onClick={() => handleCellChange(3)}>
+                          <p className="pointsLabel">Rebounds</p>
+                          <p className="cellNumber" id='pointsNumber'>{reboundsArray.rebounds[0]}</p>
+                        </div>
+                      )}
+                        <div className="spacerCell"></div>
+                        {console.log("threePointersArray", threePointersArray)}
+                        {threePointersArray && threePointersArray.threepm && threePointersArray.threepm[0] !== undefined && (
+                          <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
+                            <p className='freeThrowsLabel'>Three Pointers</p>
+                            <p className='cellNumber'>{threePointersArray.threepm[0]}</p>
+                          </div>
+                        )}
                     </div>
-                  )}
-
-                {console.log("assistsArray", assistsArray)}
-                  {assistsArray && assistsArray.assists && assistsArray.assists[0] !== undefined && (
-                    <div className="alternateCell1" onClick={() => handleCellChange(5)}>
-                      <p className="pointsLabel">Assists</p>
-                      <p className="cellNumber" id='pointsNumber'>{assistsArray.assists[0]}</p>
+                    <div className="topStatsRow">
+                      {console.log("assistsArray", assistsArray)}
+                      {assistsArray && assistsArray.assists && assistsArray.assists[0] !== undefined && (
+                        <div className="alternateCell1" onClick={() => handleCellChange(5)}>
+                          <p className="pointsLabel">Assists</p>
+                          <p className="cellNumber" id='pointsNumber'>{assistsArray.assists[0]}</p>
+                        </div>
+                      )}
+                        <div className="spacerCell"></div>
+                        {console.log("praArray", praArray)}
+                        {praArray && praArray.points && praArray.points[0] !== undefined && (
+                          <div className="alternateCell2" onClick={() => handleCellChange(6)}>
+                            <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
+                            <p className='cellNumber'>{praArray.points[0]}</p>
+                          </div>
+                        )}
                     </div>
-                  )}
-
-                {console.log("praArray", praArray)}
-                  {praArray && praArray.points && praArray.points[0] !== undefined && (
-                    <div className="alternateCell2" onClick={() => handleCellChange(6)}>
-                      <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
-                      <p className='cellNumber'>{praArray.points[0]}</p>
-                    </div>
-                  )}
-              </tbody>
+                    </tbody>
+                  </table>
             </div>
 
               <div className="graphDiv">
