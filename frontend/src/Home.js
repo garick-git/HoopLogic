@@ -114,7 +114,7 @@ const Home = () => {
 
         useEffect(() => {
           console.log('player selected: ', selectedPlayer)
-          navigate(`/playerStats/${player.id}`);
+          navigate(`/playerStats/${selectedPlayer.id}`);
         }, [selectedPlayer])
 
         return (
