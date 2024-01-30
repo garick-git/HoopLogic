@@ -48,7 +48,9 @@ def searchPlayerByString(search_string):
 
 
 def get_player_by_id(player_id):
-    player = Player.query.filter_by(id=player_id).first()
+    session = Session()
+    player = session.query(Player).filter_by(id=player_id).first()
+    session.close()
 
     if player:
         player_info = {
