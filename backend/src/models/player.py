@@ -13,7 +13,6 @@ class Player(db.Model):
     height_feet = db.Column(db.Integer)
     height_inches = db.Column(db.Integer)
     weight_pounds = db.Column(db.Integer)
-    # nba_id = db.Column(db.Integer)
     team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
     team = db.relationship('Team', backref='players')
 
