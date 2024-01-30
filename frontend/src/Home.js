@@ -108,7 +108,7 @@ const Home = () => {
 
         const handleRowClick = (player) => {
           setSelectedPlayer(player); // Set the selected player when a row is clicked
-          console.log('player')
+          console.log('player: ', player)
           navigate(`/playerStats/${player.id}`);
         };
 

@@ -298,6 +298,7 @@ const PlayerStats = () => {
     }, [])
 
     const fetchPlayer = (playerId) => {
+      console.log('ID for player being fetched on fetchPlayer() ==> ', playerId)
         fetch(`/api/player/search/id/${playerId}`, {
             method: 'GET',
             headers: {
@@ -312,6 +313,7 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPlayerData(data);
+              console.log('player fetched fetchPlayer() ==> ', data)
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -698,7 +700,7 @@ const PlayerStats = () => {
             })
             .catch((error) => {
               console.error('Error:', error);
-              console.error('Points array could not be fetched! Switching to localGraphArray...')
+              console.error('PRA array could not be fetched! Switching to localGraphArray...')
               setPraArray(localGraphArray);
               setGraphArray(localGraphArray);
           });
