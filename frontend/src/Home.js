@@ -112,11 +112,6 @@ const Home = () => {
           navigate(`/playerStats/${player.id}`);
         };
 
-        useEffect(() => {
-          console.log('player selected: ', selectedPlayer)
-          navigate(`/playerStats/${selectedPlayer.id}`);
-        }, [selectedPlayer])
-
         return (
           <div className="homePageDiv">
             <div className="homePageLogoDiv">
