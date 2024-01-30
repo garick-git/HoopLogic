@@ -1,6 +1,5 @@
 from flask import Blueprint, jsonify
 from backend.src.databaseRetrieval.playerDBRetrieval import searchPlayerByString, get_player_by_id
-from backend.src.databaseRetrieval.addingNBAids import update_nba_ids
 
 databaseRetrieval_BP = Blueprint("db_retrieval", __name__)
 
@@ -12,8 +11,3 @@ def getPlayers(search_input):
 def getPlayersByID(player_id):
     return jsonify(get_player_by_id(player_id))
 
-
-@databaseRetrieval_BP.route('/api/player/nbaid', methods=['GET'])
-def getNBAID():
-    retVal = "NBA players added"
-    return retVal
