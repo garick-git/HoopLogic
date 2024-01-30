@@ -108,8 +108,14 @@ const Home = () => {
 
         const handleRowClick = (player) => {
           setSelectedPlayer(player); // Set the selected player when a row is clicked
+          console.log('player')
           navigate(`/playerStats/${player.id}`);
         };
+
+        useEffect(() => {
+          console.log('player selected: ', selectedPlayer)
+          navigate(`/playerStats/${player.id}`);
+        }, [selectedPlayer])
 
         return (
           <div className="homePageDiv">
