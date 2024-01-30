@@ -48,16 +48,23 @@ def searchPlayerByString(search_string):
 
 
 def get_player_by_id(player_id):
-    for player in players_dict_sorted:
-        if player['id'] == player_id:
-            return {
-                "id": player['id'],
-                "first_name": player['first_name'],
-                "last_name": player['last_name'],
-                "position": player['position'],
-                "team_id": player['team'],
-                "total_points": player['total_points']
-            }
-    return None
+    session = Session()
+    player = session.query(Player).filter_by(id=player_id).first()
+    session.close()
+
+    if player:
+        player_info = {
+            "first_name": player.first_name,
+            "last_name": player.last_name,
+            "position": player.position,
+            "height_in": player.height_inches,
+            "height_feet": player.height_feet,
+            "weight": player.weight_pounds,
+            "team_id": player.team_id  
+        }
+        return player_info
+    else:
+        return None
+    
 
 
