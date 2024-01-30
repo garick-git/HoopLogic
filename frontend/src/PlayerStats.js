@@ -157,7 +157,7 @@ const PlayerStats = () => {
     };
 
     useEffect(() => {
-          fetchPlayer(playerId, gameCount);
+          fetchPlayer(playerId);
           // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
             method: 'GET',
