@@ -684,6 +684,7 @@ const PlayerStats = () => {
             },
           })
             .then((response) => {
+              console.log('you have requested for the PRA against NO team (#', selectedTeam,')')
               if (!response.ok) {
                 throw new Error('Network response was not ok');
               }
