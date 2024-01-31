@@ -49,7 +49,10 @@ def PRAByNumGames(player_id, num_games):
 
 
     avgPRA = round((avgAst[0] + avgReb[0] + avgPoints[0]), 1)
+
+    print(avgPRA)
     recentPRA = [list(map(lambda x: [x], values)) for values in zip(avgPoints[1], avgReb[1], avgAst[1])]
+    print(recentPRA)
 
 
     result = {
