@@ -407,8 +407,8 @@ const PlayerStats = () => {
       }
 
       useEffect(() => {
-        console.log('selected team: ', selectedTeam, ', selected cell: ', selectedCell, ', # of games: ', gameCount)
         if(selectedTeam != 1){
+          console.log('selected team just changed was: ', selectedTeam)
             // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
@@ -530,7 +530,7 @@ const PlayerStats = () => {
                 setGraphArray(localGraphArray);
             });
 
-            // Retrieving array of points against a specific team for the last x games
+            // Retrieving PRA array against a specific team for the last x games
             fetch(`/api/games/search/PRA/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
               headers: {
@@ -549,7 +549,7 @@ const PlayerStats = () => {
               })
               .catch((error) => {
                 console.error('Error:', error);
-                console.error('Points array could not be fetched! Switching to localGraphArray...')
+                console.error('PRA array could not be fetched! Switching to localGraphArray...')
                 setPraArray(localGraphArray);
                 setGraphArray(localGraphArray);
             });
