@@ -857,7 +857,7 @@ const PlayerStats = () => {
                         {praArray && praArray.PRA && praArray.PRA[0] !== undefined && (
                           <div className="alternateCell2" onClick={() => handleCellChange(6)}>
                             <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
-                            <p className='cellNumber'>{praArray.points[0]}</p>
+                            <p className='cellNumber'>{praArray.PRA[0]}</p>
                           </div>
                         )}
                     </div>
