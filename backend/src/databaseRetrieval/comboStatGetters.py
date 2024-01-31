@@ -47,9 +47,8 @@ def PRAByNumGames(player_id, num_games):
     avgPRA = round((avgAst[0]+avgReb[0]+avgPoints[0]),1)
     recentPRA = [sum(i) for i in zip(avgPoints[1], avgReb[1], avgAst[1])]
 
-    returnArray = [avgPRA, recentPRA]
     result = {
-        'PRA': returnArray
+        'PRA': (avgPRA, recentPRA)
     }
 
     return result
@@ -62,9 +61,8 @@ def PRAByNumGames_team(player_id, num_games, team_id):
     avgPRA = round((avgAst[0]+avgReb[0]+avgPoints[0]),1)
     recentPRA = [sum(i) for i in zip(avgPoints[1], avgReb[1], avgAst[1])]
 
-    returnArray = [avgPRA, recentPRA]
     result = {
-        'PRA': returnArray
+        'PRA': (avgPRA, recentPRA)
     }
 
     return result
