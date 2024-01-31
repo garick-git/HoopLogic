@@ -537,6 +537,7 @@ const PlayerStats = () => {
               },
             })
               .then((response) => {
+                console.log('you have requested for the PRA against team #', selectedTeam)
                 if (!response.ok) {
                   throw new Error('Network response was not ok');
                 }
@@ -554,7 +555,7 @@ const PlayerStats = () => {
             });
       }
       // If the user did not specify a team against:
-      else{
+      else if(selectedTeam == 1){
           // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
             method: 'GET',
