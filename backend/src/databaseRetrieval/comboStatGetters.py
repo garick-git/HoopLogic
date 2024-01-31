@@ -44,11 +44,11 @@ def PRAByNumGames(player_id, num_games):
     avgReb = average_and_recent_stat(player_id, num_games, PlayerStats.reb)
     avgAst = average_and_recent_stat(player_id, num_games, PlayerStats.ast)
     
-    avgPRA = round((avgAst[0]+avgReb[0]+avgPoints[0]),1)
-    recentPRA = [sum(i) for i in zip(avgPoints[1], avgReb[1], avgAst[1])]
+    avgPRA = round((avgAst[0] + avgReb[0] + avgPoints[0]), 1)
+    recentPRA = [list(sum(values)) for values in zip(avgPoints[1], avgReb[1], avgAst[1])]
 
     result = {
-        'PRA': (avgPRA, recentPRA)
+        'PRA': [avgPRA, recentPRA]
     }
 
     return result
@@ -59,10 +59,10 @@ def PRAByNumGames_team(player_id, num_games, team_id):
     avgAst = average_and_recent_stat(player_id, num_games, PlayerStats.ast, team_id)
 
     avgPRA = round((avgAst[0]+avgReb[0]+avgPoints[0]),1)
-    recentPRA = [sum(i) for i in zip(avgPoints[1], avgReb[1], avgAst[1])]
+    recentPRA = [list(sum(values)) for values in zip(avgPoints[1], avgReb[1], avgAst[1])]
 
     result = {
-        'PRA': (avgPRA, recentPRA)
+        'PRA': [avgPRA, recentPRA]
     }
 
     return result
