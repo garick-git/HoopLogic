@@ -158,7 +158,6 @@ const PlayerStats = () => {
 
     useEffect(() => {
           fetchPlayer(playerId);
-          // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
@@ -182,7 +181,6 @@ const PlayerStats = () => {
               setPointsArray(localGraphArray);
           });
 
-          // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/FTM/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
@@ -205,7 +203,6 @@ const PlayerStats = () => {
               setFtArray(localGraphArray);
           });
 
-          // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/rebounds/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
@@ -228,7 +225,6 @@ const PlayerStats = () => {
               setReboundsArray(localGraphArray);
           });
 
-          // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/3PM/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
@@ -251,7 +247,6 @@ const PlayerStats = () => {
               setThreePointersArray(localGraphArray);
           });
 
-          // Retrieving array of points against ALL teams for the last x games
           fetch(`/api/games/search/assists/${playerId}/${gameCount}`, {
             method: 'GET',
             headers: {
@@ -853,7 +848,7 @@ const PlayerStats = () => {
                         </div>
                       )}
                         <div className="spacerCell"></div>
-                        {console.log("praArray.PRA[0] ==> ", praArray.PRA[0])}
+                        {console.log("praArray ==> ", praArray)}
                         {praArray && praArray.PRA && praArray.PRA[0] !== undefined && (
                           <div className="alternateCell2" onClick={() => handleCellChange(6)}>
                             <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
