@@ -408,7 +408,7 @@ const PlayerStats = () => {
 
       useEffect(() => {
         if(selectedTeam != 1){
-          console.log('selected team just changed was: ', selectedTeam)
+          console.log('you selected team #', selectedTeam, ' which took you to the != 1 IF.')
             // Retrieving array of points against a specific team for the last x games
             fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
               method: 'GET',
@@ -423,7 +423,6 @@ const PlayerStats = () => {
                 return response.json();
               })
               .then((data) => {
-                console.log('Points array for last ', gameCount, 'games against opponent ', selectedTeam,': ', data)
                 setPointsArray(data);
                 if(selectedCell == 1){setGraphArray(data);}
               })
