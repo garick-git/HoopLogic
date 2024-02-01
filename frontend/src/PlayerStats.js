@@ -548,7 +548,7 @@ const PlayerStats = () => {
       }
 
       const fetchArraysVsTeam = () => {
-        console.log('you are in fetchArraysVsTeam because you selected team #', selectedTeam)
+        console.log('you are in fetchArraysVsTeam because you selected team #', selectedTeam-1)
         fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam-1}`, {
           method: 'GET',
           headers: {
