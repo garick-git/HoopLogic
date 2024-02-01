@@ -397,12 +397,67 @@ const PlayerStats = () => {
       }
 
       const handleCellChange = (selection) => {
-        if(selection == 1){ setGraphArray(pointsArray)}
-        if(selection == 2){ setGraphArray(ftArray)}
-        if(selection == 3){ setGraphArray(reboundsArray)}
-        if(selection == 4){ setGraphArray(threePointersArray)}
-        if(selection == 5){ setGraphArray(assistsArray)}
-        if(selection == 6){ setGraphArray(praArray)}
+        // id='statsCell1' for cell 1
+        const statsCell1 = document.getElementById('statsCell1')
+        const statsCell2 = document.getElementById('statsCell2')
+        const statsCell3 = document.getElementById('statsCell3')
+        const statsCell4 = document.getElementById('statsCell4')
+        const statsCell5 = document.getElementById('statsCell5')
+        const statsCell6 = document.getElementById('statsCell6')
+
+        if(selection == 1){ 
+          statsCell1.style.backgroundColor = 'gray';
+          statsCell2.style.backgroundColor = 'black';
+          statsCell3.style.backgroundColor = 'black';
+          statsCell4.style.backgroundColor = 'black';
+          statsCell5.style.backgroundColor = 'black';
+          statsCell6.style.backgroundColor = 'black';
+          setGraphArray(pointsArray)
+        }
+        if(selection == 2){ 
+          statsCell1.style.backgroundColor = 'black';
+          statsCell2.style.backgroundColor = 'gray';
+          statsCell3.style.backgroundColor = 'black';
+          statsCell4.style.backgroundColor = 'black';
+          statsCell5.style.backgroundColor = 'black';
+          statsCell6.style.backgroundColor = 'black';
+          setGraphArray(ftArray)
+        }
+        if(selection == 3){ 
+          statsCell1.style.backgroundColor = 'black';
+          statsCell2.style.backgroundColor = 'black';
+          statsCell3.style.backgroundColor = 'gray';
+          statsCell4.style.backgroundColor = 'black';
+          statsCell5.style.backgroundColor = 'black';
+          statsCell6.style.backgroundColor = 'black';
+          setGraphArray(reboundsArray)
+        }
+        if(selection == 4){ 
+          statsCell1.style.backgroundColor = 'black';
+          statsCell2.style.backgroundColor = 'black';
+          statsCell3.style.backgroundColor = 'black';
+          statsCell4.style.backgroundColor = 'gray';
+          statsCell5.style.backgroundColor = 'black';
+          statsCell6.style.backgroundColor = 'black';
+          setGraphArray(threePointersArray)}
+        if(selection == 5){ 
+          statsCell1.style.backgroundColor = 'black';
+          statsCell2.style.backgroundColor = 'black';
+          statsCell3.style.backgroundColor = 'black';
+          statsCell4.style.backgroundColor = 'black';
+          statsCell5.style.backgroundColor = 'gray';
+          statsCell6.style.backgroundColor = 'black';
+          setGraphArray(assistsArray)
+        }
+        if(selection == 6){ 
+          statsCell1.style.backgroundColor = 'black';
+          statsCell2.style.backgroundColor = 'black';
+          statsCell3.style.backgroundColor = 'black';
+          statsCell4.style.backgroundColor = 'black';
+          statsCell5.style.backgroundColor = 'black';
+          statsCell6.style.backgroundColor = 'gray';
+          setGraphArray(praArray)
+        }
         setSelectedCell(selection)
       }
 
@@ -800,12 +855,12 @@ const PlayerStats = () => {
                       ))}
                     </select>
                   </div>
-                <table className="statsTable">
+                  <table className="statsTable">
                     <tbody>
                     <div className="topStatsRow">
                     {console.log("pointsArray", pointsArray)}
                     {pointsArray && pointsArray.points && pointsArray.points[0] !== undefined && (
-                      <div className="pointsCell" onClick={() => handleCellChange(1)}>
+                      <div id='statsCell1' className="pointsCell" onClick={() => handleCellChange(1)}>
                         <p className="pointsLabel">Points</p>
                         <p className="cellNumber" id='pointsNumber'>{pointsArray.points[0]}</p>
                       </div>
@@ -813,7 +868,7 @@ const PlayerStats = () => {
                       <div className="spacerCell"></div>
                       {console.log("ftArray", ftArray)}
                       {ftArray && ftArray.ftm && ftArray.ftm[0] !== undefined && (
-                        <div className="freeThrowsCell" onClick={() => handleCellChange(2)}>
+                        <div id='statsCell2' className="freeThrowsCell" onClick={() => handleCellChange(2)}>
                           <p className='freeThrowsLabel'>Free Throws</p>
                           <p className='cellNumber'>{ftArray.ftm[0]}</p>
                         </div>
@@ -822,7 +877,7 @@ const PlayerStats = () => {
                     <div className="topStatsRow">
                       {console.log("reboundsArray", reboundsArray)}
                       {reboundsArray && reboundsArray.rebounds && reboundsArray.rebounds[0] !== undefined && (
-                        <div className="pointsCell" onClick={() => handleCellChange(3)}>
+                        <div id='statsCell3' className="pointsCell" onClick={() => handleCellChange(3)}>
                           <p className="pointsLabel">Rebounds</p>
                           <p className="cellNumber" id='pointsNumber'>{reboundsArray.rebounds[0]}</p>
                         </div>
@@ -830,7 +885,7 @@ const PlayerStats = () => {
                         <div className="spacerCell"></div>
                         {console.log("threePointersArray", threePointersArray)}
                         {threePointersArray && threePointersArray.threepm && threePointersArray.threepm[0] !== undefined && (
-                          <div className="freeThrowsCell" onClick={() => handleCellChange(4)}>
+                          <div id='statsCell4' className="freeThrowsCell" onClick={() => handleCellChange(4)}>
                             <p className='freeThrowsLabel'>Three Pointers</p>
                             <p className='cellNumber'>{threePointersArray.threepm[0]}</p>
                           </div>
@@ -839,7 +894,7 @@ const PlayerStats = () => {
                     <div className="topStatsRow">
                       {console.log("assistsArray", assistsArray)}
                       {assistsArray && assistsArray.assists && assistsArray.assists[0] !== undefined && (
-                        <div className="alternateCell1" onClick={() => handleCellChange(5)}>
+                        <div id='statsCell5' className="alternateCell1" onClick={() => handleCellChange(5)}>
                           <p className="pointsLabel">Assists</p>
                           <p className="cellNumber" id='pointsNumber'>{assistsArray.assists[0]}</p>
                         </div>
@@ -847,7 +902,7 @@ const PlayerStats = () => {
                         <div className="spacerCell"></div>
                         {console.log("praArray ==> ", praArray)}
                         {praArray && praArray.PRA && praArray.PRA[0] !== undefined && (
-                          <div className="alternateCell2" onClick={() => handleCellChange(6)}>
+                          <div id='statsCell6' className="alternateCell2" onClick={() => handleCellChange(6)}>
                             <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>
                             <p className='cellNumber'>{praArray.PRA[0]}</p>
                           </div>
