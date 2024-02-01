@@ -549,7 +549,7 @@ const PlayerStats = () => {
 
       const fetchArraysVsTeam = () => {
         console.log('you are in fetchArraysVsTeam because you selected team #', selectedTeam)
-        fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam}`, {
+        fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam-1}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -572,7 +572,7 @@ const PlayerStats = () => {
             setGraphArray(localGraphArray);
         });
 
-        fetch(`/api/games/search/FTM/${playerId}/${gameCount}/${selectedTeam}`, {
+        fetch(`/api/games/search/FTM/${playerId}/${gameCount}/${selectedTeam-1}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -595,7 +595,7 @@ const PlayerStats = () => {
             setGraphArray(localGraphArray);
         });
 
-        fetch(`/api/games/search/rebounds/${playerId}/${gameCount}/${selectedTeam}`, {
+        fetch(`/api/games/search/rebounds/${playerId}/${gameCount}/${selectedTeam-1}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -618,7 +618,7 @@ const PlayerStats = () => {
             setGraphArray(localGraphArray);
         });
 
-        fetch(`/api/games/search/3PM/${playerId}/${gameCount}/${selectedTeam}`, {
+        fetch(`/api/games/search/3PM/${playerId}/${gameCount}/${selectedTeam-1}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -641,7 +641,7 @@ const PlayerStats = () => {
             setGraphArray(localGraphArray);
         });
 
-        fetch(`/api/games/search/assists/${playerId}/${gameCount}/${selectedTeam}`, {
+        fetch(`/api/games/search/assists/${playerId}/${gameCount}/${selectedTeam-1}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -664,7 +664,7 @@ const PlayerStats = () => {
             setGraphArray(localGraphArray);
         });
 
-        fetch(`/api/games/search/PRA/${playerId}/${gameCount}/${selectedTeam}`, {
+        fetch(`/api/games/search/PRA/${playerId}/${gameCount}/${selectedTeam-1}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
