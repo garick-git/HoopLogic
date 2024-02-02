@@ -5,6 +5,13 @@ const Graph = ({ graphArray }) => {
     const svgRef = useRef();
     const tooltipRef = useRef(null);
     const [tooltipData, setTooltipData] = useState(null);
+    const applyTransition = (selection) => {
+        selection
+          .transition()
+          .duration(1000) // Set the duration of the transition in milliseconds
+          .ease(d3.easeCubicInOut); // Set the easing function for the transition (optional)
+      };
+      
 
     useEffect(() => {
         const handleMouseMove = (event) => {
@@ -81,13 +88,14 @@ const Graph = ({ graphArray }) => {
             .data(specificValues)
             .join('g')
             .attr('class', 'bar-group');
+          
+            applyTransition(bars);
 
         bars.append('rect')
             .attr('x', (v, i) => xScale(i))
             .attr('y', v => yScale(v))
             .attr('width', xScale.bandwidth())
             .attr('height', v => h - yScale(v))
-            .style('transition', 'transform 0.2s ease-in-out')
             .style('cursor', 'pointer')
             .attr('rx', 5)
             .attr('fill', v => (v < averageValue) ? 'red' : '#00BF63')
@@ -115,6 +123,9 @@ const Graph = ({ graphArray }) => {
             .attr('y', v => yScale(v) - 5)
             .attr('text-anchor', 'middle')
             .style('fill', 'white');
+
+        applyTransition(bars.select('rect')); // Apply transition to the bars
+        applyTransition(bars.select('text')); // Apply transition to the text elements
     }, [graphArray]);
 
     useEffect(() => {
