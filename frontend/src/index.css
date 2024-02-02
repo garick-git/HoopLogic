@@ -194,19 +194,19 @@ code, pre {
   border: solid #00BF63 2px;
   padding: 1%;
   min-height: 220px;
-  min-width: 220px;
+  min-width: 250px;
 }
 
 .playerTeam{
   display: flex;
   margin-left: 10%;
-  justify-content: center;
+  justify-content: left;
   border-bottom: solid #00BF63 1px;
   margin-right: 10%;
 }
 
 .playerTeamlbl{
-  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .playerTeamName{
