@@ -182,6 +182,8 @@ code, pre {
   font-size: larger;
   margin-left: -40%;
   margin-top: 0.4%;
+  min-height: 250px;
+  min-width: 220px;
 }
 
 .biographyTitle{
