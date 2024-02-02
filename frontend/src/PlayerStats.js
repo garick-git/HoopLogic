@@ -17,6 +17,7 @@ const PlayerStats = () => {
     const [timeoutFlag, setTimeoutFlag] = useState(null);
     const [players, setPlayers] = useState([]);
     const [graphArray, setGraphArray] = useState([]);
+    const [graphLabel, setGraphLabel] = useState('Points');
 
     const [pointsArray, setPointsArray] = useState([]);
     const [ftArray, setFtArray] = useState([]);
@@ -153,7 +154,12 @@ const PlayerStats = () => {
     };    
 
     const localGraphArray = {
-      points: [0.0, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]]
+      points: [0.0, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]],
+      ftm: [0.0, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]],
+      rebounds: [0.0, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]],
+      assists: [0.0, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]],
+      threepm: [0.0, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]],
+      PRA: [0.0, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]],
     };
 
     useEffect(() => {
@@ -408,21 +414,27 @@ const PlayerStats = () => {
 
         if(selection == 1){
           setGraphArray(pointsArray)
+          setGraphLabel('Points')
         }
         if(selection == 2){
           setGraphArray(ftArray)
+          setGraphLabel('Free Throws')
         }
         if(selection == 3){ 
           setGraphArray(reboundsArray)
+          setGraphLabel('Rebounds')
         }
         if(selection == 4){
           setGraphArray(threePointersArray)
+          setGraphLabel('Three Pointers')
         }
         if(selection == 5){
           setGraphArray(assistsArray)
+          setGraphLabel('Assists')
         }
         if(selection == 6){
           setGraphArray(praArray)
+          setGraphLabel('P+R+A')
         }
         setSelectedCell(selection)
       }
@@ -806,14 +818,17 @@ const PlayerStats = () => {
                   <div className="statsTableHeader">
                     <h3 className='statsTitle'>Stats</h3>
                     <p className="lastGamesLabel">Last Games: </p>
-                    <input
+                    <select
                       placeholder='5'
-                      type="number"
-                      min="1"
-                      max="50"
                       className="lastGamesInput"
                       onChange={(e) => handleGameCountChange(e.target.value)}
-                    />
+                    >
+                      {[...Array(50)].map((_, index) => (
+                        <option key={index} value={index + 1}>
+                          {index + 1}
+                        </option>
+                      ))}
+                    </select>
                     <p className="vsLabel">VS. </p>
                     <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
                       {NBA_TEAMS.map((team, index) => {
@@ -886,10 +901,12 @@ const PlayerStats = () => {
                     </tbody>
                   </table>
             </div>
-
+            <div className="graphSection">
+              <p className='graphLabel'>{graphLabel}</p>
               <div className="graphDiv">
                 {graphArray && <Graph graphArray={graphArray} />}
               </div>
+            </div>
             </div>
           </div>
         ) : (
