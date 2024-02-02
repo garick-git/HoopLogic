@@ -405,6 +405,7 @@ input::-webkit-inner-spin-button {
   padding-right:1%;
   padding-bottom:3%;
   max-width: 390px;
+  min-width: 390px;
   max-height: 270px;
   overflow: scroll;
 }
