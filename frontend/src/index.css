@@ -182,8 +182,6 @@ code, pre {
   font-size: larger;
   margin-left: -40%;
   margin-top: 0.4%;
-  min-height: 250px;
-  min-width: 220px;
 }
 
 .biographyTitle{
@@ -195,6 +193,8 @@ code, pre {
 .biographyTable{
   border: solid #00BF63 2px;
   padding: 1%;
+  min-height: 220px;
+  min-width: 220px;
 }
 
 .playerTeam{
