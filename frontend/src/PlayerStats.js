@@ -309,6 +309,7 @@ const PlayerStats = () => {
             .then((data) => {
               setPlayerData(data);
               console.log('player fetched fetchPlayer() ==> ', data)
+              console.log('playerData is: ', playerData)
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -718,10 +719,6 @@ const PlayerStats = () => {
         }
       }, [selectedTeam, gameCount, selectedCell])
 
-      useEffect(() => {
-        console.log('playerData is: ', playerData)
-      }, [playerData])
-
       return (
         playerData && graphArray ? (
           <div className='playerStatsPage'>
@@ -821,7 +818,7 @@ const PlayerStats = () => {
                     <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
                       {NBA_TEAMS.map((team, index) => {
                         // Check if the current team is the same as the player's team_id
-                        const isPlayerTeam = index + 1 === localPlayerData.team_id+1;
+                        const isPlayerTeam = index + 1 === playerData.team_id+1;
 
                         // Render the option only if it's not the player's team
                         if (!isPlayerTeam) {
