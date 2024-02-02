@@ -718,6 +718,10 @@ const PlayerStats = () => {
         }
       }, [selectedTeam, gameCount, selectedCell])
 
+      useEffect(() => {
+        console.log('playerData is: ', playerData)
+      }, [playerData])
+
       return (
         playerData && graphArray ? (
           <div className='playerStatsPage'>
