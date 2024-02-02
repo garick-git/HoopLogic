@@ -819,7 +819,7 @@ const PlayerStats = () => {
                     <h3 className='statsTitle'>Stats</h3>
                     <p className="lastGamesLabel">Last Games: </p>
                     <select
-                      placeholder='5'
+                      value='5'
                       className="lastGamesInput"
                       onChange={(e) => handleGameCountChange(e.target.value)}
                     >
