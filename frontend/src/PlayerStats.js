@@ -153,7 +153,7 @@ const PlayerStats = () => {
     };    
 
     const localGraphArray = {
-      points: [26.6, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]]
+      points: [0.0, [24, 25, 27, 27, 30, 24, 25, 27, 27, 30,]]
     };
 
     useEffect(() => {
@@ -405,57 +405,22 @@ const PlayerStats = () => {
         const statsCell5 = document.getElementById('statsCell5')
         const statsCell6 = document.getElementById('statsCell6')
 
-        if(selection == 1){ 
-          statsCell1.style.backgroundColor = 'gray';
-          statsCell2.style.backgroundColor = 'black';
-          statsCell3.style.backgroundColor = 'black';
-          statsCell4.style.backgroundColor = 'black';
-          statsCell5.style.backgroundColor = 'black';
-          statsCell6.style.backgroundColor = 'black';
+        if(selection == 1){
           setGraphArray(pointsArray)
         }
-        if(selection == 2){ 
-          statsCell1.style.backgroundColor = 'black';
-          statsCell2.style.backgroundColor = 'gray';
-          statsCell3.style.backgroundColor = 'black';
-          statsCell4.style.backgroundColor = 'black';
-          statsCell5.style.backgroundColor = 'black';
-          statsCell6.style.backgroundColor = 'black';
+        if(selection == 2){
           setGraphArray(ftArray)
         }
         if(selection == 3){ 
-          statsCell1.style.backgroundColor = 'black';
-          statsCell2.style.backgroundColor = 'black';
-          statsCell3.style.backgroundColor = 'gray';
-          statsCell4.style.backgroundColor = 'black';
-          statsCell5.style.backgroundColor = 'black';
-          statsCell6.style.backgroundColor = 'black';
           setGraphArray(reboundsArray)
         }
-        if(selection == 4){ 
-          statsCell1.style.backgroundColor = 'black';
-          statsCell2.style.backgroundColor = 'black';
-          statsCell3.style.backgroundColor = 'black';
-          statsCell4.style.backgroundColor = 'gray';
-          statsCell5.style.backgroundColor = 'black';
-          statsCell6.style.backgroundColor = 'black';
-          setGraphArray(threePointersArray)}
-        if(selection == 5){ 
-          statsCell1.style.backgroundColor = 'black';
-          statsCell2.style.backgroundColor = 'black';
-          statsCell3.style.backgroundColor = 'black';
-          statsCell4.style.backgroundColor = 'black';
-          statsCell5.style.backgroundColor = 'gray';
-          statsCell6.style.backgroundColor = 'black';
+        if(selection == 4){
+          setGraphArray(threePointersArray)
+        }
+        if(selection == 5){
           setGraphArray(assistsArray)
         }
-        if(selection == 6){ 
-          statsCell1.style.backgroundColor = 'black';
-          statsCell2.style.backgroundColor = 'black';
-          statsCell3.style.backgroundColor = 'black';
-          statsCell4.style.backgroundColor = 'black';
-          statsCell5.style.backgroundColor = 'black';
-          statsCell6.style.backgroundColor = 'gray';
+        if(selection == 6){
           setGraphArray(praArray)
         }
         setSelectedCell(selection)
@@ -850,10 +815,19 @@ const PlayerStats = () => {
                     />
                     <p className="vsLabel">VS. </p>
                     <select className="rivalSelection" onChange={(e) => handleTeamChange(e.target.value)}>
-                      {NBA_TEAMS.map((team, index) => (
-                        <option key={index} value={index + 1}>{team}</option>
-                      ))}
+                      {NBA_TEAMS.map((team, index) => {
+                        // Check if the current team is the same as the player's team_id
+                        const isPlayerTeam = index + 1 === localPlayerData.team_id+1;
+
+                        // Render the option only if it's not the player's team
+                        if (!isPlayerTeam) {
+                          return <option key={index} value={index + 1}>{team}</option>;
+                        }
+
+                        return null; // Do not render the option if it's the player's team
+                      })}
                     </select>
+
                   </div>
                   <table className="statsTable">
                     <tbody>
