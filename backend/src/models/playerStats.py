@@ -147,7 +147,6 @@ class PlayerStats(db.Model):
                     print(f"Request failed with status code {response.status_code}")
                     break
             except requests.exceptions.RequestException as e:
-                print(f"An error occurred: {e}")
                 break
 
         print(f"Overall: New records inserted: {new_records}, Duplicate records skipped: {duplicate_records}")
