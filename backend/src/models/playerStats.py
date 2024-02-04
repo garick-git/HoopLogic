@@ -93,11 +93,11 @@ class PlayerStats(db.Model):
                             print(f"Player with ID {player_id} does not exist. Skipping.")
                             continue
 
-                        # Check if the player stat already exists
-                        if PlayerStats.query.filter_by(id=player_stat_id).first():
-                            print(f"Player stat with ID {player_stat_id} already exists. Skipping.")
-                            duplicate_records += 1
-                            duplicate_records_page += 1
+                        game_id = player_stat_data['game']['id']
+                        existing_game = Game.query.get(game_id)
+
+                        if existing_game is None:
+                            print(f"Game with ID {game_id} does not exist. Skipping.")
                             continue
 
                         try:
@@ -123,7 +123,7 @@ class PlayerStats(db.Model):
                                 stl=player_stat_data.get('stl', 0),
                                 turnover=player_stat_data.get('turnover', 0),
                                 player_id=existing_player.id,
-                                game_id=player_stat_data['game']['id'],
+                                game_id=game_id,
                                 team_id=player_stat_data['team']['id']
                             )
 
@@ -131,7 +131,13 @@ class PlayerStats(db.Model):
                             db.session.commit()
                             new_records += 1
                             new_records_page += 1
+                        except IntegrityError as e:
+                            db.session.rollback()
+                            print(f"IntegrityError: {e}")
+                            duplicate_records += 1
+                            duplicate_records_page += 1
                         except Exception as e:
+                            db.session.rollback()
                             print(f"An error occurred while processing data: {e}")
 
                     print(f"Page {page}: New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
