@@ -60,7 +60,7 @@ class PlayerStats(db.Model):
         ]
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids[]={ids_array}"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids={ids_array}"
 
             try:
                 response = requests.get(url)
