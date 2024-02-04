@@ -1,10 +1,10 @@
-import requests
-import time
+from sqlalchemy.exc import IntegrityError
 from database import db
 from .player import Player
 from .team import Team
 from .game import Game
-from sqlalchemy.exc import IntegrityError 
+import requests
+import time
 
 class PlayerStats(db.Model):
     __tablename__ = 'playerStats'
@@ -59,27 +59,24 @@ class PlayerStats(db.Model):
                     data = response.json()
                     player_stats_data = data.get('data', [])
 
-                    new_records_page = 0  # Counter for new records on the current page
-                    duplicate_records_page = 0  # Counter for duplicate records on the current page
-
                     if not player_stats_data:
                         # No more records to fetch
                         print("No more records to fetch. Exiting.")
                         break
 
+                    new_records_page = 0
+                    duplicate_records_page = 0
+
                     for player_stat_data in player_stats_data:
                         player_stat_id = player_stat_data['id']
 
-                        # Check if 'player' is None or 'id' is not present
-                        if player_stat_data.get('player') is None or 'id' not in player_stat_data.get('player', {}):
+                        if 'player' not in player_stat_data or 'id' not in player_stat_data['player']:
                             print("Invalid player data. Skipping.")
                             continue
 
-                        # Check if the player already exists
                         existing_player = Player.query.filter_by(id=player_stat_data['player']['id']).first()
 
                         if existing_player is None:
-                            # Player does not exist, skip adding the stats
                             print(f"Player with ID {player_stat_data['player']['id']} does not exist. Skipping.")
                             continue
 
@@ -116,13 +113,13 @@ class PlayerStats(db.Model):
                             new_records_page += 1
                         except IntegrityError:
                             db.session.rollback()
+                            print(f"Duplicate record found for player ID {player_stat_data['player']['id']}. Skipping.")
                             duplicate_records += 1
                             duplicate_records_page += 1
                         except Exception as e:
                             print(f"An error occurred while processing data: {e}")
 
                     print(f"Page {page}: New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
-
                     page += 1
                     time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
                 else:
@@ -133,3 +130,6 @@ class PlayerStats(db.Model):
                 break
 
         print(f"Overall: New records inserted: {new_records}, Duplicate records skipped: {duplicate_records}")
+
+if __name__ == "__main__":
+    PlayerStats.fetch_and_insert_stats()
