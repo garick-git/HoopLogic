@@ -93,6 +93,13 @@ class PlayerStats(db.Model):
                             print(f"Player with ID {player_id} does not exist. Skipping.")
                             continue
 
+                        # Check if the player stat already exists
+                        if PlayerStats.query.filter_by(id=player_stat_id).first():
+                            print(f"Player stat with ID {player_stat_id} already exists. Skipping.")
+                            duplicate_records += 1
+                            duplicate_records_page += 1
+                            continue
+
                         try:
                             player_stat = PlayerStats(
                                 id=player_stat_id,
@@ -124,11 +131,6 @@ class PlayerStats(db.Model):
                             db.session.commit()
                             new_records += 1
                             new_records_page += 1
-                        except IntegrityError:
-                            db.session.rollback()
-                            print(f"Duplicate record found for player ID {player_id}. Skipping.")
-                            duplicate_records += 1
-                            duplicate_records_page += 1
                         except Exception as e:
                             print(f"An error occurred while processing data: {e}")
 
