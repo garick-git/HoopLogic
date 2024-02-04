@@ -133,12 +133,10 @@ class PlayerStats(db.Model):
                             new_records_page += 1
                         except IntegrityError as e:
                             db.session.rollback()
-                            print(f"IntegrityError: {e}")
                             duplicate_records += 1
                             duplicate_records_page += 1
                         except Exception as e:
                             db.session.rollback()
-                            print(f"An error occurred while processing data: {e}")
 
                     print(f"Page {page}: New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
                     page += 1
