@@ -49,8 +49,18 @@ class PlayerStats(db.Model):
         new_records = 0
         duplicate_records = 0
 
+        ids_array = [
+        460, 462, 464, 472, 473, 475, 480, 486, 487, 489, 
+        490, 491, 493, 666940, 666950, 666956, 666960, 666965, 
+        666969, 666971, 1603383, 3547240, 3547246, 3547248, 11891374, 
+        17896026, 17896027, 17896078, 17896120, 24489167, 38017693, 
+        38017698, 38017703, 38017706, 38017711, 38017721, 38017731, 
+        47738533, 56677722, 56677822, 56677831, 56677832, 56677833, 
+        56677864
+        ]
+
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids[]=115"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids[]={ids_array}"
 
             try:
                 response = requests.get(url)
