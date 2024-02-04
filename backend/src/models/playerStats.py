@@ -58,7 +58,7 @@ class PlayerStats(db.Model):
         ]
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids={','.join(map(str, ids_array))}"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids={','.join(map(str, ids_array))}&seasons[]=2023"
 
             try:
                 response = requests.get(url)
