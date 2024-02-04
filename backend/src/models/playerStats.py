@@ -30,12 +30,10 @@ class PlayerStats(db.Model):
     stl = db.Column(db.Integer)
     turnover = db.Column(db.Integer)
 
-    # Use ForeignKey references to establish relationships
     player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
     team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
 
-    # Define the relationships
     player = db.relationship('Player', backref='player_stats')
     game = db.relationship('Game', backref='player_stats')
     team = db.relationship('Team', backref='player_stats')
@@ -44,6 +42,7 @@ class PlayerStats(db.Model):
     def fetch_and_insert_stats():
         BASE_URL = "https://www.balldontlie.io/api/v1/stats"
         PER_PAGE = 100
+
         page = 1
         new_records = 0
         duplicate_records = 0
@@ -82,13 +81,12 @@ class PlayerStats(db.Model):
                             print("Invalid player data. Skipping.")
                             continue
 
-                        player_info = player_stat_data.get('player', {})
-                        player_id = player_info.get('id')
-
-                        if not player_id:
-                            print("Invalid player ID. Skipping.")
+                        player_info = player_stat_data.get('player')
+                        if not player_info or 'id' not in player_info:
+                            print("Player information not found. Skipping.")
                             continue
 
+                        player_id = player_info['id']
                         existing_player = Player.query.get(player_id)
 
                         if existing_player is None:
@@ -117,9 +115,9 @@ class PlayerStats(db.Model):
                                 reb=player_stat_data.get('reb', 0),
                                 stl=player_stat_data.get('stl', 0),
                                 turnover=player_stat_data.get('turnover', 0),
-                                player_id=player_id,
-                                game_id=player_stat_data.get('game', {}).get('id', 0),
-                                team_id=player_stat_data.get('team', {}).get('id', 0)
+                                player_id=existing_player.id,
+                                game_id=player_stat_data['game']['id'],
+                                team_id=player_stat_data['team']['id']
                             )
 
                             db.session.add(player_stat)
