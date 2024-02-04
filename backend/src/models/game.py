@@ -1,3 +1,4 @@
+from sqlalchemy.exc import IntegrityError
 import requests
 import time
 from datetime import datetime, timezone
@@ -24,10 +25,9 @@ class Game(db.Model):
 
     @staticmethod
     def parse_iso8601_date(date_str):
-        # Parse ISO 8601 date and time string to a datetime object
         try:
             date_obj = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S.%fZ')
-            date_obj = date_obj.replace(tzinfo=timezone.utc)  # Set the timezone to UTC
+            date_obj = date_obj.replace(tzinfo=timezone.utc)
             return date_obj
         except ValueError:
             return None
@@ -36,34 +36,31 @@ class Game(db.Model):
     def fetch_and_insert_games():
         BASE_URL = "https://www.balldontlie.io/api/v1/games"
         PER_PAGE = 100
+        seasons = [str(year) for year in range(2002, 2024)]  # Adjust the range to fit your needs
 
         page = 1
         total_added = 0
-        seasons = [2002, 2003, 2004, 2005, 2006,
-                   2007, 2008, 2009, 2010, 2011,
-                   2012, 2013, 2014, 2015, 2016, 
-                   2017, 2018, 2019, 2020, 2021, 
-                   2022, 2023]
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&seasons={seasons}"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&seasons={'%2C'.join(seasons)}"
 
             try:
                 response = requests.get(url)
 
                 if response.status_code == 200:
-                    data = response.json()
-                    games_data = data.get('data', [])
+                    data = response.json().get('data', [])
 
-                    # Insert data into the games table
-                    for game_data in games_data:
+                    if not data:
+                        print("No more games to fetch.")
+                        break
+
+                    for game_data in data:
                         home_team_data = game_data.get('home_team', {})
                         visitor_team_data = game_data.get('visitor_team', {})
 
-                        home_team = Team.query.filter_by(id=home_team_data.get('id')).first()
-                        visitor_team = Team.query.filter_by(id=visitor_team_data.get('id')).first()
+                        home_team = Team.query.get(home_team_data.get('id'))
+                        visitor_team = Team.query.get(visitor_team_data.get('id'))
 
-                        # Parse the date using the custom function
                         date_str = game_data.get('date')
                         date = Game.parse_iso8601_date(date_str)
 
@@ -80,22 +77,22 @@ class Game(db.Model):
                             home_team=home_team,
                             visitor_team=visitor_team
                         )
+
                         db.session.add(game)
                         total_added += 1
 
                     db.session.commit()
+                    print(f"Page {page}: Added {len(data)} games. Total added: {total_added}")
 
-                    print(f"Page {page}: Added {len(games_data)} games. Total added: {total_added}")
-
-                    if games_data:
-                        page += 1
-                        time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
-                    else:
-                        print("No more games to fetch.")
-                        break
+                    page += 1
+                    time.sleep(1)  # Delay to comply with rate limit
                 else:
                     print(f"Request failed with status code {response.status_code}")
                     break
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
                 break
+            except IntegrityError as e:
+                db.session.rollback()
+                print(f"IntegrityError: {e}")
+                print("Rolling back the session to avoid duplicate entries.")
