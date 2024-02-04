@@ -50,7 +50,7 @@ class PlayerStats(db.Model):
         duplicate_records = 0
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids[]=237"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids[]=450"
 
             try:
                 response = requests.get(url)
