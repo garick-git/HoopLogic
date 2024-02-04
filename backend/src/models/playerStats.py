@@ -42,7 +42,7 @@ class PlayerStats(db.Model):
 
     @staticmethod
     def fetch_and_insert_stats():
-        BASE_URL = "https://www.balldontlie.io/api/v1/stats?start_date=2022-1-1"
+        BASE_URL = "https://www.balldontlie.io/api/v1/stats?start_date=2023-7-1"
         PER_PAGE = 100
 
         page = 1
