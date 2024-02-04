@@ -36,7 +36,7 @@ class Game(db.Model):
     def fetch_and_insert_games():
         BASE_URL = "https://www.balldontlie.io/api/v1/games"
         PER_PAGE = 100
-        seasons = [str(year) for year in range(2002, 2024)]  # Adjust the range to fit your needs
+        seasons = [2024]  # Adjust the range to fit your needs
 
         page = 1
         total_added = 0
