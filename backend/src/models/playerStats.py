@@ -1,4 +1,5 @@
 import time
+import requests
 from datetime import datetime, timezone
 from sqlalchemy.exc import IntegrityError
 from .team import Team
