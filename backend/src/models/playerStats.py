@@ -59,7 +59,58 @@ class PlayerStats(db.Model):
         ids_array = [115]
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids={ids_array}&seasons[]=2024"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&player_ids={ids_array}&seasons[]=2023"
+
+            import requests
+import time
+from datetime import datetime, timezone
+from sqlalchemy.exc import IntegrityError
+from .team import Team
+from .player import Player  # Import the Player model
+from .game import Game  # Import the Game model
+from database import db
+
+
+class PlayerStats(db.Model):
+    __tablename__ = 'player_stats'
+
+    id = db.Column(db.Integer, primary_key=True)
+    ast = db.Column(db.Integer)
+    blk = db.Column(db.Integer)
+    dreb = db.Column(db.Integer)
+    fg3_pct = db.Column(db.Float)
+    fg3a = db.Column(db.Integer)
+    fg3m = db.Column(db.Integer)
+    fg_pct = db.Column(db.Float)
+    fga = db.Column(db.Integer)
+    fgm = db.Column(db.Integer)
+    ft_pct = db.Column(db.Float)
+    fta = db.Column(db.Integer)
+    ftm = db.Column(db.Integer)
+    min = db.Column(db.String(10))
+    oreb = db.Column(db.Integer)
+    pf = db.Column(db.Integer)
+    pts = db.Column(db.Integer)
+    reb = db.Column(db.Integer)
+    stl = db.Column(db.Integer)
+    turnover = db.Column(db.Integer)
+    player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'))
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
+    player = db.relationship('Player', backref='player_stats')
+    game = db.relationship('Game', backref='player_stats')
+    team = db.relationship('Team', backref='player_stats')
+
+    @staticmethod
+    def fetch_and_insert_stats():
+        BASE_URL = "https://www.balldontlie.io/api/v1/stats"
+        PER_PAGE = 100
+        page = 1
+        new_records = 0
+        duplicate_records = 0
+
+        while True:
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}"
 
             try:
                 response = requests.get(url)
@@ -152,3 +203,4 @@ class PlayerStats(db.Model):
 
 if __name__ == "__main__":
     PlayerStats.fetch_and_insert_stats()
+
