@@ -9,15 +9,11 @@ class GameDateUpdater:
     @staticmethod
     def parse_iso8601_date(date_str):
         try:
-            date_obj = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S.%fZ')
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d')
         except ValueError:
-            try:
-                date_obj = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%SZ')
-            except ValueError:
-                print(f"Failed to parse date string: {date_str}")
-                return None
+            print(f"Failed to parse date string: {date_str}")
+            return None
 
-        date_obj = date_obj.replace(tzinfo=timezone.utc)
         return date_obj
 
     @staticmethod
