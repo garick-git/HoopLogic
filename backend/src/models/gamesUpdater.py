@@ -24,7 +24,7 @@ class GameDateUpdater:
         total_updated = 0
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&start_date=2023-07-01"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&start_date=2002-07-01"
 
             try:
                 response = requests.get(url)
