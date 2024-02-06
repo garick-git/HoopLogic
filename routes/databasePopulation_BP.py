@@ -22,6 +22,6 @@ def populate_games():
     return "Game population process initiated."
 
 @databasePopulate_BP.route('/update_games', methods=['GET'])
-def populate_games():
+def update_games():
     GameDateUpdater.update_game_dates()
     return "Game update process initiated."
