@@ -2,6 +2,7 @@ from flask import Blueprint
 from backend.src.models.player import Player
 from backend.src.models.game import Game
 from backend.src.models.playerStats import PlayerStats
+from backend.src.models.gamesUpdater import GameDateUpdater
 
 databasePopulate_BP = Blueprint("data_populate", __name__)
 
@@ -19,3 +20,8 @@ def populate_players():
 def populate_games():
     Game.fetch_and_insert_games()
     return "Game population process initiated."
+
+@databasePopulate_BP.route('/update_games', methods=['GET'])
+def populate_games():
+    GameDateUpdater.update_game_dates()
+    return "Game update process initiated."
