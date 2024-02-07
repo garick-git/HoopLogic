@@ -473,11 +473,10 @@ input::-webkit-inner-spin-button {
     justify-content: center;
     justify-self: center;
     margin-top: 1%;
-    margin-left: 5%;
+    margin-left: 15%;
     display: flex;
     flex-direction: row;
-    width: 300px;
-    background-color: red;
+    width: 250px;
   }
 
   .playersRow{
