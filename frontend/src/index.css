@@ -432,30 +432,52 @@ input::-webkit-inner-spin-button {
   }
 
   .homePageLogo{
-    width: 450px;
+    max-width: 450px;
     margin-left: 0%;
   }
 
-  .searchBar{
-    width: 250px;    
-    height: 5px;
+  .searchBarDiv2{
+    margin-top: 18%;
+    margin-right: 9.1%;
   }
 
+  .searchBar{
+    max-width: 250px;    
+    max-height: 5px;
+  }
+
+  .suggestedPlayersDiv2{
+    max-height: 100px;
+    margin-right: -10%;
+  }
+
+  .playersRow{
+    width: 190px;
+    font-size: small;
+  }
+
+
   #secondaryLogo{
-    width: 100px;
+    width: 120px;
     margin-left: 3%;
   }
 
   .searchBar2{
-    width: 100px;
-    height: 5px;
+    max-width: 100px;
+    max-height: 5px;
     margin-top: -20%;
-    margin-right: -25%;
+    margin-right: -10%;
+  }
+
+  .headerLogo{
+    margin-top: 7%;
   }
 
   .playerName{
     margin-right: -14%;
     margin-left: -5%;
+    margin-top: 15%;
+    font-size: 370%;
   }
 
   .pageContent{
@@ -466,37 +488,63 @@ input::-webkit-inner-spin-button {
   .biographyDiv{
     margin-left: 13%;
     margin-top: -10%;
+    width: 200px;
+  }
+
+  .biographyTable{
+    min-height: 200px;
+    min-width: 230px;
   }
 
   .statsDiv{
     margin-top: 5%;
-    margin-left: -7%;
+    margin-left: -1%;
   }
 
   .statsTitle{
     margin-left: 10%;
-    margin-top: 8%;
+    margin-right: 0%;
+    margin-top: 10%;
   }
+
 
   .lastGamesLabel{
     margin-top: 8%;
+    margin-left: 8%;
   }
 
   .lastGamesInput{
-    width: 50px;
-    margin-top: 7%;
+    width: 40px;
+    margin-top: 9%;
   }
 
   .vsLabel{
-    margin-top: 8%;
+    margin-top: 10%;
   }
 
   .rivalSelection{
-    margin-top: 6%;
+    margin-top: 8%;
+    margin-right: 10%;
+    width: 100px;
+  }
+
+  .statsTable{
+    max-width: 250px;
   }
 
   .graphSection{
-    margin-left: -17%;
+    margin-left: -13%;
     width: fit-content;
+    max-width: 150px;
+  }
+
+  .graphLabel{
+    margin-top: 25%;
+    margin-bottom: 7%;
+  }
+
+  .graphDiv{
+    padding: 5%;
+    padding-left: 6%;
   }
 }
