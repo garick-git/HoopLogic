@@ -500,7 +500,7 @@ input::-webkit-inner-spin-button {
   }
 
   .playersRow2{
-    width: 190px;
+    width: 170px;
     font-size: small;
   }
 
@@ -562,7 +562,7 @@ input::-webkit-inner-spin-button {
 
   .statsDiv{
     margin-top: 5%;
-    margin-left: -11%;
+    margin-left: -18%;
   }
 
   .statsTitle{
