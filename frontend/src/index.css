@@ -427,25 +427,41 @@ input::-webkit-inner-spin-button {
 
 /* Phone screens */
 @media only screen and (max-width: 768px){
-  .homePageLogoDiv{
-    margin-top: 50%;
+  .homePageLogoDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 35%;
   }
-
-  .homePageLogo{
-    max-width: 360px;
+  
+  .homePageLogo {
+    min-width: 320px;
+    min-height: 100px;
     max-height: 100px;
-    margin-left: 0%;
+    max-width: 320px;
   }
 
-  .searchBar{
-    max-width: 250px;    
-    max-height: 5px;
-    margin-top: -20%;
+  .searchBarDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
   }
+  
+  .searchBar {
+    max-width: 250px;
+    height: 10px;
+  }
+
+  .suggestedPlayersDiv{
+    justify-content: center;
+    justify-self: center;
+    margin-top: 1%;
+  }
+
 
   .searchBarDiv2{
     margin-top: 18%;
-    margin-right: 9.1%;
   }
 
   .suggestedPlayersDiv2{
