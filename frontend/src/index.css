@@ -340,14 +340,14 @@ input::-webkit-inner-spin-button {
   margin-left: 7%;
   display: flex;
   justify-content: center;
-  width: 130%;
+  width: 100%;
 }
 
 .alternateCell1 {
   margin-left: 7%;
   display: flex;
   justify-content: center;
-  width: 130%;
+  width: 100%;
 }
 
 .alternateCell1:hover{
@@ -361,13 +361,13 @@ input::-webkit-inner-spin-button {
 }
 
 .freeThrowsLabel {
-  font-size: 150%;
+  font-size: 120%;
   display: flex;
   justify-content: center;
 }
 
 .pointsLabel {
-  font-size: 150%;
+  font-size: 120%;
   display: flex;
   justify-content: center;
   margin-top: 27%;
@@ -475,6 +475,7 @@ input::-webkit-inner-spin-button {
     margin-top: 1%;
     display: flex;
     flex-direction: row;
+    width: fit-content;
   }
 
   .playersRow{
@@ -564,20 +565,20 @@ input::-webkit-inner-spin-button {
   }
 
   .statsTitle{
-    margin-right: -2%;
-    margin-left: 7%;
+    margin-right: 2%;
+    margin-left: -1%;
     margin-top: 20%;
     font-size: 250%;
   }
 
   .lastGamesLabel{
     margin-top: 25%;
-    margin-left: 20%;
-    margin-right: -13%;
+    margin-left: 10%;
+    margin-right: -15%;
   }
 
   .lastGamesInput{
-    width: 100px;
+    width: 50px;
     margin-top: 30%;
     margin-left: 25%;
   }
@@ -589,12 +590,15 @@ input::-webkit-inner-spin-button {
   .rivalSelection{
     margin-top: 28%;
     margin-right: -45%;
-    width: 75px;
+    width: 50px;
   }
 
   .statsTable{
-    margin-left: -20%;
+    margin-left: -10%;
     margin-top: -20%;
+    display: flex;
+    justify-content: center;
+    width: 300px;
   }
 
   .graphSection{
