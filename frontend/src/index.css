@@ -424,3 +424,79 @@ input::-webkit-inner-spin-button {
   max-height: 270px;
   overflow: scroll;
 }
+
+/* Phone screens */
+@media only screen and (max-width: 768px){
+  .homePageLogoDiv{
+    margin-top: 20%;
+  }
+
+  .homePageLogo{
+    width: 450px;
+    margin-left: 0%;
+  }
+
+  .searchBar{
+    width: 250px;    
+    height: 5px;
+  }
+
+  #secondaryLogo{
+    width: 100px;
+    margin-left: 3%;
+  }
+
+  .searchBar2{
+    width: 100px;
+    height: 5px;
+    margin-top: -20%;
+    margin-right: -25%;
+  }
+
+  .playerName{
+    margin-right: -14%;
+    margin-left: -5%;
+  }
+
+  .pageContent{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .biographyDiv{
+    margin-left: 13%;
+    margin-top: -10%;
+  }
+
+  .statsDiv{
+    margin-top: 5%;
+    margin-left: -7%;
+  }
+
+  .statsTitle{
+    margin-left: 10%;
+    margin-top: 8%;
+  }
+
+  .lastGamesLabel{
+    margin-top: 8%;
+  }
+
+  .lastGamesInput{
+    width: 50px;
+    margin-top: 7%;
+  }
+
+  .vsLabel{
+    margin-top: 8%;
+  }
+
+  .rivalSelection{
+    margin-top: 6%;
+  }
+
+  .graphSection{
+    margin-left: -17%;
+    width: fit-content;
+  }
+}
