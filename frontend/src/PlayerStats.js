@@ -754,7 +754,7 @@ const PlayerStats = () => {
                   <table className='playersTable'>
                     <tbody>
                       {players.map((player) => (
-                        <tr className='playersRow' key={player.id} onClick={() => handleRowClick(player)}>
+                        <tr className='playersRow2' key={player.id} onClick={() => handleRowClick(player)}>
                           <td className="teamLogoCell">
                             <img
                               src={`/teamLogos/${teamLogos[player.team]}`}
