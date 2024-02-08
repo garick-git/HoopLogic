@@ -476,12 +476,12 @@ input::-webkit-inner-spin-button {
     margin-top: 1%;
     width: fit-content;
     margin-left: 20%;
-    max-width: 200px;
+    max-width: 250px;
     overflow-x: hidden;
 }
 
   .playersRow{
-    width: 250px;
+    width: 200px;
     font-size: small;
     text-align: center;
     justify-content: center;
