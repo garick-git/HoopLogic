@@ -484,7 +484,7 @@ input::-webkit-inner-spin-button {
     width: 200px;
     font-size: small;
     text-align: center;
-    justify-content: center;
+    margin-right: 20%;
   }
 
   .searchBarDiv2{
