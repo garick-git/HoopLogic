@@ -493,6 +493,7 @@ input::-webkit-inner-spin-button {
 
   .suggestedPlayersDiv2{
     max-height: 100px;
+    max-width: fit-content;
     margin-right: -10%;
   }
 
@@ -504,7 +505,6 @@ input::-webkit-inner-spin-button {
   .playersRow2{
     width: 170px;
     font-size: small;
-    margin-left: -20%;
   }
 
   #secondaryLogo{
