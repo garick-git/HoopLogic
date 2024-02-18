@@ -493,8 +493,9 @@ input::-webkit-inner-spin-button {
 
   .suggestedPlayersDiv2{
     max-height: 100px;
-    max-width: fit-content;
+    width: 100px;
     margin-right: -10%;
+    justify-content: left;
   }
 
   .pageHeader{
