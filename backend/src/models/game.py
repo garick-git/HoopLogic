@@ -59,6 +59,7 @@ class Game(db.Model):
 
             try:
                 response = requests.get(url, headers)
+                print(response)
 
                 if response.status_code == 200:
                     data = response.json().get('data', [])
