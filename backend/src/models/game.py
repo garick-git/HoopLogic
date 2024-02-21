@@ -49,12 +49,16 @@ class Game(db.Model):
         #            2017, 2018, 2019, 2020, 2021,
         #            2022, 2023]
         seasons = [2023]
+        API_KEY = 'REMOVED'
+        headers = {
+            'Authorization': f'{API_KEY}',
+        }
 
         while True:
             url = f"{BASE_URL}?per_page={PER_PAGE}&start_date=2024-01-01"
 
             try:
-                response = requests.get(url)
+                response = requests.get(url, headers)
 
                 if response.status_code == 200:
                     data = response.json().get('data', [])
