@@ -48,7 +48,7 @@ class Game(db.Model):
         next_cursor = None
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&start_date=2024-01-01"
             if next_cursor:
                 url += f"&cursor={next_cursor}"
 
