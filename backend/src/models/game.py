@@ -39,7 +39,7 @@ class Game(db.Model):
 
     @staticmethod
     def fetch_and_insert_games():
-        BASE_URL = "https://www.balldontlie.io/api/v1/games"
+        BASE_URL = "https:/api.balldontlie.io/v1/games"
         PER_PAGE = 100
         page = 1
         total_added = 0
@@ -55,7 +55,7 @@ class Game(db.Model):
         }
 
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&start_date=2024-01-01"
+            url = f"{BASE_URL}?per_page={PER_PAGE}"
 
             try:
                 response = requests.get(url, headers)
