@@ -98,13 +98,11 @@ class Game(db.Model):
                     if not next_cursor:
                         print("No more games to fetch.")
                         break
-                elif response.status_code == 429:
-                    print("Rate limit exceeded. Waiting before retrying...")
-                    # If rate limit is exceeded, wait for a minute before retrying
-                    time.sleep(60)
                 else:
                     print(f"Request failed with status code {response.status_code}")
                     break
+
+                time.sleep(2.5)
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
                 break
