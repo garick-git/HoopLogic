@@ -36,32 +36,29 @@ class Game(db.Model):
         date_obj = date_obj.replace(tzinfo=timezone.utc)
         return date_obj
 
-
     @staticmethod
     def fetch_and_insert_games():
         BASE_URL = "https://api.balldontlie.io/v1/games"
         PER_PAGE = 100
-        page = 1
         total_added = 0
-        # seasons = [2002, 2003, 2004, 2005, 2006,
-        #            2007, 2008, 2009, 2010, 2011,
-        #            2012, 2013, 2014, 2015, 2016,
-        #            2017, 2018, 2019, 2020, 2021,
-        #            2022, 2023]
-        seasons = [2023]
         headers = {
-            'Authorization': 'REMOVED',
+            'Authorization': 'Bearer REMOVED',
         }
+
+        next_cursor = None
 
         while True:
             url = f"{BASE_URL}?per_page={PER_PAGE}"
+            if next_cursor:
+                url += f"&cursor={next_cursor}"
 
             try:
                 response = requests.get(url, headers=headers)
-                print(response)
 
                 if response.status_code == 200:
                     data = response.json().get('data', [])
+                    meta = response.json().get('meta', {})
+                    next_cursor = meta.get('next_cursor')
 
                     for game_data in data:
                         game_id = game_data.get('id')
@@ -96,12 +93,9 @@ class Game(db.Model):
 
                     db.session.commit()
 
-                    print(f"Page {page}: Added {len(data)} games. Total added: {total_added}")
+                    print(f"Added {len(data)} games. Total added: {total_added}")
 
-                    if data:
-                        page += 1
-                        time.sleep(2)  # Adjust delay to comply with rate limit
-                    else:
+                    if not next_cursor:
                         print("No more games to fetch.")
                         break
                 else:
