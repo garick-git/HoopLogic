@@ -42,6 +42,9 @@ class PlayerStats(db.Model):
     def fetch_and_insert_stats():
         BASE_URL = "https://api.balldontlie.io/v1/stats"
         PER_PAGE = 100
+        headers = {
+            'Authorization': 'REMOVED',
+        }
 
         next_cursor = None
         new_records = 0
@@ -53,7 +56,7 @@ class PlayerStats(db.Model):
                 url += f"&cursor={next_cursor}"
 
             try:
-                response = requests.get(url)
+                response = requests.get(url, headers=headers)
 
                 if response.status_code == 200:
                     data = response.json()
