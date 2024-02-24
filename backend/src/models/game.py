@@ -42,7 +42,7 @@ class Game(db.Model):
         PER_PAGE = 100
         total_added = 0
         headers = {
-            'Authorization': 'Bearer REMOVED',
+            'Authorization': 'REMOVED',
         }
 
         next_cursor = None
