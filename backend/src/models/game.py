@@ -39,7 +39,7 @@ class Game(db.Model):
 
     @staticmethod
     def fetch_and_insert_games():
-        BASE_URL = "https:/api.balldontlie.io/v1/games"
+        BASE_URL = "https://api.balldontlie.io/v1/games"
         PER_PAGE = 100
         page = 1
         total_added = 0
