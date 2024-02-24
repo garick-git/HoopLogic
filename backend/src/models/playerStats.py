@@ -1,10 +1,10 @@
+import requests
+import time
 from sqlalchemy.exc import IntegrityError
 from database import db
 from .player import Player
 from .team import Team
 from .game import Game
-import requests
-import time
 
 class PlayerStats(db.Model):
     __tablename__ = 'playerStats'
@@ -40,26 +40,17 @@ class PlayerStats(db.Model):
 
     @staticmethod
     def fetch_and_insert_stats():
-        BASE_URL = "https://www.balldontlie.io/api/v1/stats"
+        BASE_URL = "https://api.balldontlie.io/v1/stats"
         PER_PAGE = 100
 
-        page = 1
+        next_cursor = None
         new_records = 0
         duplicate_records = 0
 
-        # ids_array = [
-        #     15, 57, 61, 70, 73, 115, 117, 125, 132, 140,
-        #     145, 161, 172, 175, 182, 191, 227, 231, 237, 
-        #     246, 265, 274, 278, 297, 322, 334, 387, 406, 
-        #     413, 416, 434, 447, 490, 666956, 666969, 3547238, 
-        #     3547245, 3547246, 3547254, 3547287, 17895966, 
-        #     17896026, 17896048, 17896055, 17896062, 17896075, 
-        #     38017683, 38017685, 38017703, 56677822
-        # ]
-        ids_array = [115]
-
         while True:
-            url = f"{BASE_URL}?per_page={PER_PAGE}&page={page}&seasons[]=2023"
+            url = f"{BASE_URL}?per_page={PER_PAGE}&start_date=2024-01-01"
+            if next_cursor:
+                url += f"&cursor={next_cursor}"
 
             try:
                 response = requests.get(url)
@@ -139,12 +130,15 @@ class PlayerStats(db.Model):
                         except Exception as e:
                             db.session.rollback()
 
-                    print(f"Page {page}: New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
-                    page += 1
-                    time.sleep(1)  # Add a delay to comply with rate limit (adjust as needed)
+                    print(f"Page {next_cursor}: New records added: {new_records_page}, Duplicate records skipped: {duplicate_records_page}")
+
+                    next_cursor = data.get('meta', {}).get('next_cursor')
+                    
                 else:
                     print(f"Request failed with status code {response.status_code}")
                     break
+
+                
             except requests.exceptions.RequestException as e:
                 break
 
