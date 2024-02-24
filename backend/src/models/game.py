@@ -49,16 +49,15 @@ class Game(db.Model):
         #            2017, 2018, 2019, 2020, 2021,
         #            2022, 2023]
         seasons = [2023]
-        API_KEY = 'REMOVED'
         headers = {
-            'Authorization': f'{API_KEY}',
+            'Authorization': 'REMOVED',
         }
 
         while True:
             url = f"{BASE_URL}?per_page={PER_PAGE}"
 
             try:
-                response = requests.get(url, headers)
+                response = requests.get(url, headers=headers)
                 print(response)
 
                 if response.status_code == 200:
