@@ -102,7 +102,6 @@ class Game(db.Model):
                     print(f"Request failed with status code {response.status_code}")
                     break
 
-                time.sleep(2.5)
             except requests.exceptions.RequestException as e:
                 print(f"An error occurred: {e}")
                 break
