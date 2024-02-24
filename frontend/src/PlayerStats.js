@@ -179,7 +179,6 @@ const PlayerStats = () => {
             .then((data) => {
               setPointsArray(data);
               setGraphArray(data);
-              console.log('data for points is: ', data)
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -299,7 +298,6 @@ const PlayerStats = () => {
     }, [])
 
     const fetchPlayer = (playerId) => {
-      console.log('ID for player being fetched on fetchPlayer() ==> ', playerId)
         fetch(`/api/player/search/id/${playerId}`, {
             method: 'GET',
             headers: {
@@ -314,8 +312,6 @@ const PlayerStats = () => {
             })
             .then((data) => {
               setPlayerData(data);
-              console.log('player fetched fetchPlayer() ==> ', data)
-              console.log('playerData is: ', playerData)
             })
             .catch((error) => {
               console.error('Error:', error);
@@ -395,7 +391,6 @@ const PlayerStats = () => {
       };
 
       const handleTeamChange = (selection) => {
-        console.log('your team selection: ', selection)
         setSelectedTeam(selection);
       }
 
@@ -440,7 +435,6 @@ const PlayerStats = () => {
       }
 
       const fetchArraysVsAll = () => {
-        console.log('you are in fetchArraysVsAll because you selected team #', selectedTeam)
         fetch(`/api/games/search/points/${playerId}/${gameCount}`, {
           method: 'GET',
           headers: {
@@ -581,7 +575,6 @@ const PlayerStats = () => {
       }
 
       const fetchArraysVsTeam = () => {
-        console.log('you are in fetchArraysVsTeam because you selected team #', selectedTeam-1)
         fetch(`/api/games/search/points/${playerId}/${gameCount}/${selectedTeam-1}`, {
           method: 'GET',
           headers: {
@@ -848,7 +841,6 @@ const PlayerStats = () => {
                   <table className="statsTable">
                     <tbody>
                     <div className="topStatsRow">
-                    {console.log("pointsArray", pointsArray)}
                     {pointsArray && pointsArray.points && pointsArray.points[0] !== undefined && (
                       <div id='statsCell1' className="pointsCell" onClick={() => handleCellChange(1)}>
                         <p className="pointsLabel">Points</p>
@@ -856,7 +848,6 @@ const PlayerStats = () => {
                       </div>
                     )}
                       <div className="spacerCell"></div>
-                      {console.log("ftArray", ftArray)}
                       {ftArray && ftArray.ftm && ftArray.ftm[0] !== undefined && (
                         <div id='statsCell2' className="freeThrowsCell" onClick={() => handleCellChange(2)}>
                           <p className='freeThrowsLabel'>Free Throws</p>
@@ -865,7 +856,6 @@ const PlayerStats = () => {
                       )}
                     </div>
                     <div className="topStatsRow">
-                      {console.log("reboundsArray", reboundsArray)}
                       {reboundsArray && reboundsArray.rebounds && reboundsArray.rebounds[0] !== undefined && (
                         <div id='statsCell3' className="pointsCell" onClick={() => handleCellChange(3)}>
                           <p className="pointsLabel">Rebounds</p>
@@ -873,7 +863,6 @@ const PlayerStats = () => {
                         </div>
                       )}
                         <div className="spacerCell"></div>
-                        {console.log("threePointersArray", threePointersArray)}
                         {threePointersArray && threePointersArray.threepm && threePointersArray.threepm[0] !== undefined && (
                           <div id='statsCell4' className="freeThrowsCell" onClick={() => handleCellChange(4)}>
                             <p className='freeThrowsLabel'>Three Pointers</p>
@@ -882,7 +871,6 @@ const PlayerStats = () => {
                         )}
                     </div>
                     <div className="topStatsRow">
-                      {console.log("assistsArray", assistsArray)}
                       {assistsArray && assistsArray.assists && assistsArray.assists[0] !== undefined && (
                         <div id='statsCell5' className="alternateCell1" onClick={() => handleCellChange(5)}>
                           <p className="pointsLabel">Assists</p>
@@ -890,7 +878,6 @@ const PlayerStats = () => {
                         </div>
                       )}
                         <div className="spacerCell"></div>
-                        {console.log("praArray ==> ", praArray)}
                         {praArray && praArray.PRA && praArray.PRA[0] !== undefined && (
                           <div id='statsCell6' className="alternateCell2" onClick={() => handleCellChange(6)}>
                             <p className='freeThrowsLabel' id='PRALabel'>P+R+A</p>

@@ -57,9 +57,7 @@ const Home = () => {
     };    
       const fetchPlayers = (inputValue) => {
         const encodedInputValue = encodeURIComponent(inputValue); // Encode the input value
-      
-        console.log('fetching data for: ', inputValue);
-      
+          
         // Make the GET request to the backend API
         fetch(`/api/player/search/${encodedInputValue}`, {
           method: 'GET',
@@ -89,9 +87,7 @@ const Home = () => {
         };
         
         useEffect(() => {
-          console.log('inputValue is: ', inputValue);
           if(inputValue.length > 1){
-            console.log(`Search for players with at least 2 characters: ${inputValue}`);
             // Clear any previous timers to prevent multiple updates
             clearTimeout(timerId);
             timerId = setTimeout(() => {
@@ -116,7 +112,6 @@ const Home = () => {
         }, [inputValue])
 
         useEffect(() => {
-          console.log('timer just ended! The input was:', inputValue);
           if(timeoutFlag != null){
             fetchPlayers(inputValue);
           }
@@ -124,7 +119,6 @@ const Home = () => {
 
         const handleRowClick = (player) => {
           setSelectedPlayer(player); // Set the selected player when a row is clicked
-          console.log('player: ', player)
           navigate(`/playerStats/${player.id}`);
         };
 
