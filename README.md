@@ -67,8 +67,7 @@ cd HoopLogic
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env        # then fill in your own values
-set -a; source .env; set +a
+export DATABASE_URL=...  SECRET_KEY=...  BALLDONTLIE_API_KEY=...
 python app.py
 
 # Front end (in a second terminal)
@@ -79,7 +78,7 @@ npm start
 
 ## Configuration
 
-Secrets are read from environment variables, never from the code. See `.env.example`.
+Secrets are read from environment variables, never from the code.
 
 | Variable | What it's for |
 | --- | --- |

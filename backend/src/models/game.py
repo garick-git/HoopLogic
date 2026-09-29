@@ -1,3 +1,4 @@
+import os
 import requests
 import time
 from datetime import datetime, timezone
@@ -6,7 +7,7 @@ from database import db
 
 
 class Game(db.Model):
-    __tablename__ = 'games'
+    __tablename__ = "games"
 
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime)
@@ -17,22 +18,22 @@ class Game(db.Model):
     status = db.Column(db.String(20))
     time = db.Column(db.String(20))
     postseason = db.Column(db.Boolean)
-    home_team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
-    visitor_team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
-    home_team = db.relationship('Team', foreign_keys=[home_team_id])
-    visitor_team = db.relationship('Team', foreign_keys=[visitor_team_id])
+    home_team_id = db.Column(db.Integer, db.ForeignKey("teams.id"))
+    visitor_team_id = db.Column(db.Integer, db.ForeignKey("teams.id"))
+    home_team = db.relationship("Team", foreign_keys=[home_team_id])
+    visitor_team = db.relationship("Team", foreign_keys=[visitor_team_id])
 
     @staticmethod
     def parse_iso8601_date(date_str):
         try:
-            date_obj = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S.%fZ')
+            date_obj = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%fZ")
         except ValueError:
             try:
-                date_obj = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%SZ')
+                date_obj = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ")
             except ValueError:
                 print(f"Failed to parse date string: {date_str}")
                 return None
-    
+
         date_obj = date_obj.replace(tzinfo=timezone.utc)
         return date_obj
 
@@ -42,7 +43,7 @@ class Game(db.Model):
         PER_PAGE = 100
         total_added = 0
         headers = {
-            'Authorization': 'REMOVED',
+            "Authorization": os.environ["BALLDONTLIE_API_KEY"],
         }
 
         next_cursor = None
@@ -56,37 +57,41 @@ class Game(db.Model):
                 response = requests.get(url, headers=headers)
 
                 if response.status_code == 200:
-                    data = response.json().get('data', [])
-                    meta = response.json().get('meta', {})
-                    next_cursor = meta.get('next_cursor')
+                    data = response.json().get("data", [])
+                    meta = response.json().get("meta", {})
+                    next_cursor = meta.get("next_cursor")
 
                     for game_data in data:
-                        game_id = game_data.get('id')
+                        game_id = game_data.get("id")
                         if Game.query.get(game_id):
                             print(f"Game with ID {game_id} already exists. Skipping...")
                             continue
 
-                        home_team_data = game_data.get('home_team', {})
-                        visitor_team_data = game_data.get('visitor_team', {})
+                        home_team_data = game_data.get("home_team", {})
+                        visitor_team_data = game_data.get("visitor_team", {})
 
-                        home_team = Team.query.filter_by(id=home_team_data.get('id')).first()
-                        visitor_team = Team.query.filter_by(id=visitor_team_data.get('id')).first()
+                        home_team = Team.query.filter_by(
+                            id=home_team_data.get("id")
+                        ).first()
+                        visitor_team = Team.query.filter_by(
+                            id=visitor_team_data.get("id")
+                        ).first()
 
-                        date_str = game_data.get('date')
+                        date_str = game_data.get("date")
                         date = Game.parse_iso8601_date(date_str)
 
                         game = Game(
                             id=game_id,
                             date=date,
-                            home_team_score=game_data.get('home_team_score'),
-                            visitor_team_score=game_data.get('visitor_team_score'),
-                            season=game_data.get('season'),
-                            period=game_data.get('period'),
-                            status=game_data.get('status'),
-                            time=game_data.get('time'),
-                            postseason=game_data.get('postseason'),
+                            home_team_score=game_data.get("home_team_score"),
+                            visitor_team_score=game_data.get("visitor_team_score"),
+                            season=game_data.get("season"),
+                            period=game_data.get("period"),
+                            status=game_data.get("status"),
+                            time=game_data.get("time"),
+                            postseason=game_data.get("postseason"),
                             home_team=home_team,
-                            visitor_team=visitor_team
+                            visitor_team=visitor_team,
                         )
                         db.session.add(game)
                         total_added += 1
